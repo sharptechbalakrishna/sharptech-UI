@@ -32,7 +32,7 @@ function EtserviceReport() {
     const [nextTableId, setNextTableId] = useState(2);
 
     const getTableName = (index) => {
-        if (index === 1) return 'VESTING INFORMATION';
+        if (index === 0) return 'VESTING INFORMATION';
         else return `CHAIN OF TITLE ${index - 1}`;
     };
 
