@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import axios from "axios";
 import "./DasReport.css";
 import { Button } from 'primereact/button';
+import Footer from '../../../components/Footer/Footer';
+import Navbar from '../../../components/Navbar/Navbar';
 
 function DasReport() {
 
@@ -701,6 +703,8 @@ function DasReport() {
     };
 
     return (
+        <div>
+            <Navbar/>
         <div className='abstractform-container'>
             <form onSubmit={(e) => onSubmit(e)}>
 
@@ -1298,6 +1302,8 @@ function DasReport() {
                     <i className="pi pi-check" style={{ marginRight: '8px' }}></i>Submit
                 </button>
             </form>
+        </div>
+        <Footer/>
         </div>
     )
 }

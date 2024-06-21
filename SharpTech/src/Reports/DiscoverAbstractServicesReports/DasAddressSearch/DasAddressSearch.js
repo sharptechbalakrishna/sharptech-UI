@@ -2,33 +2,19 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './DasAddressSearch.css'; // Ensure you have the CSS file for styling
-
-const loadCSS = (href) => {
-  return new Promise((resolve, reject) => {
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = href;
-    link.onload = () => resolve();
-    link.onerror = () => reject(new Error(`Failed to load CSS file: ${href}`));
-    document.head.appendChild(link);
-  });
-};
+import Navbar from '../../../components/Navbar/Navbar';
+import Footer from '../../../components/Footer/Footer';
 
 function DasAddressSearch() {
-  const [partialAddress, setPartialAddress] = useState(''); // Ensure it's always initialized as a string
+  const [partialAddress, setPartialAddress] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Load Font Awesome CSS
-    loadCSS('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css')
-      .then(() => console.log('Font Awesome CSS loaded successfully'))
-      .catch((error) => console.error('Error loading Font Awesome CSS:', error));
-    
     const fetchSuggestions = async () => {
-      if (typeof partialAddress === 'string' && partialAddress.length > 2) { // Add guard clause
-        try {
+      try {
+        if (partialAddress.length > 2) {
           const token = localStorage.getItem('token');
           const response = await axios.get(`http://localhost:8080/search/${partialAddress}`, {
             headers: {
@@ -36,10 +22,11 @@ function DasAddressSearch() {
             }
           });
           setSuggestions(response.data);
-        } catch (error) {
-          console.error("Error fetching suggestions:", error);
+        } else {
+          setSuggestions([]);
         }
-      } else {
+      } catch (error) {
+        console.error("Error fetching suggestions:", error);
         setSuggestions([]);
       }
     };
@@ -51,8 +38,14 @@ function DasAddressSearch() {
     setPartialAddress(event.target.value);
   };
 
+  const handleSuggestionClick = (address) => {
+    setSelectedAddress(address);
+    setPartialAddress(address.address); // Update input with full address
+    setSuggestions([]); // Clear suggestions after selection
+  };
+
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent form submission
+    e.preventDefault();
     if (selectedAddress) {
       navigate(`/DasDisplay/${selectedAddress.orderNumber}`);
     } else {
@@ -61,11 +54,12 @@ function DasAddressSearch() {
   };
 
   return (
+    <div>
+    <Navbar/>
     <div className="address-search-container">
-      <h1 className="address-search-heading">Address Search</h1>
+      <h1 className="address-search-heading">DAS Address Search</h1>
       <form className="address-search-form" onSubmit={handleSubmit}>
         <div className="address-search-input-wrapper">
-          <i className="fas fa-search address-search-icon"></i>
           <input
             className="address-search-input"
             type="text"
@@ -79,11 +73,7 @@ function DasAddressSearch() {
                 <div
                   key={index}
                   className="suggestion-item"
-                  onClick={() => {
-                    setSelectedAddress(address);
-                    setPartialAddress(address.address);
-                    setSuggestions([]);
-                  }}
+                  onClick={() => handleSuggestionClick(address)}
                 >
                   {address.address} (Order Number: {address.orderNumber})
                 </div>
@@ -91,10 +81,22 @@ function DasAddressSearch() {
             </div>
           )}
         </div>
+        <div className="order-info-box">
+          {selectedAddress ? (
+            <div className="order-details">
+              <p><strong>Address:</strong> {selectedAddress.address}</p>
+              <p><strong>Order Number:</strong> {selectedAddress.orderNumber}</p>
+            </div>
+          ) : (
+            <p>No address selected.</p>
+          )}
+        </div>
         <button className="address-search-submit-button" type="submit">
           Search
         </button>
       </form>
+    </div>
+    <Footer/>
     </div>
   );
 }

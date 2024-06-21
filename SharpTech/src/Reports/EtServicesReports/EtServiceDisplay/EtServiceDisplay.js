@@ -488,7 +488,7 @@ function EtServiceDisplay() {
                             <br />
                         </div>
 
-
+                        {etservice && (
                         <div id="legalDescription">
                             <center>
                                 <table className='et-service-form-table-1' style={{ border: '2px solid black', borderCollapse: 'collapse' }} >
@@ -501,7 +501,8 @@ function EtServiceDisplay() {
                                                 <br/>
                                                 <br/>
                                                 <br/>
-                                                PARCEL NUMBER:</p>
+                                                PARCEL NUMBER:{etservice.parcelNumber} </p>
+                                                
                                         </td>
                                     </tr>
                                 </table>
@@ -509,7 +510,9 @@ function EtServiceDisplay() {
                             <br />
                             <br />
                         </div>
+                           )}
                     </div>
+                    
 
                     <div id="pdf-content3">
                         <div id="disclaimer">
@@ -554,11 +557,7 @@ function EtServiceDisplay() {
                     <button className='et-service-display-pdf-button' onClick={printDocument}>Download PDF</button>
                 </div>
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 6f2dc605186c4e32b4cf3d645f26ca93b1006473
             </div>
             <Footer />
         </div>

@@ -12,6 +12,8 @@ import { Document, Packer, Paragraph, Table, TableRow, TableCell } from "docx";
 import htmlDocx from 'html-docx-js/dist/html-docx';
 // import { createParagraph, createHeading, createTable, HeadingLevel } from './DocHelpers';
 import "./DasDisplay.css"
+import Footer from '../../../components/Footer/Footer';
+import Navbar from '../../../components/Navbar/Navbar';
 
 function DasDisplay() {
 
@@ -150,6 +152,8 @@ function DasDisplay() {
     // const creator = options2?.creator ?? "Un-named";
     // console.log("Creator:", creator);
     return (
+        <div>
+            <Navbar/>
         <div className='abstractform-container' ref={contentRef} id="content-to-download">
             {/* <h1>{data.creator ? data.creator.name : 'Unknown Creator'}</h1> */}
             <div id="pdf-content1">
@@ -587,7 +591,8 @@ function DasDisplay() {
             </div>
 
         </div>
-
+        <Footer/>
+        </div>
     )
 }
 

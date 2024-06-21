@@ -9,7 +9,7 @@
     text-align: center;
 }
 .et-service-display-pdf-button {
-    background-color: #4CAF50; /* Green background */
+    background-color: #af684c; /* Green background */
     border: none; /* Remove borders */
     color: white; /* White text */
     padding: 15px 32px; /* Some padding */
@@ -26,7 +26,7 @@
 .et-service-display-pdf-button:hover {
     background-color: white; /* White background on hover */
     color: black; /* Black text on hover */
-    border: 2px solid #4CAF50; /* Green border on hover */
+    border: 2px solid #d16120; /* Green border on hover */
 }
 
 .et-service-display-doc-button{

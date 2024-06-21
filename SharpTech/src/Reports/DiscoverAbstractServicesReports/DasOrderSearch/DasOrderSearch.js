@@ -53,7 +53,7 @@ function DasOrderSearch() {
       <Navbar/>
       <div className="das-order-search-container">
         <form className='das-order-search-form' onSubmit={handleSubmit}>
-          <h2>Search By OrderNumber</h2>
+          <h2>DAS Order Search</h2>
           <div>
             <label  className='das-order-search-label'>OrderNumber:</label>
             <input className='et-service-order-search-label-input' type="orderNumber" value={orderNumber} onChange={(e) => setOrderNumber(e.target.value)} required />
