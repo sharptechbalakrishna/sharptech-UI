@@ -13,7 +13,7 @@ function EtServices() {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-    
+
       const token = localStorage.getItem('token');
 
       const payload = {
@@ -128,10 +128,10 @@ function EtServices() {
   const [nextRowsId, setNextRowsId] = useState(4);
 
   const [nameRunData, setNameRunData] = useState([
-    { id: 1, data: {} },
-    { id: 2, data: {} },
+    { id: 1, data: { name: '', jud: '', liens: '', ucc: '', others: '' } },
+    { id: 2, data: { name: '', jud: '', liens: '', ucc: '', others: '' } },
   ]);
-  const [nextNameRunId, setNextNameRunId] = useState(4);
+  const [nextNameRunId, setNextNameRunId] = useState(3);
 
 
 
@@ -200,19 +200,13 @@ function EtServices() {
 
   const handleChangeNameRun = (e, rowId) => {
     const { name, value } = e.target;
-    const updatedNameRunData = nameRunData.map(row => {
+    const updatedData = nameRunData.map(row => {
       if (row.id === rowId) {
-        return {
-          ...row,
-          data: {
-            ...row.data,
-            [name]: value
-          }
-        };
+        return { ...row, data: { ...row.data, [name]: value } };
       }
       return row;
     });
-    setNameRunData(updatedNameRunData);
+    setNameRunData(updatedData);
   };
 
   const handleInputChangeTaxInsta = (e, rowId) => {
@@ -400,15 +394,11 @@ function EtServices() {
       setNextRowsId(JSON.parse(savedData).length + 1);
     }
 
-    const savedData2 = localStorage.getItem('nameRunData');
-    if (savedData2) {
-      setNameRunData(JSON.parse(savedData2));
-    } else {
-      // Initialize with default rows if no data is saved
-      setNameRunData([
-        { id: 1, data: { name: '' } },
-        { id: 2, data: { name: '' } }
-      ]);
+    const namerundata = localStorage.getItem('nameRunData');
+    if (namerundata) {
+      const parsedData = JSON.parse(namerundata);
+      setNameRunData(parsedData);
+      setNextNameRunId(parsedData.length + 1);
     }
 
     const savedData3 = JSON.parse(localStorage.getItem('taxInformation'));
@@ -521,24 +511,34 @@ function EtServices() {
   };
 
 
+
+
   const handleSaveTemporarilyRow = () => {
     localStorage.setItem('nameRunData', JSON.stringify(nameRunData));
     alert('Data saved successfully!');
   };
 
-
   const handleClearRows = () => {
-    // Clear data in local storage
-    localStorage.removeItem('nameRunsData');
-
-    // Notify user
-    window.alert('Table Data Cleared from Local Storage');
-
-    const clearedData = nameRunData.map(row => ({ ...row, data: {} }));
+    const clearedData = nameRunData.map(row => ({
+      ...row,
+      data: { name: '', jud: '', liens: '', ucc: '', others: '' }
+    }));
     setNameRunData(clearedData);
-    localStorage.removeItem('nameRunData');
-
   };
+
+
+  // const handleClearRows = () => {
+  //   // Clear data in local storage
+  //   localStorage.removeItem('nameRunsData');
+
+  //   // Notify user
+  //   window.alert('Table Data Cleared from Local Storage');
+
+  //   const clearedData = nameRunData.map(row => ({ ...row, data: {} }));
+  //   setNameRunData(clearedData);
+  //   localStorage.removeItem('nameRunData');
+
+  // };
 
   const handleSaveTemporarilyRow1 = () => {
     localStorage.setItem('taxInformation', JSON.stringify(taxinfo));
@@ -878,8 +878,9 @@ function EtServices() {
                           <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>AMOUNT</th>
                         </tr>
                       </thead>
-                      {/* Table body */}
+                      {/* Table body  */}
                       <tbody>
+
                         {tableRowsData.map((row) => (
                           <tr key={row.id}>
                             <td className='et-service-form-table-1-data' style={{ border: '1px solid black' }}>
@@ -999,45 +1000,47 @@ function EtServices() {
                 <br />
                 <center>
                   <table className='et-service-form-table-1' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
-                    <tr >
-                      <th className='et-service-form-table-selftables-heading' colSpan={5}> NAMES RUNS </th>
-                    </tr>
-                    <tr className='th-color'>
-                      <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black', width: '25%' }}> NAMES</th>
-                      <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>  JUD </th>
-                      <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}> LIENS </th>
-                      <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>UCC</th>
-                      <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>Others</th>
-                    </tr>
-                    {nameRunData.map((row) => (
+                    <thead>
                       <tr>
-                        <td style={{ border: '1px solid black' }}>
-                          <input type="text" className="et-service-input-labels" name="name" placeholder='Enter Name' onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
-
-                        </td>
-                        <td style={{ border: '1px solid black' }}>
-                          <input type="text" className="et-service-input-labels" name="jud" placeholder='Enter JUD' onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
-                        </td>
-                        <td style={{ border: '1px solid black' }}>
-                          <input type="text" className="et-service-input-labels" name="liens" placeholder='Enter LIENS' onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} /></td>
-                        <td style={{ border: '1px solid black' }}>
-                          <input type="text" className="et-service-input-labels" name="ucc" placeholder='Enter UCC' onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} /></td>
-                        <td style={{ border: '1px solid black' }}>
-                          <input type="text" className="et-service-input-labels" name="others" placeholder='Enter ' onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} /></td>
+                        <th className='et-service-form-table-selftables-heading' colSpan={5}> NAMES RUNS </th>
                       </tr>
-                    ))}
+                      <tr className='th-color'>
+                        <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black', width: '25%' }}> NAMES</th>
+                        <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>  JUD </th>
+                        <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}> LIENS </th>
+                        <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>UCC</th>
+                        <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>Others</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {nameRunData.map((row) => (
+                        <tr key={row.id}>
+                          <td style={{ border: '1px solid black' }}>
+                            <input type="text" className="et-service-input-labels" name="name" placeholder='Enter Name' value={row.data.name} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
+                          </td>
+                          <td style={{ border: '1px solid black' }}>
+                            <input type="text" className="et-service-input-labels" name="jud" placeholder='Enter JUD' value={row.data.jud} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
+                          </td>
+                          <td style={{ border: '1px solid black' }}>
+                            <input type="text" className="et-service-input-labels" name="liens" placeholder='Enter LIENS' value={row.data.liens} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} /></td>
+                          <td style={{ border: '1px solid black' }}>
+                            <input type="text" className="et-service-input-labels" name="ucc" placeholder='Enter UCC' value={row.data.ucc} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} /></td>
+                          <td style={{ border: '1px solid black' }}>
+                            <input type="text" className="et-service-input-labels" name="others" placeholder='Enter Others' value={row.data.others} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} /></td>
+                        </tr>
+                      ))}
+                    </tbody>
                   </table>
-                  <button className="et-services-add-button" type='button' onClick={handleAddNameRow}> <i className="pi pi-plus"     ></i> Row</button>
+                  <button className="et-services-add-button" type='button' onClick={handleAddNameRow}> <i className="pi pi-plus"></i> Row</button>
                   {nameRunData.length > 2 && (
                     <button className="et-services-delete-button" type='button' onClick={handleDeleteLastNameRow}>
-                      <i className="pi pi-trash"     ></i> Row </button>
+                      <i className="pi pi-trash"></i> Row </button>
                   )}
                 </center>
-              </div>
-              <div>
-
-                <Button className='et-service-genenal-info-save-button' label="Save&nbsp;" icon="pi pi-check" type='button' onClick={handleSaveTemporarilyRow1} />
-                <Button className='et-service-genenal-info-clear-button' label="Clear&nbsp;" icon="pi pi-times" type='button' onClick={handleClearRows} />
+                <div>
+                  <Button className='et-service-genenal-info-save-button' label="Save&nbsp;" icon="pi pi-check" type='button' onClick={handleSaveTemporarilyRow} />
+                  <Button className='et-service-genenal-info-clear-button' label="Clear&nbsp;" icon="pi pi-times" type='button' onClick={handleClearRows} />
+                </div>
               </div>
               {/* --------------------------------------------------------------LEGAL DESCRIPTION 7-----------------------------------------------*/}
               <div>
@@ -1093,7 +1096,7 @@ function EtServices() {
 
 
 
-              
+
               <button className="et-service-form-submit-button" type="submit">
                 <i className="pi pi-check"     ></i>Submit
               </button>
