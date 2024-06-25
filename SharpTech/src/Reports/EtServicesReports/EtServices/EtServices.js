@@ -10,7 +10,6 @@ import Navbar from '../../../components/Navbar/Navbar';
 import Footer from '../../../components/Footer/Footer';
 
 function EtServices() {
-//GAyathri
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -576,7 +575,7 @@ function EtServices() {
 
               <h1><b>ETrack Title Services Inc</b></h1>
 
-              {/* --------------------------------------------------------------Table 1-----------------------------------------------*/}
+              {/* --------------------------------------------------------------GENERAL INFORMATION 1-----------------------------------------------*/}
               <div>
                 <br />
                 <center>
@@ -669,7 +668,7 @@ function EtServices() {
                 <Button className='et-service-genenal-info-clear-button' label="Clear&nbsp;" icon="pi pi-times" type='button' onClick={clearGeneralInfo} />
               </div>
 
-              {/* --------------------------------------------------------------Table 2-----------------------------------------------*/}
+              {/* --------------------------------------------------------------VestingInfo 2-----------------------------------------------*/}
 
               <div>
                 {tablesData.map(table => (
@@ -755,7 +754,7 @@ function EtServices() {
               </div>
               <br />
 
-              {/* --------------------------------------------------------------Table 3-----------------------------------------------*/}
+              {/* --------------------------------------------------------------OPEN MORTGAGE 3-----------------------------------------------*/}
               <div>
                 {tablesData2.map(table => (
                   <div key={table.id}>
@@ -862,7 +861,7 @@ function EtServices() {
                 ))}
                 <br />
 
-                {/* --------------------------------------------------------------Table 4-----------------------------------------------*/}
+                {/* --------------------------------------------------------------ACTIVE JUDGMENTS  4-----------------------------------------------*/}
                 <div>
                   <br />
                   <center>
@@ -913,7 +912,7 @@ function EtServices() {
                 </div>
 
 
-                {/* --------------------------------------------------------------Table 5-----------------------------------------------*/}
+                {/* --------------------------------------------------------------TAX INFORMATION 5-----------------------------------------------*/}
 
                 <div>
                   <br />
@@ -995,7 +994,7 @@ function EtServices() {
               <br />
               <br />
 
-              {/* --------------------------------------------------------------Table 6-----------------------------------------------*/}
+              {/* --------------------------------------------------------------NAMES RUNS 6-----------------------------------------------*/}
               <div>
                 <br />
                 <center>
@@ -1040,7 +1039,7 @@ function EtServices() {
                 <Button className='et-service-genenal-info-save-button' label="Save&nbsp;" icon="pi pi-check" type='button' onClick={handleSaveTemporarilyRow1} />
                 <Button className='et-service-genenal-info-clear-button' label="Clear&nbsp;" icon="pi pi-times" type='button' onClick={handleClearRows} />
               </div>
-              {/* --------------------------------------------------------------Table 7-----------------------------------------------*/}
+              {/* --------------------------------------------------------------LEGAL DESCRIPTION 7-----------------------------------------------*/}
               <div>
                 <br />
                 <center>
@@ -1063,7 +1062,7 @@ function EtServices() {
                 </center>
               </div>
 
-              {/* --------------------------------------------------------------Table 8-----------------------------------------------*/}
+              {/* --------------------------------------------------------------DISCLAIMER 8-----------------------------------------------*/}
               <div>
                 <br />
                 <center>
@@ -1091,6 +1090,10 @@ function EtServices() {
                   </table>
                 </center>
               </div>
+
+
+
+              
               <button className="et-service-form-submit-button" type="submit">
                 <i className="pi pi-check"     ></i>Submit
               </button>
