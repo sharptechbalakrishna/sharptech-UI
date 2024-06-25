@@ -43,7 +43,11 @@ function EtServices() {
             }
           ],
           etnameruns: nameRunData.map(row => ({ ...row.data })),
-          ettaxinstallment: tableTaxInstaData.map(row => ({ ...row.data })),
+          ettaxinstallment: tableTaxInstaData.map(row => ({
+            amount: row.amount || '',
+            status: row.status || '',
+            paidDueDate: row.paidDueDate || ''
+          })),
         }
       };
       await axios.post("http://localhost:8080/etinsert", payload, {
@@ -51,6 +55,8 @@ function EtServices() {
           'Authorization': `Bearer ${token}`
         }
       });
+
+      console.log(payload);
       window.alert("Data Sent Sucessfully");
 
 
@@ -86,6 +92,12 @@ function EtServices() {
   })
 
   const { landValue, buildingValue, totalValue, excemption, notes } = taxinfo
+
+  const [tableTaxInstaData, setTableTaxInstaData] = useState([
+    { id: 1, data: {} },
+    { id: 2, data: {} },
+  ]);
+  const [nextTableTaxInstaId, setNextTableTaxInstaId] = useState(2);
 
   const { orderNumber, refeenceNumber, searchDate, effectiveDate, propertyAdderess, state, country, parcelNumber,
     subDivision, lotUnit, block, sfrPudCondo } = user
@@ -135,11 +147,7 @@ function EtServices() {
 
 
 
-  const [tableTaxInstaData, setTableTaxInstaData] = useState([
-    { id: 1, data: {} },
-    { id: 2, data: {} },
-  ]);
-  const [nextTableTaxInstaId, setNextTableTaxInstaId] = useState(2);
+
 
   const [considerationAmount, setConsiderationAmount] = useState('');
 
@@ -209,21 +217,14 @@ function EtServices() {
     setNameRunData(updatedData);
   };
 
-  const handleInputChangeTaxInsta = (e, rowId) => {
+  const handleInputChangeTaxInsta = (e, index) => {
     const { name, value } = e.target;
-    const updatedTableTaxInstaData = tableTaxInstaData.map(row => {
-      if (row.id === rowId) {
-        return {
-          ...row,
-          data: {
-            ...row.data,
-            [name]: value
-          }
-        };
-      }
-      return row;
-    });
-    setTableTaxInstaData(updatedTableTaxInstaData);
+    const newTableData = [...tableTaxInstaData];
+    newTableData[index] = {
+      ...newTableData[index],
+      [name]: value
+    };
+    setTableTaxInstaData(newTableData);
   };
 
 
@@ -324,6 +325,7 @@ function EtServices() {
     if (tableTaxInstaData.length > 0) {
       const updatedRows = tableTaxInstaData.slice(0, -1); // Remove the last row
       setTableTaxInstaData(updatedRows);
+      localStorage.setItem('tableTaxInstaData',JSON.stringify(updatedRows));
     }
   };
 
@@ -401,26 +403,13 @@ function EtServices() {
       setNextNameRunId(parsedData.length + 1);
     }
 
-    const savedData3 = JSON.parse(localStorage.getItem('taxInformation'));
-    if (savedData3) {
-      setTaxInfo({
-        landValue: savedData3.landValue || "",
-        buildingValue: savedData3.buildingValue || "",
-        totalValue: savedData3.totalValue || "",
-        excemption: savedData3.excemption || "",
-        notes: savedData3.notes || "",
-      });
-      setTableTaxInstaData(savedData3.tableTaxInstaData || []);
-    }
-
-
-    const savedTaxInfo = localStorage.getItem('taxInformation');
-    const savedTableData = localStorage.getItem('tableTaxInstaData');
+    const savedTaxInfo = JSON.parse(localStorage.getItem('taxInformation'));
+    const savedTableData = JSON.parse(localStorage.getItem('tableTaxInstaData'));
     if (savedTaxInfo) {
-      setTaxInfo(JSON.parse(savedTaxInfo));
+      setTaxInfo(savedTaxInfo);
     }
     if (savedTableData) {
-      setTableTaxInstaData(JSON.parse(savedTableData));
+      setTableTaxInstaData(savedTableData);
     }
   }, []);
 
@@ -526,20 +515,6 @@ function EtServices() {
     setNameRunData(clearedData);
   };
 
-
-  // const handleClearRows = () => {
-  //   // Clear data in local storage
-  //   localStorage.removeItem('nameRunsData');
-
-  //   // Notify user
-  //   window.alert('Table Data Cleared from Local Storage');
-
-  //   const clearedData = nameRunData.map(row => ({ ...row, data: {} }));
-  //   setNameRunData(clearedData);
-  //   localStorage.removeItem('nameRunData');
-
-  // };
-
   const handleSaveTemporarilyRow1 = () => {
     localStorage.setItem('taxInformation', JSON.stringify(taxinfo));
     localStorage.setItem('tableTaxInstaData', JSON.stringify(tableTaxInstaData));
@@ -547,6 +522,13 @@ function EtServices() {
   };
 
   const handleClearRows1 = () => {
+    const clearedData = tableTaxInstaData.map(row => ({
+      ...row,
+      amount: '',
+      status: '',
+      paidDueDate: ''
+    }));
+    setTableTaxInstaData(clearedData);
     setTaxInfo({
       landValue: "",
       buildingValue: "",
@@ -554,10 +536,6 @@ function EtServices() {
       excemption: "",
       notes: "",
     });
-    setTableTaxInstaData([]);
-    localStorage.removeItem('taxInformation');
-    localStorage.removeItem('tableTaxInstaData');
-    alert('Data cleared!');
   };
 
 
@@ -960,16 +938,19 @@ function EtServices() {
                       </tr>
 
                       {
-                        tableTaxInstaData.map((row) => (
-                          <tr key={row.id}>
-                            <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }} >{row.id - 1 === 0 ? `${row.id}ST INSTALLMENT ` : row.id - 1 === 1 ? ` ${row.id}ND INSTALLMENT` : row.id - 1 === 2 ? `${row.id}rd Installment` : `${row.id}th Installemnt`}</td>
-                            <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }} >
-                              <input type="text" className="et-service-input-labels" name="amount" placeholder='Enter Amount' onChange={e => handleInputChangeTaxInsta(e, row.id)} style={{ width: '100%' }} />
+                        tableTaxInstaData.map((row, index) => (
+                          <tr key={index}>
+                            <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }}>
+                              {index === 0 ? `${index + 1}ST INSTALLMENT` : index === 1 ? `${index + 1}ND INSTALLMENT` : index === 2 ? `${index + 1}RD INSTALLMENT` : `${index + 1}TH INSTALLMENT`}
                             </td>
-                            <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }} >
-                              <input type="text" className="et-service-input-labels" name="status" placeholder='Enter Status' onChange={e => handleInputChangeTaxInsta(e, row.id)} style={{ width: '100%' }} />                                </td>
-                            <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }} >
-                              <input type="Date" className="et-service-input-labels" name="paidDueDate" placeholder='Enter Date' onChange={e => handleInputChangeTaxInsta(e, row.id)} style={{ width: '100%' }} />
+                            <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }}>
+                              <input type="text" className="et-service-input-labels" name="amount" placeholder='Enter Amount' value={row.amount} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
+                            </td>
+                            <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }}>
+                              <input type="text" className="et-service-input-labels" name="status" placeholder='Enter Status' value={row.status} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
+                            </td>
+                            <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }}>
+                              <input type="date" className="et-service-input-labels" name="paidDueDate" placeholder='Enter Date' value={row.paidDueDate} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
                             </td>
                           </tr>
                         ))
@@ -981,9 +962,9 @@ function EtServices() {
                         </td>
                       </tr>
                     </table>
-                    <button className="et-services-add-button" onClick={handleAddTaxInstaRow}> <i className="pi pi-plus"     ></i> Row</button>
+                    <button className="et-services-add-button" type='button' onClick={handleAddTaxInstaRow}> <i className="pi pi-plus"     ></i> Row</button>
                     {tableTaxInstaData.length > 2 && (
-                      <button className="et-services-delete-button" onClick={handleDeleteLastTaxInstaRow}>
+                      <button className="et-services-delete-button" type='button' onClick={handleDeleteLastTaxInstaRow}>
                         <i className="pi pi-trash"     ></i> Row  </button>
                     )}
                   </center>
