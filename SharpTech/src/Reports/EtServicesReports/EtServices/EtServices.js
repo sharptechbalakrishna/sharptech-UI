@@ -12,6 +12,7 @@ import Footer from '../../../components/Footer/Footer';
 function EtServices() {
 //GAyathri
   const onSubmit = async (e) => {
+    //Gayathri 10101
     e.preventDefault();
     try {
 
