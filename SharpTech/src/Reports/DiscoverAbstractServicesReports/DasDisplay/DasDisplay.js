@@ -582,8 +582,8 @@ function DasDisplay() {
        
             <div className='abstractform-button-container'>
                 <center>
-                    <button className='et-service-display-doc-button ' onClick={printDocument}>Download PDF</button>
-                    <button className='et-service-display-pdf-button' onClick={handleDownload}>Download DOCX</button>
+                    <button className='das-service-display-pdf-button ' onClick={printDocument}>Download PDF</button>
+                    <button className='das-service-display-doc-button' onClick={handleDownload}>Download DOCX</button>
                 </center>
 
 

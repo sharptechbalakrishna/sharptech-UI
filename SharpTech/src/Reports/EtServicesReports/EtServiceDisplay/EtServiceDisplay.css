@@ -1,3 +1,25 @@
+
+.et-services-container{
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    width: 80%;
+
+   
+    align-items: stretch; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
 .et-service-form-table-2-data{
     padding-top: 10px;
     padding-bottom: 10px;
@@ -12,15 +34,16 @@
     background-color: #af684c; /* Green background */
     border: none; /* Remove borders */
     color: white; /* White text */
-    padding: 15px 32px; /* Some padding */
+    padding: 10px 12px; /* Some padding */
     text-align: center; /* Centered text */
     text-decoration: none; /* Remove underline */
     display: inline-block; /* Get elements to line up properly */
     font-size: 16px; /* Increase font size */
     margin: 4px 2px; /* Add some margin */
     cursor: pointer; /* Pointer/hand icon */
-    border-radius: 12px; /* Rounded corners */
+    border-radius: 10px; /* Rounded corners */
     transition-duration: 0.4s; /* Animation duration */
+    width: 10%;
 }
 
 .et-service-display-pdf-button:hover {
@@ -33,15 +56,16 @@
     background-color: #3558f1; /* Green background */
     border: none; /* Remove borders */
     color: white; /* White text */
-    padding: 15px 32px; /* Some padding */
+    padding: 10px 12px; /* Some padding */
     text-align: center; /* Centered text */
     text-decoration: none; /* Remove underline */
     display: inline-block; /* Get elements to line up properly */
     font-size: 16px; /* Increase font size */
-    margin: 4px 2px; /* Add some margin */
+   
     cursor: pointer; /* Pointer/hand icon */
-    border-radius: 12px; /* Rounded corners */
+    border-radius: 10px; /* Rounded corners */
     transition-duration: 0.4s; /* Animation duration */
+    width: 11%;
 }
 
 
