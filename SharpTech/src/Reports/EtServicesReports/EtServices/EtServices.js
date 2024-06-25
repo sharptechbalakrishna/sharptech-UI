@@ -9,11 +9,8 @@ import { Button } from 'primereact/button';
 import Navbar from '../../../components/Navbar/Navbar';
 import Footer from '../../../components/Footer/Footer';
 
-
-
-
 function EtServices() {
-
+//GAyathri
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
