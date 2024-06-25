@@ -14,11 +14,7 @@ function EtServices() {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-
-
-      // Shravankumar
-      // Srad
-
+    
       const token = localStorage.getItem('token');
 
       const payload = {
