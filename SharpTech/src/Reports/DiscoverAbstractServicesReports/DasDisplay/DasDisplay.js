@@ -157,6 +157,8 @@ function DasDisplay() {
         <div className='abstractform-container' ref={contentRef} id="content-to-download">
             {/* <h1>{data.creator ? data.creator.name : 'Unknown Creator'}</h1> */}
             <div id="pdf-content1">
+                <br/>
+                <br/>
                 {/* First set of content to be converted */}
                 {/* <img src="your-image-url.jpg" alt="Your Image" style={{ width: '100%', height: 'auto' }} /> */}
                 <div >
