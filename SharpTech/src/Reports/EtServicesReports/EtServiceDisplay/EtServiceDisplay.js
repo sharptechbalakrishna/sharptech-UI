@@ -80,12 +80,17 @@ function EtServiceDisplay() {
             pdf.addPage();
             await addContentToPDF(input3);
 
-            pdf.save("et_service.pdf");
+            // Generate a filename with current timestamp
+            const now = new Date();
+            const fileName = `et_service_${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}_${now.getHours()}-${now.getMinutes()}-${now.getSeconds()}.pdf`;
+
+            // Save the PDF with the generated filename
+            pdf.save(fileName);
         };
 
         generatePDF();
-
     };
+
     const contentRef = useRef(null);
     const handleDownload = () => {
         const content = contentRef.current.innerHTML;
@@ -365,8 +370,8 @@ function EtServiceDisplay() {
                     <div id="pdf-content2">
 
 
-<br/>
-<br/>
+                        <br />
+                        <br />
                         <div >
                             <center>
                                 <table className='et-service-form-table-1' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
@@ -519,8 +524,8 @@ function EtServiceDisplay() {
 
 
                     <div id="pdf-content3">
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                         <div id="disclaimer">
                             <center>
                                 <table className='et-service-form-table-1' style={{ border: '2px solid black', borderCollapse: 'collapse' }} >
@@ -560,8 +565,8 @@ function EtServiceDisplay() {
 
                     </div>
                     <center>
-                    <button className='et-service-display-doc-button' onClick={handleDownload}>Download DOCX</button>
-                    <button className='et-service-display-pdf-button' onClick={printDocument}>Download PDF</button>
+                        <button className='et-service-display-doc-button' onClick={handleDownload}>Download DOCX</button>
+                        <button className='et-service-display-pdf-button' onClick={printDocument}>Download PDF</button>
                     </center>
                 </div>
             </center>
