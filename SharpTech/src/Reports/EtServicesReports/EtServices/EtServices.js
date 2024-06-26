@@ -11,10 +11,13 @@ import Navbar from '../../../components/Navbar/Navbar';
 import Footer from '../../../components/Footer/Footer';
 
 function EtServices() {
+
+  const [loading, setLoading] = useState(false);
+
   const onSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
-
       const token = localStorage.getItem('token');
 
       const payload = {
@@ -59,12 +62,11 @@ function EtServices() {
 
       console.log(payload);
       window.alert("Data Sent Sucessfully");
-
-
     } catch (error) {
       console.error("Registration failed:", error);
       window.alert("Data Not Sent Somthing went Wrong"); // Handle error if registration fails
-
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -864,7 +866,7 @@ function EtServices() {
                       {tableRowsData.map((row) => (
                         <tr key={row.id}>
                           <td className='et-service-form-table-1-data' style={{ border: '1px solid black' }}>
-                            <input type="text" className="et-service-input-labels" placeholder="Enter Case Number" name="caseNumber" value={row.data.caseNumber || ''} onChange={e => handleChange(e, row.id)} style={{ width: '100%' }} />
+                            <input type="text" className="et-service-input-labels" placeholder="Enter Case Number" name="caseNumbe" value={row.data.caseNumbe || ''} onChange={e => handleChange(e, row.id)} style={{ width: '100%' }} />
                           </td>
                           <td className='et-service-form-table-1-data' style={{ border: '1px solid black' }}>
                             <input type="text" className="et-service-input-labels" placeholder="Enter Description" name="description" value={row.data.description || ''} onChange={e => handleChange(e, row.id)} style={{ width: '100%' }} />
@@ -1086,9 +1088,43 @@ function EtServices() {
 
 
 
-              <button className="et-service-form-submit-button" type="submit">
+              {/* <button className="et-service-form-submit-button" type="submit" >
                 <i className="pi pi-check"></i>Submit
+              </button> 
+
+
+              <button
+                className="et-service-form-submit-button" type="submit" onClick={handleSubmit} disabled={loading}>
+                {loading ? (
+                  <ProgressSpinner style={{ width: '50px', height: '24px' }} strokeWidth="4" />
+                ) : (
+                  <>
+                    <i className="pi pi-check" style={{ marginRight: '8px' }}></i> 
+                    Submit
+                  </>
+                )}
+              </button> */}
+
+              <button
+                className="et-service-form-submit-button"
+                type="submit"
+                disabled={loading}
+                onClick={onSubmit}
+              >
+                {loading ? (
+                  <>
+                    <ProgressSpinner style={{ width: '24px', height: '24px', marginRight: '8px' }} strokeWidth="4" />
+                    Submitting...
+                  </>
+                ) : (
+                  <>
+                    <i className="pi pi-check" style={{ marginRight: '8px' }}></i>
+                    Submit
+                  </>
+                )}
               </button>
+
+
 
             </table>
           </form>
