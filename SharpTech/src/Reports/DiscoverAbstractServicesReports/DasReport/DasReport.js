@@ -199,7 +199,7 @@ function DasReport() {
         localStorage.removeItem(`vestingTableData_${tableId}`);
 
         // Update overall tables data in localStorage
-        localStorage.setItem('vestingInfo', JSON.stringify(updatedTables));
+        localStorage.setItem('dadVestinInfo', JSON.stringify(updatedTables));
     };
 
 
@@ -295,9 +295,9 @@ function DasReport() {
             setUser(JSON.parse(savedPropertyInfo));
         }
 
-        const savedVestingInfo = localStorage.getItem('vestingInfo');
-        if (savedVestingInfo) {
-            const parsedData = JSON.parse(savedVestingInfo);
+        const saveddasVestingInfo = localStorage.getItem('dadVestinInfo');
+        if (saveddasVestingInfo) {
+            const parsedData = JSON.parse(saveddasVestingInfo);
 
             // Iterate through parsedData and set each table's data
             const updatedTables = parsedData.map(data => ({
@@ -437,7 +437,7 @@ function DasReport() {
         window.alert('Table Data Saved Successfully');
 
         // Update overall tables data in localStorage
-        localStorage.setItem('vestingInfo', JSON.stringify(tablesData));
+        localStorage.setItem('dadVestinInfo', JSON.stringify(tablesData));
     };
 
     const clearVestingInfo = (tableId) => {
@@ -452,14 +452,14 @@ function DasReport() {
             setTablesData(updatedTables);
             localStorage.removeItem(`vestingTableData_${tableId}`);
             window.alert('Table Data Cleared');
-            localStorage.setItem('vestingInfo', JSON.stringify(updatedTables));
+            localStorage.setItem('dadVestinInfo', JSON.stringify(updatedTables));
         } else {
             // If there are multiple tables, remove the table
             const updatedTables = tablesData.filter(table => table.id !== tableId);
             setTablesData(updatedTables);
             localStorage.removeItem(`vestingTableData_${tableId}`);
             window.alert('Table Data Cleared and Table Deleted');
-            localStorage.setItem('vestingInfo', JSON.stringify(updatedTables));
+            localStorage.setItem('dadVestinInfo', JSON.stringify(updatedTables));
         }
     };
 
@@ -633,6 +633,15 @@ function DasReport() {
             });
             console.log(payload);
             window.alert("Data Sent Sucessfully");
+
+            localStorage.removeItem('propertyInfo');
+            localStorage.removeItem('dadVestinInfo');
+            localStorage.removeItem('mortgageInfo');
+            localStorage.removeItem('tableRowsData');
+            localStorage.removeItem('taxInformation');
+            localStorage.removeItem('nameRunData');
+            localStorage.removeItem('tableTaxInstaData');
+            window.location.reload();
 
 
         } catch (error) {
@@ -812,7 +821,7 @@ function DasReport() {
                                                 </td>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>RECORDED DATE:</th>
                                                 <td colSpan={2} style={{ border: '1px solid black' }}>
-                                                <input type="date" className="abstract-control-input" placeholder="Enter Date" name="recorderdDate" value={table.data.recorderdDate || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
+                                                    <input type="date" className="abstract-control-input" placeholder="Enter Date" name="recorderdDate" value={table.data.recorderdDate || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
                                                 </td>
                                             </tr>
                                             <tr>
