@@ -153,395 +153,395 @@ function DasDisplay() {
     // console.log("Creator:", creator);
     return (
         <div>
-            <Navbar/>
-        <div className='abstractform-container' ref={contentRef} id="content-to-download">
-            {/* <h1>{data.creator ? data.creator.name : 'Unknown Creator'}</h1> */}
-            <div id="pdf-content1">
-                <br/>
-                <br/>
-                {/* First set of content to be converted */}
-                {/* <img src="your-image-url.jpg" alt="Your Image" style={{ width: '100%', height: 'auto' }} /> */}
-                <div >
-                    
-                    <center>
-                        <table className='das-display-report-heading' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
-                            <tr> <th className='das-display-overall-heading'>DISCOVER ABSTRACT REPORT </th> </tr>
-                        </table>
-                    </center>
+            <Navbar />
+            <div className='abstractform-container' ref={contentRef} id="content-to-download">
+                {/* <h1>{data.creator ? data.creator.name : 'Unknown Creator'}</h1> */}
+                <div id="pdf-content1">
                     <br />
                     <br />
-                    {/* -----------------------------------------Table-1----------------------------------------------------- */}
-                    {etservice && (
-                        <div>
-                            <center>
-                                {etservice && (
-                                    <div>
-                                        <center>
-                                            <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
-                                                <tr>
-                                                    <th className="das-display-header-table" style={{ marginBottom:'10px' }} colSpan={6}>PROPERTY INFO </th>
-                                                </tr>
+                    {/* First set of content to be converted */}
+                    {/* <img src="your-image-url.jpg" alt="Your Image" style={{ width: '100%', height: 'auto' }} /> */}
+                    <div >
 
-                                                <tr>
-                                                    <th className="das-display-side-headings"  colSpan={1} style={{ border: '1px solid black' }}>ORDER NUMBER :</th>
-                                                    <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{etservice.orderNumber} </td>
-                                                    <th className="das-display-side-headings"colSpan={1} style={{ border: '1px solid black' }}>REFERENCE NUMBER :</th>
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>  {etservice.referenceNumber} </td>
-                                                </tr>
+                        <center>
+                            <table className='das-display-report-heading' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
+                                <tr> <th className='das-display-overall-heading'>DISCOVER ABSTRACT REPORT </th> </tr>
+                            </table>
+                        </center>
+                        <br />
+                        <br />
+                        {/* -----------------------------------------Table-1----------------------------------------------------- */}
+                        {etservice && (
+                            <div>
+                                <center>
+                                    {etservice && (
+                                        <div>
+                                            <center>
+                                                <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
+                                                    <tr>
+                                                        <th className="das-display-header-table" style={{ marginBottom: '10px' }} colSpan={6}>PROPERTY INFO </th>
+                                                    </tr>
 
-                                                <tr>
-                                                    <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>SEARCH DATE :</th>
-                                                    <td className="das-report-display-data"  colSpan={1} style={{ border: '1px solid black' }}> {etservice.searchDate}  </td>
+                                                    <tr>
+                                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>ORDER NUMBER :</th>
+                                                        <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{etservice.orderNumber} </td>
+                                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>REFERENCE NUMBER :</th>
+                                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>  {etservice.referenceNumber} </td>
+                                                    </tr>
 
-                                                    <th className="das-display-side-headings"c colSpan={1} style={{ border: '1px solid black' }}>As Of</th>
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >7:30 Am</td>
+                                                    <tr>
+                                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>SEARCH DATE :</th>
+                                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}> {etservice.searchDate}  </td>
 
-                                                    <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>EFFECTIVE DATE :</th>
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{etservice.effectiveDate}  </td>
-                                                </tr>
+                                                        <th className="das-display-side-headings" c colSpan={1} style={{ border: '1px solid black' }}>As Of</th>
+                                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >7:30 Am</td>
 
-                                                <tr>
+                                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>EFFECTIVE DATE :</th>
+                                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{etservice.effectiveDate}  </td>
+                                                    </tr>
 
-                                                    <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>PROPERTY ADDRESS :</th>
-                                                    <td className="das-report-display-data"  colSpan={5} style={{ border: '1px solid black' }}>  {etservice.propertyAddress} </td>
+                                                    <tr>
 
-                                                </tr>
+                                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>PROPERTY ADDRESS :</th>
+                                                        <td className="das-report-display-data" colSpan={5} style={{ border: '1px solid black' }}>  {etservice.propertyAddress} </td>
 
-                                                <tr>
-                                                    <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> STATE : </th>
-                                                    <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>  {etservice.state}  </td>
+                                                    </tr>
 
-                                                    <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> COUNTY :</th>
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}> {etservice.county}  </td>
-                                                </tr>
+                                                    <tr>
+                                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> STATE : </th>
+                                                        <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>  {etservice.state}  </td>
 
-                                                <tr>
-                                                    <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>BORROWER NAME :</th>
-                                                    <td className="das-report-display-data" colSpan={5} style={{ border: '1px solid black' }}>  {etservice.borrowerName}</td>
+                                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> COUNTY :</th>
+                                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}> {etservice.county}  </td>
+                                                    </tr>
 
-                                                </tr>
-                                                <tr>
-                                                    <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> PARCEL NUMBER :</th>
-                                                    <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>  {etservice.parcelNumber} </td>
+                                                    <tr>
+                                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>BORROWER NAME :</th>
+                                                        <td className="das-report-display-data" colSpan={5} style={{ border: '1px solid black' }}>  {etservice.borrowerName}</td>
 
-                                                    <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> SUBDIVISION : </th>
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}> {etservice.subdivision} </td>
-                                                </tr>
+                                                    </tr>
+                                                    <tr>
+                                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> PARCEL NUMBER :</th>
+                                                        <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>  {etservice.parcelNumber} </td>
 
-                                                <tr>
-                                                    <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> LOT/UNIT </th>
-                                                    <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>  {etservice.lotUnit}</td>
-                                                    <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>BLOCK:</th>
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}> {etservice.block}  </td>
-                                                </tr>
+                                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> SUBDIVISION : </th>
+                                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}> {etservice.subdivision} </td>
+                                                    </tr>
 
-                                                <tr>
-                                                    <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>PROPERTY TYPE:</th>
-                                                    <td className="das-report-display-data" colSpan={5} style={{ border: '1px solid black' }}>{etservice.propertyType} </td>
-                                                    {/* <td colSpan={1} style={{ border: '1px solid black' }}></td>
+                                                    <tr>
+                                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> LOT/UNIT </th>
+                                                        <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>  {etservice.lotUnit}</td>
+                                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>BLOCK:</th>
+                                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}> {etservice.block}  </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>PROPERTY TYPE:</th>
+                                                        <td className="das-report-display-data" colSpan={5} style={{ border: '1px solid black' }}>{etservice.propertyType} </td>
+                                                        {/* <td colSpan={1} style={{ border: '1px solid black' }}></td>
                                                     <td colSpan={1}  style={{ border: '1px solid black' }}></td> */}
-                                                </tr>
+                                                    </tr>
 
-                                            </table>
-                                        </center>
-                                    </div>
-                                )}
-                            </center>
-                        </div>
-                    )}
-
-
-                    <br />
-                    <br />
-                 
-                    {etservice && etservice.vestingdeedinfo.map((vestingdeedinfo, index) => (
-                        <div key={index} >
-                            <br />
-                            <center>
-                                <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
-                                    <tr>
-                                        <th className='das-display-header-table' colSpan="4"> {index === 0 ? "VESTING INFORMATION" : ` CHAIN OF TITLE  ${index}`}  </th>
-                                    </tr>
-
-                                    <tr>
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> DEED TYPE </th>
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{vestingdeedinfo.deedType}  </td>
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> CONSIDERATION AMOUNT : $ </th>
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{vestingdeedinfo.considerationAmount} </td>
-                                    </tr>
-
-                                    <tr>
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> GRANTOR : </th>
-                                        <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{vestingdeedinfo.grantor}  </td>
-                                    </tr>
-
-                                    <tr>
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>GRANTEE : </th>
-                                        <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{vestingdeedinfo.grantee}</td>
-                                    </tr>
-
-                                    <tr>
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> VESTING INFO :</th>
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{vestingdeedinfo.vesting} </td>
-
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>INSTR/BOOK/PAGE:</th>
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{vestingdeedinfo.instaBookPage}  </td>
-                                    </tr>
-
-                                    <tr>
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> DATED DATE: </th>
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{vestingdeedinfo.datedDate}  </td>
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>RECORDED DATE:</th>
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{vestingdeedinfo.recorderdDate} </td>
-                                    </tr>
-
-                                    <tr>
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>COMMENTS :</th>
-                                        <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{vestingdeedinfo.comments}  </td>
-                                    </tr>
-
-                                </table>
-                            </center>
-                        </div>
-                    ))}
-                    <br />
-                    <br />
-                    {etservice && etservice.absopenmortgagedeedinfo.map((openmortagedeedinfo, mIndex) => (
-                        <div key={mIndex} >
-                            <br />
-                            <center>
-                                <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }} >
-                                    <tr>
-                                        <th className='das-display-header-table' colSpan={4} >OPEN MORTGAGE / DEED OF TRUST  - ({mIndex}) INFORMATION </th>
-                                    </tr>
-
-                                    <tr>
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> MORTGAGO </th>
-                                        <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{openmortagedeedinfo.mortgagor}</td>
-                                    </tr>
-
-                                    <tr>
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> MORTGAGEE </th>
-                                        <td className="das-report-display-data"  colSpan={3} style={{ border: '1px solid black' }}>{openmortagedeedinfo.mortgagee}</td>
-                                    </tr>
-
-                                    <tr>
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> TRUSTEE </th>
-                                        <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{openmortagedeedinfo.trustee}</td>
-                                    </tr>
-
-                                    <tr>
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> INSTRUMENT/BOOK/PAGE: </th>
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.instrBookPage}</td>
-
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>AMOUNT [$]:</th>
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.amount}</td>
-                                    </tr>
+                                                </table>
+                                            </center>
+                                        </div>
+                                    )}
+                                </center>
+                            </div>
+                        )}
 
 
-                                    <tr>
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> DATED DATE:  </th>
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.datedDate}</td>
+                        <br />
+                        <br />
 
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>RECORDED DATE:</th>
+                        {etservice && etservice.vestingdeedinfo.map((vestingdeedinfo, index) => (
+                            <div key={index} >
+                                <br />
+                                <center>
+                                    <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
+                                        <tr>
+                                            <th className='das-display-header-table' colSpan="4"> {index === 0 ? "VESTING INFORMATION" : ` CHAIN OF TITLE  ${index}`}  </th>
+                                        </tr>
 
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.recordedDate}</td>
-                                    </tr>
+                                        <tr>
+                                            <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> DEED TYPE </th>
+                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{vestingdeedinfo.deedType}  </td>
+                                            <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> CONSIDERATION AMOUNT : $ </th>
+                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{vestingdeedinfo.considerationAmount} </td>
+                                        </tr>
 
-                                    <tr>
+                                        <tr>
+                                            <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> GRANTOR : </th>
+                                            <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{vestingdeedinfo.grantor}  </td>
+                                        </tr>
 
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>MATURITY DATE</th>
-                                        <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{openmortagedeedinfo.maturityDate}</td>
-                                    </tr>
+                                        <tr>
+                                            <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>GRANTEE : </th>
+                                            <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{vestingdeedinfo.grantee}</td>
+                                        </tr>
 
-                                    <tr>
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> MORTGAGE ASSIGNED TO </th>
+                                        <tr>
+                                            <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> VESTING INFO :</th>
+                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{vestingdeedinfo.vesting} </td>
 
-                                        <td className="das-report-display-data"colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.mortgageAssignedTo}</td>
+                                            <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>INSTR/BOOK/PAGE:</th>
+                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{vestingdeedinfo.instaBookPage}  </td>
+                                        </tr>
 
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>ASSIGNMENT BK/PG </th>
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.assignmentBkPg}</td>
-                                    </tr>
+                                        <tr>
+                                            <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> DATED DATE: </th>
+                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{vestingdeedinfo.datedDate}  </td>
+                                            <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>RECORDED DATE:</th>
+                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{vestingdeedinfo.recorderdDate} </td>
+                                        </tr>
 
-                                    <tr>
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> ASSIGNMENT DATED </th>
+                                        <tr>
+                                            <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>COMMENTS :</th>
+                                            <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{vestingdeedinfo.comments}  </td>
+                                        </tr>
 
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.assignmentDated === null ? "No Data" : openmortagedeedinfo.assignmentDated}</td>
+                                    </table>
+                                </center>
+                            </div>
+                        ))}
+                        <br />
+                        <br />
+                        {etservice && etservice.absopenmortgagedeedinfo.map((openmortagedeedinfo, mIndex) => (
+                            <div key={mIndex} >
+                                <br />
+                                <center>
+                                    <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }} >
+                                        <tr>
+                                            <th className='das-display-header-table' colSpan={4} >OPEN MORTGAGE / DEED OF TRUST  - ({mIndex}) INFORMATION </th>
+                                        </tr>
 
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>ASSIGNMENT RECORDED: </th>
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.assignmentRecorded === null ? "No Data" : openmortagedeedinfo.assignmentRecorded}</td>
-                                    </tr>
+                                        <tr>
+                                            <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> MORTGAGO </th>
+                                            <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{openmortagedeedinfo.mortgagor}</td>
+                                        </tr>
 
-                                    <tr>
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>COMMENTS</th>
-                                        <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{openmortagedeedinfo.comments === null ? "No Data" : openmortagedeedinfo.comments}</td>
-                                    </tr>
-                                </table>
-                            </center>
-                        </div>
-                    ))}
-                    <br />
+                                        <tr>
+                                            <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> MORTGAGEE </th>
+                                            <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{openmortagedeedinfo.mortgagee}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> TRUSTEE </th>
+                                            <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{openmortagedeedinfo.trustee}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> INSTRUMENT/BOOK/PAGE: </th>
+                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.instrBookPage}</td>
+
+                                            <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>AMOUNT [$]:</th>
+                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.amount}</td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> DATED DATE:  </th>
+                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.datedDate}</td>
+
+                                            <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>RECORDED DATE:</th>
+
+                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.recordedDate}</td>
+                                        </tr>
+
+                                        <tr>
+
+                                            <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>MATURITY DATE</th>
+                                            <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{openmortagedeedinfo.maturityDate}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> MORTGAGE ASSIGNED TO </th>
+
+                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.mortgageAssignedTo}</td>
+
+                                            <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>ASSIGNMENT BK/PG </th>
+                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.assignmentBkPg}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> ASSIGNMENT DATED </th>
+
+                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.assignmentDated === null ? "No Data" : openmortagedeedinfo.assignmentDated}</td>
+
+                                            <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>ASSIGNMENT RECORDED: </th>
+                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.assignmentRecorded === null ? "No Data" : openmortagedeedinfo.assignmentRecorded}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>COMMENTS</th>
+                                            <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{openmortagedeedinfo.comments === null ? "No Data" : openmortagedeedinfo.comments}</td>
+                                        </tr>
+                                    </table>
+                                </center>
+                            </div>
+                        ))}
+                        <br />
+                    </div>
                 </div>
-            </div>
-            <br />
-            <br />
-          
-            <div id="pdf-content2">
                 <br />
-                {/* <center>
+                <br />
+
+                <div id="pdf-content2">
+                    <br />
+                    {/* <center>
                     <table className='das-display-report-heading' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
                         <tr>  <th> DISCOVER ABSTRACT REPORT </th> </tr>
                     </table>
                 </center> */}
-                <br />
-                <br />
-                <div >
-                    <center>
-                        <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
-                            <thead>
-                                <tr>
-                                    <th className='das-display-header-table' colSpan={4} style={{ marginBottom:'10px' }}> ACTIVE JUDGMENTS AND LIENS</th>
-                                </tr>
-                                <tr>
-                                     <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }} scope="col">CASE TYPE</th>
-                                    <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }} scope="col">BK&PG/CASE NO/INSTR NO</th>
-                                    <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }} scope="col">RECORDING DATE</th>
-                                    <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }} scope="col">AMOUNT</th>
-                                  
-                                    {/* <th className="mx-2" scope="col">Action</th>*/}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {etservice && etservice.absActiveJudgementsAndLines.map((activejudgmentsandliens, index) => (
-                                    <tr key={index} style={{ border: '1px solid black' }}>
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.caseType}</td>
-                                        <td className="das-report-display-data"  colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.bkPgCaseNo}</td>
-                                        <td className="das-report-display-data"  colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.recordingDate}</td>
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.amount}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </center>
-                </div>
-                <br />
-                {etservice && etservice.assessementsAndTaxInfo.map((taxinformation, tindex) => (
-                    <div id="taxInformation" key={tindex}>
-                        <br />
+                    <br />
+                    <br />
+                    <div >
                         <center>
-                            <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }} >
-                                <tr>
-                                    <th className='das-display-header-table' colSpan={4} >TAX INFORMATION </th>
-                                </tr>
-                                <tr >
-                                    <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>ASSESMENT YEAR</th>
-                                    <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>2023</th>
-                                    <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>TAX YEAR</th>
-                                    <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>2023</th>
-                                </tr>
-
-                                <tr>
-                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} > LAND VALUE </td>
-                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinformation.landValue}</td>
-                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} > BUILDING VALUE </td>
-                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinformation.buildingValue}</td>
-                                </tr>
-
-                                <tr>
-                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} > TOTAL VALUE </td>
-                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinformation.totalValue}</td>
-                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} > EXTRAVALUE </td>
-                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinformation.extraValue}</td>
-                                </tr>
-
-                                <tr className='das-display-header-table'>
-                                    <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>INSTALLMENT</th>
-                                    <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>AMOUNT</th>
-                                    <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>STATUS</th>
-                                    <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>PAID/DUE DATE</th>
-
-                                </tr>
-                                {etservice && etservice.taxinstallments.map((taxinstallment, tindex) => (
-                                    <tr key={tindex}>
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{tindex === 0 ? `${tindex + 1}ST INSTALLMENT ` : tindex === 1 ? ` ${tindex + 1}ND INSTALLMENT` : tindex === 2 ? `${tindex + 1}RD INSTALLMENT` : `${tindex + 1}TH INSTALLMENT`}</td>
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinstallment.amount}</td>
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinstallment.status}</td>
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinstallment.paidDueDate}</td>
+                            <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
+                                <thead>
+                                    <tr>
+                                        <th className='das-display-header-table' colSpan={4} style={{ marginBottom: '10px' }}> ACTIVE JUDGMENTS AND LIENS</th>
                                     </tr>
-                                ))}
-                                <tr>
-                                    <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}> COMMENTS </th>
-                                    <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{taxinformation.comments}</td>
-                                </tr>
+                                    <tr>
+                                        <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }} scope="col">CASE TYPE</th>
+                                        <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }} scope="col">BK&PG/CASE NO/INSTR NO</th>
+                                        <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }} scope="col">RECORDING DATE</th>
+                                        <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }} scope="col">AMOUNT</th>
+
+                                        {/* <th className="mx-2" scope="col">Action</th>*/}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {etservice && etservice.absActiveJudgementsAndLines.map((activejudgmentsandliens, index) => (
+                                        <tr key={index} style={{ border: '1px solid black' }}>
+                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.caseType}</td>
+                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.bkPgCaseNo}</td>
+                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.recordingDate}</td>
+                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.amount}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
                             </table>
                         </center>
                     </div>
-                ))}
-                <br />
-                <br /> 
-              
-
-                <center>
-                    <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
-                        <tr >
-                            <th className='das-display-header-table' style={{ marginBottom:'10px' }} colSpan={5}> NAMES RUNS</th>
-                        </tr>
-                        <tr className='das-display-heading-table'>
-                            <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}> NAME </th>
-                            <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>  JUD </th>
-                            <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}> LINES </th>
-                            <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>UCC</th>
-                            <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>OTHERS</th>
-                        </tr>
-
-                        {etservice && etservice.namesrun.map((nameruns, nindex) => (
-                            <tr key={nindex}>
-                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{nameruns.name}</td>
-                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{nameruns.jud === null ? "X" : nameruns.jud}</td>
-                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{nameruns.liens === null ? "X" : nameruns.liens}</td>
-                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{nameruns.ucc === null ? "X" : nameruns.ucc}</td>
-                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{nameruns.others === null ? "X" : nameruns.others}</td>
-                            </tr>
-                        ))}
-                    </table>
                     <br />
-                </center>
+                    {etservice && etservice.assessementsAndTaxInfo.map((taxinformation, tindex) => (
+                        <div id="taxInformation" key={tindex}>
+                            <br />
+                            <center>
+                                <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }} >
+                                    <tr>
+                                        <th className='das-display-header-table' colSpan={4} >TAX INFORMATION </th>
+                                    </tr>
+                                    <tr >
+                                        <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>ASSESMENT YEAR</th>
+                                        <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>2023</th>
+                                        <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>TAX YEAR</th>
+                                        <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>2023</th>
+                                    </tr>
 
-                <br />
-                {etservice && (
+                                    <tr>
+                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} > LAND VALUE </td>
+                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinformation.landValue}</td>
+                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} > BUILDING VALUE </td>
+                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinformation.buildingValue}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} > TOTAL VALUE </td>
+                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinformation.totalValue}</td>
+                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} > EXTRAVALUE </td>
+                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinformation.extraValue}</td>
+                                    </tr>
+
+                                    <tr className='das-display-header-table'>
+                                        <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>INSTALLMENT</th>
+                                        <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>AMOUNT</th>
+                                        <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>STATUS</th>
+                                        <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>PAID/DUE DATE</th>
+
+                                    </tr>
+                                    {etservice && etservice.taxinstallments.map((taxinstallment, tindex) => (
+                                        <tr key={tindex}>
+                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{tindex === 0 ? `${tindex + 1}ST INSTALLMENT ` : tindex === 1 ? ` ${tindex + 1}ND INSTALLMENT` : tindex === 2 ? `${tindex + 1}RD INSTALLMENT` : `${tindex + 1}TH INSTALLMENT`}</td>
+                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinstallment.amount}</td>
+                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinstallment.status}</td>
+                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinstallment.paidDueDate}</td>
+                                        </tr>
+                                    ))}
+                                    <tr>
+                                        <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}> COMMENTS </th>
+                                        <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{taxinformation.comments}</td>
+                                    </tr>
+                                </table>
+                            </center>
+                        </div>
+                    ))}
+                    <br />
+                    <br />
+
+
                     <center>
                         <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
-                            <tr>
-                                <th className="das-display-header-table" colSpan={1}> SHORT LEGAL DESCRIPTION </th>
+                            <tr >
+                                <th className='das-display-header-table' style={{ marginBottom: '10px' }} colSpan={5}> NAMES RUNS</th>
+                            </tr>
+                            <tr className='das-display-heading-table'>
+                                <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}> NAME </th>
+                                <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>  JUD </th>
+                                <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}> LINES </th>
+                                <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>UCC</th>
+                                <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>OTHERS</th>
                             </tr>
 
-                            <tr>
-                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>
-                                    <p>FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED </p>
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <p> PROPERTY ADDRESS :  {etservice.propertyAddress} </p>
-                                    {/* {etservice.propertyAddress === null ? "No" : {etservice.propertyAddress}}  */}
-                                </td>
-                          
-                            </tr>
-
-
+                            {etservice && etservice.namesrun.map((nameruns, nindex) => (
+                                <tr key={nindex}>
+                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{nameruns.name}</td>
+                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{nameruns.jud === null ? "X" : nameruns.jud}</td>
+                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{nameruns.liens === null ? "X" : nameruns.liens}</td>
+                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{nameruns.ucc === null ? "X" : nameruns.ucc}</td>
+                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{nameruns.others === null ? "X" : nameruns.others}</td>
+                                </tr>
+                            ))}
                         </table>
+                        <br />
                     </center>
-                )}
-            </div>
-            <br />
-            <br />
 
-           
-            <div id="pdf-content3">
-                {/* Third set of content to be converted */}
+                    <br />
+                    {etservice && (
+                        <center>
+                            <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
+                                <tr>
+                                    <th className="das-display-header-table" colSpan={1}> SHORT LEGAL DESCRIPTION </th>
+                                </tr>
 
+                                <tr>
+                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>
+                                        <p>FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED </p>
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <p> PROPERTY ADDRESS :  {etservice.propertyAddress} </p>
+                                        {/* {etservice.propertyAddress === null ? "No" : {etservice.propertyAddress}}  */}
+                                    </td>
+
+                                </tr>
+
+
+                            </table>
+                        </center>
+                    )}
+                </div>
                 <br />
-                {/* <center>
+                <br />
+
+
+                <div id="pdf-content3">
+                    {/* Third set of content to be converted */}
+
+                    <br />
+                    {/* <center>
                     <table className='das-display-report-heading' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
                         <tr>
                             <th>  DISCOVER ABSTRACT REPORT   </th>
@@ -549,51 +549,51 @@ function DasDisplay() {
                     </table>
                 </center> */}
 
-                <br />
-                <br />
-                {etservice && (
-                    <div className='abstractreport-container-13'>
-                        <br />
+                    <br />
+                    <br />
+                    {etservice && (
+                        <div className='abstractreport-container-13'>
+                            <br />
 
-                    </div>
-                )}
-                <br />
-                <br />
+                        </div>
+                    )}
+                    <br />
+                    <br />
 
-                <center>
-                    <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }} >
+                    <center>
+                        <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }} >
 
-                        <tr>
-                            <th className='das-display-header-table' style={{ marginBottom:'10px' }} colSpan={1}>DISCLAIMER</th>
-                        </tr>
+                            <tr>
+                                <th className='das-display-header-table' style={{ marginBottom: '10px' }} colSpan={1}>DISCLAIMER</th>
+                            </tr>
 
-                        <tr>
-                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>This title search report was performed in accordance with generally accepted standards. This report may not contain information
-                                affecting above real estate property that cannot be indexed due to different spelling of owner's name or incorrectly recorded
-                                parcel number or recorder clerk error. Taxes are informational purposes only, all information contained herein are obtained
-                                from Tax collectors office/website. Please do check for any additional levies and assessments before settlement. We makes no
-                                warranties, and assumes no liability whatsoever for the accuracy of the information contained herein beyond the exercise of
-                                such reasonable care.</td>
-                        </tr>
+                            <tr>
+                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>This title search report was performed in accordance with generally accepted standards. This report may not contain information
+                                    affecting above real estate property that cannot be indexed due to different spelling of owner's name or incorrectly recorded
+                                    parcel number or recorder clerk error. Taxes are informational purposes only, all information contained herein are obtained
+                                    from Tax collectors office/website. Please do check for any additional levies and assessments before settlement. We makes no
+                                    warranties, and assumes no liability whatsoever for the accuracy of the information contained herein beyond the exercise of
+                                    such reasonable care.</td>
+                            </tr>
 
-                    </table>
-                </center>
-                <br />
+                        </table>
+                    </center>
+                    <br />
+                </div>
+
+
+                <div className='abstractform-button-container'>
+                    <center>
+                        <button className='das-service-display-pdf-button ' onClick={printDocument}>Download PDF</button>
+                        <button className='das-service-display-doc-button' onClick={handleDownload}>Download DOCX</button>
+                    </center>
+
+
+                    {/* <button className='abstractform-button' onClick={generateWordDocument}>Download word</button> */}
+                </div>
+
             </div>
-         
-       
-            <div className='abstractform-button-container'>
-                <center>
-                    <button className='das-service-display-pdf-button ' onClick={printDocument}>Download PDF</button>
-                    <button className='das-service-display-doc-button' onClick={handleDownload}>Download DOCX</button>
-                </center>
-
-
-                {/* <button className='abstractform-button' onClick={generateWordDocument}>Download word</button> */}
-            </div>
-
-        </div>
-        <Footer/>
+            <Footer />
         </div>
     )
 }
