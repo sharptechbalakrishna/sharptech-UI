@@ -22,7 +22,7 @@ function DasDisplay() {
     const [isDownloading, setIsDownloading] = useState(false);
 
     useEffect(() => {
-        const loadUser = async () => {
+        const loadEtService = async () => {
             try {
                 const token = localStorage.getItem('token');
                 const result = await axios.get(`http://localhost:8080/fetch/${orderNumber}`, {
@@ -30,27 +30,30 @@ function DasDisplay() {
                         'Authorization': `Bearer ${token}`
                     }
                 });
-                window.alert("Successfully fetched");
-                console.log(result);
                 setEtService(result.data);
             } catch (error) {
-                console.error('Error fetching user details:', error);
+                console.error('Error fetching et service details:', error);
             }
         };
-
-        loadUser();
+    
+        loadEtService();
+    
+        return () => {
+            // Clean up any remaining state or effects here if needed
+        };
     }, [orderNumber]);
+    
 
     const printDocument = () => {
         const input1 = document.getElementById('pdf-content1');
         const input2 = document.getElementById('pdf-content2');
         const input3 = document.getElementById('pdf-content3');
-
+    
         const generatePDF = async () => {
             const pdf = new jsPDF('p', 'mm', 'a4');
             const pageHeight = pdf.internal.pageSize.getHeight();
             const imgWidth = pdf.internal.pageSize.getWidth();
-
+    
             const addContentToPDF = async (input) => {
                 const canvas = await html2canvas(input, {
                     scrollY: -window.scrollY,
@@ -61,7 +64,7 @@ function DasDisplay() {
                 const imgHeight = (canvas.height / canvas.width) * imgWidth;
                 let position = 0;
                 let remainingHeight = imgHeight;
-
+    
                 while (remainingHeight > 0) {
                     if (remainingHeight > pageHeight) {
                         pdf.addImage(imgData, 'PNG', 10, position, imgWidth, pageHeight - 10);
@@ -73,84 +76,95 @@ function DasDisplay() {
                         remainingHeight = 0;
                     }
                 }
+    
+                // Add current date and time at the bottom of the page
+                const now = new Date();
+                const formattedDate = `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
+                const textWidth = pdf.getStringUnitWidth(formattedDate) * pdf.internal.getFontSize() / pdf.internal.scaleFactor;
+                const textX = (pdf.internal.pageSize.getWidth() - textWidth) / 2;
+                const textY = pdf.internal.pageSize.getHeight() - 10;
+                pdf.text(formattedDate, textX, textY, { align: 'center' });
             };
-
+    
             await addContentToPDF(input1);
             pdf.addPage();
             await addContentToPDF(input2);
             pdf.addPage();
             await addContentToPDF(input3);
-
-            // pdf.save("et_service.pdf");
-            pdf.save("das_service.pdf");
+    
+            // Construct filename with current date
+            const currentDate = new Date();
+            const formattedDate = currentDate.toISOString().slice(0, 10); // Format as YYYY-MM-DD
+    
+            const filename = `das_service_${formattedDate}.pdf`; // Filename with current date
+    
+            // Save PDF with filename
+            pdf.save(filename);
         };
-
+    
         generatePDF();
     };
+    
+    
+    
+    
     const contentRef = useRef(null);
     const handleDownload = () => {
         const content = contentRef.current.innerHTML;
         const css = `
-               <style>
-            /* General styling */
-            body {
-                font-family: Arial, sans-serif;
-                line-height: 1.5;
-                font-size: 14px;
-                color: #000;
-                margin: 0;
-                padding: 0;
-            }
-                .das-display-overall-heading  {
-                    
-                    font-size: 22px;
-                    padding-top:10px;
-                   background-color: #db815d; 
-                    color:black; 
-                    border-radius: 10px; 
-
+            <style>
+                /* General styling */
+                body {
+                    font-family: Arial, sans-serif;
+                    line-height: 1.5;
+                    font-size: 14px;
+                    color: #000;
+                    margin: 0;
+                    padding: 0;
                 }
-                    .das-display-sub-title-headings{
-                background-color: #93c0f3;
-                    }
-
-                 
-                
+                .das-display-overall-heading {
+                    font-size: 22px;
+                    padding-top: 10px;
+                    background-color: #db815d;
+                    color: black;
+                    border-radius: 10px;
+                }
+                .das-display-sub-title-headings {
+                    background-color: #93c0f3;
+                }
                 .das-display-header-table {
-                 background-color: #7fb9f7;
-                  padding-top: 10px;
-                    }
-
-            .das-report-display-data{
-            text-align: center;
-            }
-
-          
-            table {
-                width: 100%;
-                border-collapse: collapse;
-             
-            }
-
-          
-        </style>
+                    background-color: #7fb9f7;
+                    padding-top: 10px;
+                }
+                .das-report-display-data {
+                    text-align: center;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+            </style>
+        `;
     
-    `;
+        // Corrected HTML string with escaped quotes around content
         const html = `<!DOCTYPE html><html><head><meta charset="UTF-8">${css}</head><body>${content}</body></html>`;
+    
         const docxContent = htmlDocx.asBlob(html);
-        saveAs(docxContent, 'Das Report.docx');
+    
+        // Get the current date
+        const currentDate = new Date();
+    
+        // Format the date as YYYY-MM-DD (you can adjust the format as needed)
+        const formattedDate = currentDate.toISOString().slice(0, 10);
+    
+        // Construct the filename with the date appended
+        const filename = `Das_Report_${formattedDate}.docx`;
+    
+        // Save the DOCX file with the filename including the date
+        saveAs(docxContent, filename);
     };
-    // Usage of contentRef in your component
-    // const MyComponent = () => {
-    //  const contentRef = useRef();
 
-    // const [data, setData] = useState(null);
-    // if (!data) {
-    //     return <div>Loading...</div>;
-    // }
-    // console.log("options2:", options2);
-    // const creator = options2?.creator ?? "Un-named";
-    // console.log("Creator:", creator);
+
     return (
         <div>
             <Navbar />
