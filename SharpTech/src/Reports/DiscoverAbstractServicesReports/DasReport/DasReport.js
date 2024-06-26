@@ -316,7 +316,7 @@ function DasReport() {
                     vesting: data.data.vesting || '',
                     instaBookPage: data.data.instaBookPage || '',  // Ensure the name matches
                     datedDate: data.data.datedDate || '',
-                    recordedDate: data.data.recordedDate || '',  // Ensure the name matches
+                    recorderdDate: data.data.recorderdDate || '',  // Ensure the name matches
                     comments: data.data.comments || ''  // Ensure the name matches
                 }
             }));
@@ -462,55 +462,6 @@ function DasReport() {
             localStorage.setItem('vestingInfo', JSON.stringify(updatedTables));
         }
     };
-
-    // const handleSave2 = () => {
-    //     // Check if all fields in all tables are filled
-    //     const isAnyFieldEmpty = tablesData2.some(table => 
-    //         ['mortgagor', 'mortgagee', 'instrBookPage', 'amount', 'datedDate', 'recordedDate'].some(field => !table[field])
-    //     );
-
-    //     if (isAnyFieldEmpty) {
-    //         alert("Please fill in all fields before saving!");
-    //     } else {
-    //         // Save data to local storage temporarily
-    //         localStorage.setItem('tempTablesData2', JSON.stringify(tablesData2));
-    //         alert("Data saved temporarily!");
-    //     }
-    // };
-
-    // const handleClear2 = () => {
-    //     // Check if any table contains data
-    //     const isDataPresent = tablesData2.some(table =>
-    //         Object.values(table).some(value => value)
-    //     );
-
-    //     if (isDataPresent) {
-    //         // Clear data inside the tables without removing the tables themselves
-    //         const clearedData = tablesData2.map(table => ({
-    //             ...table,
-    //             mortgagor: '',
-    //             mortgagee: '',
-    //             trustee: '',
-    //             instrBookPage: '',
-    //             amount: '',
-    //             datedDate: '',
-    //             recordedDate: '',
-    //             maturityDate: '',
-    //             mortgageAssignedTo: '',
-    //             assignmentBkPg: '',
-    //             assignmentDated: '',
-    //             assignmentRecorded: '',
-    //             comments: ''
-    //         }));
-    //         setTablesData2(clearedData);
-    //         localStorage.removeItem('tempTablesData2');
-    //         alert('Table data cleared!');
-    //     } else {
-    //         alert('There is no data to clear.');
-    //     }
-    // };
-
-    //save and clear for the third table
 
     const saveMortgageInfo = (tableId) => {
         const tableData = tablesData2.find(table => table.id === tableId);
@@ -861,7 +812,7 @@ function DasReport() {
                                                 </td>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>RECORDED DATE:</th>
                                                 <td colSpan={2} style={{ border: '1px solid black' }}>
-                                                    <input type="date" className="abstract-control-input" placeholder="Enter RECORDED DATE" name="recordedDate" value={table.data.recordedDate || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
+                                                <input type="date" className="abstract-control-input" placeholder="Enter Date" name="recorderdDate" value={table.data.recorderdDate || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -938,9 +889,9 @@ function DasReport() {
                                             <td colSpan={'4'} style={{ border: '1px solid black' }}>
                                                 <input type="text" className="abstract-control-input" name="instrBookPage" placeholder='Enter INSTRUMENT/BOOK/PAGE:' style={{ width: '100%' }} value={table.data.instrBookPage || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
-                                            <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>Amount [$]:</th>
+                                            <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>AMOUNT [$]:</th>
                                             <td colSpan={2} style={{ border: '1px solid black' }}>
-                                                <input type="Number" className="abstract-control-input" placeholder="$ Enter Amount" name="amount" style={{ width: '100%' }} value={table.data.amount || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
+                                                <input type="text" className="abstract-control-input" placeholder="$ Enter Amount" name="amount" style={{ width: '100%' }} value={table.data.amount || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                         </tr>
                                         <tr>
@@ -1100,7 +1051,7 @@ function DasReport() {
                                         <td colSpan='1' style={{ border: '1px solid black' }} >
                                             <input type="text" className="abstract-control-input" placeholder="Enter TotalValue" name="totalValue" value={taxinfo.totalValue} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
                                         </td>
-                                        <th className="das-report-sub-heading" colSpan='1' style={{ border: '1px solid black' }} > EXEMPTION </th>
+                                        <th className="das-report-sub-heading" colSpan='1' style={{ border: '1px solid black' }} > EXTRAVALUE </th>
                                         <td colSpan='1' style={{ border: '1px solid black' }} >
                                             <input type="text" className="abstract-control-input" placeholder="Enter extraValue" name="extraValue" value={taxinfo.extraValue} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
                                         </td>
@@ -1128,7 +1079,7 @@ function DasReport() {
                                         </tr>
                                     ))}
                                     <tr>
-                                        <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>NOTES</th>
+                                        <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>COMMENTS</th>
                                         <td colSpan={6} style={{ border: '1px solid black' }}>
                                             <input type='text' className="abstract-control-input" placeholder="Enter Notes" name="comments" value={comments} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
                                         </td>

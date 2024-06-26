@@ -266,7 +266,7 @@ function DasDisplay() {
                                     <tr>
                                         <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> DEED TYPE </th>
                                         <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{vestingdeedinfo.deedType}  </td>
-                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> CONSIDERATION Amount : $ </th>
+                                        <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> CONSIDERATION AMOUNT : $ </th>
                                         <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{vestingdeedinfo.considerationAmount} </td>
                                     </tr>
 
@@ -292,7 +292,7 @@ function DasDisplay() {
                                         <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> DATED DATE: </th>
                                         <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{vestingdeedinfo.datedDate}  </td>
                                         <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>RECORDED DATE:</th>
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{vestingdeedinfo.deedTrecorderdDateype} </td>
+                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{vestingdeedinfo.recorderdDate} </td>
                                     </tr>
 
                                     <tr>
@@ -317,7 +317,7 @@ function DasDisplay() {
 
                                     <tr>
                                         <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> MORTGAGO </th>
-                                        <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{openmortagedeedinfo.mortgago}</td>
+                                        <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{openmortagedeedinfo.mortgagor}</td>
                                     </tr>
 
                                     <tr>
@@ -417,7 +417,7 @@ function DasDisplay() {
                                         <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.caseType}</td>
                                         <td className="das-report-display-data"  colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.bkPgCaseNo}</td>
                                         <td className="das-report-display-data"  colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.recordingDate}</td>
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.Amount}</td>
+                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.amount}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -450,8 +450,8 @@ function DasDisplay() {
                                 <tr>
                                     <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} > TOTAL VALUE </td>
                                     <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinformation.totalValue}</td>
-                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} > EXEMPTION </td>
-                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinformation.excemption}</td>
+                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} > EXTRAVALUE </td>
+                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinformation.extraValue}</td>
                                 </tr>
 
                                 <tr className='das-display-header-table'>
@@ -463,15 +463,15 @@ function DasDisplay() {
                                 </tr>
                                 {etservice && etservice.taxinstallments.map((taxinstallment, tindex) => (
                                     <tr key={tindex}>
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{tindex === 0 ? `${tindex + 1}ST INSTALLMENT ` : tindex === 1 ? ` ${tindex + 1}ND INSTALLMENT` : tindex === 2 ? `${tindex + 1}RD ST INSTALLMENT` : `${tindex + 1}TH ST INSTALLMENT`}</td>
+                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{tindex === 0 ? `${tindex + 1}ST INSTALLMENT ` : tindex === 1 ? ` ${tindex + 1}ND INSTALLMENT` : tindex === 2 ? `${tindex + 1}RD INSTALLMENT` : `${tindex + 1}TH INSTALLMENT`}</td>
                                         <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinstallment.amount}</td>
                                         <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinstallment.status}</td>
                                         <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinstallment.paidDueDate}</td>
                                     </tr>
                                 ))}
                                 <tr>
-                                    <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}> NOTES </th>
-                                    <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{taxinformation.notes}</td>
+                                    <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}> COMMENTS </th>
+                                    <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{taxinformation.comments}</td>
                                 </tr>
                             </table>
                         </center>
