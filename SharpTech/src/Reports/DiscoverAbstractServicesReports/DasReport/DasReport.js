@@ -6,6 +6,7 @@ import "./DasReport.css";
 import { Button } from 'primereact/button';
 import Footer from '../../../components/Footer/Footer';
 import Navbar from '../../../components/Navbar/Navbar';
+import { ProgressSpinner } from 'primereact/progressspinner';
 
 function DasReport() {
 
@@ -578,12 +579,23 @@ function DasReport() {
         setTablesDataD(tablesDataD.filter(table => table.id !== tableId));
     };
 
-    const onSubmit = async (e) => {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(false);
 
+    const onSubmit = async (e) => {
         e.preventDefault();
+
+        // Perform form validation
+        if (!validateForm()) {
+            setError('Please fill in all required fields.');
+            return;
+        }
+
+        setLoading(true);
+
         try {
             const token = localStorage.getItem('token');
-
             const payload = {
                 propertyinfo: {
                     orderNumber: orderNumber,
@@ -599,23 +611,17 @@ function DasReport() {
                     lotUnit: lotUnit,
                     block: block,
                     propertyType: propertyType,
-
                     vestingdeedinfo: tablesData.map(table => ({ ...table.data })),
                     absopenmortgagedeedinfo: tablesData2.map(table => ({ ...table.data })),
                     absActiveJudgementsAndLines: tableRowsData.map(table => ({ ...table.data })),
-
-                    assessementsAndTaxInfo: [
-                        {
-
-                            taxYear: taxYear,
-                            landValue: landValue,
-                            buildingValue: buildingValue,
-                            extraValue: extraValue,
-                            totalValue: totalValue,
-                            comments: comments
-
-                        }
-                    ],
+                    assessementsAndTaxInfo: [{
+                        taxYear: taxYear,
+                        landValue: landValue,
+                        buildingValue: buildingValue,
+                        extraValue: extraValue,
+                        totalValue: totalValue,
+                        comments: comments
+                    }],
                     namesrun: nameRunData.map(row => ({ ...row.data })),
                     taxinstallments: tableTaxInstaData.map(row => ({
                         amount: row.amount,
@@ -624,33 +630,51 @@ function DasReport() {
                     })),
                 }
             };
-            await axios.post("http://localhost:8080/insert", payload, {
 
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
+            // Simulate a delay for demonstration (remove this in actual implementation)
+            await new Promise(resolve => setTimeout(resolve, 1500));
 
-            });
-            console.log(payload);
-            window.alert("Data Sent Sucessfully");
-
-            localStorage.removeItem('propertyInfo');
-            localStorage.removeItem('dadVestinInfo');
-            localStorage.removeItem('mortgageInfo');
-            localStorage.removeItem('tableRowsData');
-            localStorage.removeItem('taxInformation');
-            localStorage.removeItem('nameRunData');
-            localStorage.removeItem('tableTaxInstaData');
-            window.location.reload();
-
-
+            // Simulate success based on a condition (remove this in actual implementation)
+            const successCondition = true; // Replace with actual success condition
+            if (successCondition) {
+                await axios.post("http://localhost:8080/insert", payload, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                setSuccess(true);
+                console.log(payload);
+                window.alert("Data Sent Successfully");
+                clearLocalStorage();
+                window.location.reload();
+            } else {
+                setError('Failed to submit data. Please try again.');
+            }
         } catch (error) {
             console.error("Registration failed:", error);
-            // Handle error if registration fails
+            setError('Failed to submit data. Please try again.');
+        } finally {
+            setLoading(false);
         }
-
-
     };
+
+    const validateForm = () => {
+        // Implement your form validation logic here
+        // Example: check if required fields are filled
+        return true; // Replace with actual validation logic
+    };
+
+    const clearLocalStorage = () => {
+        // Clear local storage items
+        localStorage.removeItem('propertyInfo');
+        localStorage.removeItem('dadVestinInfo');
+        localStorage.removeItem('mortgageInfo');
+        localStorage.removeItem('tableRowsData');
+        localStorage.removeItem('taxInformation');
+        localStorage.removeItem('nameRunData');
+        localStorage.removeItem('tableTaxInstaData');
+    };
+
 
     return (
         <div>
@@ -1264,7 +1288,34 @@ function DasReport() {
                     <br />
                     <br />
 
-                    <button className="das-report-submit-button" type="Submit">  <i className="pi pi-check" style={{ marginRight: '8px' }}></i>Submit  </button>
+                    {/* <button className="das-report-submit-button" type="Submit">  <i className="pi pi-check" style={{ marginRight: '8px' }}></i>Submit  </button> */}
+
+                    {/* <button className="das-report-submit-button" type="submit" disabled={loading || success}>
+                        {loading ? (
+                            <>
+                                <ProgressSpinner style={{ width: '24px', height: '24px', marginRight: '8px' }} strokeWidth="4" />
+                                Submitting...
+                            </>
+                        ) : (
+                            <>
+                                <i className="pi pi-check" style={{ marginRight: '8px' }}></i> Submit
+                            </>
+                        )}
+                    </button> */}
+
+
+                    <button className="abstract-service-form-submit-button" type="submit" disabled={loading}>
+                        {loading ? (
+                            <>
+                                <ProgressSpinner style={{ width: '24px', height: '24px', marginRight: '8px' }} strokeWidth="4" />
+                                Submitting...
+                            </>
+                        ) : (
+                            <>
+                                <i className="pi pi-check" style={{ marginRight: '8px' }}></i> Submit
+                            </>
+                        )}
+                    </button>
                 </form>
             </div>
             <Footer />

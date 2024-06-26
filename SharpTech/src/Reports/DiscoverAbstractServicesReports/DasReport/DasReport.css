@@ -366,6 +366,35 @@
 
 
 
+.abstract-service-form-submit-button {
+  background-color: #217feb;
+  
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  margin-left: 45%;
+margin-right: 45%;
+ 
+}
 
+.abstract-service-form-submit-button:hover {
+  background-color: #218838;
+}
+
+.abstract-service-form-submit-button:active {
+  background-color: #1e7e34;
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+.abstract-service-form-submit-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(129, 195, 240, 0.5);
+}
 
 
