@@ -185,58 +185,58 @@ function DasDisplay() {
                                                 <tr>
                                                     <th className="das-display-side-headings"  colSpan={1} style={{ border: '1px solid black' }}>ORDER NUMBER :</th>
                                                     <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{etservice.orderNumber} </td>
-                                                    <th colSpan={1} style={{ border: '1px solid black' }}>REFERENCE NUMBER :</th>
+                                                    <th className="das-display-side-headings"colSpan={1} style={{ border: '1px solid black' }}>REFERENCE NUMBER :</th>
                                                     <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>  {etservice.referenceNumber} </td>
                                                 </tr>
 
                                                 <tr>
-                                                    <th colSpan={1} style={{ border: '1px solid black' }}>SEARCH DATE :</th>
+                                                    <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>SEARCH DATE :</th>
                                                     <td className="das-report-display-data"  colSpan={1} style={{ border: '1px solid black' }}> {etservice.searchDate}  </td>
 
-                                                    <th colSpan={1} style={{ border: '1px solid black' }}>As Of</th>
+                                                    <th className="das-display-side-headings"c colSpan={1} style={{ border: '1px solid black' }}>As Of</th>
                                                     <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >7:30 Am</td>
 
-                                                    <th colSpan={1} style={{ border: '1px solid black' }}>EFFECTIVE DATE :</th>
+                                                    <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>EFFECTIVE DATE :</th>
                                                     <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{etservice.effectiveDate}  </td>
                                                 </tr>
 
                                                 <tr>
 
-                                                    <th colSpan={1} style={{ border: '1px solid black' }}>PROPERTY ADDRESS :</th>
+                                                    <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>PROPERTY ADDRESS :</th>
                                                     <td className="das-report-display-data"  colSpan={5} style={{ border: '1px solid black' }}>  {etservice.propertyAddress} </td>
 
                                                 </tr>
 
                                                 <tr>
-                                                    <th colSpan={1} style={{ border: '1px solid black' }}> STATE : </th>
+                                                    <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> STATE : </th>
                                                     <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>  {etservice.state}  </td>
 
-                                                    <th colSpan={1} style={{ border: '1px solid black' }}> COUNTY :</th>
+                                                    <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> COUNTY :</th>
                                                     <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}> {etservice.county}  </td>
                                                 </tr>
 
                                                 <tr>
-                                                    <th colSpan={1} style={{ border: '1px solid black' }}>BORROWER NAME :</th>
+                                                    <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>BORROWER NAME :</th>
                                                     <td className="das-report-display-data" colSpan={5} style={{ border: '1px solid black' }}>  {etservice.borrowerName}</td>
 
                                                 </tr>
                                                 <tr>
-                                                    <th colSpan={1} style={{ border: '1px solid black' }}> PARCEL NUMBER :</th>
+                                                    <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> PARCEL NUMBER :</th>
                                                     <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>  {etservice.parcelNumber} </td>
 
-                                                    <th colSpan={1} style={{ border: '1px solid black' }}> SUBDIVISION : </th>
+                                                    <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> SUBDIVISION : </th>
                                                     <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}> {etservice.subdivision} </td>
                                                 </tr>
 
                                                 <tr>
-                                                    <th colSpan={1} style={{ border: '1px solid black' }}> LOT/UNIT </th>
+                                                    <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> LOT/UNIT </th>
                                                     <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>  {etservice.lotUnit}</td>
-                                                    <th colSpan={1} style={{ border: '1px solid black' }}>BLOCK:</th>
+                                                    <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>BLOCK:</th>
                                                     <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}> {etservice.block}  </td>
                                                 </tr>
 
                                                 <tr>
-                                                    <th colSpan={1} style={{ border: '1px solid black' }}>PROPERTY TYPE:</th>
+                                                    <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>PROPERTY TYPE:</th>
                                                     <td className="das-report-display-data" colSpan={5} style={{ border: '1px solid black' }}>{etservice.propertyType} </td>
                                                     {/* <td colSpan={1} style={{ border: '1px solid black' }}></td>
                                                     <td colSpan={1}  style={{ border: '1px solid black' }}></td> */}
