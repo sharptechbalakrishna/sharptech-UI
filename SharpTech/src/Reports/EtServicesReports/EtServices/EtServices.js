@@ -1105,12 +1105,7 @@ function EtServices() {
                 )}
               </button> */}
 
-              <button
-                className="et-service-form-submit-button"
-                type="submit"
-                disabled={loading}
-                onClick={onSubmit}
-              >
+              <button className="et-service-form-submit-button"  type="submit" disabled={loading}>
                 {loading ? (
                   <>
                     <ProgressSpinner style={{ width: '24px', height: '24px', marginRight: '8px' }} strokeWidth="4" />
@@ -1118,13 +1113,10 @@ function EtServices() {
                   </>
                 ) : (
                   <>
-                    <i className="pi pi-check" style={{ marginRight: '8px' }}></i>
-                    Submit
+                    <i className="pi pi-check" style={{ marginRight: '8px' }}></i> Submit
                   </>
                 )}
               </button>
-
-
 
             </table>
           </form>
