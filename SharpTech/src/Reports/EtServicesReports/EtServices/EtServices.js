@@ -62,6 +62,14 @@ function EtServices() {
 
       console.log(payload);
       window.alert("Data Sent Sucessfully");
+      localStorage.removeItem('etGeneralInfo');
+      localStorage.removeItem('etVestingInfo');
+      localStorage.removeItem('etMortageInfo');
+      localStorage.removeItem('etActiveJudgmentData');
+      localStorage.removeItem('etTaxInformationData');
+      localStorage.removeItem('etNameRunData');
+      localStorage.removeItem('etTaxInstaData');
+      window.location.reload();
     } catch (error) {
       console.error("Registration failed:", error);
       window.alert("Data Not Sent Somthing went Wrong"); // Handle error if registration fails
@@ -252,7 +260,7 @@ function EtServices() {
     localStorage.removeItem(`vestingTableData_${tableId}`);
 
     // Update overall tables data in localStorage
-    localStorage.setItem('vestingInfo', JSON.stringify(updatedTables));
+    localStorage.setItem('etVestingInfo', JSON.stringify(updatedTables));
   };
 
 
@@ -274,7 +282,7 @@ function EtServices() {
     localStorage.removeItem(`mortgageTableData_${tableId}`);
 
     // Update overall mortgage tables data in localStorage
-    localStorage.setItem('mortgageInfo', JSON.stringify(updatedTables2));
+    localStorage.setItem('etMortageInfo', JSON.stringify(updatedTables2));
   };
 
 
@@ -290,7 +298,7 @@ function EtServices() {
     if (tableRowsData.length > 0) {
       const updatedRows = tableRowsData.slice(0, -1); // Remove the last row
       setTableRowsData(updatedRows);
-      localStorage.setItem('tableRowsData', JSON.stringify(updatedRows)); // Update local storage
+      localStorage.setItem('etActiveJudgmentData', JSON.stringify(updatedRows)); // Update local storage
     }
   };
 
@@ -312,7 +320,7 @@ function EtServices() {
     if (nameRunData.length > 0) {
       const updatedRows = nameRunData.slice(0, -1); // Remove the last row
       setNameRunData(updatedRows);
-      localStorage.setItem('nameRunData', JSON.stringify(updatedRows)); // Update local storage)
+      localStorage.setItem('etNameRunData', JSON.stringify(updatedRows)); // Update local storage)
     }
   };
 
@@ -328,18 +336,18 @@ function EtServices() {
     if (tableTaxInstaData.length > 0) {
       const updatedRows = tableTaxInstaData.slice(0, -1); // Remove the last row
       setTableTaxInstaData(updatedRows);
-      localStorage.setItem('tableTaxInstaData', JSON.stringify(updatedRows));
+      localStorage.setItem('etTaxInstaData', JSON.stringify(updatedRows));
     }
   };
 
   //  loadin the table data form the Loacl Storage if Saved
   useEffect(() => {
-    const savedGeneralInfo = localStorage.getItem('generalInfo');
-    if (savedGeneralInfo) {
-      setUser(JSON.parse(savedGeneralInfo));
+    const savedetGeneralInfo = localStorage.getItem('etGeneralInfo');
+    if (savedetGeneralInfo) {
+      setUser(JSON.parse(savedetGeneralInfo));
     }
 
-    const savedVestingInfo = localStorage.getItem('vestingInfo');
+    const savedVestingInfo = localStorage.getItem('etVestingInfo');
     if (savedVestingInfo) {
       const parsedData = JSON.parse(savedVestingInfo);
 
@@ -365,7 +373,7 @@ function EtServices() {
       setNextTableId(parsedData.length + 1); // Ensure nextTableId is set correctly
     }
 
-    const savedMortgageInfo = localStorage.getItem('mortgageInfo');
+    const savedMortgageInfo = localStorage.getItem('etMortageInfo');
     if (savedMortgageInfo) {
       const parsedData2 = JSON.parse(savedMortgageInfo);
 
@@ -393,21 +401,21 @@ function EtServices() {
     }
 
 
-    const savedData = localStorage.getItem('tableRowsData');
-    if (savedData) {
-      setTableRowsData(JSON.parse(savedData));
-      setNextRowsId(JSON.parse(savedData).length + 1);
+    const savedEtActiveJudgmentData = localStorage.getItem('etActiveJudgmentData');
+    if (savedEtActiveJudgmentData) {
+      setTableRowsData(JSON.parse(savedEtActiveJudgmentData));
+      setNextRowsId(JSON.parse(savedEtActiveJudgmentData).length + 1);
     }
 
-    const namerundata = localStorage.getItem('nameRunData');
-    if (namerundata) {
-      const parsedData = JSON.parse(namerundata);
+    const savedNameRunData = localStorage.getItem('etNameRunData');
+    if (savedNameRunData) {
+      const parsedData = JSON.parse(savedNameRunData);
       setNameRunData(parsedData);
       setNextNameRunId(parsedData.length + 1);
     }
 
-    const savedTaxInfo = JSON.parse(localStorage.getItem('taxInformation'));
-    const savedTableData = JSON.parse(localStorage.getItem('tableTaxInstaData'));
+    const savedTaxInfo = JSON.parse(localStorage.getItem('etTaxInformationData'));
+    const savedTableData = JSON.parse(localStorage.getItem('etTaxInstaData'));
     if (savedTaxInfo) {
       setTaxInfo(savedTaxInfo);
     }
@@ -417,14 +425,14 @@ function EtServices() {
   }, []);
 
 
-  //  SaveFunction for ETGeneralInfo
-  const saveGeneralInfo = () => {
-    localStorage.setItem('generalInfo', JSON.stringify(user));
+  //  SaveFunction for ETetGeneralInfo
+  const saveetGeneralInfo = () => {
+    localStorage.setItem('etGeneralInfo', JSON.stringify(user));
     window.alert("General Info Saved Successfully");
   };
 
-  //  Clear Function for ETGeneralInfo
-  const clearGeneralInfo = () => {
+  //  Clear Function for ETetGeneralInfo
+  const clearetGeneralInfo = () => {
     setUser({
       orderNumber: "",
       refeenceNumber: "",
@@ -439,7 +447,7 @@ function EtServices() {
       block: "",
       sfrPudCondo: "",
     });
-    localStorage.removeItem('generalInfo');
+    localStorage.removeItem('etGeneralInfo');
     window.alert("General Info Cleared");
   };
 
@@ -449,7 +457,7 @@ function EtServices() {
     window.alert('Table Data Saved Successfully');
 
     // Update overall tables data in localStorage
-    localStorage.setItem('vestingInfo', JSON.stringify(tablesData));
+    localStorage.setItem('etVestingInfo', JSON.stringify(tablesData));
   };
 
   const clearVestingInfo = (tableId) => {
@@ -464,15 +472,15 @@ function EtServices() {
     window.alert('Table Data Cleared');
 
     // Update overall tables data in localStorage
-    localStorage.setItem('vestingInfo', JSON.stringify(updatedTables));
+    localStorage.setItem('etVestingInfo', JSON.stringify(updatedTables));
   };
 
   const saveMortgageInfo = (tableId) => {
     const tableData = tablesData2.find(table => table.id === tableId);
-    localStorage.setItem(`mortgageTableData_${tableId}`, JSON.stringify(tableData));
+    localStorage.setItem(`emortgageTableData_${tableId}`, JSON.stringify(tableData));
     window.alert('Table Data Saved Successfully');
 
-    localStorage.setItem('mortgageInfo', JSON.stringify(tablesData2));
+    localStorage.setItem('etMortageInfo', JSON.stringify(tablesData2));
   };
 
 
@@ -487,26 +495,26 @@ function EtServices() {
     localStorage.removeItem(`mortgageTableData_${tableId}`);
     window.alert('Table Data Cleared');
 
-    localStorage.setItem('mortgageInfo', JSON.stringify(updatedTables));
+    localStorage.setItem('etMortageInfo', JSON.stringify(updatedTables));
   };
 
-  const handleSave = () => {
-    localStorage.setItem('tableRowsData', JSON.stringify(tableRowsData));
+  const saveEtActiveJudgment = () => {
+    localStorage.setItem('etActiveJudgmentData', JSON.stringify(tableRowsData));
     alert('Data saved successfully!');
   };
 
   // Handle clearing data of the last row
-  const handleClear = () => {
+  const clearEtActiveJudgment = () => {
     const clearedRows = tableRowsData.map(row => ({ ...row, data: {} }));
     setTableRowsData(clearedRows);
-    localStorage.removeItem('tableRowsData'); // Clear local storage
+    localStorage.removeItem('etActiveJudgmentData'); // Clear local storage
   };
 
 
 
 
   const handleSaveTemporarilyRow = () => {
-    localStorage.setItem('nameRunData', JSON.stringify(nameRunData));
+    localStorage.setItem('etNameRunData', JSON.stringify(nameRunData));
     alert('Data saved successfully!');
   };
 
@@ -519,8 +527,8 @@ function EtServices() {
   };
 
   const handleSaveTemporarilyRow1 = () => {
-    localStorage.setItem('taxInformation', JSON.stringify(taxinfo));
-    localStorage.setItem('tableTaxInstaData', JSON.stringify(tableTaxInstaData));
+    localStorage.setItem('etTaxInformationData', JSON.stringify(taxinfo));
+    localStorage.setItem('etTaxInstaData', JSON.stringify(tableTaxInstaData));
     alert('Data saved to local storage!');
   };
 
@@ -645,8 +653,8 @@ function EtServices() {
                   </table>
                 </center>
 
-                <Button className='et-service-genenal-info-save-button' label="Save&nbsp;" icon="pi pi-check" type='button' onClick={saveGeneralInfo} />
-                <Button className='et-service-genenal-info-clear-button' label="Clear&nbsp;" icon="pi pi-times" type='button' onClick={clearGeneralInfo} />
+                <Button className='et-service-genenal-info-save-button' label="Save&nbsp;" icon="pi pi-check" type='button' onClick={saveetGeneralInfo} />
+                <Button className='et-service-genenal-info-clear-button' label="Clear&nbsp;" icon="pi pi-times" type='button' onClick={clearetGeneralInfo} />
               </div>
 
               {/* --------------------------------------------------------------VestingInfo 2-----------------------------------------------*/}
@@ -885,13 +893,13 @@ function EtServices() {
                 </center>
                 <button className="et-services-add-button" type='button' onClick={handleAddRow}> <i className="pi pi-plus"     ></i>Row</button>
                 {tableRowsData.length > 3 && (
-                  <button className="et-services-delete-button" onClick={handleDeleteLastRow}>
+                  <button className="et-services-delete-button" type='button' onClick={handleDeleteLastRow}>
                     <i className="pi pi-trash"     ></i> Row
                   </button>
                 )}
                 <br />
-                <Button className='et-service-genenal-info-save-button' label="Save&nbsp;" icon="pi pi-check" type='button' onClick={handleSave} />
-                <Button className='et-service-genenal-info-clear-button' label="Clear&nbsp;" icon="pi pi-times" type='button' onClick={handleClear} />
+                <Button className='et-service-genenal-info-save-button' label="Save&nbsp;" icon="pi pi-check" type='button' onClick={saveEtActiveJudgment} />
+                <Button className='et-service-genenal-info-clear-button' label="Clear&nbsp;" icon="pi pi-times" type='button' onClick={clearEtActiveJudgment} />
               </div>
 
 
