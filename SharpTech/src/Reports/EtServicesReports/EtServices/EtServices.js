@@ -325,7 +325,7 @@ function EtServices() {
     if (tableTaxInstaData.length > 0) {
       const updatedRows = tableTaxInstaData.slice(0, -1); // Remove the last row
       setTableTaxInstaData(updatedRows);
-      localStorage.setItem('tableTaxInstaData',JSON.stringify(updatedRows));
+      localStorage.setItem('tableTaxInstaData', JSON.stringify(updatedRows));
     }
   };
 
@@ -838,146 +838,152 @@ function EtServices() {
                   </div>
                 ))}
                 <br />
+              </div>
 
-                {/* --------------------------------------------------------------ACTIVE JUDGMENTS  4-----------------------------------------------*/}
-                <div>
-                  <br />
-                  <center>
-                    <table className='et-service-form-table-1' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
-                      {/* Table headers */}
-                      <thead>
-                        <tr className='th-color'>
-                          <th className='et-service-form-table-selftables-heading' colSpan={4}>ACTIVE JUDGMENTS AND LIENS</th>
-                        </tr>
-                        <tr className='th-color'>
-                          <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>CASE NUMBER</th>
-                          <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>DESCRIPTION</th>
-                          <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>DATE RECORDED</th>
-                          <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>AMOUNT</th>
-                        </tr>
-                      </thead>
-                      {/* Table body  */}
-                      <tbody>
-
-                        {tableRowsData.map((row) => (
-                          <tr key={row.id}>
-                            <td className='et-service-form-table-1-data' style={{ border: '1px solid black' }}>
-                              <input type="text" className="et-service-input-labels" placeholder="Enter Case Number" name="caseNumber" value={row.data.caseNumber || ''} onChange={e => handleChange(e, row.id)} style={{ width: '100%' }} />
-                            </td>
-                            <td className='et-service-form-table-1-data' style={{ border: '1px solid black' }}>
-                              <input type="text" className="et-service-input-labels" placeholder="Enter Description" name="description" value={row.data.description || ''} onChange={e => handleChange(e, row.id)} style={{ width: '100%' }} />
-                            </td>
-                            <td className='et-service-form-table-1-data' style={{ border: '1px solid black' }}>
-                              <input type="date" className="et-service-input-labels" placeholder="Enter Date" name="dateRecorded" value={row.data.dateRecorded || ''} onChange={e => handleChange(e, row.id)} style={{ width: '100%' }} />
-                            </td>
-                            <td className='et-service-form-table-1-data' style={{ border: '1px solid black' }}>
-                              <input type="text" className="et-service-input-labels" placeholder="Enter Amount" name="amount" value={row.data.amount || ''} onChange={e => handleChange(e, row.id)} style={{ width: '100%' }} />
-                            </td>
-
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </center>
-                  <button className="et-services-add-button" type='button' onClick={handleAddRow}> <i className="pi pi-plus"     ></i>Row</button>
-                  {tableRowsData.length > 3 && (
-                    <button className="et-services-delete-button" onClick={handleDeleteLastRow}>
-                      <i className="pi pi-trash"     ></i> Row
-                    </button>
-                  )}
-                  <br />
-                  <Button className='et-service-genenal-info-save-button' label="Save&nbsp;" icon="pi pi-check" type='button' onClick={handleSave} />
-                  <Button className='et-service-genenal-info-clear-button' label="Clear&nbsp;" icon="pi pi-times" type='button' onClick={handleClear} />
-                </div>
-
-
-                {/* --------------------------------------------------------------TAX INFORMATION 5-----------------------------------------------*/}
-
-                <div>
-                  <br />
-                  <center>
-                    <table className='et-service-form-table-1' style={{ border: '2px solid black', borderCollapse: 'collapse' }} >
-                      <tr>
-                        <th className='et-service-form-table-selftables-heading' colSpan="4">TAX INFORMATION </th>
+              {/* --------------------------------------------------------------ACTIVE JUDGMENTS  4-----------------------------------------------*/}
+              <div>
+                <br />
+                <center>
+                  <table className='et-service-form-table-1' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
+                    {/* Table headers */}
+                    <thead>
+                      <tr className='th-color'>
+                        <th className='et-service-form-table-selftables-heading' colSpan={4}>ACTIVE JUDGMENTS AND LIENS</th>
                       </tr>
                       <tr className='th-color'>
-                        <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>ASSESMENT YEAR</th>
-                        <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>2023</th>
-                        <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>TAX YEAR</th>
-                        <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>2023</th>
-                      </tr>
-
-                      <tr>
-                        <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }} > LAND VALUE </td>
-                        <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }} >
-                          <input type="text" className="et-service-input-labels" placeholder="Enter LandValue" name="landValue" value={taxinfo.landValue} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
-                        </td>
-                        <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }} > BUILDING VALUE </td>
-                        <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }} >
-                          <input type="text" className="et-service-input-labels" placeholder="Enter BuildingValue" name="buildingValue" value={taxinfo.buildingValue} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
-                        </td>
-                      </tr>
-
-                      <tr>
-                        <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }} > TOTAL VALUE </td>
-                        <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }} >
-                          <input type="text" className="et-service-input-labels" placeholder="Enter TotalValue" name="totalValue" value={taxinfo.totalValue} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
-                        </td>
-                        <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }} > EXEMPTION </td>
-                        <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }} >
-                          <input type="text" className="et-service-input-labels" placeholder="Enter Excemption" name="excemption" value={taxinfo.excemption} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
-                        </td>
-                      </tr>
-
-                      <tr>
-                        <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>INSTALLMENT</th>
+                        <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>CASE NUMBER</th>
+                        <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>DESCRIPTION</th>
+                        <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>DATE RECORDED</th>
                         <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>AMOUNT</th>
-                        <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>STATUS</th>
-                        <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>PAID/DUE DATE</th>
-
                       </tr>
+                    </thead>
+                    {/* Table body  */}
+                    <tbody>
 
-                      {
-                        tableTaxInstaData.map((row, index) => (
-                          <tr key={index}>
-                            <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }}>
-                              {index === 0 ? `${index + 1}ST INSTALLMENT` : index === 1 ? `${index + 1}ND INSTALLMENT` : index === 2 ? `${index + 1}RD INSTALLMENT` : `${index + 1}TH INSTALLMENT`}
-                            </td>
-                            <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }}>
-                              <input type="text" className="et-service-input-labels" name="amount" placeholder='Enter Amount' value={row.amount} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
-                            </td>
-                            <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }}>
-                              <input type="text" className="et-service-input-labels" name="status" placeholder='Enter Status' value={row.status} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
-                            </td>
-                            <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }}>
-                              <input type="date" className="et-service-input-labels" name="paidDueDate" placeholder='Enter Date' value={row.paidDueDate} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
-                            </td>
-                          </tr>
-                        ))
-                      }
-                      <tr>
-                        <th style={{ border: '1px solid black' }}> NOTES </th>
-                        <td className='et-service-form-table-1-data' colSpan={6} style={{ border: '1px solid black' }}>
-                          <input type='text-area' className="et-service-input-labels" placeholder="Enter Notes" name="notes" value={notes} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
-                        </td>
-                      </tr>
-                    </table>
-                    <button className="et-services-add-button" type='button' onClick={handleAddTaxInstaRow}> <i className="pi pi-plus"     ></i> Row</button>
-                    {tableTaxInstaData.length > 2 && (
-                      <button className="et-services-delete-button" type='button' onClick={handleDeleteLastTaxInstaRow}>
-                        <i className="pi pi-trash"     ></i> Row  </button>
-                    )}
-                  </center>
-                </div>
+                      {tableRowsData.map((row) => (
+                        <tr key={row.id}>
+                          <td className='et-service-form-table-1-data' style={{ border: '1px solid black' }}>
+                            <input type="text" className="et-service-input-labels" placeholder="Enter Case Number" name="caseNumber" value={row.data.caseNumber || ''} onChange={e => handleChange(e, row.id)} style={{ width: '100%' }} />
+                          </td>
+                          <td className='et-service-form-table-1-data' style={{ border: '1px solid black' }}>
+                            <input type="text" className="et-service-input-labels" placeholder="Enter Description" name="description" value={row.data.description || ''} onChange={e => handleChange(e, row.id)} style={{ width: '100%' }} />
+                          </td>
+                          <td className='et-service-form-table-1-data' style={{ border: '1px solid black' }}>
+                            <input type="date" className="et-service-input-labels" placeholder="Enter Date" name="dateRecorded" value={row.data.dateRecorded || ''} onChange={e => handleChange(e, row.id)} style={{ width: '100%' }} />
+                          </td>
+                          <td className='et-service-form-table-1-data' style={{ border: '1px solid black' }}>
+                            <input type="text" className="et-service-input-labels" placeholder="Enter Amount" name="amount" value={row.data.amount || ''} onChange={e => handleChange(e, row.id)} style={{ width: '100%' }} />
+                          </td>
+
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </center>
+                <button className="et-services-add-button" type='button' onClick={handleAddRow}> <i className="pi pi-plus"     ></i>Row</button>
+                {tableRowsData.length > 3 && (
+                  <button className="et-services-delete-button" onClick={handleDeleteLastRow}>
+                    <i className="pi pi-trash"     ></i> Row
+                  </button>
+                )}
+                <br />
+                <Button className='et-service-genenal-info-save-button' label="Save&nbsp;" icon="pi pi-check" type='button' onClick={handleSave} />
+                <Button className='et-service-genenal-info-clear-button' label="Clear&nbsp;" icon="pi pi-times" type='button' onClick={handleClear} />
+              </div>
+
+
+              {/* --------------------------------------------------------------TAX INFORMATION 5-----------------------------------------------*/}
+
+              <div>
+                <br />
+                <br />
+                <center>
+                  <table className='et-service-form-table-1' style={{ border: '2px solid black', borderCollapse: 'collapse' }} >
+                    <tr>
+                      <th className='et-service-form-table-selftables-heading' colSpan="4">TAX INFORMATION </th>
+                    </tr>
+                    <tr className='th-color'>
+                      <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>ASSESMENT YEAR</th>
+                      <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>2023</th>
+                      <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>TAX YEAR</th>
+                      <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>2023</th>
+                    </tr>
+
+                    <tr>
+                      <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }} > LAND VALUE </td>
+                      <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }} >
+                        <input type="text" className="et-service-input-labels" placeholder="Enter LandValue" name="landValue" value={taxinfo.landValue} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
+                      </td>
+                      <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }} > BUILDING VALUE </td>
+                      <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }} >
+                        <input type="text" className="et-service-input-labels" placeholder="Enter BuildingValue" name="buildingValue" value={taxinfo.buildingValue} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }} > TOTAL VALUE </td>
+                      <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }} >
+                        <input type="text" className="et-service-input-labels" placeholder="Enter TotalValue" name="totalValue" value={taxinfo.totalValue} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
+                      </td>
+                      <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }} > EXEMPTION </td>
+                      <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }} >
+                        <input type="text" className="et-service-input-labels" placeholder="Enter Excemption" name="excemption" value={taxinfo.excemption} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>INSTALLMENT</th>
+                      <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>AMOUNT</th>
+                      <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>STATUS</th>
+                      <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>PAID/DUE DATE</th>
+
+                    </tr>
+
+                    {
+                      tableTaxInstaData.map((row, index) => (
+                        <tr key={index}>
+                          <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }}>
+                            {index === 0 ? `${index + 1}ST INSTALLMENT` : index === 1 ? `${index + 1}ND INSTALLMENT` : index === 2 ? `${index + 1}RD INSTALLMENT` : `${index + 1}TH INSTALLMENT`}
+                          </td>
+                          <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }}>
+                            <input type="text" className="et-service-input-labels" name="amount" placeholder='Enter Amount' value={row.amount} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
+                          </td>
+                          <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }}>
+                            <input type="text" className="et-service-input-labels" name="status" placeholder='Enter Status' value={row.status} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
+                          </td>
+                          <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }}>
+                            <input type="date" className="et-service-input-labels" name="paidDueDate" placeholder='Enter Date' value={row.paidDueDate} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
+                          </td>
+                        </tr>
+                      ))
+                    }
+                    <tr>
+                      <th style={{ border: '1px solid black' }}> NOTES </th>
+                      <td className='et-service-form-table-1-data' colSpan={6} style={{ border: '1px solid black' }}>
+                        <input type='text-area' className="et-service-input-labels" placeholder="Enter Notes" name="notes" value={notes} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
+                      </td>
+                    </tr>
+                  </table>
+                  <button className="et-services-add-button" type='button' onClick={handleAddTaxInstaRow}> <i className="pi pi-plus"     ></i> Row</button>
+                  {tableTaxInstaData.length > 2 && (
+                    <button className="et-services-delete-button" type='button' onClick={handleDeleteLastTaxInstaRow}>
+                      <i className="pi pi-trash"     ></i> Row  </button>
+                  )}
+                </center>
+
 
                 <Button className='et-service-genenal-info-save-button' label="Save&nbsp;" icon="pi pi-check" type='button' onClick={handleSaveTemporarilyRow1} />
                 <Button className='et-service-genenal-info-clear-button' label="Clear&nbsp;" icon="pi pi-times" type='button' onClick={handleClearRows1} />
               </div>
-              <br />
-              <br />
+
+
+
+
 
               {/* --------------------------------------------------------------NAMES RUNS 6-----------------------------------------------*/}
               <div>
+                <br />
+                <br />
                 <br />
                 <center>
                   <table className='et-service-form-table-1' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
@@ -1023,6 +1029,7 @@ function EtServices() {
                   <Button className='et-service-genenal-info-clear-button' label="Clear&nbsp;" icon="pi pi-times" type='button' onClick={handleClearRows} />
                 </div>
               </div>
+
               {/* --------------------------------------------------------------LEGAL DESCRIPTION 7-----------------------------------------------*/}
               <div>
                 <br />
