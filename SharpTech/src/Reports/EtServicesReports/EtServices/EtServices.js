@@ -657,7 +657,7 @@ function EtServices() {
                     <center>
                       <table className='et-service-form-table-1' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
                         <tr className='et-service-form-table-1-rows' >
-                          <th className='et-service-form-table-selftables-heading' colSpan="7"> {table.name} </th>
+                          <th className='et-service-form-table-selftables-heading' colSpan="7"> {table.name ? table.name : 'VESTING INFORMATION'} </th>
                         </tr>
                         <tr className='et-service-form-table-1-rows'>
                           <th className='et-service-form-table-1-heading' style={{ border: '1px solid black' }}> DEED TYPE  </th>
