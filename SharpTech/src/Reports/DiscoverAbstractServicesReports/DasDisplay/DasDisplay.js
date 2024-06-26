@@ -20,27 +20,28 @@ function DasDisplay() {
     const [etservice, setEtService] = useState(null);
     const { orderNumber } = useParams(); // Assuming you're using React Router hooks
     const [isDownloading, setIsDownloading] = useState(false);
-
     useEffect(() => {
-        const loadUser = async () => {
-            try {
-                const token = localStorage.getItem('token');
-                const result = await axios.get(`http://localhost:8080/fetch/${orderNumber}`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                window.alert("Successfully fetched");
-                console.log(result);
-                setEtService(result.data);
-            } catch (error) {
-                console.error('Error fetching user details:', error);
-            }
+        const loadEtService = async () => {
+          try {
+            const token = localStorage.getItem('token');
+            const result = await axios.get(`http://localhost:8080/fetch/${orderNumber}`, {
+              headers: {
+                'Authorization': `Bearer ${token}`
+              }
+            });
+            setEtService(result.data);
+          } catch (error) {
+            console.error('Error fetching et service details:', error);
+          }
         };
-
-        loadUser();
-    }, [orderNumber]);
-
+    
+        loadEtService();
+    
+        return () => {
+          // Clean up any remaining state or effects here if needed
+        };
+      }, [orderNumber]);
+      
     const printDocument = () => {
         const input1 = document.getElementById('pdf-content1');
         const input2 = document.getElementById('pdf-content2');
@@ -317,7 +318,7 @@ function DasDisplay() {
 
                                     <tr>
                                         <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> MORTGAGO </th>
-                                        <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{openmortagedeedinfo.mortgago}</td>
+                                        <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{openmortagedeedinfo.mortgagor}</td>
                                     </tr>
 
                                     <tr>
@@ -464,7 +465,7 @@ function DasDisplay() {
                                 {etservice && etservice.taxinstallments.map((taxinstallment, tindex) => (
                                     <tr key={tindex}>
                                         <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{tindex === 0 ? `${tindex + 1}ST INSTALLMENT ` : tindex === 1 ? ` ${tindex + 1}ND INSTALLMENT` : tindex === 2 ? `${tindex + 1}RD ST INSTALLMENT` : `${tindex + 1}TH ST INSTALLMENT`}</td>
-                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinstallment.amount}</td>
+                                        <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinstallment.Amount}</td>
                                         <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinstallment.status}</td>
                                         <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinstallment.paidDueDate}</td>
                                     </tr>
