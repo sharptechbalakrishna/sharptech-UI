@@ -80,7 +80,6 @@ function DasReport() {
     const { taxYear, landValue, buildingValue, extraValue, totalValue, comments } = taxinfo
 
     const onInputChange2 = (e) => {
-
         setTaxInfo({ ...taxinfo, [e.target.name]: e.target.value })
     };
 
@@ -92,7 +91,7 @@ function DasReport() {
                     ...row,
                     data: {
                         ...row.data,
-                        [name]: value.toUpperCase()
+                        [name]: value
                     }
                 };
             }
@@ -118,11 +117,21 @@ function DasReport() {
     };
 
     const [amount, setAmount] = useState('');
+
     const handleInputChange = (e, tableId) => {
         const { name, value } = e.target;
-        const updatedTablesData = tablesData.map(table =>
-            table.id === tableId ? { ...table, [name]: value } : table
-        );
+        const updatedTablesData = tablesData.map(table => {
+            if (table.id === tableId) {
+                return {
+                    ...table,
+                    data: {
+                        ...table.data,
+                        [name]: value
+                    }
+                };
+            }
+            return table;
+        });
         setTablesData(updatedTablesData);
     };
 
@@ -134,61 +143,45 @@ function DasReport() {
         const numericValue = Number(value);
         return `$${numericValue.toFixed(2)}`;
     };
-    const handleInputChange2 = (e, tableId) => {
+    const handleChaneMortage = (e, tableId) => {
         const { name, value } = e.target;
-        const tableIndex = tablesData2.findIndex(table => table.id === tableId);
-        if (tableIndex === -1) return;
-
-        const updatedTable = {
-            ...tablesData2[tableIndex],
-            [name]: value
-        };
-
-        const updatedTablesData = [...tablesData2];
-        updatedTablesData[tableIndex] = updatedTable;
-        setTablesData2(updatedTablesData);
+        const updatedTablesData2 = tablesData2.map(table => {
+            if (table.id === tableId) {
+                return {
+                    ...table,
+                    data: {
+                        ...table.data,
+                        [name]: value
+                    }
+                };
+            }
+            return table;
+        });
+        setTablesData2(updatedTablesData2);
     };
 
     const handleChangeNameRun = (e, rowId) => {
         const { name, value } = e.target;
-        const updatedNameRunData = nameRunData.map(row => {
-            if (row.id === rowId) {
-                return {
-                    ...row,
-                    data: {
-                        ...row.data,
-                        [name]: value
-                    }
-                };
-            }
-            return row;
-        });
-        setNameRunData(updatedNameRunData);
+        setNameRunData(prevData =>
+            prevData.map(row =>
+                row.id === rowId ? { ...row, data: { ...row.data, [name]: value } } : row
+            )
+        );
     };
     //saveDataToLocalStorage(updatedNameRunData);
 
-    const handleInputChangeTaxInsta = (e, rowId) => {
+    const handleInputChangeTaxInsta = (e, index) => {
         const { name, value } = e.target;
-        const updatedTableTaxInstaData = tableTaxInstaData.map(row => {
-            if (row.id === rowId) {
-                return {
-                    ...row,
-                    data: {
-                        ...row.data,
-                        [name]: value
-                    }
-                };
-            }
-            return row;
-        });
-        setTableTaxInstaData(updatedTableTaxInstaData);
+        const updatedRows = [...tableTaxInstaData];
+        updatedRows[index] = { ...updatedRows[index], [name]: value };
+        setTableTaxInstaData(updatedRows);
     };
 
     const [showDeleteButton, setShowDeleteButton] = useState(false);
 
     //   const getTableName = (id) => `Table ${id}`;
 
-    const handleAddTable = (e) => {
+    const AddVestingTable = (e) => {
         e.preventDefault();
         const newTableId = nextTableId;
         const newName = getTableName(newTableId); // const newTableId = tablesData.length + 1;
@@ -198,14 +191,20 @@ function DasReport() {
         setNextTableId(newTableId + 1);
     };
 
-    const handleDeleteTable = (idToDelete) => {
-        const updatedTables = tablesData.filter(table => table.id !== idToDelete);
+    const DeleteVestingTable = (tableId) => {
+        const updatedTables = tablesData.filter(table => table.id !== tableId);
         setTablesData(updatedTables);
+
+        // Remove specific table data from localStorage
+        localStorage.removeItem(`vestingTableData_${tableId}`);
+
+        // Update overall tables data in localStorage
+        localStorage.setItem('vestingInfo', JSON.stringify(updatedTables));
     };
 
 
 
-    const handleAddTable2 = (e) => {
+    const AddMortageTable = (e) => {
         e.preventDefault();
         const newTableId2 = nextTableId2;   // const newTableId = tablesData.length + 1;       
         const newIndicator = tablesData2.length;
@@ -213,9 +212,16 @@ function DasReport() {
         setNextTableId2(newTableId2 + 1);
     };
 
-    const handleDeleteTable2 = (idToDelete) => {
-        const updatedTables2 = tablesData2.filter(table => table.id !== idToDelete);
+    const DeleteMortageTable = (tableId) => {
+        // Filter out the table to delete
+        const updatedTables2 = tablesData2.filter(table => table.id !== tableId);
         setTablesData2(updatedTables2);
+
+        // Remove specific mortgage table data from localStorage
+        localStorage.removeItem(`mortgageTableData_${tableId}`);
+
+        // Update overall mortgage tables data in localStorage
+        localStorage.setItem('mortgageInfo', JSON.stringify(updatedTables2));
     };
 
 
@@ -227,11 +233,12 @@ function DasReport() {
 
     const handleDeleteLastRow = () => {
         if (tableRowsData.length > 0) {
-            const updatedRows = [...tableRowsData];
-            updatedRows.pop();
+            const updatedRows = tableRowsData.slice(0, -1); // Remove the last row
             setTableRowsData(updatedRows);
+            localStorage.setItem('tableRowsData', JSON.stringify(updatedRows)); // Update local storage
         }
     };
+
     const handleAddNameRow = (e) => {
         e.preventDefault()
         const newNameRunId = nextNameRunId;
@@ -244,13 +251,14 @@ function DasReport() {
         if (nameRunData.length > 0) {
             const updatedRows = nameRunData.slice(0, -1); // Remove the last row
             setNameRunData(updatedRows);
+            localStorage.setItem('nameRunData', JSON.stringify(updatedRows)); // Update local storage)
         }
     };
 
     const handleAddTaxInstaRow = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         const newTableTaxInstaId = nextTableTaxInstaId;
-        const newRow = { id: newTableTaxInstaId, data: {} };
+        const newRow = { id: newTableTaxInstaId, amount: '', status: '', paidDueDate: '' }; // Initialize fields
         setTableTaxInstaData([...tableTaxInstaData, newRow]);
         setNextTableTaxInstaId(newTableTaxInstaId + 1);
     };
@@ -259,8 +267,10 @@ function DasReport() {
         if (tableTaxInstaData.length > 0) {
             const updatedRows = tableTaxInstaData.slice(0, -1); // Remove the last row
             setTableTaxInstaData(updatedRows);
+            localStorage.setItem('tableTaxInstaData', JSON.stringify(updatedRows));
         }
     };
+
 
 
     {/*const handleAddTable = (e) => {
@@ -279,76 +289,121 @@ function DasReport() {
     };
 
     useEffect(() => {
-        const savedUser = JSON.parse(localStorage.getItem('userData'));
-        if (savedUser) {
-            setUser(savedUser);
+
+        const savedPropertyInfo = localStorage.getItem('propertyInfo');
+        if (savedPropertyInfo) {
+            setUser(JSON.parse(savedPropertyInfo));
         }
 
-        const storedTablesData = JSON.parse(localStorage.getItem('tablesData')) || [];
-        if (storedTablesData.length > 0) {
-            setTablesData(storedTablesData);
+        const savedVestingInfo = localStorage.getItem('vestingInfo');
+        if (savedVestingInfo) {
+            const parsedData = JSON.parse(savedVestingInfo);
+
+            // Iterate through parsedData and set each table's data
+            const updatedTables = parsedData.map(data => ({
+                id: data.id,
+                name: data.name,
+                data: {
+                    mortgagor: data.data.mortgagor || '',
+                    mortgagee: data.data.mortgagee || '',
+                    trustee: data.data.trustee || '',
+                    instrBookPage: data.data.instrBookPage || '', // Corrected from instBookPage to instrBookPage
+                    amount: data.data.amount || '',
+                    deedType: data.data.deedType || '',
+                    considerationAmount: data.data.considerationAmount || '',
+                    grantor: data.data.grantor || '',
+                    grantee: data.data.grantee || '',
+                    vesting: data.data.vesting || '',
+                    instaBookPage: data.data.instaBookPage || '',  // Ensure the name matches
+                    datedDate: data.data.datedDate || '',
+                    recordedDate: data.data.recordedDate || '',  // Ensure the name matches
+                    comments: data.data.comments || ''  // Ensure the name matches
+                }
+            }));
+
+            // Set the updated tables data and nextTableId
+            setTablesData(updatedTables);
+            setNextTableId(parsedData.length + 1); // Ensure nextTableId is set correctly
         }
 
-        const storedTablesData2 = JSON.parse(localStorage.getItem('tablesData2')) || [];
-        if (storedTablesData2.length > 0) {
-            setTablesData2(storedTablesData2);
-            setNextTableId2(storedTablesData2[storedTablesData2.length - 1].id + 1);
+        const savedMortgageInfo = localStorage.getItem('mortgageInfo');
+        if (savedMortgageInfo) {
+            const parsedData2 = JSON.parse(savedMortgageInfo);
+
+            const updatedTables2 = parsedData2.map(data => ({
+                id: data.id,
+                data: {
+                    mortgagor: data.data.mortgagor || '',
+                    mortgagee: data.data.mortgagee || '',
+                    trustee: data.data.trustee || '',
+                    instrBookPage: data.data.instrBookPage || '', // Corrected from instBookPage to instrBookPage
+                    amount: data.data.amount || '',
+                    datedDate: data.data.datedDate || '',
+                    recordedDate: data.data.recordedDate || '',
+                    maturityDate: data.data.maturityDate || '',
+                    mortgageAssignedTo: data.data.mortgageAssignedTo || '', // Corrected from mortageAssiTo to mortgageAssignedTo
+                    assignmentBkPg: data.data.assignmentBkPg || '', // Corrected from assiBkPg to assignmentBkPg
+                    assignmentDated: data.data.assignmentDated || '', // Corrected from assiDated to assignmentDated
+                    assignmentRecorded: data.data.assignmentRecorded || '', // Corrected from assiRecorded to assignmentRecorded
+                    comments: data.data.comments || '' // Corrected from additionalInformation to comments
+                }
+            }));
+
+            setTablesData2(updatedTables2);
+            setNextTableId2(parsedData2.length + 1);
         }
 
-        // const savedTableRowsData = JSON.parse(localStorage.getItem('tableRowsData'));
-        // if (savedTableRowsData) {
-        //     setTableRowsData(savedTableRowsData);
-        // }
-        const tempTableRowsData = localStorage.getItem('tempTableRowsData');
-        if (tempTableRowsData) {
-            setTableRowsData(JSON.parse(tempTableRowsData));
+        const savedActiveJudgment = localStorage.getItem('tableRowsData');
+        if (savedActiveJudgment) {
+            setTableRowsData(JSON.parse(savedActiveJudgment));
+            setNextRowsId(JSON.parse(savedActiveJudgment).length + 1);
         }
-    },
-        []);
 
-
-
-    const onSave = () => {
-        // Check if any field is empty
-        const isAnyFieldEmpty = Object.values(user).some(value => value === '');
-
-        if (isAnyFieldEmpty) {
-            alert("Please fill in all fields before saving!");
-        } else {
-            // Save data to local storage temporarily
-            localStorage.setItem('tempUserData', JSON.stringify(user));
-            alert("Data saved temporarily!");
+        const namerundata = localStorage.getItem('nameRunData');
+        if (namerundata) {
+            const parsedData = JSON.parse(namerundata);
+            setNameRunData(parsedData);
+            setNextNameRunId(parsedData.length + 1);
         }
+
+        const savedTaxInfo = JSON.parse(localStorage.getItem('taxInformation'));
+        const savedTableData = JSON.parse(localStorage.getItem('tableTaxInstaData'));
+        if (savedTaxInfo) {
+            setTaxInfo(savedTaxInfo);
+        }
+        if (savedTableData) {
+            setTableTaxInstaData(savedTableData);
+        }
+
+    }, []);
+
+
+
+    const savePropertyInfo = () => {
+        localStorage.setItem('propertyInfo', JSON.stringify(user));
+        window.alert("Property Info Saved Successfully");
     };
 
-    const clearLocalStorage = () => {
-        // Check if any field is filled
-        const isAnyFieldFilled = Object.values(user).some(value => value !== '');
-
-        if (isAnyFieldFilled) {
-            // Clear local storage
-            localStorage.removeItem('tempUserData');
-            // Clear user state
-            setUser({
-                orderNumber: '',
-                referenceNumber: '',
-                searchDate: '',
-                effectiveDate: '',
-                propertyAddress: '',
-                state: '',
-                county: '',
-                borrowerName: '',
-                parcelNumber: '',
-                subdivision: '',
-                lotUnit: '',
-                block: '',
-                propertyType: ''
-            });
-            alert("Local storage cleared!");
-        } else {
-            alert("There is no data to clear!");
-        }
+    const clearPropertyInfo = () => {
+        setUser({
+            orderNumber: '',
+            referenceNumber: '',
+            searchDate: '',
+            effectiveDate: '',
+            propertyAddress: '',
+            state: '',
+            county: '',
+            borrowerName: '',
+            parcelNumber: '',
+            subdivision: '',
+            lotUnit: '',
+            block: '',
+            propertyType: ''
+        });
+        localStorage.removeItem('PropertyInfo');
+        window.alert("Property Info Cleared");
     };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const tempUserData = JSON.parse(localStorage.getItem('tempUserData'));
@@ -359,7 +414,7 @@ function DasReport() {
                 .then(response => {
                     console.log("Data saved successfully!", response.data);
                     // Clear local storage after saving data to the database
-                    clearLocalStorage();
+                    clearPropertyInfo();
                     alert("Data saved successfully to the database!");
                 })
                 .catch(error => {
@@ -376,45 +431,35 @@ function DasReport() {
 
     // the below code is for save and clear for the second table table data
 
-    const handleSaveTable = (tableId) => {
+    const saveVestingInfo = (tableId) => {
         const tableData = tablesData.find(table => table.id === tableId);
+        localStorage.setItem(`vestingTableData_${tableId}`, JSON.stringify(tableData));
+        window.alert('Table Data Saved Successfully');
 
-        // Check if all required fields are filled
-        const requiredFields = ['deedType', 'considerationAmount', 'grantor', 'grantee', 'vesting', 'instaBookPage', 'datedDate', 'recordedDate'];
-        const isAnyFieldEmpty = requiredFields.some(field => !tableData[field]); // Updated condition to check for empty fields
-
-        if (isAnyFieldEmpty) {
-            alert("Please fill in all required fields before saving!");
-        } else {
-            localStorage.setItem(`tableData${tableId}`, JSON.stringify(tableData));
-            alert(`Data for ${tableData.name} saved temporarily!`);
-        }
+        // Update overall tables data in localStorage
+        localStorage.setItem('vestingInfo', JSON.stringify(tablesData));
     };
 
-    const handleClearTable = (tableId) => {
-        const tableData = tablesData.find(table => table.id === tableId);
-
-        // Check if any field other than 'id' and 'name' contains data
-        const isDataPresent = Object.keys(tableData).some(key => key !== 'id' && key !== 'name' && tableData[key] !== '' && tableData[key] !== null);
-
-        if (isDataPresent) {
-            const clearedData = Object.keys(tableData).reduce((acc, key) => {
-                if (key !== 'id' && key !== 'name') {
-                    acc[key] = '';
-                } else {
-                    acc[key] = tableData[key];
+    const clearVestingInfo = (tableId) => {
+        if (tableId === 1) {
+            // If it's the only table, just clear the data
+            const updatedTables = tablesData.map(table => {
+                if (table.id === tableId) {
+                    return { ...table, data: {} };
                 }
-                return acc;
-            }, {});
-
-            const updatedTablesData = tablesData.map(table =>
-                table.id === tableId ? clearedData : table
-            );
-            setTablesData(updatedTablesData);
-            localStorage.removeItem(`tableData${tableId}`);
-            alert(`Data for ${tableData.name} cleared!`);
+                return table;
+            });
+            setTablesData(updatedTables);
+            localStorage.removeItem(`vestingTableData_${tableId}`);
+            window.alert('Table Data Cleared');
+            localStorage.setItem('vestingInfo', JSON.stringify(updatedTables));
         } else {
-            alert(`There is no data to clear for ${tableData.name}.`);
+            // If there are multiple tables, remove the table
+            const updatedTables = tablesData.filter(table => table.id !== tableId);
+            setTablesData(updatedTables);
+            localStorage.removeItem(`vestingTableData_${tableId}`);
+            window.alert('Table Data Cleared and Table Deleted');
+            localStorage.setItem('vestingInfo', JSON.stringify(updatedTables));
         }
     };
 
@@ -467,165 +512,105 @@ function DasReport() {
 
     //save and clear for the third table
 
-    const handleSaveTable1 = (tableId) => {
-        const tableIndex = tablesData2.findIndex(table => table.id === tableId);
-        if (tableIndex === -1) return;
+    const saveMortgageInfo = (tableId) => {
+        const tableData = tablesData2.find(table => table.id === tableId);
+        localStorage.setItem(`mortgageTableData_${tableId}`, JSON.stringify(tableData));
+        window.alert('Table Data Saved Successfully');
 
-        const tableData = tablesData2[tableIndex];
-
-        // Example check for required fields (adjust as per your table structure)
-        const requiredFields = ['mortgagor', 'mortgagee', 'instrBookPage', 'amount', 'datedDate', 'recordedDate'];
-        const isAnyFieldEmpty = requiredFields.some(field => !tableData[field]);
-
-        if (isAnyFieldEmpty) {
-            alert(`Please fill in all required fields for Table ${tableId} before saving!`);
-        } else {
-            // Save data to local storage or perform any other necessary actions
-            localStorage.setItem(`tempTableData2${tableId}`, JSON.stringify(tableData));
-            alert(`Data for Table ${tableId} saved temporarily!`);
-        }
+        localStorage.setItem('mortgageInfo', JSON.stringify(tablesData2));
     };
 
-    const handleClearTable1 = (tableId) => {
-        const tableData = tablesData2.find(table => table.id === tableId);
 
-        // Check if any field other than 'id' contains data
-        const isDataPresent = Object.keys(tableData).some(key => key !== 'id' && tableData[key] !== '');
-
-        if (isDataPresent) {
-            const clearedData = {
-                ...tableData,
-                mortgagor: '',
-                mortgagee: '',
-                trustee: '',
-                instrBookPage: '',
-                amount: '',
-                datedDate: '',
-                recordedDate: '',
-                maturityDate: '',
-                mortgageAssignedTo: '',
-                assignmentBkPg: '',
-                assignmentDated: '',
-                assignmentRecorded: '',
-                comments: ''
-            };
-
-            const updatedTablesData = tablesData2.map(table =>
-                table.id === tableId ? clearedData : table
-            );
-            setTablesData2(updatedTablesData);
-            localStorage.removeItem(`tableData${tableId}`);
-            alert(`Data for Table ${tableId} cleared!`);
+    const clearMortgageInfo = (tableId) => {
+        if (tableId === 1) {
+            // If it's the only table, just clear the data
+            const updatedTables = tablesData2.map(table => {
+                if (table.id === tableId) {
+                    return { ...table, data: {} };
+                }
+                return table;
+            });
+            setTablesData2(updatedTables);
+            localStorage.removeItem(`mortgageTableData_${tableId}`);
+            window.alert('Table Data Cleared');
+            localStorage.setItem('mortgageInfo', JSON.stringify(updatedTables));
         } else {
-            alert(`There is no data to clear for Table ${tableId}.`);
+            // If there are multiple tables, remove the table
+            const updatedTables = tablesData2.filter(table => table.id !== tableId);
+            setTablesData2(updatedTables);
+            localStorage.removeItem(`mortgageTableData_${tableId}`);
+            window.alert('Table Data Cleared and Table Deleted');
+            localStorage.setItem('mortgageInfo', JSON.stringify(updatedTables));
         }
     };
 
 
     //save and clear for activejudgements and lines
-    const handleSaveTemporarilyRow = () => {
-        // Check if any field in any row is empty
-        const isAnyFieldEmpty = tableRowsData.some(row =>
-            Object.values(row.data).some(value => value === '')
-        );
-
-        if (isAnyFieldEmpty) {
-            alert("Please fill in all fields before saving!");
-        } else {
-            // Ensure no empty rows are saved
-            const filteredRowsData = tableRowsData.filter(row =>
-                Object.values(row.data).some(value => value !== '')
-            );
-
-            if (filteredRowsData.length === 0) {
-                alert("There is no data to save. Please fill in the fields.");
-            } else {
-                // Save filtered data to temporary storage
-                localStorage.setItem('tempTableRowsData', JSON.stringify(filteredRowsData));
-                alert("Table data saved temporarily!");
-            }
-        }
+    const saveActiveJudgment = () => {
+        localStorage.setItem('tableRowsData', JSON.stringify(tableRowsData));
+        alert('Active saved successfully!');
     };
 
 
-    const handleClearRows = () => {
-        if (tableRowsData.length === 0 || tableRowsData.every(row => Object.values(row.data).every(value => value === ''))) {
-            alert("There is no data to clear.");
-        } else {
-            // Clear table data
-            setTableRowsData([]);
-            // Clear data from local storage
-            localStorage.removeItem('tempTableRowsData');
-            alert("Table data cleared!");
-        }
+    const clearActiveJudgment = () => {
+        const clearedRows = tableRowsData.map(row => ({
+            ...row,
+            data: {
+                caseType: '',
+                bkPgCaseNo: '',
+                recordingDate: '',
+                amount: ''
+            }
+        }));
+        setTableRowsData(clearedRows);
+        localStorage.removeItem('tableRowsData'); // Clear local storage
+        alert('Active judgments cleared successfully!');
     };
 
     //save and clear function for taxinfo
     const handleSaveTemporarilyTaxInstaRow = () => {
-        // Check if any field in any row is empty
-        const isAnyFieldEmpty = tableTaxInstaData.some(row =>
-            Object.values(row.data).some(value => value === '')
-        );
-
-        if (isAnyFieldEmpty) {
-            alert("Please fill in all fields before saving!");
-        } else {
-            // Ensure no empty rows are saved
-            const filteredRowsData = tableTaxInstaData.filter(row =>
-                Object.values(row.data).some(value => value !== '')
-            );
-
-            if (filteredRowsData.length === 0) {
-                alert("There is no data to save. Please fill in the fields.");
-            } else {
-                // Save filtered data to temporary storage
-                localStorage.setItem('tempTaxInstaData', JSON.stringify(filteredRowsData));
-                alert("Table data saved temporarily!");
-            }
-        }
+        localStorage.setItem('taxInformation', JSON.stringify(taxinfo));
+        localStorage.setItem('tableTaxInstaData', JSON.stringify(tableTaxInstaData));
+        alert('Data saved to local storage!');
     };
+
     const handleClearTaxInstaRows = () => {
-        if (tableTaxInstaData.length === 0 || tableTaxInstaData.every(row => Object.values(row.data).every(value => value === ''))) {
-            alert("There is no data to clear.");
-        } else {
-            // Clear table data
-            setTableTaxInstaData([]);
-            // Clear data from local storage
-            localStorage.removeItem('tempTaxInstaData');
-            alert("Table data cleared!");
-        }
+        const clearedData = tableTaxInstaData.map(row => ({
+            ...row,
+            amount: '',
+            status: '',
+            paidDueDate: ''
+        }));
+        setTableTaxInstaData(clearedData);
+        setTaxInfo({
+            landValue: "",
+            buildingValue: "",
+            totalValue: "",
+            excemption: "",
+            notes: "",
+        });
     };
     //save and clear for namesand run
 
     const handleSaveTemporarilyNameRunRow = () => {
-        const isAnyFieldEmpty = nameRunData.some(row =>
-            Object.values(row.data).some(value => value === '')
-        );
-
-        if (isAnyFieldEmpty) {
-            alert("Please fill in all fields before saving!");
-        } else {
-            const filteredRowsData = nameRunData.filter(row =>
-                Object.values(row.data).some(value => value !== '')
-            );
-
-            if (filteredRowsData.length === 0) {
-                alert("There is no data to save. Please fill in the fields.");
-            } else {
-                localStorage.setItem('tempNameRunData', JSON.stringify(filteredRowsData));
-                alert("Table data saved temporarily!");
-            }
-        }
+        localStorage.setItem('nameRunData', JSON.stringify(nameRunData));
+        alert('Data saved successfully!');
     };
 
     const handleClearNameRunRows = () => {
-        if (nameRunData.length === 0 || nameRunData.every(row => Object.values(row.data).every(value => value === ''))) {
-            alert("There is no data to clear.");
-        } else {
-            setNameRunData([]);
-            localStorage.removeItem('tempNameRunData');
-            alert("Table data cleared!");
-        }
+        const clearedRows = nameRunData.map(row => ({
+            ...row,
+            data: {
+                name: '',
+                jud: '',
+                liens: '',
+                ucc: '',
+                others: ''
+            }
+        }));
+        setNameRunData(clearedRows);
+        localStorage.removeItem('nameRunData'); // Clear local storage
+        alert('Data cleared successfully!');
     };
 
     const [tablesDataD, setTablesDataD] = useState([
@@ -681,7 +666,11 @@ function DasReport() {
                         }
                     ],
                     namesrun: nameRunData.map(row => ({ ...row.data })),
-                    taxinstallments: tableTaxInstaData.map(row => ({ ...row.data })),
+                    taxinstallments: tableTaxInstaData.map(row => ({
+                        amount: row.amount,
+                        status: row.status,
+                        paidDueDate: row.paidDueDate
+                    })),
                 }
             };
             await axios.post("http://localhost:8080/insert", payload, {
@@ -691,6 +680,7 @@ function DasReport() {
                 }
 
             });
+            console.log(payload);
             window.alert("Data Sent Sucessfully");
 
 
@@ -811,8 +801,8 @@ function DasReport() {
 
                             <br />
 
-                            <Button className='das-report-general-info-save-button' label="Save&nbsp;" icon="pi pi-check" onClick={onSave} />
-                            <Button className='das-report-general-info-clear-button ' label="Clear&nbsp;" icon="pi pi-times" onClick={clearLocalStorage} />
+                            <Button className='das-report-general-info-save-button' type='button' label="Save&nbsp;" icon="pi pi-check" onClick={savePropertyInfo} />
+                            <Button className='das-report-general-info-clear-button ' type='button' label="Clear&nbsp;" icon="pi pi-times" onClick={clearPropertyInfo} />
                         </center>
                     </div>
 
@@ -835,49 +825,49 @@ function DasReport() {
                                             <tr>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> DEED TYPE </th>
                                                 <td colSpan={4} style={{ border: '1px solid black' }}>
-                                                    <input type="text" className="abstract-control-input" placeholder="Enter Deed Type" name="deedType" value={table.deedType || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} required />
+                                                    <input type="text" className="abstract-control-input" placeholder="Enter Deed Type" name="deedType" value={table.data.deedType || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} required />
                                                 </td>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> CONSIDERATION AMOUNT ($) </th>
                                                 <td colSpan={'100%'} style={{ border: '1px solid black' }}>
-                                                    <input type="text" className="abstract-control-input" placeholder="Enter Consideration Amount" name="considerationAmount" value={table.considerationAmount || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} required />
+                                                    <input type="text" className="abstract-control-input" placeholder="Enter Consideration Amount" name="considerationAmount" value={table.data.considerationAmount || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} required />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> GRANTOR : </th>
                                                 <td colSpan={'6'} style={{ border: '1px solid black' }}>
-                                                    <input type="text" className="abstract-control-input" placeholder="Enter Grantor" name="grantor" value={table.grantor || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
+                                                    <input type="text" className="abstract-control-input" placeholder="Enter Grantor" name="grantor" value={table.data.grantor || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>GRANTEE : </th>
                                                 <td colSpan={6} style={{ border: '1px solid black' }}>
-                                                    <input type="text" className="abstract-control-input" placeholder="Enter Grantee" name="grantee" value={table.grantee || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
+                                                    <input type="text" className="abstract-control-input" placeholder="Enter Grantee" name="grantee" value={table.data.grantee || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> VESTING INFO :</th>
                                                 <td colSpan={'4'} style={{ border: '1px solid black' }}>
-                                                    <input type="text" className="abstract-control-input" placeholder="Enter Vesting" name="vesting" value={table.vesting || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
+                                                    <input type="text" className="abstract-control-input" placeholder="Enter Vesting" name="vesting" value={table.data.vesting || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
                                                 </td>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>INSTR/BOOK/PAGE:</th>
                                                 <td colSpan={2} style={{ border: '1px solid black' }}>
-                                                    <input type="text" className="abstract-control-input" placeholder="Enter INSTR/BOOK/PAGE" name="instaBookPage" value={table.instaBookPage || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
+                                                    <input type="text" className="abstract-control-input" placeholder="Enter INSTR/BOOK/PAGE" name="instaBookPage" value={table.data.instaBookPage || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> DATED DATE: </th>
                                                 <td colSpan={'4'} style={{ border: '1px solid black' }}>
-                                                    <input type="date" className="abstract-control-input" placeholder="Enter Date" name="datedDate" value={table.datedDate || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
+                                                    <input type="date" className="abstract-control-input" placeholder="Enter Date" name="datedDate" value={table.data.datedDate || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
                                                 </td>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>RECORDED DATE:</th>
                                                 <td colSpan={2} style={{ border: '1px solid black' }}>
-                                                    <input type="date" className="abstract-control-input" placeholder="Enter RECORDED DATE" name="recordedDate" value={table.recordedDate || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
+                                                    <input type="date" className="abstract-control-input" placeholder="Enter RECORDED DATE" name="recordedDate" value={table.data.recordedDate || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>COMMENTS :</th>
                                                 <td colSpan={6} style={{ border: '1px solid black' }}>
-                                                    <input type="text" className="abstract-control-input" placeholder="Enter Notes" name="comments" value={table.comments || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
+                                                    <input type="text" className="abstract-control-input" placeholder="Enter Notes" name="comments" value={table.data.comments || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -885,15 +875,17 @@ function DasReport() {
 
                                     <br />
                                     {table.id > 1 && (
-                                        
-
-                                        <button className="das-report-delete-button-table" onClick={() => handleDeleteTable(table.id)}> <i className="pi pi-trash" style={{ marginRight: '8px' }}></i> Table</button>
-                                    )} <button className=" das-report-add-button-table" onClick={handleAddTable}> <i className="pi pi-plus" style={{ marginRight: '8px' }}></i>Table</button>
+                                        <button className="das-report-delete-button-table" onClick={() => DeleteVestingTable(table.id)}>
+                                            <i className="pi pi-trash" style={{ marginRight: '8px' }}></i> Table
+                                        </button>
+                                    )}
+                                    <button className=" das-report-add-button-table" onClick={AddVestingTable}>
+                                        <i className="pi pi-plus" style={{ marginRight: '8px' }}></i>Table
+                                    </button>
                                     <br />
 
-
-                                    <Button className='das-report-general-info-save-button' label="Save&nbsp;" icon="pi pi-check" onClick={() => handleSaveTable(table.id)} />
-                                    <Button className='das-report-general-info-clear-button' label="Clear&nbsp;" icon="pi pi-times" onClick={() => handleClearTable(table.id)} />
+                                    <Button className='das-report-general-info-save-button' type='button' label="Save&nbsp;" icon="pi pi-check" onClick={() => saveVestingInfo(table.id)} />
+                                    <Button className='das-report-general-info-clear-button' type='button' label="Clear&nbsp;" icon="pi pi-times" onClick={() => clearVestingInfo(table.id)} />
                                 </center>
                             </div>
                         ))}
@@ -927,75 +919,74 @@ function DasReport() {
                                         <tr>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> MORTGAGOR :</th>
                                             <td colSpan={6} style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" placeholder="Enter  MORTGAGO" name="mortgagor" style={{ width: '100%' }} onChange={(e) => handleInputChange2(e, table.id)} required />
-                                            </td>
+                                                <input type="text" className="abstract-control-input" name="mortgagor" placeholder='Enter MORTGAGEE' style={{ width: '100%' }} value={table.data.mortgagor || ''} onChange={(e) => handleChaneMortage(e, table.id)} required />                                            </td>
                                         </tr>
                                         <tr>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> MORTGAGEE :</th>
                                             <td colSpan={'6'} style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" name="mortgagee" placeholder='Enter MORTGAGEE' style={{ width: '100%' }} onChange={(e) => handleInputChange2(e, table.id)} required />
+                                                <input type="text" className="abstract-control-input" name="mortgagee" placeholder='Enter MORTGAGEE' style={{ width: '100%' }} value={table.data.mortgagee || ''} onChange={(e) => handleChaneMortage(e, table.id)} required />
                                             </td>
                                         </tr>
                                         <tr>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> TRUSTEE :</th>
                                             <td colSpan={6} style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" placeholder="Enter TRUSTEE" name="trustee" style={{ width: '100%' }} onChange={(e) => handleInputChange2(e, table.id)} />
+                                                <input type="text" className="abstract-control-input" placeholder="Enter TRUSTEE" name="trustee" style={{ width: '100%' }} value={table.data.trustee || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> INSTRUMENT/BOOK/PAGE :</th>
                                             <td colSpan={'4'} style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" name="instrBookPage" placeholder='Enter INSTRUMENT/BOOK/PAGE:' style={{ width: '100%' }} onChange={(e) => handleInputChange2(e, table.id)} />
+                                                <input type="text" className="abstract-control-input" name="instrBookPage" placeholder='Enter INSTRUMENT/BOOK/PAGE:' style={{ width: '100%' }} value={table.data.instrBookPage || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>Amount [$]:</th>
                                             <td colSpan={2} style={{ border: '1px solid black' }}>
-                                                <input type="Number" className="abstract-control-input" placeholder="$ Enter Amount" name="amount" style={{ width: '100%' }} onChange={(e) => handleInputChange2(e, table.id)} />
+                                                <input type="Number" className="abstract-control-input" placeholder="$ Enter Amount" name="amount" style={{ width: '100%' }} value={table.data.amount || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> DATED DATE:</th>
                                             <td colSpan={'4'} style={{ border: '1px solid black' }}>
-                                                <input type="Date" className="abstract-control-input" name="datedDate" placeholder='Enter DATED DATE:' style={{ width: '100%' }} onChange={(e) => handleInputChange2(e, table.id)} />
+                                                <input type="Date" className="abstract-control-input" name="datedDate" placeholder='Enter DATED DATE:' style={{ width: '100%' }} value={table.data.datedDate || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>RECORDED DATE:</th>
                                             <td colSpan={2} style={{ border: '1px solid black' }}>
-                                                <input type="Date" className="abstract-control-input" placeholder="Enter RECORDED DATE" name="recordedDate" style={{ width: '100%' }} onChange={(e) => handleInputChange2(e, table.id)} />
+                                                <input type="Date" className="abstract-control-input" placeholder="Enter RECORDED DATE" name="recordedDate" style={{ width: '100%' }} value={table.data.recordedDate || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colSpan={5}></td>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>MATURITY DATE :</th>
                                             <td colSpan={3} style={{ border: '1px solid black' }}>
-                                                <input type="Date" className="abstract-control-input" placeholder="Enter Maturity Date" name="maturityDate" style={{ width: '100%' }} onChange={(e) => handleInputChange2(e, table.id)} />
+                                                <input type="Date" className="abstract-control-input" placeholder="Enter Maturity Date" name="maturityDate" style={{ width: '100%' }} value={table.data.maturityDate || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> MORTGAGE ASSIGNED TO</th>
                                             <td colSpan={'6'} style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" name="mortgageAssignedTo" placeholder='Enter MORTGAGE ASSIGNED TO' style={{ width: '100%' }} onChange={(e) => handleInputChange2(e, table.id)} />
+                                                <input type="text" className="abstract-control-input" name="mortgageAssignedTo" placeholder='Enter MORTGAGE ASSIGNED TO' style={{ width: '100%' }} value={table.data.mortgageAssignedTo || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> ASSIGNMENT BK/PG :</th>
                                             <td colSpan={'4'} style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" name="assignmentBkPg" placeholder='Enter ASSIGNMENT BK/PG :' style={{ width: '100%' }} onChange={(e) => handleInputChange2(e, table.id)} />
+                                                <input type="text" className="abstract-control-input" name="assignmentBkPg" placeholder='Enter ASSIGNMENT BK/PG :' style={{ width: '100%' }} value={table.data.assignmentBkPg || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>ASSIGNMENT DATED :</th>
                                             <td colSpan={2} style={{ border: '1px solid black' }}>
-                                                <input type="Date" className="abstract-control-input" placeholder="Enter ASSIGNMENT DATED" name="assignmentDated" style={{ width: '100%' }} onChange={(e) => handleInputChange2(e, table.id)} />
+                                                <input type="Date" className="abstract-control-input" placeholder="Enter ASSIGNMENT DATED" name="assignmentDated" style={{ width: '100%' }} value={table.data.assignmentDated || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colSpan={5}></td>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>ASSIGNMENT RECORDED :</th>
                                             <td colSpan={3} style={{ border: '1px solid black' }}>
-                                                <input type="Date" className="abstract-control-input" placeholder="Enter ASSIGNMENT RECORDED:" name="assignmentRecorded" style={{ width: '100%' }} onChange={(e) => handleInputChange2(e, table.id)} />
+                                                <input type="Date" className="abstract-control-input" placeholder="Enter ASSIGNMENT RECORDED:" name="assignmentRecorded" style={{ width: '100%' }} value={table.data.assignmentRecorded || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>COMMENTS :</th>
                                             <td colSpan={6} style={{ border: '1px solid black' }}>
-                                                <input type='text-area' className="abstract-control-input" placeholder="Enter COMMENTS" name="comments" style={{ width: '100%' }} onChange={(e) => handleInputChange2(e, table.id)} />
+                                                <input type='text-area' className="abstract-control-input" placeholder="Enter COMMENTS" name="comments" style={{ width: '100%' }} value={table.data.comments || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                         </tr>
                                     </table>
@@ -1003,11 +994,11 @@ function DasReport() {
 
                                     {table.id > 1 && (
 
-                                        <button className="das-report-delete-button-table" onClick={() => handleDeleteTable2(table.id)}> <i className="pi pi-trash" style={{ marginRight: '8px' }}></i> Table</button>
-                                    )} <button className=" das-report-add-button-table" onClick={handleAddTable2}> <i className="pi pi-plus" style={{ marginRight: '8px' }}></i>Table</button>
+                                        <button className="das-report-delete-button-table" onClick={() => DeleteMortageTable(table.id)}> <i className="pi pi-trash" style={{ marginRight: '8px' }}></i> Table</button>
+                                    )} <button className=" das-report-add-button-table" onClick={AddMortageTable}> <i className="pi pi-plus" style={{ marginRight: '8px' }}></i>Table</button>
                                     <br />
-                                    <Button className='das-report-general-info-save-button' label="Save&nbsp;" icon="pi pi-check" onClick={() => handleSaveTable1(table.id)} />
-                                    <Button className='das-report-general-info-clear-button' label="Clear&nbsp;" icon="pi pi-times" onClick={() => handleClearTable1(table.id)} />
+                                    <Button className='das-report-general-info-save-button' type='button' label="Save&nbsp;" icon="pi pi-check" onClick={() => saveMortgageInfo(table.id)} />
+                                    <Button className='das-report-general-info-clear-button' type='button' label="Clear&nbsp;" icon="pi pi-times" onClick={() => clearMortgageInfo(table.id)} />
                                 </center>
                             </div>
                         ))}
@@ -1034,7 +1025,7 @@ function DasReport() {
                                             <th className="das-report-sub-heading-1" style={{ border: '1px solid black' }}>AMOUNT</th>
                                         </tr>
                                     </thead>
-                                   
+
                                     <tbody>
                                         {tableRowsData.map((row) => (
                                             <tr key={row.id}>
@@ -1055,20 +1046,20 @@ function DasReport() {
                                     </tbody>
                                 </table>
                             ) : (
-                                 <p>this is empty table</p>
+                                <p>this is empty table</p>
                             )}
-                            
+
                             <br />
-                            <button className=" das-report-add-button" onClick={handleAddRow}> <i className="pi pi-plus" style={{ marginRight: '8px' }}></i>Row</button>
+                            <button className=" das-report-add-button" type='button' onClick={handleAddRow}> <i className="pi pi-plus" style={{ marginRight: '8px' }}></i>Row</button>
 
                             {tableRowsData.length > 3 && (
 
-                                <button className="das-report-delete-button" onClick={handleDeleteLastRow}>    <i className="pi pi-trash" style={{ marginRight: '8px' }}></i>Row</button>
+                                <button className="das-report-delete-button" type='button' onClick={handleDeleteLastRow}>    <i className="pi pi-trash" style={{ marginRight: '8px' }}></i>Row</button>
                             )}
                             <br />
 
-                            <Button className='das-report-general-info-save-button' label="Save&nbsp;" icon="pi pi-check" onClick={handleSaveTemporarilyRow} />
-                            <Button className='das-report-general-info-clear-button' label="Clear&nbsp;" icon="pi pi-times" onClick={handleClearRows} />
+                            <Button className='das-report-general-info-save-button' type='button' label="Save&nbsp;" icon="pi pi-check" onClick={saveActiveJudgment} />
+                            <Button className='das-report-general-info-clear-button' type='button' label="Clear&nbsp;" icon="pi pi-times" onClick={clearActiveJudgment} />
 
                         </center>
                         <br />
@@ -1097,21 +1088,21 @@ function DasReport() {
                                     <tr>
                                         <th className="das-report-sub-heading" colSpan='1' style={{ border: '1px solid black' }} > LAND VALUE </th>
                                         <td colSpan='1' style={{ border: '1px solid black' }} >
-                                            <input type="text" className="abstract-control-input" placeholder="Enter LandValue" name="landValue" style={{ width: '100%' }} />
+                                            <input type="text" className="abstract-control-input" placeholder="Enter LandValue" name="landValue" value={taxinfo.landValue} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
                                         </td>
                                         <th className="das-report-sub-heading" colSpan='1' style={{ border: '1px solid black' }} > BUILDING VALUE </th>
                                         <td colSpan='1' style={{ border: '1px solid black' }} >
-                                            <input type="text" className="abstract-control-input" placeholder="Enter BuildingValue" name="buildingValue" style={{ width: '100%' }} />
+                                            <input type="text" className="abstract-control-input" placeholder="Enter BuildingValue" name="buildingValue" value={taxinfo.buildingValue} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
                                         </td>
                                     </tr>
                                     <tr>
                                         <th className="das-report-sub-heading" colSpan='1' style={{ border: '1px solid black' }} > TOTAL VALUE </th>
                                         <td colSpan='1' style={{ border: '1px solid black' }} >
-                                            <input type="text" className="abstract-control-input" placeholder="Enter TotalValue" name="totalValue" style={{ width: '100%' }} />
+                                            <input type="text" className="abstract-control-input" placeholder="Enter TotalValue" name="totalValue" value={taxinfo.totalValue} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
                                         </td>
                                         <th className="das-report-sub-heading" colSpan='1' style={{ border: '1px solid black' }} > EXEMPTION </th>
                                         <td colSpan='1' style={{ border: '1px solid black' }} >
-                                            <input type="text" className="abstract-control-input" placeholder="Enter extraValue" name="extraValue" style={{ width: '100%' }} />
+                                            <input type="text" className="abstract-control-input" placeholder="Enter extraValue" name="extraValue" value={taxinfo.extraValue} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
                                         </td>
                                     </tr>
                                     <tr>
@@ -1126,20 +1117,20 @@ function DasReport() {
                                                 {index + 1 === 1 ? `${index + 1}ST INSTALLMENT ` : index + 1 === 2 ? `${index + 1}ND INSTALLMENT` : index + 1 === 3 ? `${index + 1}RD INSTALLMENT` : `${index + 1}TH INSTALLMENT`}
                                             </th>
                                             <td colSpan='1' style={{ border: '1px solid black' }} >
-                                                <input type="text" className="abstract-control-input" name="amount" placeholder='Enter Amount' onChange={e => handleInputChangeTaxInsta(e, row.id)} style={{ width: '100%' }} />
+                                                <input type="text" className="abstract-control-input" name="amount" placeholder='Enter Amount' value={row.amount} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
                                             </td>
                                             <td colSpan='1' style={{ border: '1px solid black' }} >
-                                                <input type="text" className="abstract-control-input" name="status" placeholder='Enter Status' onChange={e => handleInputChangeTaxInsta(e, row.id)} style={{ width: '100%' }} />
+                                                <input type="text" className="abstract-control-input" name="status" placeholder='Enter Status' value={row.status} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
                                             </td>
                                             <td colSpan='1' style={{ border: '1px solid black' }} >
-                                                <input type="date" className="abstract-control-input" name="paidDueDate" placeholder='Enter Date' onChange={e => handleInputChangeTaxInsta(e, row.id)} style={{ width: '100%' }} />
+                                                <input type="date" className="abstract-control-input" name="paidDueDate" placeholder='Enter Date' value={row.paidDueDate} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
                                             </td>
                                         </tr>
                                     ))}
                                     <tr>
                                         <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>NOTES</th>
                                         <td colSpan={6} style={{ border: '1px solid black' }}>
-                                            <input type='text' className="abstract-control-input" placeholder="Enter Notes" name="comments" style={{ width: '100%' }} />
+                                            <input type='text' className="abstract-control-input" placeholder="Enter Notes" name="comments" value={comments} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
                                         </td>
                                     </tr>
                                 </tbody>
@@ -1148,13 +1139,13 @@ function DasReport() {
 
                             {tableTaxInstaData.length > 2 && (
 
-                                <button className="das-report-delete-button" onClick={handleDeleteLastTaxInstaRow}>  <i className="pi pi-trash" style={{ marginRight: '8px' }}></i> Row</button>
-                            )}<button className="das-report-add-button " onClick={handleAddTaxInstaRow}> <i className="pi pi-plus" style={{ marginRight: '8px' }}></i>Row</button>
+                                <button className="das-report-delete-button" type='button' onClick={handleDeleteLastTaxInstaRow}>  <i className="pi pi-trash" style={{ marginRight: '8px' }}></i> Row</button>
+                            )}<button className="das-report-add-button " type='button' onClick={handleAddTaxInstaRow}> <i className="pi pi-plus" style={{ marginRight: '8px' }}></i>Row</button>
 
                             <br />
 
-                            <Button className='das-report-general-info-save-button' label="Save&nbsp;" icon="pi pi-check" onClick={handleSaveTemporarilyTaxInstaRow} />
-                            <Button className='das-report-general-info-clear-button' label="Clear&nbsp;" icon="pi pi-times" onClick={handleClearTaxInstaRows} />
+                            <Button className='das-report-general-info-save-button' type='button' label="Save&nbsp;" icon="pi pi-check" onClick={handleSaveTemporarilyTaxInstaRow} />
+                            <Button className='das-report-general-info-clear-button' type='button' label="Clear&nbsp;" icon="pi pi-times" onClick={handleClearTaxInstaRows} />
                         </center>
                     </div>
 
@@ -1181,19 +1172,59 @@ function DasReport() {
                                     {nameRunData.map((row) => (
                                         <tr key={row.id}>
                                             <td style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" name="name" placeholder='Enter Name' onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
+                                                <input
+                                                    type="text"
+                                                    className="abstract-control-input"
+                                                    name="name"
+                                                    placeholder='Enter Name'
+                                                    value={row.data.name}
+                                                    onChange={e => handleChangeNameRun(e, row.id)}
+                                                    style={{ width: '100%' }}
+                                                />
                                             </td>
                                             <td style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" name="jud" placeholder='Enter JUD' onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
+                                                <input
+                                                    type="text"
+                                                    className="abstract-control-input"
+                                                    name="jud"
+                                                    placeholder='Enter JUD'
+                                                    value={row.data.jud}
+                                                    onChange={e => handleChangeNameRun(e, row.id)}
+                                                    style={{ width: '100%' }}
+                                                />
                                             </td>
                                             <td style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" name="liens" placeholder='Enter LIENS' onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
+                                                <input
+                                                    type="text"
+                                                    className="abstract-control-input"
+                                                    name="liens"
+                                                    placeholder='Enter LIENS'
+                                                    value={row.data.liens}
+                                                    onChange={e => handleChangeNameRun(e, row.id)}
+                                                    style={{ width: '100%' }}
+                                                />
                                             </td>
                                             <td style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" name="ucc" placeholder='Enter UCC' onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
+                                                <input
+                                                    type="text"
+                                                    className="abstract-control-input"
+                                                    name="ucc"
+                                                    placeholder='Enter UCC'
+                                                    value={row.data.ucc}
+                                                    onChange={e => handleChangeNameRun(e, row.id)}
+                                                    style={{ width: '100%' }}
+                                                />
                                             </td>
                                             <td style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" name="others" placeholder='Enter Others' onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
+                                                <input
+                                                    type="text"
+                                                    className="abstract-control-input"
+                                                    name="others"
+                                                    placeholder='Enter Others'
+                                                    value={row.data.others}
+                                                    onChange={e => handleChangeNameRun(e, row.id)}
+                                                    style={{ width: '100%' }}
+                                                />
                                             </td>
                                         </tr>
                                     ))}
@@ -1201,18 +1232,15 @@ function DasReport() {
                             </table>
                             <br />
 
-                            <button className=" das-report-add-button" onClick={handleAddNameRow}> <i className="pi pi-plus" style={{ marginRight: '8px' }}></i>Row</button>
+                            <button className=" das-report-add-button" type='button' onClick={handleAddNameRow}> <i className="pi pi-plus" style={{ marginRight: '8px' }}></i>Row</button>
                             {nameRunData.length > 2 && (
-
-                                <button className="das-report-delete-button" onClick={handleDeleteLastNameRow}>
+                                <button className="das-report-delete-button" type='button' onClick={handleDeleteLastNameRow}>
                                     <i className="pi pi-trash" style={{ marginRight: '8px' }}></i> Row</button>
                             )}
                             <br />
 
-
-                            <Button className='das-report-general-info-save-button' label="Save&nbsp;" icon="pi pi-check" onClick={handleSaveTemporarilyNameRunRow} />
-                            <Button className='das-report-general-info-clear-button' label="Clear&nbsp;" icon="pi pi-times" onClick={handleClearNameRunRows} />
-
+                            <Button className='das-report-general-info-save-button' type='button' label="Save&nbsp;" icon="pi pi-check" onClick={handleSaveTemporarilyNameRunRow} />
+                            <Button className='das-report-general-info-clear-button' type='button' label="Clear&nbsp;" icon="pi pi-times" onClick={handleClearNameRunRows} />
                         </center>
                     </div>
 
@@ -1236,7 +1264,7 @@ function DasReport() {
                                         <br />
                                         <br />
                                         <br />
-                                        PROPERTY ADDRESS: 
+                                        PROPERTY ADDRESS:
 
                                     </td>
                                     <br />
