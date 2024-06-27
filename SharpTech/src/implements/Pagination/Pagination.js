@@ -4,6 +4,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { TextField, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { ProgressBar } from 'primereact/progressbar'; // Import ProgressBar
 import './Pagination.css';
 import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/saga-blue/theme.css';
@@ -23,11 +24,9 @@ export default function Pagination() {
 
     const navigate = useNavigate(); // Initialize useNavigate
 
-
     const handleViewClick = (rowData) => {
         navigate('/EmployeeDetail', { state: { id: rowData.id } });
     };
-
 
     useEffect(() => {
         loadUsers();
@@ -91,62 +90,63 @@ export default function Pagination() {
 
     return (
         <div>
-            <Navbar/>
+            <Navbar />
             <div className="pagination-datatable-demo">
                 <div className="pagination-card">
                     <h1 className="Pagination-main-heading">Employee Information</h1>
                     <div className="pagination-datatable-wrapper">
-                        <DataTable
-                            value={filteredUsers}
-                            paginator
-                            rows={rows}
-                            first={first}
-                            onPage={onPage}
-                            totalRecords={users.length}
-                            paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                            rowsPerPageOptions={[5, 10, 20, 30, 40]}
-                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries &nbsp; &nbsp;"
-                            header={header}
-                            globalFilter={globalFilter}
-                            className="pagination-datatable" >
-                            <Column field="empId" header="Employee ID" sortable className="heading-pagination-column" />
-                            <Column field="firstName" header="First Name" className="heading-pagination-column" />
-                            <Column field="middleName" header="Middle Name" className="heading-pagination-column" />
-                            <Column field="lastName" header="Last Name" className="heading-pagination-column" />
-                            <Column field="role" header="Role" className="heading-pagination-column" />
-                            <Column field="email" header="Email" className="heading-pagination-column" />
-                            <Column field="designation" header="Designation" className="heading-pagination-column" />
-                            <Column field="phoneNumber" header="Phone Number" className="heading-pagination-column" />
-                            <Column field="remark" header="Remark" className="heading-pagination-column" />                        
-                            <Column field="fatherName" header="Father's Name" className="heading-pagination-column" />
-                            <Column field="motherName" header="Mother's Name" className="heading-pagination-column" />
-                            <Column field="dateOfBirth" header="Date of Birth" className="heading-pagination-column" />
-                            <Column field="address" header="Address" className="heading-pagination-column" />
-                            <Column field="joiningDate" header="Joining Date" className="heading-pagination-column" />
-                            <Column field="salary" header="Salary" className="heading-pagination-column" />
-                            <Column field="qualification" header="Qualification" className="heading-pagination-column" />
-                            <Column field="releavingDate" header="Releaving Date" className="heading-pagination-column" />
-                            <Column field="aadhaarNumber" header="Aadhaar Number" className="heading-pagination-column" />
-                            <Column field="panNumber" header="Pan Number" className="heading-pagination-column" />
-                            <Column field="remark" header="Remark" className="heading-pagination-column" />
-                            <Column
-                                header="Actions"
-                                body={(rowData) => (
-                                    <div>
-                                        {/* <Button icon="pi pi-user-plus" label="View" className="p-button-rounded p-button-info" /> */}
-                                        <Button icon="pi pi-pen-to-square" label="&nbsp;View&nbsp;&nbsp;" className="p-button-rounded p-button-custom-warning" onClick={() => handleViewClick(rowData)} />
-                                        {/* <Button icon="pi pi-search" className="p-button-rounded p-button-warning" />
-                                        <Button icon="pi pi-trash" label="Delete" className="p-button-rounded p-button-danger" onClick={() => deleteUser(rowData.empId)} />
-                                        <Button icon="pi pi-info-circle" className="p-button-rounded p-button-info" />
-                                        <Button icon={<ArrowForwardIcon />} className="p-button-rounded p-button-info" /> */}
-                                    </div>
-                                )}
-                            />
-                        </DataTable>
+                        {loading ? (
+                            <div className="loading-container">
+                                <ProgressBar mode="indeterminate" style={{ height: '4px' }} />
+                            </div>
+                        ) : (
+                            <DataTable
+                                value={filteredUsers}
+                                paginator
+                                rows={rows}
+                                first={first}
+                                onPage={onPage}
+                                totalRecords={users.length}
+                                paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                                rowsPerPageOptions={[5, 10, 20, 30, 40]}
+                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries &nbsp; &nbsp;"
+                                header={header}
+                                globalFilter={globalFilter}
+                                className="pagination-datatable">
+                                <Column field="empId" header="Employee ID" sortable className="heading-pagination-column" />
+                                <Column field="firstName" header="First Name" className="heading-pagination-column" />
+                                <Column field="middleName" header="Middle Name" className="heading-pagination-column" />
+                                <Column field="lastName" header="Last Name" className="heading-pagination-column" />
+                                <Column field="role" header="Role" className="heading-pagination-column" />
+                                <Column field="email" header="Email" className="heading-pagination-column" />
+                                <Column field="designation" header="Designation" className="heading-pagination-column" />
+                                <Column field="phoneNumber" header="Phone Number" className="heading-pagination-column" />
+                                <Column field="remark" header="Remark" className="heading-pagination-column" />
+                                <Column field="fatherName" header="Father's Name" className="heading-pagination-column" />
+                                <Column field="motherName" header="Mother's Name" className="heading-pagination-column" />
+                                <Column field="dateOfBirth" header="Date of Birth" className="heading-pagination-column" />
+                                <Column field="address" header="Address" className="heading-pagination-column" />
+                                <Column field="joiningDate" header="Joining Date" className="heading-pagination-column" />
+                                <Column field="salary" header="Salary" className="heading-pagination-column" />
+                                <Column field="qualification" header="Qualification" className="heading-pagination-column" />
+                                <Column field="releavingDate" header="Releaving Date" className="heading-pagination-column" />
+                                <Column field="aadhaarNumber" header="Aadhaar Number" className="heading-pagination-column" />
+                                <Column field="panNumber" header="Pan Number" className="heading-pagination-column" />
+                                <Column field="remark" header="Remark" className="heading-pagination-column" />
+                                <Column
+                                    header="Actions"
+                                    body={(rowData) => (
+                                        <div>
+                                            <Button icon="pi pi-pen-to-square" label="&nbsp;View&nbsp;&nbsp;" className="p-button-rounded p-button-custom-warning" onClick={() => handleViewClick(rowData)} />
+                                        </div>
+                                    )}
+                                />
+                            </DataTable>
+                        )}
                     </div>
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </div>
     );
 }

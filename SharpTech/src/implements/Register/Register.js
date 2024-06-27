@@ -1,9 +1,8 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ClipLoader } from 'react-spinners'; // Import ClipLoader from react-spinners
 import "./Register.css";
 import Footer from "../../components/Footer/Footer";
-import FormsNavbar from "../../components/FormsNavbar/FormsNavbar";
 import UserService from "../UserService/UserService";
 import Navbar from "../../components/Navbar/Navbar";
 
@@ -13,6 +12,7 @@ function Register() {
     const currentDate = new Date();
     return currentDate.toISOString().split('T')[0]; // Returns current date in string format (YYYY-MM-DD)
   };
+
   const [user, setUser] = useState({
     empId: "",
     phoneNumber: "",
@@ -39,50 +39,34 @@ function Register() {
   const [empIdExists, setEmpIdExists] = useState(false);
   const [empIdInvalid, setEmpIdInvalid] = useState(false);
   const [emailExists, setEmailExists] = useState(false);
-  const [emailInvalid, setEmailInvalid] = useState(false); 
+  const [emailInvalid, setEmailInvalid] = useState(false);
   const [panInvalid, setPanInvalid] = useState(false);
-
+  const [loading, setLoading] = useState(false); // Add loading state
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
 
-    const getMaxDate = () => {
-      const currentDate = new Date();
-      return currentDate.toISOString().split('T')[0]; // Returns current date in string format (YYYY-MM-DD)
-    };
-  
     if (name === 'dateOfBirth') {
       const dob = new Date(value);
       const eighteenYearsAgo = new Date();
       eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
       if (dob > eighteenYearsAgo) {
-        
         alert("You must be at least 18 years old to register.");
       }
     }
 
-    
     if (name === 'panNumber') {
       const panPattern = /^[A-Za-z]{5}\d{4}[A-Za-z]$/;
-
       if (value === '' || panPattern.test(value)) {
-        const formattedValue = value.toUpperCase(); // Convert input value to uppercase if it matches the PAN pattern
-        setUser({ ...user, [name]: formattedValue }); // Set formatted value to state
-        setPanInvalid(false); // Reset error state when format is correct or input is empty
+        const formattedValue = value.toUpperCase();
+        setUser({ ...user, [name]: formattedValue });
+        setPanInvalid(false);
       } else {
-        // Invalid PAN format
-        setUser({ ...user, [name]: value }); // Set value to state (to preserve user input)
-        setPanInvalid(true); // Set error state when format is invalid
+        setUser({ ...user, [name]: value });
+        setPanInvalid(true);
       }
       return;
     }
-  
-
-    const getMinDate = () => {
-      const currentDate = new Date();
-      const minDate = new Date(currentDate.getFullYear() - 18, currentDate.getMonth(), currentDate.getDate());
-      return minDate.toISOString().split('T')[0]; // Converts the date to string format (YYYY-MM-DD)
-    };
 
     if (name === 'phoneNumber') {
       const sanitizedValue = value.replace(/\D/g, '').slice(0, 10);
@@ -108,6 +92,7 @@ function Register() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true on form submission
     try {
       const token = localStorage.getItem('token');
       const response = await UserService.register(user, token);
@@ -140,7 +125,7 @@ function Register() {
         salary: "",
         qualification: "",
         aadhaarNumber: "",
-        panNumber: "", 
+        panNumber: "",
         releavingDate: "",
         role: "",
         remark: ""
@@ -149,6 +134,8 @@ function Register() {
     } catch (error) {
       console.error('Error registering user', error);
       alert('An error occurred while registering user');
+    } finally {
+      setLoading(false); // Set loading to false after form submission completes
     }
   };
 
@@ -164,26 +151,17 @@ function Register() {
           <h4>Employee Register</h4>
           <form onSubmit={onSubmit}>
             <div className="form-row">
-              {/* <div className="form-group col">
-                <label htmlFor="empId">Employee Id</label>
-                <input type="text" className="form-control" placeholder="Enter your employee id" name="empId" value={user.empId} onChange={onInputChange} required />
-                {empIdInvalid && <span className="error-message-return">Invalid Employee ID format</span>}
-                {empIdExists && <span className="error-message-return">Employee ID already exists</span>}
-              </div> */}
-             
-            </div>
-            <div className="form-row">
               <div className="form-group col">
                 <label htmlFor="empFirstName">First Name</label><b className="register-reqired-field"> &nbsp;*</b>
                 <input type="text" className="form-control" placeholder="Enter your first name" name="firstName" value={user.firstName} onChange={onInputChange} required />
               </div>
               <div className="form-group col">
                 <label htmlFor="empMiddleName">Middle Name</label>
-                <input type="text" className="form-control" placeholder="Enter your middle name" name="middleName" value={user.middleName} onChange={onInputChange} />
+                <input type="text" className="form-control" placeholder="Enter your middle name" name="middleName" value={user.middleName} onChange={onInputChange}  />
               </div>
               <div className="form-group col">
-                <label htmlFor="empLastName">Last Name</label>
-                <input type="text" className="form-control" placeholder="Enter your last name" name="lastName" value={user.lastName} onChange={onInputChange} />
+                <label htmlFor="empLastName">Last Name</label><b className="register-reqired-field"> &nbsp;*</b>
+                <input type="text" className="form-control" placeholder="Enter your last name" name="lastName" value={user.lastName} onChange={onInputChange} required />
               </div>
             </div>
             <div className="form-row">
@@ -206,7 +184,6 @@ function Register() {
                 <input type="email" className="form-control" placeholder="email@gmail.com" name="email" value={user.email} onChange={onInputChange} required />
                 {emailExists && <span className="error-message-return">Email address is already exists use different email</span>}
                 {emailInvalid && <span className="error-message-return">Invalid email format</span>}
-
               </div>
               <div className="form-group col">
                 <label htmlFor="empPassword">Password</label><b className="register-reqired-field"> &nbsp;*</b>
@@ -219,7 +196,7 @@ function Register() {
               
             </div>
             <div className="form-row">
-            <div className="form-group col">
+              <div className="form-group col">
                 <label htmlFor="empJoiningDate">Joining Date</label>
                 <input type="date" className="form-control" placeholder="Enter your joining date" name="joiningDate" value={user.joiningDate} onChange={onInputChange}  />
               </div>
@@ -274,10 +251,15 @@ function Register() {
             </div>
 
             <div className="button-container">
-              <button type="submit">Submit</button>
+              <button type="submit" disabled={loading}>
+                {loading ? (
+                  <ClipLoader color="#ffffff" loading={true} size={25} /> // Display ClipLoader while loading
+                ) : (
+                  "Submit"
+                )}
+              </button>
               <button type="button" onClick={handleCancel}>Cancel</button>
             </div>
-
           </form>
         </div>
       </div>
@@ -285,6 +267,5 @@ function Register() {
     </div>
   );
 }
-
 
 export default Register;

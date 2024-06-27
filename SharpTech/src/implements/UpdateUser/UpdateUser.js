@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import UserService from '../UserService/UserService';
 import "./UpdateUser.css";
 import Footer from '../../components/Footer/Footer';
-import FormsNavbar from '../../components/FormsNavbar/FormsNavbar';
+import Navbar from '../../components/Navbar/Navbar';
 
 function UpdateUser() {
   const navigate = useNavigate();
@@ -103,7 +103,7 @@ function UpdateUser() {
 
   return (
     <div>
-      <FormsNavbar />
+      <Navbar />
       <div className="register-container">
         <div className="register-form">
           <h4>Update Employee Details</h4>
