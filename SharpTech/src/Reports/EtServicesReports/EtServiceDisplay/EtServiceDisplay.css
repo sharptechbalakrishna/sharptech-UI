@@ -1,12 +1,23 @@
 
-.et-services-container{
-    display: flex;
-    flex-direction: column;
-    max-width: 100%;
-    width: 100%;
-    align-items: stretch; 
+
+.et-display-services-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the tables horizontally */
+  width: 100%;
+  margin-top: 10%;
 }
 
+
+
+.et-display-services-container table {
+    width: 80%; /* or any specific width like 600px */
+    table-layout: fixed; /* Optional: ensures the table respects the width set */
+  }
+
+  .etract-title-service-heading{
+    font-size: 28px;
+  }
 
 .et-service-form-table-2-data{
     padding-top: 10px;
@@ -31,7 +42,7 @@
     cursor: pointer; /* Pointer/hand icon */
     border-radius: 10px; /* Rounded corners */
     transition-duration: 0.4s; /* Animation duration */
-    width: 10%;
+    width: 60%;
 }
 
 .et-service-display-pdf-button:hover {
@@ -53,7 +64,7 @@
     cursor: pointer; /* Pointer/hand icon */
     border-radius: 10px; /* Rounded corners */
     transition-duration: 0.4s; /* Animation duration */
-    width: 11%;
+    width: 60%;
 }
 
 

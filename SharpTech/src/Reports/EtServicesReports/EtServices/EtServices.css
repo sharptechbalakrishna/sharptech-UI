@@ -6,6 +6,10 @@
   height: 80%;
   max-height: 100%;
   margin-top: 8%;
+  width: 100%;
+  flex-direction: column;
+  max-width: 100%;
+  align-items: stretch;
 
 }
 
@@ -32,7 +36,7 @@
 .et-service-form-table-selftables-heading {
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: rgb(150, 147, 147);
+  background-color: rgb(180, 178, 178);
 
 }
 
@@ -88,13 +92,13 @@
 .et-service-input-labels {
   width: 100%;
   /* Ensure the input takes the full width of its container */
-  padding: 5px;
+  
   /*Add padding for better spacing inside the input */
-  border: 1px solid #ccc;
+  
   /* Light grey border */
   border-radius: 4px;
   /* Rounded corners */
-  font-size: 20px;
+  font-size: 18px;
   color: #161816;
   box-sizing: border-box;
   /* Ensures padding and border are included in the element's total width and height */

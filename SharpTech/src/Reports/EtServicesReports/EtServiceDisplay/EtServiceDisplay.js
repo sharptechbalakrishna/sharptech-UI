@@ -146,7 +146,7 @@ function EtServiceDisplay() {
         <div >
             <Navbar />
             <center>
-                <div className='et-services-container' ref={contentRef} id="content-to-download">
+                <div className='et-display-services-container' ref={contentRef} id="content-to-download" >
 
 
                     <div id="pdf-content1">
@@ -161,7 +161,7 @@ function EtServiceDisplay() {
                                 <div >
                                     <center>
                                         <table className='et-service-form-table-1'
-                                            style={{ border: '2px solid black', borderCollapse: 'collapse', width: '100%' }}
+                                            style={{ border: '2px solid black', borderCollapse: 'collapse', width: '80%' }}
                                         >
 
                                             <tr className='et-service-form-table-1-rows' >
