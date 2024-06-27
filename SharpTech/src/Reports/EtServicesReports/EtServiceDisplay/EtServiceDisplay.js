@@ -166,7 +166,7 @@ function EtServiceDisplay() {
                                 <div >
                                     <center>
                                         <table className='et-service-form-table-1'
-                                            style={{ border: '2px solid black', borderCollapse: 'collapse' }}
+                                            style={{ border: '2px solid black', borderCollapse: 'collapse', width: '100%' }}
                                         >
 
                                             <tr className='et-service-form-table-1-rows' >
@@ -304,7 +304,7 @@ function EtServiceDisplay() {
                                             </tr>
 
                                             <tr>
-                                                <th className='et-service-form-table-2-heading' colSpan={1} style={{ border: '1px solid black' }}> MORTGAGO  </th>
+                                                <th className='et-service-form-table-2-heading' colSpan={1} style={{ border: '1px solid black' }}> MORTGAGOR  </th>
                                                 <td className='et-service-form-table-2-data' colSpan={3} style={{ border: '1px solid black' }}>{openmortagedeedinfo.mortgago}</td>
                                             </tr>
 

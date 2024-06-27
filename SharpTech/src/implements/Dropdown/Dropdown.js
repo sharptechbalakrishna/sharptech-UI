@@ -23,7 +23,7 @@ const Dropdown = () => {
         onMouseLeave={handleMouseLeave(setIsOpen)}
       >
         <button className="dropdown-button-component">
-        DAS Report
+        DAS Services
           <RiArrowDropDownLine className="dropdown-icon" />
         </button>
 
@@ -58,7 +58,7 @@ const Dropdown = () => {
         {isSecondOpen && (
           <ul className="dropdown-menu">
            <li className="dropdown-item">
-              <RouterLink to="/EtServices" className="dropdown-link-component">ET Services</RouterLink>
+              <RouterLink to="/EtServices" className="dropdown-link-component">ET Report</RouterLink>
             </li>
             {/* <li className="dropdown-item">
               <RouterLink to="/EtserviceReport" className="dropdown-link-component">EtserviceReport</RouterLink>
