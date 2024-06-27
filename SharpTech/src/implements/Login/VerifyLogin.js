@@ -30,6 +30,7 @@ const VerifyLogin = () => {
       if (userData.token) {
         verifylogin(userData.token, userData.role, userData.transactionId);
         localStorage.setItem('email', email); // Store email in localStorage
+        localStorage.setItem('loginTime', Date.now().toString()); // Store login time in localStorage
         navigate('/DisplayLogin');
       } else {
         setError(userData.message);
