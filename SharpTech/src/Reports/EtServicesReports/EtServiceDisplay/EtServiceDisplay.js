@@ -97,7 +97,12 @@ function EtServiceDisplay() {
         const css = `
         <style>
           
-           et-service-form-table-1 {
+
+        .et-display-services-container table {
+    width: 80%; /* or any specific width like 600px */
+    table-layout: fixed; /* Optional: ensures the table respects the width set */
+  }
+           .et-service-form-table-1 {
                 width: 100%;
                
               max-height:100%;
@@ -161,7 +166,7 @@ function EtServiceDisplay() {
                                 <div >
                                     <center>
                                         <table className='et-service-form-table-1'
-                                            style={{ border: '2px solid black', borderCollapse: 'collapse', width: '80%' }}
+                                            style={{ border: '2px solid black', borderCollapse: 'collapse' }}
                                         >
 
                                             <tr className='et-service-form-table-1-rows' >
