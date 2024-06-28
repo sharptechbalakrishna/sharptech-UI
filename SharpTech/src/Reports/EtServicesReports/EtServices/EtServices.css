@@ -98,19 +98,11 @@
 
 .et-service-input-labels {
   width: 100%;
-  /* Ensure the input takes the full width of its container */
-  
-  /*Add padding for better spacing inside the input */
-  
-  /* Light grey border */
   border-radius: 4px;
-  /* Rounded corners */
   font-size: 18px;
   color: #161816;
   box-sizing: border-box;
-  /* Ensures padding and border are included in the element's total width and height */
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  /* Smooth transition for border and shadow changes */
   text-align: center;
   padding-left: 10px;
 }
@@ -118,24 +110,19 @@
 /* Styling for the placeholder text */
 .et-service-input-labels::placeholder {
   color: #999;
-  /* Light grey color for the placeholder text */
 }
 
 /* Styling for when the input is focused */
 .et-service-input-labels:focus {
   border-color: #6f7174;
-  /* Blue border on focus */
   box-shadow: 0 0 5px rgba(74, 75, 77, 0.5);
-  /* Subtle blue shadow on focus */
   outline: none;
-  /* Remove default outline */
 }
 
 
 /* Styling the form input types */
 .et-services-form-container input[type="date"] {
-  width: calc(100% - 20px);
-  /* Adjusting input width to prevent overflow */
+  width: calc(100% - 20px); /* Adjusting input width to prevent overflow */
 }
 
 /* Styling the form input placeholders */
@@ -229,7 +216,6 @@
   margin-bottom: 20px;
 }
 
-/* Styling the form table rows */
 
 .et-service-form-table-1-rows td {
   border: 1px solid rgb(27, 25, 25);
@@ -239,65 +225,51 @@
   border: 1px solid rgb(0, 0, 0);
 }
 
-/* Styling the form table headings */
+/* -----------Styling the form table headings----- */
 .et-service-form-table-1-heading {
   text-align: left;
   font-weight: bold;
   padding-left: 10px;
 }
 
-/* Styling the form table data */
+/* ----------Styling the form table data----------- */
 .et-service-form-table-1-data {
   padding: none;
   max-height: 100%;
   height: 50%;
 }
 
-/* Styling the form inputs */
+/*----------- Styling the form inputs----------- */
 
 
 .et-service-input-labels {
   width: 100%;
-  /* Ensure the input takes the full width of its container */
   padding: 5px;
-  /*Add padding for better spacing inside the input */
   border: 1px solid #ccc;
-  /* Light grey border */
   border-radius: 4px;
-  /* Rounded corners */
   font-size: 20px;
   color: #161816;
   box-sizing: border-box;
-  /* Ensures padding and border are included in the element's total width and height */
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  /* Smooth transition for border and shadow changes */
   text-align: left;
 }
 
-/* Styling for the placeholder text */
 .et-service-input-labels::placeholder {
   color: #999;
-  /* Light grey color for the placeholder text */
 }
 
-/* Styling for when the input is focused */
+
 .et-service-input-labels:focus {
   border-color: #6f7174;
-  /* Blue border on focus */
   box-shadow: 0 0 5px rgba(74, 75, 77, 0.5);
-  /* Subtle blue shadow on focus */
   outline: none;
-  /* Remove default outline */
 }
 
 
-/* Styling the form input types */
 .et-services-form-container input[type="date"] {
   width: calc(100% - 20px);
-  /* Adjusting input width to prevent overflow */
 }
 
-/* Styling the form input placeholders */
 .et-services-form-container ::placeholder {
   color: #999;
 }
@@ -318,11 +290,11 @@
 
 .et-services-add-button:hover {
   background-color: #003f7f;
-  /* Color when the button is clicked */
+ 
 }
 
 .et-services-delete-button {
-  background-color: #dc3545;
+  background-color: #f34455;
   color: white;
   padding: 10px 15px;
   border: none;
@@ -341,12 +313,12 @@
 
 .et-services-delete-button:active {
   background-color: #bd2130;
-  /* Change this to the color you want when the button is clicked */
+ 
 }
 
 .et-service-form-submit-button {
   background-color: #217feb;
-  /* Customize the background color */
+
   color: white;
   border: none;
   padding: 10px 20px;
@@ -378,16 +350,16 @@
 
 
 
-/* Style for the ave button */
+/* ------------------save, clear------------------*/
 .et-service-genenal-info-save-button {
-  background-color: #28a745;
+  background-color: #35bb54;
   border-color: #28a745;
   color: white;
-  font-size: 20pxpx;
-
+  font-size: 18px;
   border-radius: 5px;
   transition: background-color 0.3s, border-color 0.3s;
   margin-right: 10px;
+padding-left: 5px;
 }
 
 .et-service-genenal-info-save-button:hover {
@@ -396,25 +368,68 @@
 }
 
 
-
-
-
-
-/* Style for the Clear button */
 .et-service-genenal-info-clear-button {
   background-color: #dc3545;
   border-color: #dc3545;
   color: white;
-  font-size: px;
+  font-size: 18px;
   border-radius: 5px;
   transition: background-color 0.3s, border-color 0.3s;
-
+  padding-left: 5px;
 }
 
 .et-service-genenal-info-clear-button:hover {
   background-color: #c82333;
   border-color: #bd2130;
 }
+
+
+/*-----------------------------delete,add---------------*/
+
+.et-service-genenal-info-delete-button {
+  background-color: #f7815d;
+  border:none;
+  color: white;
+  font-size:18px;
+  border-radius: 5px;
+  
+  transition: background-color 0.3s, border-color 0.3s;
+  text-align: center;
+  padding-top: 11px;
+  padding-bottom: 11px;
+  padding-right: 5px;
+  padding-left: 5px;
+  margin-right: 10px;
+  
+ 
+
+}
+.et-service-genenal-info-delete-button:hover {
+  background-color: #ec5537; /* Adjust the color as needed */
+}
+
+
+
+.et-service-genenal-info-add-button {
+  background-color: #52c2f7;
+  border:none;
+  color: white;
+  font-size: 18px;
+
+  border-radius: 5px;
+  background-color: #0fa9eb;
+  transition: background-color 0.3s border-color 0.3s;
+  text-align: center;
+  padding-top: 11px;
+  padding-bottom: 11px;
+  padding-right: 5px;
+  padding-left: 5px;
+  margin-right: 10px;
+}
+.et-service-genenal-info-add-button:hover {
+  background-color: #37b9ec; /* Adjust the color as needed */
+}
+
 
 /* Common button styles */
 .p-button {

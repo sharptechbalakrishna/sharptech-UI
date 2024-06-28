@@ -9,8 +9,10 @@ import Navbar from '../../components/Navbar/Navbar';
 function UpdateUser() {
   const navigate = useNavigate();
   const { userId } = useParams();
-  const [emailInvalid, setEmailInvalid] = useState(false); 
+
+  const [emailInvalid, setEmailInvalid] = useState(false);
   const [dobInvalid, setDobInvalid] = useState(false);
+  const [panInvalid, setPanInvalid] = useState(false);
 
   const [userData, setUserData] = useState({
     empId: "",
@@ -36,13 +38,13 @@ function UpdateUser() {
   });
 
   useEffect(() => {
-    fetchUserDataById(userId); // Pass the userId to fetchUserDataById
-  }, [userId]); // Whenever there is a change in userId, run this
+    fetchUserDataById(userId);
+  }, [userId]);
 
   const fetchUserDataById = async (userId) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await UserService.getUserById(userId, token); // Pass userId to getUserById
+      const response = await UserService.getUserById(userId, token);
       const { empId, phoneNumber, firstName, middleName, lastName, fatherName, motherName, email, password, dateOfBirth, address, joiningDate, designation, salary, qualification, aadhaarNumber, panNumber, releavingDate, role, remark } = response.employee;
       setUserData({ empId, phoneNumber, firstName, middleName, lastName, fatherName, motherName, email, password, dateOfBirth, address, joiningDate, designation, salary, qualification, aadhaarNumber, panNumber, releavingDate, role, remark });
     } catch (error) {
@@ -58,10 +60,11 @@ function UpdateUser() {
       const eighteenYearsAgo = new Date();
       eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
       if (dob > eighteenYearsAgo) {
-        setDobInvalid(true);
+        setDobInvalid(true); // Set dobInvalid to true if age is less than 18
+        alert("You must be at least 18 years old to register.");
         return;
       } else {
-        setDobInvalid(false);
+        setDobInvalid(false); // Reset dobInvalid if age requirement is met
       }
     }
 
@@ -69,12 +72,32 @@ function UpdateUser() {
       if (!/^\d*$/.test(value)) return;
       if (value.length > 10) return;
     }
+
     if (name === 'email') {
       const emailPattern = /^[a-z0-9.@]+$/;
       setEmailInvalid(value !== "" && !emailPattern.test(value));
     }
-    
-    setUserData((prevUserData) => ({
+
+    if (name === 'panNumber') {
+      const panPattern = /^[A-Za-z]{5}\d{4}[A-Za-z]$/;
+      if (value === '' || panPattern.test(value)) {
+        const formattedValue = value.toUpperCase();
+        setUserData(prevUserData => ({
+          ...prevUserData,
+          [name]: formattedValue
+        }));
+        setPanInvalid(false);
+      } else {
+        setUserData(prevUserData => ({
+          ...prevUserData,
+          [name]: value
+        }));
+        setPanInvalid(true);
+      }
+      return;
+    }
+
+    setUserData(prevUserData => ({
       ...prevUserData,
       [name]: value
     }));
@@ -92,7 +115,6 @@ function UpdateUser() {
         const token = localStorage.getItem('token');
         const res = await UserService.updateUser(userId, userData, token);
         console.log(res);
-        // Redirect to profile page or display a success message
         navigate("/DisplayAll");
       }
     } catch (error) {
@@ -100,6 +122,7 @@ function UpdateUser() {
       alert(error);
     }
   };
+
 
   return (
     <div>
@@ -188,11 +211,12 @@ function UpdateUser() {
 
               <div className="form-group col">
                 <label htmlFor="empAadhaarNumber">Aadhaar Number</label>
-                <input type="number" className="form-control" placeholder="Enter your Aadhaar Number" name="aadhaarNumber" value={userData.aadhaarNumber} onChange={handleInputChange} />
+                <input type="tel" className="form-control" placeholder="Enter your Aadhaar Number" name="aadhaarNumber" value={userData.aadhaarNumber} maxLength="12" onChange={handleInputChange} />
               </div>
               <div className="form-group col">
                 <label htmlFor="empPanNumber">Pan Number</label>
-                <input type="text" className="form-control" placeholder="Enter your pan number" name="panNumber" value={userData.panNumber} onChange={handleInputChange} />
+                <input type="text" className="form-control" placeholder="Enter your pan number" name="panNumber" value={userData.panNumber} maxLength="10" onChange={handleInputChange} />
+                {panInvalid && <span className="error-message-return">Invalid PAN format</span>}
               </div>
             </div>
             <div className="form-row">

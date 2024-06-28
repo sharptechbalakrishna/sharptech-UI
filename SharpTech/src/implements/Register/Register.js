@@ -52,6 +52,11 @@ function Register() {
       eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
       if (dob > eighteenYearsAgo) {
         alert("You must be at least 18 years old to register.");
+        setUser((prevState) => ({
+          ...prevState,
+          [name]: '', // Clear the date of birth field
+        }));
+        return; // Exit the function early
       }
     }
 

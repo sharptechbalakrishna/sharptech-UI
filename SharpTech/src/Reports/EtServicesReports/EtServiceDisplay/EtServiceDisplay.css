@@ -12,8 +12,20 @@
 
 .et-display-services-container table {
     width: 80%; /* or any specific width like 600px */
-    table-layout: fixed; /* Optional: ensures the table respects the width set */
+    table-layout: fixed; /* Ensures the table respects the width set */
+    word-wrap: break-word; /* Ensures long words break to the next line */
+    border-collapse: collapse; /* Ensures borders collapse for cleaner look */
   }
+
+/* 
+  .et-display-services-container th, .et-display-services-container td {
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+    padding: 10px; 
+    border: 1px solid black; 
+  } */
+
 
   .etract-title-service-heading{
     font-size: 28px;
