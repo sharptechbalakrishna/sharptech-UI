@@ -26,7 +26,10 @@
 
 
 }
-
+.et-service-side-heading-fields{
+  text-align: left;
+  padding-left: 5px;
+}
 /* Styling the main table border */
 /* .et-services-main-table-border {
     border: 2px solid black;
@@ -44,6 +47,7 @@
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: rgb(212, 210, 210);
+  text-align: center;
 
 
 }
@@ -83,7 +87,10 @@
   padding: none;
   max-height: 100%;
   height: 50%;
-  text-align: center;
+  text-align: left;
+  padding-left: 5px;
+  padding-right: 5px;
+  
 }
 
 /* Styling the form inputs */
@@ -105,6 +112,7 @@
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   /* Smooth transition for border and shadow changes */
   text-align: center;
+  padding-left: 10px;
 }
 
 /* Styling for the placeholder text */
@@ -233,8 +241,9 @@
 
 /* Styling the form table headings */
 .et-service-form-table-1-heading {
-  text-align: center;
+  text-align: left;
   font-weight: bold;
+  padding-left: 10px;
 }
 
 /* Styling the form table data */
@@ -262,6 +271,7 @@
   /* Ensures padding and border are included in the element's total width and height */
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   /* Smooth transition for border and shadow changes */
+  text-align: left;
 }
 
 /* Styling for the placeholder text */

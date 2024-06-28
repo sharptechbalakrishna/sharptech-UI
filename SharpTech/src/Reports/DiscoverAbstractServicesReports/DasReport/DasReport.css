@@ -116,6 +116,9 @@
 .das-report-sub-heading {
   font-size: 18px;
   font-weight: bold;
+  text-align: left;
+  padding-left: 10px;
+
 
 
 }
@@ -139,7 +142,8 @@
   color: #161816;
   box-sizing: border-box;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  text-align: center;
+  text-align: left;
+  padding-left: 10px;
 }
 
 
@@ -247,7 +251,7 @@
 
 
 .das-report-text-line{
-  text-align: center;
+  text-align: left;
   padding-left: 10px;
   margin-right: 10px;
 }

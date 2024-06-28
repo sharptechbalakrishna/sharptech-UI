@@ -131,10 +131,15 @@ function EtServiceDisplay() {
 
             .et-service-form-table-2-heading {
                 font-weight: bold;
+                text-align: left;
+                padding-left:10px
+
             }
 
             .et-service-form-table-2-data {
-                text-align: center;
+                text-align: left;
+                padding-left:10px
+
             }
       
 }
@@ -166,7 +171,7 @@ function EtServiceDisplay() {
                                 <div >
                                     <center>
                                         <table className='et-service-form-table-1'
-                                            style={{ border: '2px solid black', borderCollapse: 'collapse', width: '100%' }}
+                                            style={{ border: '2px solid black', borderCollapse: 'collapse' }}
                                         >
 
                                             <tr className='et-service-form-table-1-rows' >
@@ -462,7 +467,7 @@ function EtServiceDisplay() {
 
                                         <tr>
                                             <th className='et-service-form-table-sub-selftables-heading' colSpan={1} style={{ border: '1px solid black' }}> NOTES </th>
-                                            <td className='et-service-form-table-2-data' colSpan={3} style={{ border: '1px solid black' }}>{taxinformation.notes}</td>
+                                            <td className='et-service-form-table-2-data' colSpan={3} style={{ border: '1px solid black', wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>{taxinformation.notes}</td>
                                         </tr>
                                     </table>
                                 </center>
