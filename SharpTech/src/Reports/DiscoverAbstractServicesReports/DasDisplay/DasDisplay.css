@@ -16,6 +16,7 @@
 .abstractform-container table {
   width: 80%; /* or any specific width like 600px */
   table-layout: fixed; /* Optional: ensures the table respects the width set */
+  word-wrap: break-word;
 }
 .abstractform-container{
   margin-top: 10%;
@@ -95,6 +96,31 @@
   padding-top: 5px;
   padding-bottom: 5px;
   background-color: #aed0f5;
+}
+
+.das-display-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  /* Full height of the viewport */
+  width: 100vw;
+  /* Full width of the viewport */
+  position: fixed;
+  /* Fix the loader to the viewport */
+  top: 0;
+  /* Align to the top */
+  left: 0;
+  /* Align to the left */
+  background: rgba(255, 255, 255, 0.8);
+  /* Optional: Semi-transparent background */
+  z-index: 1000;
+  /* Ensure it's on top of other elements */
+
+}
+.das-display-loader-container {
+  min-height: 100vh;
+  margin-top: -25px;
 }
 
 
