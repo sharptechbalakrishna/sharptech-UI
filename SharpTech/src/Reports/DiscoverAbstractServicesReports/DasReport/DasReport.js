@@ -783,15 +783,14 @@ function DasReport() {
 
                             </table>
 
-                            <br />
+
 
                             <Button className='das-report-general-info-save-button' type='button' label="Save&nbsp;" icon="pi pi-check" onClick={savePropertyInfo} />
                             <Button className='das-report-general-info-clear-button ' type='button' label="Clear&nbsp;" icon="pi pi-times" onClick={clearPropertyInfo} />
                         </center>
                     </div>
+                    <br />
 
-                    <br />
-                    <br />
                     {/* --------------------------------------------------------------Table 2-----------------------------------------------*/}
 
                     <div>
@@ -857,16 +856,15 @@ function DasReport() {
                                         </tbody>
                                     </table>
 
-                                    <br />
+
+                                    <button className=" das-report-general-info-add-button" onClick={AddVestingTable}>
+                                        <i className="pi pi-plus" style={{ marginRight: '8px' }}></i>Table
+                                    </button>
                                     {table.id > 1 && (
-                                        <button className="das-report-delete-button-table" onClick={() => DeleteVestingTable(table.id)}>
+                                        <button className="das-report-general-info-delete-button" onClick={() => DeleteVestingTable(table.id)}>
                                             <i className="pi pi-trash" style={{ marginRight: '8px' }}></i> Table
                                         </button>
                                     )}
-                                    <button className=" das-report-add-button-table" onClick={AddVestingTable}>
-                                        <i className="pi pi-plus" style={{ marginRight: '8px' }}></i>Table
-                                    </button>
-                                    <br />
 
                                     <Button className='das-report-general-info-save-button' type='button' label="Save&nbsp;" icon="pi pi-check" onClick={() => saveVestingInfo(table.id)} />
                                     <Button className='das-report-general-info-clear-button' type='button' label="Clear&nbsp;" icon="pi pi-times" onClick={() => clearVestingInfo(table.id)} />
@@ -874,20 +872,12 @@ function DasReport() {
                             </div>
                         ))}
                         <br />
-
-
                         <br />
-
-                        <br />
-
-                        <br />
-
-
-
                     </div>
 
-                    <br />
-                    <br />
+
+
+
 
                     {/* --------------------------------------------------------------Table 3-----------------------------------------------*/}
                     <div>
@@ -977,10 +967,10 @@ function DasReport() {
 
 
                                     {table.id > 1 && (
+                                        <button className="das-report-general-info-delete-button" onClick={() => DeleteMortageTable(table.id)}> <i className="pi pi-trash" style={{ marginRight: '8px' }}></i> Table</button>
+                                    )}
+                                    <button className=" das-report-general-info-add-button" onClick={AddMortageTable}> <i className="pi pi-plus" style={{ marginRight: '8px' }}></i>Table</button>
 
-                                        <button className="das-report-delete-button-table" onClick={() => DeleteMortageTable(table.id)}> <i className="pi pi-trash" style={{ marginRight: '8px' }}></i> Table</button>
-                                    )} <button className=" das-report-add-button-table" onClick={AddMortageTable}> <i className="pi pi-plus" style={{ marginRight: '8px' }}></i>Table</button>
-                                    <br />
                                     <Button className='das-report-general-info-save-button' type='button' label="Save&nbsp;" icon="pi pi-check" onClick={() => saveMortgageInfo(table.id)} />
                                     <Button className='das-report-general-info-clear-button' type='button' label="Clear&nbsp;" icon="pi pi-times" onClick={() => clearMortgageInfo(table.id)} />
                                 </center>
@@ -989,8 +979,6 @@ function DasReport() {
                         <br />
                     </div>
 
-                    <br />
-                    <br />
 
                     <div>
                         <br />
@@ -1033,14 +1021,14 @@ function DasReport() {
                                 <p>this is empty table</p>
                             )}
 
-                            <br />
-                            <button className=" das-report-add-button" type='button' onClick={handleAddRow}> <i className="pi pi-plus" style={{ marginRight: '8px' }}></i>Row</button>
+
+                            <button className="das-report-general-info-add-button" type='button' onClick={handleAddRow}> <i className="pi pi-plus" style={{ marginRight: '8px' }}></i>Row</button>
 
                             {tableRowsData.length > 3 && (
 
-                                <button className="das-report-delete-button" type='button' onClick={handleDeleteLastRow}>    <i className="pi pi-trash" style={{ marginRight: '8px' }}></i>Row</button>
+                                <button className="das-report-general-info-delete-button" type='button' onClick={handleDeleteLastRow}>    <i className="pi pi-trash" style={{ marginRight: '8px' }}></i>Row</button>
                             )}
-                            <br />
+
 
                             <Button className='das-report-general-info-save-button' type='button' label="Save&nbsp;" icon="pi pi-check" onClick={saveActiveJudgment} />
                             <Button className='das-report-general-info-clear-button' type='button' label="Clear&nbsp;" icon="pi pi-times" onClick={clearActiveJudgment} />
@@ -1119,14 +1107,14 @@ function DasReport() {
                                     </tr>
                                 </tbody>
                             </table>
-                            <br />
 
+
+                            <button className="das-report-general-info-add-button" type='button' onClick={handleAddTaxInstaRow}> <i className="pi pi-plus" style={{ marginRight: '8px' }}></i>Row</button>
                             {tableTaxInstaData.length > 2 && (
 
-                                <button className="das-report-delete-button" type='button' onClick={handleDeleteLastTaxInstaRow}>  <i className="pi pi-trash" style={{ marginRight: '8px' }}></i> Row</button>
-                            )}<button className="das-report-add-button " type='button' onClick={handleAddTaxInstaRow}> <i className="pi pi-plus" style={{ marginRight: '8px' }}></i>Row</button>
+                                <button className="das-report-general-info-delete-button" type='button' onClick={handleDeleteLastTaxInstaRow}>  <i className="pi pi-trash" style={{ marginRight: '8px' }}></i> Row</button>
+                            )}
 
-                            <br />
 
                             <Button className='das-report-general-info-save-button' type='button' label="Save&nbsp;" icon="pi pi-check" onClick={handleSaveTemporarilyTaxInstaRow} />
                             <Button className='das-report-general-info-clear-button' type='button' label="Clear&nbsp;" icon="pi pi-times" onClick={handleClearTaxInstaRows} />
@@ -1156,79 +1144,38 @@ function DasReport() {
                                     {nameRunData.map((row) => (
                                         <tr key={row.id}>
                                             <td style={{ border: '1px solid black' }}>
-                                                <input
-                                                    type="text"
-                                                    className="abstract-control-input"
-                                                    name="name"
-                                                    placeholder='Enter Name'
-                                                    value={row.data.name}
-                                                    onChange={e => handleChangeNameRun(e, row.id)}
-                                                    style={{ width: '100%' }}
-                                                />
+                                                <input  type="text"  className="abstract-control-input" name="name" placeholder='Enter Name'  value={row.data.name}  onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }}  />
                                             </td>
                                             <td style={{ border: '1px solid black' }}>
-                                                <input
-                                                    type="text"
-                                                    className="abstract-control-input"
-                                                    name="jud"
-                                                    placeholder='Enter JUD'
-                                                    value={row.data.jud}
-                                                    onChange={e => handleChangeNameRun(e, row.id)}
-                                                    style={{ width: '100%' }}
-                                                />
+                                                <input  type="text"  className="abstract-control-input"  name="jud" placeholder='Enter JUD'  value={row.data.jud}  onChange={e => handleChangeNameRun(e, row.id)}   style={{ width: '100%' }} />
                                             </td>
                                             <td style={{ border: '1px solid black' }}>
-                                                <input
-                                                    type="text"
-                                                    className="abstract-control-input"
-                                                    name="liens"
-                                                    placeholder='Enter LIENS'
-                                                    value={row.data.liens}
-                                                    onChange={e => handleChangeNameRun(e, row.id)}
-                                                    style={{ width: '100%' }}
-                                                />
+                                                <input  type="text"  className="abstract-control-input"  name="liens"    placeholder='Enter LIENS'   value={row.data.liens}   onChange={e => handleChangeNameRun(e, row.id)}  style={{ width: '100%' }}  />
                                             </td>
                                             <td style={{ border: '1px solid black' }}>
-                                                <input
-                                                    type="text"
-                                                    className="abstract-control-input"
-                                                    name="ucc"
-                                                    placeholder='Enter UCC'
-                                                    value={row.data.ucc}
-                                                    onChange={e => handleChangeNameRun(e, row.id)}
-                                                    style={{ width: '100%' }}
-                                                />
+                                                <input  type="text" className="abstract-control-input" name="ucc" placeholder='Enter UCC' value={row.data.ucc} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }}/>
                                             </td>
                                             <td style={{ border: '1px solid black' }}>
-                                                <input
-                                                    type="text"
-                                                    className="abstract-control-input"
-                                                    name="others"
-                                                    placeholder='Enter Others'
-                                                    value={row.data.others}
-                                                    onChange={e => handleChangeNameRun(e, row.id)}
-                                                    style={{ width: '100%' }}
-                                                />
+                                                <input type="text" className="abstract-control-input" name="others" placeholder='Enter Others' value={row.data.others} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }}/>
                                             </td>
                                         </tr>
                                     ))}
                                 </tbody>
                             </table>
-                            <br />
 
-                            <button className=" das-report-add-button" type='button' onClick={handleAddNameRow}> <i className="pi pi-plus" style={{ marginRight: '8px' }}></i>Row</button>
+
+                            <button className="das-report-general-info-add-button" type='button' onClick={handleAddNameRow}> <i className="pi pi-plus" style={{ marginRight: '8px' }}></i>Row</button>
                             {nameRunData.length > 2 && (
-                                <button className="das-report-delete-button" type='button' onClick={handleDeleteLastNameRow}>
+                                <button className="das-report-general-info-delete-button" type='button' onClick={handleDeleteLastNameRow}>
                                     <i className="pi pi-trash" style={{ marginRight: '8px' }}></i> Row</button>
                             )}
-                            <br />
+
 
                             <Button className='das-report-general-info-save-button' type='button' label="Save&nbsp;" icon="pi pi-check" onClick={handleSaveTemporarilyNameRunRow} />
                             <Button className='das-report-general-info-clear-button' type='button' label="Clear&nbsp;" icon="pi pi-times" onClick={handleClearNameRunRows} />
                         </center>
                     </div>
 
-                    <br />
                     <br />
 
                     <div className='abstractreport-container-13'>
@@ -1281,12 +1228,19 @@ function DasReport() {
 
                             </table>
                         </center>
-
+                        <button className="abstract-service-form-submit-button" type="submit" disabled={loading}>
+                        {loading ? (
+                            <>
+                                <ProgressSpinner style={{ width: '24px', height: '24px', marginRight: '8px' }} strokeWidth="4" />
+                                Submitting...
+                            </>
+                        ) : (
+                            <>
+                                <i className="pi pi-check" style={{ marginRight: '8px' }}></i> Submit
+                            </>
+                        )}
+                    </button>
                     </div>
-
-
-                    <br />
-                    <br />
 
                     {/* <button className="das-report-submit-button" type="Submit">  <i className="pi pi-check" style={{ marginRight: '8px' }}></i>Submit  </button> */}
 
@@ -1304,18 +1258,8 @@ function DasReport() {
                     </button> */}
 
 
-                    <button className="abstract-service-form-submit-button" type="submit" disabled={loading}>
-                        {loading ? (
-                            <>
-                                <ProgressSpinner style={{ width: '24px', height: '24px', marginRight: '8px' }} strokeWidth="4" />
-                                Submitting...
-                            </>
-                        ) : (
-                            <>
-                                <i className="pi pi-check" style={{ marginRight: '8px' }}></i> Submit
-                            </>
-                        )}
-                    </button>
+                  
+
                 </form>
             </div>
             <Footer />
