@@ -725,11 +725,11 @@ function EtServices() {
                     </center>
 
 
+                   
+                    <button className="et-service-genenal-info-add-button" onClick={handleAddTable}> <i className="pi pi-plus" style={{ marginRight: '5px' }}></i>  Table  </button>
                     {table.id > 1 && (
                       <button className="et-service-genenal-info-delete-button" onClick={() => handleDeleteTable(table.id)}> <i className="pi pi-trash" ></i> Table</button>
                     )}
-                    <button className="et-service-genenal-info-add-button" onClick={handleAddTable}> <i className="pi pi-plus" style={{ marginRight: '5px' }}></i>  Table  </button>
-
                     <Button className='et-service-genenal-info-save-button' label="Save&nbsp;" icon="pi pi-check" type='button' onClick={() => saveVestingInfo(table.id)} />
                     <Button className='et-service-genenal-info-clear-button' label="Clear&nbsp;" icon="pi pi-times" type='button' onClick={() => clearVestingInfo(table.id)} />
                   </div>
@@ -831,14 +831,15 @@ function EtServices() {
                       </table>
                     </center>
 
+                  
+                    <button className="et-service-genenal-info-add-button" onClick={handleAddTable2}>
+                      <i className="pi pi-plus"  style={{ marginRight: '5px' }}   ></i>Table
+                    </button>
                     {table.id > 1 && (
                       <button className="et-service-genenal-info-delete-button" onClick={() => handleDeleteTable2(table.id)}>
                         <i className="pi pi-trash"     ></i> Table
                       </button>
                     )}
-                    <button className="et-service-genenal-info-add-button" onClick={handleAddTable2}>
-                      <i className="pi pi-plus"  style={{ marginRight: '5px' }}   ></i>Table
-                    </button>
                     <Button className='et-service-genenal-info-save-button' label="Save&nbsp;" icon="pi pi-check" type='button' onClick={() => saveMortgageInfo(table.id)} />
                     <Button className='et-service-genenal-info-clear-button' label="Clear&nbsp;" icon="pi pi-times" type='button' onClick={() => clearMortgageInfo(table.id)} />
                   </div>
