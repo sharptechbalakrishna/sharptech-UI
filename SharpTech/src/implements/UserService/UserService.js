@@ -4,7 +4,7 @@ import axios from "axios";
 
 class UserService{
     static BASE_URL = "http://18.212.235.223:8080"
-    //  http://18.212.235.223:8080/auth/login
+  
 
     static async login(email, password){
         try{
