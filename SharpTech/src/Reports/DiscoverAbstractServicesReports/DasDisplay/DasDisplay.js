@@ -6,11 +6,9 @@ import { useParams } from 'react-router-dom';
 import jsPDF from 'jspdf';
 import * as autoTable from 'jspdf-autotable';
 import html2canvas from 'html2canvas';
-// npm install file-saver docx html-docx-js
 import { saveAs } from 'file-saver';
 import { Document, Packer, Paragraph, Table, TableRow, TableCell } from "docx";
 import htmlDocx from 'html-docx-js/dist/html-docx';
-// import { createParagraph, createHeading, createTable, HeadingLevel } from './DocHelpers';
 import "./DasDisplay.css"
 import Footer from '../../../components/Footer/Footer';
 import Navbar from '../../../components/Navbar/Navbar';

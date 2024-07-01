@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 function DisplayLogin() {
   const [profileInfo, setProfileInfo] = useState(null);
-  const {  isAdmin } = useContext(AuthContext); // Use the context
+  const { isAdmin } = useContext(AuthContext); // Use the context
 
   useEffect(() => {
     fetchProfileInfo();
@@ -68,7 +68,7 @@ function DisplayLogin() {
                 <div className="displaylogin-label">Email:</div>
                 <div className="displaylogin-value">{profileInfo.email}</div>
               </div>
-              
+
               <div className="displaylogin-row">
                 <div className="displaylogin-label">Date Of Birth:</div>
                 <div className="displaylogin-value">{profileInfo.dateOfBirth}</div>
@@ -114,13 +114,13 @@ function DisplayLogin() {
                 <div className="displaylogin-value">{profileInfo.remark}</div>
               </div>
               {isAdmin && <div className="displaylogin-card">
-              <button className='displaylogin-update-button'><Link to={`/update-user/${profileInfo.id}`}>Update</Link></button>
-            </div>}
+                <button className='displaylogin-update-button'><Link to={`/update-user/${profileInfo.id}`}>Update</Link></button>
+              </div>}
             </div>
           </div>
         )}
       </div>
-      <Footer />  
+      <Footer />
     </div>
   );
 }

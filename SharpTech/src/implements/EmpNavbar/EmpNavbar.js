@@ -34,8 +34,6 @@ const EmpNavbar = () => {
                 <li>
                     <Link to='/'>Forms</Link>
                 </li>
-              
-                
             </ul>
             <img src={menu_icon} alt="" className='menu-icon' onClick={toggleMenu} />
         </nav>

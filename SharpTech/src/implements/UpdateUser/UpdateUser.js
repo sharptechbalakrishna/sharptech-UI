@@ -172,18 +172,14 @@ function UpdateUser() {
             <div className="form-row">
               <div className="form-group col">
                 <label htmlFor="empEmail">Email</label>
-                <input type="email" className="form-control" placeholder="Enter your email" name="email" value={userData.email} onChange={handleInputChange} readOnly/>
+                <input type="email" className="form-control" placeholder="Enter your email" name="email" value={userData.email} onChange={handleInputChange} readOnly />
                 {emailInvalid && <span className="error-message-return">Invalid email format</span>}
                 {<p>&nbsp;&nbsp;Email can't be Edit</p>}
               </div>
               <div className="form-group col">
                 <label htmlFor="phoneNumber">Phone Number</label>
-                <input type="tel" className="form-control" placeholder="Enter your phone number" name="phoneNumber" value={userData.phoneNumber} onChange={handleInputChange}  pattern="\d{10}" />
+                <input type="tel" className="form-control" placeholder="Enter your phone number" name="phoneNumber" value={userData.phoneNumber} onChange={handleInputChange} pattern="\d{10}" />
               </div>
-              {/* <div className="form-group col">
-                  <label htmlFor="empPassword">Password</label>
-                  <input type="password" className="form-control" placeholder="Enter your password" name="password" value={userData.password} onChange={handleInputChange} />
-                </div> */}
               <div className="form-group col">
                 <label htmlFor="empJoiningDate">Joining Date</label>
                 <input type="date" className="form-control" placeholder="Enter your joining date" name="joiningDate" value={userData.joiningDate} onChange={handleInputChange} />
@@ -200,7 +196,7 @@ function UpdateUser() {
               </div>
               <div className="form-group col">
                 <label htmlFor="empSalary">Salary</label>
-                <input type="tel" className="form-control" placeholder="Enter your salary" name="salary" value={userData.salary} onChange={handleInputChange}  maxLength="9" />
+                <input type="tel" className="form-control" placeholder="Enter your salary" name="salary" value={userData.salary} onChange={handleInputChange} maxLength="9" />
               </div>
             </div>
             <div className="form-row">
@@ -228,7 +224,7 @@ function UpdateUser() {
                   <option value="USER">USER</option>
                 </select>
               </div>
-              
+
               <div className="form-group col">
                 <label htmlFor="empRemarks">Remarks</label>
                 <input type="text" className="form-control" placeholder="Enter employee remarks" name="remark" value={userData.remark} onChange={handleInputChange} />

@@ -6,7 +6,7 @@ const PublicRoute = ({ redirectTo }) => {
   const isAuthenticated = UserService.isAuthenticated();
 
   if (isAuthenticated) {
-    return <Navigate to={redirectTo="/DisplayLogin"} />;
+    return <Navigate to={redirectTo = "/DisplayLogin"} />;
   }
 
   return <Outlet />;

@@ -58,46 +58,38 @@ function EtSearchAddress() {
             }
         } catch (error) {
             console.error("Error submitting form:", error);
-        } 
-        
+        }
+
         finally {
             setLoading(false); // Set loading to false after form submission
         }
-
-
     };
 
     return (
         <div>
-            <Navbar/>
-        <div className="et-address-search-container">
-            <form className='et-address-search-form' onSubmit={handleSubmit}>
-                <h2>ET Report Address Search </h2>
-                <input
-                    className="et-address-search-input-field"
-                    type="text"
-                    placeholder="Search Address"
-                    value={partialAddress}
-                    onChange={handleAddressChange}
-                />
-                {suggestions.length > 0 && (
-                    <div className="et-address-suggestions-dropdown">
-                        <select className="et-address-suggestions-suggestions" onChange={(e) => handleSuggestionClick(JSON.parse(e.target.value))}>
-                            <option value="">Select Address</option>
-                            {suggestions.map((address, index) => (
-                                <option key={address.address} value={JSON.stringify(address)}>
-                                    {address.address} (Order Number: {address.orderNumber})
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                )}
-                <button className="et-address-search-submit-button" type="submit" disabled={loading}>
-                    {loading ? <ProgressSpinner style={{ width: '24px', height: '24px' }} strokeWidth="4" /> : 'Submit'}
-                </button>
-            </form>
-        </div>
-        <Footer/>
+            <Navbar />
+            <div className="et-address-search-container">
+                <form className='et-address-search-form' onSubmit={handleSubmit}>
+                    <h2>ET Report Address Search </h2>
+                    <input className="et-address-search-input-field" type="text" placeholder="Search Address" value={partialAddress} onChange={handleAddressChange} />
+                    {suggestions.length > 0 && (
+                        <div className="et-address-suggestions-dropdown">
+                            <select className="et-address-suggestions-suggestions" onChange={(e) => handleSuggestionClick(JSON.parse(e.target.value))}>
+                                <option value="">Select Address</option>
+                                {suggestions.map((address, index) => (
+                                    <option key={address.address} value={JSON.stringify(address)}>
+                                        {address.address} (Order Number: {address.orderNumber})
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    )}
+                    <button className="et-address-search-submit-button" type="submit" disabled={loading}>
+                        {loading ? <ProgressSpinner style={{ width: '24px', height: '24px' }} strokeWidth="4" /> : 'Submit'}
+                    </button>
+                </form>
+            </div>
+            <Footer />
         </div>
     );
 }

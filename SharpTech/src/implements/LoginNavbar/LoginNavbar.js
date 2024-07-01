@@ -3,10 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/SharpTechLogo.png';
 import menu_icon from '../../assets/menu-icon.png';
-import Dropdown from '../Dropdown/Dropdown';
-
-import { Link as RouterLink } from 'react-router-dom';
-
 
 const LoginNavbar = () => {
     const [sticky, setSticky] = useState(false);
@@ -37,25 +33,6 @@ const LoginNavbar = () => {
                 <li>
                     <Link to='/'>Home</Link>
                 </li>
-                {/* <li ><Dropdown/></li>  */}
-                {/* 
-                    <li><RouterLink to='/Tempservice'>Tempservice</RouterLink></li>
-                    <li><RouterLink to='/Pagination'>Tables</RouterLink></li>
-                */}
-
-                {/* 
-                <li>
-                    <Link to='/EmployeeSearch'>EmployeeSearch</Link>
-                </li>
-                <li>
-                    <Link to='/DisplayAll'>DisplayAll</Link>
-                </li>
-               <li>
-                    <Link to='/Register'>Register</Link>
-                </li> */}
-
-
-
             </ul>
             <img src={menu_icon} alt="" className='menu-icon' onClick={toggleMenu} />
         </nav>

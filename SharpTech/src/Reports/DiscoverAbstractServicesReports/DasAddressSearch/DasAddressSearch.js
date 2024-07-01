@@ -86,50 +86,50 @@ function DasAddressSearch() {
 
   return (
     <div>
-      <Navbar/>
-    <div className="address-search-container">
-      
-      <form className="address-search-form" onSubmit={handleSubmit}>
-      <h1 className="address-search-heading">DAS Address Search</h1>
-        <div className="address-search-input-wrapper">
+      <Navbar />
+      <div className="address-search-container">
 
-          <i className="fas fa-search address-search-icon"></i>
-          <input
-            className="address-search-input"
-            type="text"
-            placeholder="Search Address"
-            value={partialAddress}
-            onChange={handleAddressChange}
-          />
-        </div>
-        {suggestions.length > 0 && partialAddress.length > 2 && (
-          <div className="address-search-suggestions">
-            <select
-              className="address-search-suggestions-select"
-              onChange={handleSuggestionClick}
-            >
-              <option value="">Select Address</option>
-              {suggestions.map((address) => (
-                <option key={address.orderNumber} value={JSON.stringify(address)}>
-                  {address.propertyAddress} (Order Number: {address.orderNumber})
-                </option>
-              ))}
-            </select>
+        <form className="address-search-form" onSubmit={handleSubmit}>
+          <h1 className="address-search-heading">DAS Address Search</h1>
+          <div className="address-search-input-wrapper">
+
+            <i className="fas fa-search address-search-icon"></i>
+            <input
+              className="address-search-input"
+              type="text"
+              placeholder="Search Address"
+              value={partialAddress}
+              onChange={handleAddressChange}
+            />
           </div>
-        )}
-        <button className="address-search-submit-button" type="submit" disabled={loading}>
-          {loading ? <ProgressSpinner style={{ width: '24px', height: '24px' }} strokeWidth="4" /> : 'Search'}
-        </button>
-        {selectedAddress && (
-        <div className="address-search-result">
-          <p><strong>Selected Address:</strong> {selectedAddress.propertyAddress}</p>
-          <p><strong>Order Number:</strong> {selectedAddress.orderNumber}</p>
-        </div>
-      )}
-      </form>
-    
-    </div>
-    <Footer/>
+          {suggestions.length > 0 && partialAddress.length > 2 && (
+            <div className="address-search-suggestions">
+              <select
+                className="address-search-suggestions-select"
+                onChange={handleSuggestionClick}
+              >
+                <option value="">Select Address</option>
+                {suggestions.map((address) => (
+                  <option key={address.orderNumber} value={JSON.stringify(address)}>
+                    {address.propertyAddress} (Order Number: {address.orderNumber})
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+          <button className="address-search-submit-button" type="submit" disabled={loading}>
+            {loading ? <ProgressSpinner style={{ width: '24px', height: '24px' }} strokeWidth="4" /> : 'Search'}
+          </button>
+          {selectedAddress && (
+            <div className="address-search-result">
+              <p><strong>Selected Address:</strong> {selectedAddress.propertyAddress}</p>
+              <p><strong>Order Number:</strong> {selectedAddress.orderNumber}</p>
+            </div>
+          )}
+        </form>
+
+      </div>
+      <Footer />
     </div>
   );
 }

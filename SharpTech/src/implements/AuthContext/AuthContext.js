@@ -1,4 +1,3 @@
-// src/context/AuthContext.js
 import React, { createContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext();
@@ -20,7 +19,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('token', token);
         localStorage.setItem('role', role);
         localStorage.setItem('transactionId', transactionId);
-    //    localStorage.setItem('email', email);  Store email in local storage Storin the emil in the Login
+        //    localStorage.setItem('email', email);  Store email in local storage Storin the emil in the Login
         setIsAuthenticated(true);
         setIsAdmin(role === 'ADMIN');
     };

@@ -5,7 +5,6 @@ import Navbar from '../../../components/Navbar/Navbar';
 import 'primereact/resources/themes/saga-blue/theme.css';  // Or any other theme you prefer
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
-// import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Button } from 'primereact/button';
 import "./DasOrderSearch.css";
 import UserService from '../../../implements/UserService/UserService';
@@ -44,19 +43,19 @@ function DasOrderSearch() {
       setEtService(null); // Clear user data
       setError("Error fetching user data"); // Set error message
       console.error("Error fetching user data:", error);
-    }finally {
-            setLoading(false);
-        }
+    } finally {
+      setLoading(false);
+    }
   };
   return (
 
     <div>
-      <Navbar/>
+      <Navbar />
       <div className="das-order-search-container">
         <form className='das-order-search-form' onSubmit={handleSubmit}>
           <h2>DAS Order Search</h2>
           <div>
-            <label  className='das-order-search-label'>OrderNumber:</label>
+            <label className='das-order-search-label'>OrderNumber:</label>
             <input className='et-service-order-search-label-input' type="orderNumber" value={orderNumber} onChange={(e) => setOrderNumber(e.target.value)} required />
           </div>
           {/* <button type="submit">Login</button> */}

@@ -162,7 +162,7 @@ function Register() {
               </div>
               <div className="form-group col">
                 <label htmlFor="empMiddleName">Middle Name</label>
-                <input type="text" className="form-control" placeholder="Enter your middle name" name="middleName" value={user.middleName} onChange={onInputChange}  />
+                <input type="text" className="form-control" placeholder="Enter your middle name" name="middleName" value={user.middleName} onChange={onInputChange} />
               </div>
               <div className="form-group col">
                 <label htmlFor="empLastName">Last Name</label><b className="register-reqired-field"> &nbsp;*</b>
@@ -172,7 +172,7 @@ function Register() {
             <div className="form-row">
               <div className="form-group col">
                 <label htmlFor="empFatherName">Father's Name</label><b className="register-reqired-field"> &nbsp;*</b>
-                <input type="text" className="form-control" placeholder="Enter your father's name" name="fatherName" value={user.fatherName} onChange={onInputChange} required/>
+                <input type="text" className="form-control" placeholder="Enter your father's name" name="fatherName" value={user.fatherName} onChange={onInputChange} required />
               </div>
               <div className="form-group col">
                 <label htmlFor="empMotherName">Mother's Name</label><b className="register-reqired-field"> &nbsp;*</b>
@@ -180,7 +180,7 @@ function Register() {
               </div>
               <div className="form-group col">
                 <label htmlFor="empDateOfBirth">Date of Birth</label><b className="register-reqired-field"> &nbsp;*</b>
-                <input  type="date" className="form-control"  placeholder="Enter your date of birth"  name="dateOfBirth" value={user.dateOfBirth} onChange={onInputChange} max={getMaxDate()} required />   
+                <input type="date" className="form-control" placeholder="Enter your date of birth" name="dateOfBirth" value={user.dateOfBirth} onChange={onInputChange} max={getMaxDate()} required />
               </div>
             </div>
             <div className="form-row">
@@ -198,12 +198,12 @@ function Register() {
                 <label htmlFor="phoneNumber">Phone Number</label><b className="register-reqired-field"> &nbsp;*</b>
                 <input type="tel" className="form-control" placeholder="Enter your phone number" name="phoneNumber" value={user.phoneNumber} onChange={onInputChange} pattern="\d{10}" required />
               </div>
-              
+
             </div>
             <div className="form-row">
               <div className="form-group col">
                 <label htmlFor="empJoiningDate">Joining Date</label>
-                <input type="date" className="form-control" placeholder="Enter your joining date" name="joiningDate" value={user.joiningDate} onChange={onInputChange}  />
+                <input type="date" className="form-control" placeholder="Enter your joining date" name="joiningDate" value={user.joiningDate} onChange={onInputChange} />
               </div>
               <div className="form-group col">
                 <label htmlFor="empDesignation">Designation</label>
@@ -243,7 +243,7 @@ function Register() {
                 <label htmlFor="empReleavingDate">Releaving Date</label>
                 <input type="date" className="form-control" placeholder="Enter releaving date" name="releavingDate" value={user.releavingDate} onChange={onInputChange} />
               </div>
-             
+
               <div className="form-group col">
                 <label htmlFor="empRemarks">Remarks</label>
                 <input type="text" className="form-control" placeholder="Enter employee remarks" name="remark" value={user.remark} onChange={onInputChange} />

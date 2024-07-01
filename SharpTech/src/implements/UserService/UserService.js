@@ -1,33 +1,29 @@
-
-
 import axios from "axios";
 
-class UserService{
+class UserService {
     static BASE_URL = "http://18.212.235.223:8080"
-  
 
-    static async login(email, password){
-        try{
-            const response = await axios.post(`${UserService.BASE_URL}/auth/login`, {email, password})
+
+    static async login(email, password) {
+        try {
+            const response = await axios.post(`${UserService.BASE_URL}/auth/login`, { email, password })
             console.log(response)
             return response.data;
 
-        }catch(err){
+        } catch (err) {
             throw err;
         }
     }
 
-
-    static async verifylogin(email, otp){
-        try{
-            const response = await axios.post(`${UserService.BASE_URL}/auth/verify-otp`, {email, otp})
+    static async verifylogin(email, otp) {
+        try {
+            const response = await axios.post(`${UserService.BASE_URL}/auth/verify-otp`, { email, otp })
             return response.data;
 
-        }catch(err){
+        } catch (err) {
             throw err;
         }
     }
-
 
     static async logout(email, transactionId) {
         try {
@@ -37,9 +33,6 @@ class UserService{
             throw err;
         }
     }
-
-    
-
 
     static async register(user, token) {
         const config = {
@@ -57,104 +50,94 @@ class UserService{
         }
     }
 
-    static async getAllUsers(token){
-        try{
-            const response = await axios.get(`${UserService.BASE_URL}/admin/get-all-users`, 
-            {
-                headers: {Authorization: `Bearer ${token}`}
-            })
+    static async getAllUsers(token) {
+        try {
+            const response = await axios.get(`${UserService.BASE_URL}/admin/get-all-users`,
+                {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
             return response.data;
-        }catch(err){
+        } catch (err) {
             throw err;
         }
     }
 
-
-    static async getYourProfile(token){
-        try{
-            const response = await axios.get(`${UserService.BASE_URL}/adminuser/get-profile`, 
-            {
-                headers: {Authorization: `Bearer ${token}`}
-            })
+    static async getYourProfile(token) {
+        try {
+            const response = await axios.get(`${UserService.BASE_URL}/adminuser/get-profile`,
+                {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
             return response.data;
-        }catch(err){
+        } catch (err) {
             throw err;
         }
     }
 
-    static async getUserById(userId, token){
-        try{
-            const response = await axios.get(`${UserService.BASE_URL}/admin/get-users/${userId}`, 
-            {
-                headers: {Authorization: `Bearer ${token}`}
-            })
+    static async getUserById(userId, token) {
+        try {
+            const response = await axios.get(`${UserService.BASE_URL}/admin/get-users/${userId}`,
+                {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
             return response.data;
-        }catch(err){
-            throw err;
-        }
-    }
-    static async getUserByempId(userempId, token){
-        try{
-            const response = await axios.get(`${UserService.BASE_URL}/admin/get-users-by-empid/${userempId}`, 
-            {
-                headers: {Authorization: `Bearer ${token}`}
-            })
-            return response.data;
-        }catch(err){
+        } catch (err) {
             throw err;
         }
     }
 
-    static async deleteUser(userId, token){
-        try{
-            const response = await axios.delete(`${UserService.BASE_URL}/admin/delete/${userId}`, 
-            {
-                headers: {Authorization: `Bearer ${token}`}
-            })
+    static async getUserByempId(userempId, token) {
+        try {
+            const response = await axios.get(`${UserService.BASE_URL}/admin/get-users-by-empid/${userempId}`,
+                {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
             return response.data;
-        }catch(err){
+        } catch (err) {
             throw err;
         }
     }
 
+    static async deleteUser(userId, token) {
+        try {
+            const response = await axios.delete(`${UserService.BASE_URL}/admin/delete/${userId}`,
+                {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
+            return response.data;
+        } catch (err) {
+            throw err;
+        }
+    }
 
-    static async updateUser(userId, userData, token){
-        try{
+    static async updateUser(userId, userData, token) {
+        try {
             const response = await axios.put(`${UserService.BASE_URL}/admin/update/${userId}`, userData,
-            {
-                headers: {Authorization: `Bearer ${token}`}
-            })
+                {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
             return response.data;
-        }catch(err){
+        } catch (err) {
             throw err;
         }
     }
 
-
-
-
-    /**AUTHENTICATION CHECKER */
-    // static logout(){
-    //     localStorage.removeItem('token')
-    //     localStorage.removeItem('role')
-    // }
-
-    static isAuthenticated(){
+    static isAuthenticated() {
         const token = localStorage.getItem('token')
         return !!token
     }
 
-    static isAdmin(){
+    static isAdmin() {
         const role = localStorage.getItem('role')
         return role === 'ADMIN'
     }
 
-    static isUser(){
+    static isUser() {
         const role = localStorage.getItem('role')
         return role === 'USER'
     }
 
-    static adminOnly(){
+    static adminOnly() {
         return UserService.isAuthenticated() && UserService.isAdmin();
     }
 

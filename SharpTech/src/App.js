@@ -6,9 +6,7 @@ import Forms from './components/Forms/Forms';
 import EmployeeSearch from "./implements/EmployeeSearch/EmployeeSearch";
 import DisplayLogin from './implements/DisplayLogin/DisplayLogin';
 import Login from './implements/Login/Login';
-// import Signup from "./implements/Signup/Signup";
 import Register from "./implements/Register/Register"
-// import About from './components/About/About';
 import "./App.css";
 import Programs from './components/Programs/Programs';
 import TitleSearch from './components/TitleSearch/TitleSearch';
@@ -16,9 +14,7 @@ import SketchRoof from './components/SketchRoof/SketchRoof';
 import SoftwareServices from './components/SoftwareServices/SoftwareServices';
 import DisplayAll from './implements/DisplayAll/DisplayAll';
 import { AuthProvider } from './implements/AuthContext/AuthContext';
-// import UserService from './implements/UserService/UserService';
 import UpdateUser from './implements/UpdateUser/UpdateUser';
-
 import EtServices from './Reports/EtServicesReports/EtServices/EtServices';
 import EtSearchAddress from './Reports/EtServicesReports/EtSearchAddress/EtSearchAddress';
 import EtServiceDisplay from './Reports/EtServicesReports/EtServiceDisplay/EtServiceDisplay';
@@ -34,7 +30,6 @@ import EmployeeDetail from './implements/EmployeeDetail/EmployeeDetail';
 import ProtectedRoute from './implements/Logic/ProtectedRoute';
 import PublicRoute from './implements/Logic/PublicRoute';
 import VerifyLogin from './implements/Login/VerifyLogin';
-import EtserviceReport from './Reports/EtServicesReports/EtserviceReport';
 
 
 function App() {
@@ -45,10 +40,6 @@ function App() {
       <Router>
         <div className="App">
           <div className="container">
-
-
-            {/* Workin fine */}
-            {/* reddy dfdfdf */}
 
             {/* These are the routes are public route any one can access directly */}
             <Routes>
@@ -63,7 +54,6 @@ function App() {
               <Route path="/ResetPassword" element={<ResetPassword />} />
               <Route path="/SoftwareServices" element={<SoftwareServices />} />
               <Route path="/AuthProvider" element={<AuthProvider />} />
-
               <Route path="/VerifyLogin" element={<VerifyLogin />} />
 
 
@@ -79,15 +69,17 @@ function App() {
                 <Route path="/EmployeeDetail" element={<EmployeeDetail />} />
               </Route>
 
+
+
                {/* This route will access only with the unauthitcatid only with help of PublicRoute in Logic folder  */}
               <Route element={<PublicRoute redirectTo="/" />}>
                 <Route path="/Login" element={<Login />} />
               </Route>
 
+
               {/* This route will access with both admin and Employee with the help of ProtectedRoute in Loginc folder  */}
               <Route element={<ProtectedRoute redirectTo="/" />}>
                 <Route path="/EtServices" element={<EtServices />} />
-                <Route path="/EtserviceReport" element={<EtserviceReport />} />
                 <Route path="/EtSearchAddress" element={<EtSearchAddress />} />
                 <Route path="/EtServiceDisplay/:orderNumber" element={<EtServiceDisplay />} />
                 <Route path="/EtOrderSearch" element={<EtOrderSearch />} />
@@ -110,5 +102,3 @@ function App() {
 }
 
 export default App;
-
-//Final commit

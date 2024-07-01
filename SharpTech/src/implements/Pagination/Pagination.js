@@ -69,18 +69,18 @@ export default function Pagination() {
         />
     );
 
-    const deleteUser = async (userId) => {
-        try {
-            const confirmDelete = window.confirm('Are you sure you want to delete this user');
-            const token = localStorage.getItem('token');  // Retrieve the token from localStorage
-            if (confirmDelete) {
-                await UserService.deleteUser(userId, token);
-                loadUsers();
-            }
-        } catch (error) {
-            console.error('Error deleting user', error);
-        }
-    };
+    // const deleteUser = async (userId) => {
+    //     try {
+    //         const confirmDelete = window.confirm('Are you sure you want to delete this user');
+    //         const token = localStorage.getItem('token');  // Retrieve the token from localStorage
+    //         if (confirmDelete) {
+    //             await UserService.deleteUser(userId, token);
+    //             loadUsers();
+    //         }
+    //     } catch (error) {
+    //         console.error('Error deleting user', error);
+    //     }
+    // };
 
     const filteredUsers = users.filter((user) =>
         Object.values(user).some((value) =>

@@ -4,7 +4,7 @@ import UserService from '../UserService/UserService';
 
 const ProtectedRoute = ({ role, redirectTo }) => {
   const isAuthenticated = UserService.isAuthenticated();
-  
+
   const userRole = localStorage.getItem('role');
 
   if (!isAuthenticated) {

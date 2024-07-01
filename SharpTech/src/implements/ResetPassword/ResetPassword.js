@@ -41,22 +41,10 @@ const ResetPassword = () => {
         <h1>Reset Password</h1>
         <form onSubmit={handleSubmit}>
           <div className="reset-password-input-group">
-            <input 
-              type="text" 
-              value={otp} 
-              onChange={(e) => setOtp(e.target.value)} 
-              placeholder="Enter OTP"
-              required 
-            />
+            <input type="text" value={otp} onChange={(e) => setOtp(e.target.value)} placeholder="Enter OTP" required />
           </div>
           <div className="reset-password-input-group">
-            <input 
-              type="password" 
-              value={newPassword} 
-              onChange={(e) => setNewPassword(e.target.value)} 
-              placeholder="Enter New Password"
-              required 
-            />
+            <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="Enter New Password" required />
           </div>
           <button type="submit">Reset Password</button>
         </form>

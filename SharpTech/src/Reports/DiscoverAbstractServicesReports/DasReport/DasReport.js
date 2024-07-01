@@ -1145,19 +1145,19 @@ function DasReport() {
                                     {nameRunData.map((row) => (
                                         <tr key={row.id}>
                                             <td style={{ border: '1px solid black' }}>
-                                                <input  type="text"  className="abstract-control-input" name="name" placeholder='Enter Name'  value={row.data.name}  onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }}  />
+                                                <input type="text" className="abstract-control-input" name="name" placeholder='Enter Name' value={row.data.name} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
                                             </td>
                                             <td style={{ border: '1px solid black' }}>
-                                                <input  type="text"  className="abstract-control-input"  name="jud" placeholder='Enter JUD'  value={row.data.jud}  onChange={e => handleChangeNameRun(e, row.id)}   style={{ width: '100%' }} />
+                                                <input type="text" className="abstract-control-input" name="jud" placeholder='Enter JUD' value={row.data.jud} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
                                             </td>
                                             <td style={{ border: '1px solid black' }}>
-                                                <input  type="text"  className="abstract-control-input"  name="liens"    placeholder='Enter LIENS'   value={row.data.liens}   onChange={e => handleChangeNameRun(e, row.id)}  style={{ width: '100%' }}  />
+                                                <input type="text" className="abstract-control-input" name="liens" placeholder='Enter LIENS' value={row.data.liens} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
                                             </td>
                                             <td style={{ border: '1px solid black' }}>
-                                                <input  type="text" className="abstract-control-input" name="ucc" placeholder='Enter UCC' value={row.data.ucc} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }}/>
+                                                <input type="text" className="abstract-control-input" name="ucc" placeholder='Enter UCC' value={row.data.ucc} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
                                             </td>
                                             <td style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" name="others" placeholder='Enter Others' value={row.data.others} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }}/>
+                                                <input type="text" className="abstract-control-input" name="others" placeholder='Enter Others' value={row.data.others} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
                                             </td>
                                         </tr>
                                     ))}
@@ -1230,37 +1230,18 @@ function DasReport() {
                             </table>
                         </center>
                         <button className="abstract-service-form-submit-button" type="submit" disabled={loading}>
-                        {loading ? (
-                            <>
-                                <ProgressSpinner style={{ width: '24px', height: '24px', marginRight: '8px' }} strokeWidth="4" />
-                                Submitting...
-                            </>
-                        ) : (
-                            <>
-                                <i className="pi pi-check" style={{ marginRight: '8px' }}></i> Submit
-                            </>
-                        )}
-                    </button>
+                            {loading ? (
+                                <>
+                                    <ProgressSpinner style={{ width: '24px', height: '24px', marginRight: '8px' }} strokeWidth="4" />
+                                    Submitting...
+                                </>
+                            ) : (
+                                <>
+                                    <i className="pi pi-check" style={{ marginRight: '8px' }}></i> Submit
+                                </>
+                            )}
+                        </button>
                     </div>
-
-                    {/* <button className="das-report-submit-button" type="Submit">  <i className="pi pi-check" style={{ marginRight: '8px' }}></i>Submit  </button> */}
-
-                    {/* <button className="das-report-submit-button" type="submit" disabled={loading || success}>
-                        {loading ? (
-                            <>
-                                <ProgressSpinner style={{ width: '24px', height: '24px', marginRight: '8px' }} strokeWidth="4" />
-                                Submitting...
-                            </>
-                        ) : (
-                            <>
-                                <i className="pi pi-check" style={{ marginRight: '8px' }}></i> Submit
-                            </>
-                        )}
-                    </button> */}
-
-
-                  
-
                 </form>
             </div>
             <Footer />

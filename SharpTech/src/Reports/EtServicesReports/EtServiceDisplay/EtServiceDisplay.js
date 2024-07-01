@@ -14,10 +14,6 @@ import { ClipLoader } from 'react-spinners'; // Import ClipLoader from react-spi
 import UserService from '../../../implements/UserService/UserService';
 
 
-
-
-
-
 function EtServiceDisplay() {
     const [etservice, setEtService] = useState(null);
     const { orderNumber } = useParams(); // Assuming you're using React Router hooks

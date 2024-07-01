@@ -39,18 +39,18 @@ const ForgetPassword = () => {
       <div className="forgot-password-box">
         <h1 className="forgot-password-heading">Forgot Password</h1>
         <p>Enter your email address, and we will send an OTP which you can use to reset your password.</p>
-        <br/>
+        <br />
         <form onSubmit={handleSubmit}>
           <FloatLabel label="Email" value={email}>
             <input
-            // placeholder='email@gmail.com'
+              // placeholder='email@gmail.com'
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </FloatLabel>
-          <br/>
+          <br />
           <button type="submit">Get OTP</button>
         </form>
         {message && <p className="forget-success-message">{message}</p>}

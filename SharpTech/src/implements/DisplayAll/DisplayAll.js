@@ -53,8 +53,7 @@ function DisplayAll() {
 
   return (
     <div>
-      {/* <FormsNavbar /> */}
-      <Navbar/>
+      <Navbar />
       <div className='display-all-container'>
         <center>
           <table className="custom-table">

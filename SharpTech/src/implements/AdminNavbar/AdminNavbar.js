@@ -5,8 +5,6 @@ import logo from '../../assets/SharpTechLogo.png';
 import menu_icon from '../../assets/menu-icon.png';
 
 
-
-
 const AdminNavbar = () => {
     const [sticky, setSticky] = useState(false);
     const [mobileMenu, setMobileMenu] = useState(false);
@@ -35,9 +33,6 @@ const AdminNavbar = () => {
                 <li>
                     <Link to='/'>Home</Link>
                 </li>
-                
-              
-                
             </ul>
             <img src={menu_icon} alt="" className='menu-icon' onClick={toggleMenu} />
         </nav>
