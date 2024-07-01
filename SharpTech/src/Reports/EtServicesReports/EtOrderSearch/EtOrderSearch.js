@@ -11,6 +11,7 @@ import { FloatLabel } from 'primereact/floatlabel';
 import { InputText } from 'primereact/inputtext';
 import Navbar from '../../../components/Navbar/Navbar';
 import Footer from '../../../components/Footer/Footer';
+import UserService from '../../../implements/UserService/UserService';
 
 
 function EtOrderSearch() {
@@ -31,7 +32,7 @@ function EtOrderSearch() {
 
         try {
             const token = localStorage.getItem('token');
-            const result = await axios.get(`http://localhost:8080/display/${orderNumber}`, {
+            const result = await axios.get(`${UserService.BASE_URL}/display/${orderNumber}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

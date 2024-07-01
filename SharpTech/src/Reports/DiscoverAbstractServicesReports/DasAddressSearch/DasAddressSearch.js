@@ -5,6 +5,7 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 import './DasAddressSearch.css';
 import Footer from '../../../components/Footer/Footer';
 import Navbar from '../../../components/Navbar/Navbar';
+import UserService from '../../../implements/UserService/UserService';
 
 const loadCSS = (href) => {
   return new Promise((resolve, reject) => {
@@ -36,7 +37,7 @@ function DasAddressSearch() {
         try {
           setLoading(true);
           const token = localStorage.getItem('token');
-          const response = await axios.get(`http://localhost:8080/partial/Addresssearch/${partialAddress.toLowerCase()}`, {
+          const response = await axios.get(`${UserService.BASE_URL}/partial/Addresssearch/${partialAddress.toLowerCase()}`, {
             headers: {
               'Authorization': `Bearer ${token}`
             }

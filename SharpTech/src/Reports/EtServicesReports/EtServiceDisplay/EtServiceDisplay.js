@@ -11,6 +11,7 @@ import Navbar from '../../../components/Navbar/Navbar';
 import Footer from '../../../components/Footer/Footer';
 import htmlDocx from "html-docx-js/dist/html-docx";
 import { ClipLoader } from 'react-spinners'; // Import ClipLoader from react-spinners
+import UserService from '../../../implements/UserService/UserService';
 
 
 
@@ -28,7 +29,7 @@ function EtServiceDisplay() {
         const loadUser = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const result = await axios.get(`http://localhost:8080/display/${orderNumber}`, {
+                const result = await axios.get(`${UserService.BASE_URL}/display/${orderNumber}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }

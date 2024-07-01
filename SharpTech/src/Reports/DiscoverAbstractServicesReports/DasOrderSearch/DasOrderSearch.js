@@ -8,6 +8,7 @@ import 'primeicons/primeicons.css';
 // import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Button } from 'primereact/button';
 import "./DasOrderSearch.css";
+import UserService from '../../../implements/UserService/UserService';
 
 
 function DasOrderSearch() {
@@ -30,7 +31,7 @@ function DasOrderSearch() {
 
     try {
       const token = localStorage.getItem('token');
-      const result = await axios.get(`http://localhost:8080/fetch/${orderNumber}`, {
+      const result = await axios.get(`${UserService.BASE_URL}/fetch/${orderNumber}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

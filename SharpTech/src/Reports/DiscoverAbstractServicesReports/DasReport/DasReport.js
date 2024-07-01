@@ -7,6 +7,7 @@ import { Button } from 'primereact/button';
 import Footer from '../../../components/Footer/Footer';
 import Navbar from '../../../components/Navbar/Navbar';
 import { ProgressSpinner } from 'primereact/progressspinner';
+import UserService from '../../../implements/UserService/UserService';
 
 function DasReport() {
 
@@ -637,7 +638,7 @@ function DasReport() {
             // Simulate success based on a condition (remove this in actual implementation)
             const successCondition = true; // Replace with actual success condition
             if (successCondition) {
-                await axios.post("http://localhost:8080/insert", payload, {
+                await axios.post(`${UserService.BASE_URL}/insert`, payload, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -645,7 +646,7 @@ function DasReport() {
                 setSuccess(true);
                 console.log(payload);
                 window.alert("Data Sent Successfully");
-                clearLocalStorage();
+                // clearLocalStorage();
                 window.location.reload();
             } else {
                 setError('Failed to submit data. Please try again.');

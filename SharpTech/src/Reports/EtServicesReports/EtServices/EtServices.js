@@ -9,6 +9,7 @@ import "./EtServices.css"
 import { Button } from 'primereact/button';
 import Navbar from '../../../components/Navbar/Navbar';
 import Footer from '../../../components/Footer/Footer';
+import UserService from '../../../implements/UserService/UserService';
 
 function EtServices() {
 
@@ -55,7 +56,7 @@ function EtServices() {
         }
       };
       console.log('sending data',payload);
-      const response = await axios.post("http://localhost:8080/etinsert", payload, {
+      const response = await axios.post(`${UserService.BASE_URL}/etinsert`, payload, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

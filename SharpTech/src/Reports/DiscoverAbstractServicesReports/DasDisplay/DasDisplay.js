@@ -15,6 +15,7 @@ import "./DasDisplay.css"
 import Footer from '../../../components/Footer/Footer';
 import Navbar from '../../../components/Navbar/Navbar';
 import { ClipLoader } from 'react-spinners'; // Import ClipLoader from react-spinners
+import UserService from '../../../implements/UserService/UserService';
 
 
 function DasDisplay() {
@@ -29,7 +30,7 @@ function DasDisplay() {
         const loadEtService = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const result = await axios.get(`http://localhost:8080/fetch/${orderNumber}`, {
+                const result = await axios.get(`${UserService.BASE_URL}/fetch/${orderNumber}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }

@@ -25,6 +25,7 @@ const Navbar = () => {
       hasLoggedOutRef.current = true; // Set ref to true to prevent further logouts
 
       try {
+        logout();
         const email = localStorage.getItem('email');
         const transactionId = localStorage.getItem('transactionId');
         if (!email) {
