@@ -115,7 +115,7 @@ function UpdateUser() {
         const token = localStorage.getItem('token');
         const res = await UserService.updateUser(userId, userData, token);
         console.log(res);
-        navigate("/DisplayAll");
+        navigate("/Pagination");
       }
     } catch (error) {
       console.error('Error updating user profile:', error);
