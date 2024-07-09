@@ -20,8 +20,8 @@ const SketchRoof = ({ setPlayState }) => {
                 <div className="about-right">
                     <h2>Xactimate Roof Sketches</h2>
                     <p>Leveraging the robust capabilities of
-                        Xactimate, we create detailed roof
-                        sketches that adhere to industry standards.
+                        Xactimate, we create detailed Roof
+                        Sketches that adhere to industry standards.
                         Whether you need measurements for slopes, dimensions,
                         or surface areas, our Xactimate specialists ensure</p>
 
@@ -38,8 +38,8 @@ const SketchRoof = ({ setPlayState }) => {
                 <div className="about-right">
                     <h2>Symbility Roof Sketches</h2>
                     <p>Our experts are proficient in utilizing Symbility's
-                        intuitive platform to generate comprehensive roof
-                        sketches. With Symbility, we provide customized
+                        intuitive platform to generate comprehensive Roof
+                        Sketches. With Symbility, we provide customized
                         diagrams with precise measurements and annotations,
                         tailored to your specific project requirements.</p>
 
@@ -93,7 +93,7 @@ const SketchRoof = ({ setPlayState }) => {
             </div>
          <p> Our Roof Sketch Services, where we bring together 
             the power of industry-leading software platforms – Xactimate, Symbility, and Applicad – 
-            to provide you with precise, detailed, and customized roof sketches. 
+            to provide you with precise, detailed, and customized Roof Sketches. 
             Our team specializes in utilizing these advanced tools to deliver 
             accurate measurements and comprehensive diagrams for contractors, insurance professionals, and homeowners.</p> <br/>
           <p>The Nature of work is to calculate pitch of a particular aerial

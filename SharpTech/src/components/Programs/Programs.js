@@ -13,8 +13,8 @@ import { Link } from 'react-router-dom'
 const Programs = () => {
   return (
     <div>
-      <p className='programs-container-text'><li><i className="fa fa-check"></i>Specializing in development of software front-end
-        applications and back-end applications, providing assistance
+      <p className='programs-container-text'><li><i className="fa fa-check"></i>Specializing in Development of Software Front-End
+        Applications and Back-End Applications, providing assistance
         in completing the assigned projects. We have well trained and
         experience Technical Trainers who supports and provides training
         and provide assistance in building project. </li>  </p>
@@ -32,7 +32,7 @@ const Programs = () => {
             <img src={pro_1} alt="" />
             <div className="caption">
               {/* <img src={program_icon_1} alt="" /> */}
-              <p>	click here to know more  </p>
+              <p>	Click here to know more  </p>
             </div>
           </Link>
         </div>
@@ -46,7 +46,7 @@ const Programs = () => {
             <div className="caption">
 
               {/*  <img src={program_icon_2} alt="" />*/}
-              <p>	click here to know more  </p>
+              <p>	Click here to know more  </p>
             </div>
           </Link>
         </div>
@@ -57,7 +57,7 @@ const Programs = () => {
             <img src={pro_2} alt="" />
             <div className="caption">
               {/*<img src={program_icon_3} alt="" />*/}
-              <p>	click here to know more  </p>
+              <p>	Click here to know more  </p>
 
             </div>
           </Link>

@@ -19,16 +19,16 @@ const SoftwareServices = ({ setPlayState }) => {
                         <h3>Technology Service Provider for Product Development </h3>
                         <p>Sharp Tech Systems Pvt Ltd is an innovative
                             leader with more than 15 years of expertise,
-                            specializing in the development of bespoke
-                            software applications tailored to meet our
-                            clients' specific requirements. Our dedicated
+                            specializing in the Development of bespoke
+                            Software Applications tailored to meet our
+                            client's specific requirements. Our dedicated
                             team is committed to providing continuous monitoring
                             of developed applications and regularly updating them
                             with new features. We ensure seamless communication with
-                            our clients by notifying them of releases
+                            our client's by notifying them of releases
                             via email and actively soliciting their
-                            input to incorporate the latest developments into the software.</p>
-                        <p>  <strong> • One-Stop Destination:</strong> We pride ourselves on being a one-stop destination for all your software development needs.</p>
+                            input to incorporate the latest Developments into the Software.</p>
+                        <p>  <strong> • One-Stop Destination:</strong> We pride ourselves on being a one-stop destination for all your Software Development needs.</p>
                         <p><strong>• Solutions Tailored:</strong>  We offer a comprehensive range of solutions tailored to meet every aspect of your project requirements</p>
                         <p><strong>• Professional Team:</strong>  Our team of experienced professionals excels in delivering high-quality, customized solutions that address your unique challenges and goals.</p>
                         <p><strong>• Conceptualization to Execution:</strong> From conceptualization to execution, we work closely with our clients to ensure that every aspect of the project is handled with precision and expertise</p>
@@ -45,12 +45,12 @@ const SoftwareServices = ({ setPlayState }) => {
                         <img src={SoftwareServices_img_2} alt="" className='about-img' />
                     </div>
                     <div className="about-right">
-                        <h3>Individual student Project Completion Support</h3>
+                        <h3>Individual Student Project Completion Support</h3>
                         <p>As one the major requirement for engineering
                             student is to complete the given projects
                             in timely manner before completing the semester
                             . A good project would help them to understand the
-                            concept of software application like (Java, ReactJS
+                            concept of Software Application like (Java, ReactJS
                             , Angular, Databases, SAP Projects, Python etc ).
                             As a software development company, we would assist students
                             with projects through a method focused on learning and understanding. </p>
@@ -71,7 +71,7 @@ const SoftwareServices = ({ setPlayState }) => {
                             their skills both technically and groom themselves
                             with various personality development training programs.
                             We provide both online and offline training programs</p>
-                         <p> <strong> •	Training Provided:</strong> We are experts in providing training in programming languages and software development methodologies to communication skills and leadership development</p>
+                         <p> <strong> •	Training Provided:</strong> We are experts in providing training in programming languages and Software Development methodologies to communication skills and leadership development</p>
 <p><strong>•	Support for Professional and New comers :</strong> Whether you're a seasoned professional looking to upskill in a specific technology or a newcomer to the workforce seeking to enhance your communication abilities, we're here to support you every step of the way.</p>
 
 

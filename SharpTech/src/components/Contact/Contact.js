@@ -50,10 +50,14 @@ const Contact = () => {
         <p>Saturday and Sunday: 7:00 AM to 12:00 PM EST.</p>
         <ul>
           <li>
+          <a href="mailto:your@email.com" target="_blank">
             <img src={mail_icon} alt=""  className='contact-mail-icon'/>info@sharptechsystems.in
+            </a>
           </li>
+
           <li>
             <h2>Head Office: USA</h2>
+           
           </li>
           <li>
             <a href="https://www.google.com/maps/place/21189+Dana+Ct,+Ashburn,+VA+20148,+USA/@39.0304231,-77.5320008,17z/data=!3m1!4b1!4m6!3m5!1s0x89b63e4f20456d6f:0x93d26c2cb610021f!8m2!3d39.0304231!4d-77.5320008!16s%2Fg%2F11c4t8hl0d?entry=ttu" target="_blank">

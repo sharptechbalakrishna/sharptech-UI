@@ -15,7 +15,7 @@ const Footer = () => {
       <p>© 2024 Sharp Tech Systems Pvt Ltd. All rights reserved.</p>
 
       <ul>
-        <li><a className="linkedin" href="https://www.linkedin.com/company/sharp-tech-systems-private-limited/?originalSubdomain=in"><FaLinkedin /></a></li>
+        <li><a className="linkedin" href="https://www.linkedin.com/company/sharp-tech-systems/?viewAsMember=true"><FaLinkedin /></a></li>
         
         <li><a className="facebook" href="https://www.facebook.com/sharptechsystems/"><FaFacebook /></a></li> 
         <li><a className="email" href="mailto:your@email.com"><MdEmail /></a></li> {/* Using MdEmail icon */}

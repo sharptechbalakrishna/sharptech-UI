@@ -24,17 +24,17 @@ const About = ({ setPlayState }) => {
             with over 15 years  of experience specializing in
             Software
             Application, helping students with project, provide
-            software training along with title search services
-            and roof sketches.  Sharp Tech Systems has consistently
+            Software Training along with Title Search services
+            and Roof Sketches.  Sharp Tech Systems has consistently
             delivered high-quality solutions to clients towards
             insurance and title search industries. </p>
           <p>With an unwavering commitment to excellence,
             Sharp Tech Systems has become a trusted partner
-            for businesses seeking accurate and reliable title
-            search services and roof sketches. Our team of skilled
+            for businesses seeking accurate and reliable Title
+            Search services and Roof Sketches. Our team of skilled
             professional employees advanced techniques and cutting-edge
             technology to ensure thorough and precise title searches,
-            draw roof sketches with exact measurements and
+            draw Roof Sketches with exact measurements and
             help clients mitigate risks and make informed decisions</p>
 
 

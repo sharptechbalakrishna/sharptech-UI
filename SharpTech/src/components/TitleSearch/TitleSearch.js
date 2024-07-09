@@ -14,12 +14,12 @@ const TitleSearch = ({ setPlayState }) => {
       <div className='about'>
         <div className="about-right">
           <h2>Title Search Services:</h2>
-          <p>As an industry leader with expertise in performing 
-            title search with close to 20+ years of experience
+          <p className='titile-paragraph'>As an industry leader with expertise in performing 
+            Title Search with close to 20+ years of experience
              and well educated experienced underwriters.
-              Sharptech Systems supports Major clients 
+              Sharp Tech Systems supports Major clients 
               for performing Title Search services.
-               Below are the services supported by  Sharptech Systems:</p>
+               Below are the services supported by  Sharp Tech Systems:</p>
           <ul>
      
 
@@ -61,14 +61,14 @@ const TitleSearch = ({ setPlayState }) => {
           </ul>
         </div>
       </div>
-     <p> Our title search services encompass a comprehensive approach, beginning with a thorough
+     <p> Our Title Search services encompass a comprehensive approach, beginning with a thorough
        investigation into the property ownership history. We meticulously examine relevant legal
         documents, including deeds and mortgages, to ensure accuracy and completeness. Our process 
         includes a detailed eye view, verifying property encumbrances, liens, and easements, while
          also identifying potential title defects or discrepancies. With a steadfast commitment to 
          compliance with industry regulations and standards, 
       our dedicated team of professionals brings together expertise in 
-      title research and analysis, ensuring a robust and reliable service tailored to meet our clients' needs.</p>
+      title research and analysis, ensuring a robust and reliable service tailored to meet our client's needs.</p>
       <br/>
       <Footer/>
     </div>
