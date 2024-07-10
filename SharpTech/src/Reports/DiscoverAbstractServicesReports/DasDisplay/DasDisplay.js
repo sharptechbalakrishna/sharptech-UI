@@ -214,14 +214,14 @@ function DasDisplay() {
                                                             </tr>
 
                                                             <tr>
-                                                                <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>ORDER NUMBER :</th>
+                                                                <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>ORDER NUMBER</th>
                                                                 <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{etservice.orderNumber} </td>
-                                                                <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>REFERENCE NUMBER :</th>
+                                                                <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>REFERENCE NUMBER</th>
                                                                 <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>  {etservice.referenceNumber} </td>
                                                             </tr>
 
                                                             <tr>
-                                                                <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>SEARCH DATE :</th>
+                                                                <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>SEARCH DATE:</th>
                                                                 <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}> {etservice.searchDate}  </td>
 
                                                                 <th className="das-display-side-headings" c colSpan={1} style={{ border: '1px solid black' }}>As Of</th>
@@ -466,7 +466,9 @@ function DasDisplay() {
                                             </tr>
                                             <tr >
                                                 <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>ASSESMENT YEAR</th>
-                                                <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>2023</th>
+                                                <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>
+                                                    2023
+                                                    </th>
                                                 <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>TAX YEAR</th>
                                                 <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>2023</th>
                                             </tr>
@@ -537,7 +539,27 @@ function DasDisplay() {
                                 </table>
                                 <br />
                             </center>
-
+                            {etservice && (
+                                <div className='abstractreport-container-12'>
+                                    <br />
+                                    <center>
+                                        <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
+                                            <thead>
+                                                <tr>
+                                                    <th className="das-display-header-table" colSpan='7'>ADDITIONAL INFORMATION</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colSpan='7' style={{ width: '100%', border: '1px solid black' }}>
+                                                        {etservice.additionalInformation || "No additional information available"}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </center>
+                                </div>
+                            )}
                             <br />
                             {etservice && (
                                 <center>

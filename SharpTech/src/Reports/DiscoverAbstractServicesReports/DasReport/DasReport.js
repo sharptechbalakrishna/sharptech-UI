@@ -10,8 +10,39 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 import UserService from '../../../implements/UserService/UserService';
 
 function DasReport() {
+    const [assessmentYear, setAssessmentYear] = useState('');
+    const [selectedTaxYear, setSelectedTaxYear] = useState('');
+  
+    const handleAssessmentYearChange = (e) => {
+      setAssessmentYear(e.target.value);
+    };
+  
+    const handleTaxYearChange = (e) => {
+      setSelectedTaxYear(e.target.value);
+    };
+  
+    // Generate a list of years from 1900 to current year
+    const years = [];
+    const currentYear = new Date().getFullYear();
+    for (let year = 1900; year <= currentYear; year++) {
+      years.push(year.toString());
+    }
+    const [additionalInformation, setAdditionalInformation] = useState('');
+
+    // Handle input changes
+    const onInputChangeinfo = (event) => {
+        setAdditionalInformation(event.target.value);
+    };
+
+    // UseEffect to log changes in additionalInformation
+    useEffect(() => {
+        console.log("Additional Information updated:", additionalInformation);
+    }, [additionalInformation]);
 
 
+    const handleInfoChange = (event) => {
+        setAdditionalInformation(event.target.value);
+    };
     const [user, setUser] = useState({
 
         orderNumber: "",
@@ -623,6 +654,10 @@ function DasReport() {
                         totalValue: totalValue,
                         comments: comments
                     }],
+                    dasadditionalinformation:
+                        [{
+                            additionalInformation: additionalInformation
+                        }],
                     namesrun: nameRunData.map(row => ({ ...row.data })),
                     taxinstallments: tableTaxInstaData.map(row => ({
                         amount: row.amount,
@@ -698,19 +733,21 @@ function DasReport() {
                                 </tr>
 
                                 <tr>
-                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>ORDER NUMBER :</th>
+                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>ORDER NUMBER</th>
                                     <td colSpan={4} style={{ border: '1px solid black' }}>
-                                        <input className="abstract-control-input" type="text" placeholder="Enter order Number" name="orderNumber" value={user.orderNumber} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
+                                        <input className="abstract-control-input" type="text" style={{ width: '100%', font: 'italic' }}
+                                            placeholder="Enter order Number"
+                                            name="orderNumber" value={user.orderNumber} onChange={(e) => onInputChange(e)} />
                                     </td>
 
-                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>REFERENCE NUMBER :</th>
+                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>REFERENCE NUMBER</th>
                                     <td colSpan={'100%'} style={{ border: '1px solid black' }}>
                                         <input className="abstract-control-input" type="text" placeholder='Enter Reference Number' name='referenceNumber' value={user.referenceNumber} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
                                     </td>
                                 </tr>
 
                                 <tr>
-                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>SEARCH DATE :</th>
+                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>SEARCH DATE:</th>
                                     <td colSpan={'2'} style={{ border: '1px solid black' }}>
                                         <input className="abstract-control-input" type="Date" placeholder="Enter Serch Data" name="searchDate" value={user.searchDate} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
                                     </td>
@@ -718,7 +755,7 @@ function DasReport() {
                                     <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>AS OF</th>
                                     <td >7:30 Am</td>
 
-                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>EFFECTIVE DATE :</th>
+                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>EFFECTIVE DATE:</th>
                                     <td colSpan={2} style={{ border: '1px solid black' }}>
                                         <input className="abstract-control-input" type="Date" placeholder="Enter Effective Data " name="effectiveDate" value={user.effectiveDate} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
                                     </td>
@@ -726,7 +763,7 @@ function DasReport() {
 
                                 <tr>
 
-                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>PROPERTY ADDRESS :</th>
+                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>PROPERTY ADDRESS:</th>
                                     <td colSpan={6} style={{ border: '1px solid black' }}>
                                         <input className="abstract-control-input" type="text" placeholder="Enter Address " name="propertyAddress" value={user.propertyAddress} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
                                     </td>
@@ -734,42 +771,42 @@ function DasReport() {
                                 </tr>
 
                                 <tr>
-                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> STATE : </th>
+                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> STATE</th>
                                     <td colSpan={'4'} style={{ border: '1px solid black' }}>
                                         <input className="abstract-control-input" type="text" name="state" placeholder='Enter State' value={user.state} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
                                     </td>
 
-                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> COUNTY :</th>
+                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> COUNTY</th>
                                     <td colSpan={2} style={{ border: '1px solid black' }}>
                                         <input className="abstract-control-input" type="text" placeholder="Enter Country" name="county" value={user.county} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
                                     </td>
                                 </tr>
 
                                 <tr>
-                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>BORROWER NAME :</th>
+                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>BORROWER NAME</th>
                                     <td colSpan={6} style={{ border: '1px solid black' }}>
                                         <input className="abstract-control-input" type="text" placeholder="Enter Notes" name="borrowerName" value={user.borrowerName} style={{ width: '100%' }} onChange={(e) => onInputChange(e)} />
                                     </td>
 
                                 </tr>
                                 <tr>
-                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> PARCEL NUMBER :</th>
+                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> PARCEL NUMBER</th>
                                     <td colSpan={'4'} style={{ border: '1px solid black' }}>
                                         <input className="abstract-control-input" type="text" placeholder='Enter Parcel Number' name="parcelNumber" value={user.parcelNumber} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
                                     </td>
 
-                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> SUBDIVISION : </th>
+                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> SUBDIVISION:</th>
                                     <td colSpan={2} style={{ border: '1px solid black' }}>
                                         <input className="abstract-control-input" type="text" placeholder="Enter Sub Division" name="subdivision" value={user.subdivision} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
                                     </td>
                                 </tr>
 
                                 <tr>
-                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> LOT/UNIT </th>
+                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> LOT/UNIT:</th>
                                     <td colSpan={'4'} style={{ border: '1px solid black' }}>
                                         <input className="abstract-control-input" type="text" placeholder='Enter Unit' name="lotUnit" value={user.lotUnit} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
                                     </td>
-                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>BLOCK:</th>
+                                    <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>BLOCK</th>
                                     <td colSpan={2} style={{ border: '1px solid black' }}>
                                         <input className="abstract-control-input" type="text" placeholder="Enter Block" name="block" value={user.block} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
                                     </td>
@@ -817,23 +854,23 @@ function DasReport() {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> GRANTOR : </th>
+                                                <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> GRANTOR</th>
                                                 <td colSpan={'6'} style={{ border: '1px solid black' }}>
                                                     <input type="text" className="abstract-control-input" placeholder="Enter Grantor" name="grantor" value={table.data.grantor || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>GRANTEE : </th>
+                                                <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>GRANTEE</th>
                                                 <td colSpan={6} style={{ border: '1px solid black' }}>
                                                     <input type="text" className="abstract-control-input" placeholder="Enter Grantee" name="grantee" value={table.data.grantee || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> VESTING INFO :</th>
+                                                <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> VESTING INFO:</th>
                                                 <td colSpan={'4'} style={{ border: '1px solid black' }}>
                                                     <input type="text" className="abstract-control-input" placeholder="Enter Vesting" name="vesting" value={table.data.vesting || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
                                                 </td>
-                                                <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>INSTR/BOOK/PAGE:</th>
+                                                <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>INSTR/BOOK/PAGE</th>
                                                 <td colSpan={2} style={{ border: '1px solid black' }}>
                                                     <input type="text" className="abstract-control-input" placeholder="Enter INSTR/BOOK/PAGE" name="instaBookPage" value={table.data.instaBookPage || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
                                                 </td>
@@ -849,7 +886,7 @@ function DasReport() {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>COMMENTS :</th>
+                                                <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>COMMENTS:</th>
                                                 <td colSpan={6} style={{ border: '1px solid black' }}>
                                                     <input type="text" className="abstract-control-input" placeholder="Enter Notes" name="comments" value={table.data.comments || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
                                                 </td>
@@ -892,28 +929,28 @@ function DasReport() {
                                             <th className="das-report-main-table-heading" colSpan="7">OPEN MORTGAGE / DEED OF TRUST  ({table.id}) </th>
                                         </tr>
                                         <tr>
-                                            <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> MORTGAGOR :</th>
+                                            <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> MORTGAGOR</th>
                                             <td colSpan={6} style={{ border: '1px solid black' }}>
                                                 <input type="text" className="abstract-control-input" name="mortgagor" placeholder='Enter MORTGAGEE' style={{ width: '100%' }} value={table.data.mortgagor || ''} onChange={(e) => handleChaneMortage(e, table.id)} required />                                            </td>
                                         </tr>
                                         <tr>
-                                            <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> MORTGAGEE :</th>
+                                            <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> MORTGAGEE</th>
                                             <td colSpan={'6'} style={{ border: '1px solid black' }}>
                                                 <input type="text" className="abstract-control-input" name="mortgagee" placeholder='Enter MORTGAGEE' style={{ width: '100%' }} value={table.data.mortgagee || ''} onChange={(e) => handleChaneMortage(e, table.id)} required />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> TRUSTEE :</th>
+                                            <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> TRUSTEE</th>
                                             <td colSpan={6} style={{ border: '1px solid black' }}>
                                                 <input type="text" className="abstract-control-input" placeholder="Enter TRUSTEE" name="trustee" style={{ width: '100%' }} value={table.data.trustee || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> INSTRUMENT/BOOK/PAGE :</th>
+                                            <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> INSTRUMENT/BOOK/PAGE</th>
                                             <td colSpan={'4'} style={{ border: '1px solid black' }}>
                                                 <input type="text" className="abstract-control-input" name="instrBookPage" placeholder='Enter INSTRUMENT/BOOK/PAGE:' style={{ width: '100%' }} value={table.data.instrBookPage || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
-                                            <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>AMOUNT [$]:</th>
+                                            <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>AMOUNT [$]</th>
                                             <td colSpan={2} style={{ border: '1px solid black' }}>
                                                 <input type="text" className="abstract-control-input" placeholder="$ Enter Amount" name="amount" style={{ width: '100%' }} value={table.data.amount || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
@@ -942,24 +979,24 @@ function DasReport() {
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> ASSIGNMENT BK/PG :</th>
+                                            <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> ASSIGNMENT BK/PG</th>
                                             <td colSpan={'4'} style={{ border: '1px solid black' }}>
                                                 <input type="text" className="abstract-control-input" name="assignmentBkPg" placeholder='Enter ASSIGNMENT BK/PG :' style={{ width: '100%' }} value={table.data.assignmentBkPg || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
-                                            <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>ASSIGNMENT DATED :</th>
+                                            <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>ASSIGNMENT DATED:</th>
                                             <td colSpan={2} style={{ border: '1px solid black' }}>
                                                 <input type="Date" className="abstract-control-input" placeholder="Enter ASSIGNMENT DATED" name="assignmentDated" style={{ width: '100%' }} value={table.data.assignmentDated || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colSpan={5}></td>
-                                            <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>ASSIGNMENT RECORDED :</th>
+                                            <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>ASSIGNMENT RECORDED:</th>
                                             <td colSpan={3} style={{ border: '1px solid black' }}>
                                                 <input type="Date" className="abstract-control-input" placeholder="Enter ASSIGNMENT RECORDED:" name="assignmentRecorded" style={{ width: '100%' }} value={table.data.assignmentRecorded || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>COMMENTS :</th>
+                                            <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>COMMENTS:</th>
                                             <td colSpan={6} style={{ border: '1px solid black' }}>
                                                 <input type='text-area' className="abstract-control-input" placeholder="Enter COMMENTS" name="comments" style={{ width: '100%' }} value={table.data.comments || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
@@ -1052,9 +1089,37 @@ function DasReport() {
                                     </tr>
                                     <tr className='th-color'>
                                         <th className="das-report-sub-heading-1" style={{ border: '1px solid black' }}>ASSESMENT YEAR</th>
-                                        <th className="das-report-sub-heading-1" style={{ border: '1px solid black' }}>2023</th>
-                                        <th className="das-report-sub-heading-1" style={{ border: '1px solid black' }}>TAX YEAR</th>
-                                        <th className="das-report-sub-heading-1" style={{ border: '1px solid black' }}>2023</th>
+                                        <th className="das-report-sub-heading-1" style={{ border: '1px solid black' }}>
+                                            <select
+                                                className="das-report-sub-heading-1"
+                                                style={{ border: '1px solid black' }}
+                                                value={assessmentYear}
+                                                onChange={handleAssessmentYearChange}
+                                            >
+                                                <option value="">Select Year</option>
+                                                {years.map((year) => (
+                                                    <option key={year} value={year}>
+                                                        {year}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </th>
+                                        <th className="das-report-sub-heading-1" style={{ border: '1px solid black' }}>SELECTED TAX YEAR</th>
+                                        <th className="das-report-sub-heading-1" style={{ border: '1px solid black' }}>
+                                            <select
+                                                className="das-report-sub-heading-1"
+                                                style={{ border: 'none', background: 'none', outline: 'none' }}
+                                                value={selectedTaxYear}
+                                                onChange={handleTaxYearChange}
+                                            >
+                                                <option value="">Select Year</option>
+                                                {years.map((year) => (
+                                                    <option key={year} value={year}>
+                                                        {year}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -1176,7 +1241,36 @@ function DasReport() {
                             <Button className='das-report-general-info-clear-button' type='button' label="Clear&nbsp;" icon="pi pi-times" onClick={handleClearNameRunRows} />
                         </center>
                     </div>
+                    <div >
+                        <br />
+                        <center>
+                            <table className='serviceform-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
+                                <thead>
+                                    <tr>
+                                        <th className='das-report-main-table-heading' colSpan="5">Additional Information</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colSpan='5' style={{ border: '1px solid black' }}>
+                                            <input
+                                                className="abstract-control-input"
+                                                type="text"
+                                                placeholder="Enter additional information"
+                                                name="additionalInformation"
+                                                value={additionalInformation}
+                                                onChange={onInputChangeinfo}
+                                                style={{ width: '100%' }}
+                                            />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </center>
+                        <br />
 
+
+                    </div>
                     <br />
 
                     <div className='abstractreport-container-13'>

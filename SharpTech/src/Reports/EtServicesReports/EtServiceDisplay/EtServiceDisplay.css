@@ -123,9 +123,10 @@
 }
 
 .et-service-disclaimer-box {
-  text-align: left;
+  text-align: justify;
   margin: 20px;
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   font-size: 14px;
   line-height: 1.6;
   background-color: #f9f9f9;

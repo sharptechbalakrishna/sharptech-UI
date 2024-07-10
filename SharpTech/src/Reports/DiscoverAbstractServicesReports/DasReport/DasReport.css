@@ -251,8 +251,9 @@
 
 
 .das-report-text-line{
-  text-align: left;
+  text-align: justify;
   padding-left: 10px;
+  padding-right: 10px;
   margin-right: 10px;
 }
 
@@ -370,6 +371,9 @@ background-color: #ec4a38;
 
 
 
+.abstract-control-input::placeholder {
+  font-style: italic;
+}
 
 
 
