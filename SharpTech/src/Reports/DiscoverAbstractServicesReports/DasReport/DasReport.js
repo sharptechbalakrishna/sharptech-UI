@@ -10,11 +10,11 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 import UserService from '../../../implements/UserService/UserService';
 
 function DasReport() {
-    const [assessmentYear, setAssessmentYear] = useState('');
+    const [assesementYear, setAssesementYear] = useState('');
     const [selectedTaxYear, setSelectedTaxYear] = useState('');
   
     const handleAssessmentYearChange = (e) => {
-      setAssessmentYear(e.target.value);
+        setAssesementYear(e.target.value);
     };
   
     const handleTaxYearChange = (e) => {
@@ -815,14 +815,11 @@ function DasReport() {
                                 <tr>
                                     <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>PROPERTY TYPE:</th>
                                     <td colSpan={'8'} style={{ border: '1px solid black' }}>
-                                        <input className="abstract-control-input" type="text" placeholder='SFR/PUD/CONDO' name="propertyType" value={user.propertyType} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
+                                        <input className="abstract-control-input" type="text" placeholder='PROPERTY TYPE' name="propertyType" value={user.propertyType} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
                                     </td>
                                 </tr>
 
                             </table>
-
-
-
                             <Button className='das-report-general-info-save-button' type='button' label="Save&nbsp;" icon="pi pi-check" onClick={savePropertyInfo} />
                             <Button className='das-report-general-info-clear-button ' type='button' label="Clear&nbsp;" icon="pi pi-times" onClick={clearPropertyInfo} />
                         </center>
@@ -1093,7 +1090,7 @@ function DasReport() {
                                             <select
                                                 className="das-report-sub-heading-1"
                                                 style={{ border: '1px solid black' }}
-                                                value={assessmentYear}
+                                                value={assesementYear}
                                                 onChange={handleAssessmentYearChange}
                                             >
                                                 <option value="">Select Year</option>

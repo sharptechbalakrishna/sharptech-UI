@@ -13,7 +13,26 @@ import UserService from '../../../implements/UserService/UserService';
 
 function EtServices() {
 
+  const [additionalInformation, setAdditionalInformation] = useState('');
+
+  // Handle input changes
+  const onInputChangeinfo = (event) => {
+      setAdditionalInformation(event.target.value);
+  };
+
+  // UseEffect to log changes in additionalInformation
+  useEffect(() => {
+      console.log("Additional Information updated:", additionalInformation);
+  }, [additionalInformation]);
+
+
+  const handleInfoChange = (event) => {
+      setAdditionalInformation(event.target.value);
+  };
+
+
   const [loading, setLoading] = useState(false);
+
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -47,6 +66,11 @@ function EtServices() {
               notes: notes
             }
           ],
+          
+          etadditionalinformation:
+          [{
+              additionalInformation: additionalInformation
+          }],
           etnameruns: nameRunData.map(row => ({ ...row.data })),
           ettaxinstallment: tableTaxInstaData.map(row => ({
             amount: row.amount || '',
@@ -1036,7 +1060,37 @@ function EtServices() {
                 <Button className='et-service-genenal-info-clear-button' label="Clear&nbsp;" icon="pi pi-times" type='button' onClick={handleClearRows} />
 
               </div>
+              <div >
+                        <br />
+                        <center>
+                            <table className='et-service-form-table-1' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
+                                <thead>
+                                    <tr>
+                                        <th className='et-service-form-table-selftables-heading' colSpan="5">Additional Information</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colSpan='5' style={{ border: '1px solid black' }}>
+                                            <input
+                                                className="abstract-control-input"
+                                                type="text"
+                                                placeholder="additional information"
+                                                name="additionalInformation"
+                                                value={additionalInformation}
+                                                onChange={onInputChangeinfo}
+                                                style={{ width: '100%' }}
+                                            />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </center>
+                        <br />
 
+
+                    </div>
+                    <br />
               {/* --------------------------------------------------------------LEGAL DESCRIPTION 7-----------------------------------------------*/}
               <div>
                 <br />

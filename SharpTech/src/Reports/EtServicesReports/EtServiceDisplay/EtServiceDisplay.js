@@ -515,7 +515,29 @@ function EtServiceDisplay() {
                                     <br />
                                     <br />
                                 </div>
-
+                                {etservice && etservice.etadditionalinformation.map((additionalinfo, tindex) => (
+                                <div className='abstractreport-container-12'>
+                                    <br />
+                                    <center>
+                                        <table className='et-service-form-table-1' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
+                                            <thead>
+                                                <tr>
+                                                    <th className="et-service-form-table-selftables-heading" colSpan='7'>ADDITIONAL INFORMATION</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colSpan='7' style={{ width: '100%', border: '1px solid black' }}>
+                                                        {additionalinfo.additionalInformation || "No additional information available"}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </center>
+                                </div>
+                            ))}
+                            <br/>
+                            <br/>
                                 {etservice && (
                                     <div id="legalDescription">
                                         <center>

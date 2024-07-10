@@ -34,6 +34,7 @@ function DasDisplay() {
                     }
                 });
                 setEtService(result.data);
+                console.log(result.data);
             } catch (error) {
                 console.error('Error fetching et service details:', error);
             } finally {
@@ -467,6 +468,7 @@ function DasDisplay() {
                                                 </tr>
                                                 <tr className='th-color'>
                                                     <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }} colSpan={2}>ASSESMENT YEAR</th>
+                                                    <td>{taxinformation.assesementYear}</td>
                                                     <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }} colSpan={2}>TAX YEAR</th>
                                                 </tr>
                                                 <tr>
@@ -539,7 +541,7 @@ function DasDisplay() {
                                 </table>
                                 <br />
                             </center>
-                            {etservice && (
+                            {etservice && etservice.dasadditionalinformation.map((additionalinfo, tindex) => (
                                 <div className='abstractreport-container-12'>
                                     <br />
                                     <center>
@@ -552,14 +554,14 @@ function DasDisplay() {
                                             <tbody>
                                                 <tr>
                                                     <td colSpan='7' style={{ width: '100%', border: '1px solid black' }}>
-                                                        {etservice.additionalInformation || "No additional information available"}
+                                                        {additionalinfo.additionalInformation || "No additional information available"}
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </center>
                                 </div>
-                            )}
+                            ))}
                             <br />
                             {etservice && (
                                 <center>
