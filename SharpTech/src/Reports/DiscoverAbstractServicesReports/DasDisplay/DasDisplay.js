@@ -460,52 +460,52 @@ function DasDisplay() {
                                 <div id="taxInformation" key={tindex}>
                                     <br />
                                     <center>
-                                        <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }} >
-                                            <tr>
-                                                <th className='das-display-header-table' colSpan={4} >TAX INFORMATION </th>
-                                            </tr>
-                                            <tr >
-                                                <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>ASSESMENT YEAR</th>
-                                                <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>
-                                                    2023
-                                                    </th>
-                                                <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>TAX YEAR</th>
-                                                <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>2023</th>
-                                            </tr>
-
-                                            <tr>
-                                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} > LAND VALUE </td>
-                                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinformation.landValue}</td>
-                                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} > BUILDING VALUE </td>
-                                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinformation.buildingValue}</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} > TOTAL VALUE </td>
-                                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinformation.totalValue}</td>
-                                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} > EXTRAVALUE </td>
-                                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinformation.extraValue}</td>
-                                            </tr>
-
-                                            <tr className='das-display-header-table'>
-                                                <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>INSTALLMENT</th>
-                                                <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>AMOUNT</th>
-                                                <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>STATUS</th>
-                                                <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}>PAID/DUE DATE</th>
-
-                                            </tr>
-                                            {etservice && etservice.taxinstallments.map((taxinstallment, tindex) => (
-                                                <tr key={tindex}>
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{tindex === 0 ? `${tindex + 1}ST INSTALLMENT ` : tindex === 1 ? ` ${tindex + 1}ND INSTALLMENT` : tindex === 2 ? `${tindex + 1}RD INSTALLMENT` : `${tindex + 1}TH INSTALLMENT`}</td>
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinstallment.amount}</td>
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinstallment.status}</td>
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >{taxinstallment.paidDueDate}</td>
+                                        <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
+                                            <thead>
+                                                <tr>
+                                                    <th className='das-display-header-table' colSpan={4}>TAX INFORMATION</th>
                                                 </tr>
-                                            ))}
-                                            <tr>
-                                                <th className="das-display-sub-title-headings" colSpan={1} style={{ border: '1px solid black' }}> COMMENTS </th>
-                                                <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{taxinformation.comments}</td>
-                                            </tr>
+                                                <tr className='th-color'>
+                                                    <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }} colSpan={2}>ASSESMENT YEAR</th>
+                                                    <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }} colSpan={2}>TAX YEAR</th>
+                                                </tr>
+                                                <tr>
+                                                    <td className="das-report-display-data" style={{ border: '1px solid black' }} colSpan={2}>{taxinformation.assessmentYear}</td>
+                                                    <td className="das-report-display-data" style={{ border: '1px solid black' }} colSpan={2}>{taxinformation.taxYear}</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr className='th-color'>
+                                                    <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }}>LAND VALUE</th>
+                                                    <td className="das-report-display-data" style={{ border: '1px solid black' }} colSpan={1}>{taxinformation.landValue}</td>
+                                                    <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }}>BUILDING VALUE</th>
+                                                    <td className="das-report-display-data" style={{ border: '1px solid black' }} colSpan={1}>{taxinformation.buildingValue}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }}>TOTAL VALUE</th>
+                                                    <td className="das-report-display-data" style={{ border: '1px solid black' }} colSpan={1}>{taxinformation.totalValue}</td>
+                                                    <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }}>EXTRA VALUE</th>
+                                                    <td className="das-report-display-data" style={{ border: '1px solid black' }} colSpan={1}>{taxinformation.extraValue}</td>
+                                                </tr>
+                                                <tr className='th-color'>
+                                                    <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }}>INSTALLMENT</th>
+                                                    <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }}>AMOUNT</th>
+                                                    <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }}>STATUS</th>
+                                                    <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }}>PAID/DUE DATE</th>
+                                                </tr>
+                                                {etservice && etservice.taxinstallments.map((taxinstallment, tindex) => (
+                                                    <tr key={tindex} className={tindex % 2 === 0 ? 'th-color' : ''}>
+                                                        <td className="das-report-display-data" style={{ border: '1px solid black' }}>{tindex === 0 ? `${tindex + 1}ST INSTALLMENT` : tindex === 1 ? `${tindex + 1}ND INSTALLMENT` : tindex === 2 ? `${tindex + 1}RD INSTALLMENT` : `${tindex + 1}TH INSTALLMENT`}</td>
+                                                        <td className="das-report-display-data" style={{ border: '1px solid black' }}>{taxinstallment.amount}</td>
+                                                        <td className="das-report-display-data" style={{ border: '1px solid black' }}>{taxinstallment.status}</td>
+                                                        <td className="das-report-display-data" style={{ border: '1px solid black' }}>{taxinstallment.paidDueDate}</td>
+                                                    </tr>
+                                                ))}
+                                                <tr className='th-color'>
+                                                    <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }} colSpan={1}>COMMENTS</th>
+                                                    <td className="das-report-display-data" style={{ border: '1px solid black' }} colSpan={3}>{taxinformation.comments}</td>
+                                                </tr>
+                                            </tbody>
                                         </table>
                                     </center>
                                 </div>

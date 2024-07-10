@@ -736,20 +736,20 @@ function DasReport() {
                                     <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>ORDER NUMBER</th>
                                     <td colSpan={4} style={{ border: '1px solid black' }}>
                                         <input className="abstract-control-input" type="text" style={{ width: '100%', font: 'italic' }}
-                                            placeholder="Enter order Number"
+                                            placeholder="Order Number"
                                             name="orderNumber" value={user.orderNumber} onChange={(e) => onInputChange(e)} />
                                     </td>
 
                                     <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>REFERENCE NUMBER</th>
                                     <td colSpan={'100%'} style={{ border: '1px solid black' }}>
-                                        <input className="abstract-control-input" type="text" placeholder='Enter Reference Number' name='referenceNumber' value={user.referenceNumber} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
+                                        <input className="abstract-control-input" type="text" placeholder='Reference Number' name='referenceNumber' value={user.referenceNumber} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>SEARCH DATE:</th>
                                     <td colSpan={'2'} style={{ border: '1px solid black' }}>
-                                        <input className="abstract-control-input" type="Date" placeholder="Enter Serch Data" name="searchDate" value={user.searchDate} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
+                                        <input className="abstract-control-input" type="Date" placeholder="Serch Data" name="searchDate" value={user.searchDate} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
                                     </td>
 
                                     <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>AS OF</th>
@@ -757,7 +757,7 @@ function DasReport() {
 
                                     <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>EFFECTIVE DATE:</th>
                                     <td colSpan={2} style={{ border: '1px solid black' }}>
-                                        <input className="abstract-control-input" type="Date" placeholder="Enter Effective Data " name="effectiveDate" value={user.effectiveDate} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
+                                        <input className="abstract-control-input" type="Date" placeholder="Effective Data " name="effectiveDate" value={user.effectiveDate} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
                                     </td>
                                 </tr>
 
@@ -773,12 +773,12 @@ function DasReport() {
                                 <tr>
                                     <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> STATE</th>
                                     <td colSpan={'4'} style={{ border: '1px solid black' }}>
-                                        <input className="abstract-control-input" type="text" name="state" placeholder='Enter State' value={user.state} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
+                                        <input className="abstract-control-input" type="text" name="state" placeholder='State' value={user.state} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
                                     </td>
 
                                     <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> COUNTY</th>
                                     <td colSpan={2} style={{ border: '1px solid black' }}>
-                                        <input className="abstract-control-input" type="text" placeholder="Enter Country" name="county" value={user.county} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
+                                        <input className="abstract-control-input" type="text" placeholder="Country" name="county" value={user.county} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
                                     </td>
                                 </tr>
 
@@ -792,30 +792,30 @@ function DasReport() {
                                 <tr>
                                     <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> PARCEL NUMBER</th>
                                     <td colSpan={'4'} style={{ border: '1px solid black' }}>
-                                        <input className="abstract-control-input" type="text" placeholder='Enter Parcel Number' name="parcelNumber" value={user.parcelNumber} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
+                                        <input className="abstract-control-input" type="text" placeholder='Parcel Number' name="parcelNumber" value={user.parcelNumber} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
                                     </td>
 
                                     <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> SUBDIVISION:</th>
                                     <td colSpan={2} style={{ border: '1px solid black' }}>
-                                        <input className="abstract-control-input" type="text" placeholder="Enter Sub Division" name="subdivision" value={user.subdivision} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
+                                        <input className="abstract-control-input" type="text" placeholder="Sub Division" name="subdivision" value={user.subdivision} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> LOT/UNIT:</th>
                                     <td colSpan={'4'} style={{ border: '1px solid black' }}>
-                                        <input className="abstract-control-input" type="text" placeholder='Enter Unit' name="lotUnit" value={user.lotUnit} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
+                                        <input className="abstract-control-input" type="text" placeholder='Unit' name="lotUnit" value={user.lotUnit} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
                                     </td>
                                     <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>BLOCK</th>
                                     <td colSpan={2} style={{ border: '1px solid black' }}>
-                                        <input className="abstract-control-input" type="text" placeholder="Enter Block" name="block" value={user.block} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
+                                        <input className="abstract-control-input" type="text" placeholder="Block" name="block" value={user.block} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>PROPERTY TYPE:</th>
                                     <td colSpan={'8'} style={{ border: '1px solid black' }}>
-                                        <input className="abstract-control-input" type="text" placeholder='Enter SFR/PUD/CONDO' name="propertyType" value={user.propertyType} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
+                                        <input className="abstract-control-input" type="text" placeholder='SFR/PUD/CONDO' name="propertyType" value={user.propertyType} onChange={(e) => onInputChange(e)} style={{ width: '100%' }} />
                                     </td>
                                 </tr>
 
@@ -846,49 +846,49 @@ function DasReport() {
                                             <tr>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> DEED TYPE </th>
                                                 <td colSpan={4} style={{ border: '1px solid black' }}>
-                                                    <input type="text" className="abstract-control-input" placeholder="Enter Deed Type" name="deedType" value={table.data.deedType || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} required />
+                                                    <input type="text" className="abstract-control-input" placeholder="Deed Type" name="deedType" value={table.data.deedType || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} required />
                                                 </td>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> CONSIDERATION AMOUNT ($) </th>
                                                 <td colSpan={'100%'} style={{ border: '1px solid black' }}>
-                                                    <input type="text" className="abstract-control-input" placeholder="Enter Consideration Amount" name="considerationAmount" value={table.data.considerationAmount || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} required />
+                                                    <input type="text" className="abstract-control-input" placeholder="Consideration Amount" name="considerationAmount" value={table.data.considerationAmount || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} required />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> GRANTOR</th>
                                                 <td colSpan={'6'} style={{ border: '1px solid black' }}>
-                                                    <input type="text" className="abstract-control-input" placeholder="Enter Grantor" name="grantor" value={table.data.grantor || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
+                                                    <input type="text" className="abstract-control-input" placeholder="Grantor" name="grantor" value={table.data.grantor || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>GRANTEE</th>
                                                 <td colSpan={6} style={{ border: '1px solid black' }}>
-                                                    <input type="text" className="abstract-control-input" placeholder="Enter Grantee" name="grantee" value={table.data.grantee || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
+                                                    <input type="text" className="abstract-control-input" placeholder="Grantee" name="grantee" value={table.data.grantee || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> VESTING INFO:</th>
                                                 <td colSpan={'4'} style={{ border: '1px solid black' }}>
-                                                    <input type="text" className="abstract-control-input" placeholder="Enter Vesting" name="vesting" value={table.data.vesting || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
+                                                    <input type="text" className="abstract-control-input" placeholder="Vesting" name="vesting" value={table.data.vesting || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
                                                 </td>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>INSTR/BOOK/PAGE</th>
                                                 <td colSpan={2} style={{ border: '1px solid black' }}>
-                                                    <input type="text" className="abstract-control-input" placeholder="Enter INSTR/BOOK/PAGE" name="instaBookPage" value={table.data.instaBookPage || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
+                                                    <input type="text" className="abstract-control-input" placeholder="INSTR/BOOK/PAGE" name="instaBookPage" value={table.data.instaBookPage || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> DATED DATE: </th>
                                                 <td colSpan={'4'} style={{ border: '1px solid black' }}>
-                                                    <input type="date" className="abstract-control-input" placeholder="Enter Date" name="datedDate" value={table.data.datedDate || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
+                                                    <input type="date" className="abstract-control-input" placeholder="Date" name="datedDate" value={table.data.datedDate || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
                                                 </td>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>RECORDED DATE:</th>
                                                 <td colSpan={2} style={{ border: '1px solid black' }}>
-                                                    <input type="date" className="abstract-control-input" placeholder="Enter Date" name="recorderdDate" value={table.data.recorderdDate || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
+                                                    <input type="date" className="abstract-control-input" placeholder="Date" name="recorderdDate" value={table.data.recorderdDate || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>COMMENTS:</th>
                                                 <td colSpan={6} style={{ border: '1px solid black' }}>
-                                                    <input type="text" className="abstract-control-input" placeholder="Enter Notes" name="comments" value={table.data.comments || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
+                                                    <input type="text" className="abstract-control-input" placeholder="Enter COMMENTS" name="comments" value={table.data.comments || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} />
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -931,68 +931,68 @@ function DasReport() {
                                         <tr>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> MORTGAGOR</th>
                                             <td colSpan={6} style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" name="mortgagor" placeholder='Enter MORTGAGEE' style={{ width: '100%' }} value={table.data.mortgagor || ''} onChange={(e) => handleChaneMortage(e, table.id)} required />                                            </td>
+                                                <input type="text" className="abstract-control-input" name="mortgagor" placeholder='MORTGAGOR' style={{ width: '100%' }} value={table.data.mortgagor || ''} onChange={(e) => handleChaneMortage(e, table.id)} required />                                            </td>
                                         </tr>
                                         <tr>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> MORTGAGEE</th>
                                             <td colSpan={'6'} style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" name="mortgagee" placeholder='Enter MORTGAGEE' style={{ width: '100%' }} value={table.data.mortgagee || ''} onChange={(e) => handleChaneMortage(e, table.id)} required />
+                                                <input type="text" className="abstract-control-input" name="mortgagee" placeholder='MORTGAGEE' style={{ width: '100%' }} value={table.data.mortgagee || ''} onChange={(e) => handleChaneMortage(e, table.id)} required />
                                             </td>
                                         </tr>
                                         <tr>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> TRUSTEE</th>
                                             <td colSpan={6} style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" placeholder="Enter TRUSTEE" name="trustee" style={{ width: '100%' }} value={table.data.trustee || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
+                                                <input type="text" className="abstract-control-input" placeholder="TRUSTEE" name="trustee" style={{ width: '100%' }} value={table.data.trustee || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> INSTRUMENT/BOOK/PAGE</th>
                                             <td colSpan={'4'} style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" name="instrBookPage" placeholder='Enter INSTRUMENT/BOOK/PAGE:' style={{ width: '100%' }} value={table.data.instrBookPage || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
+                                                <input type="text" className="abstract-control-input" name="instrBookPage" placeholder='INSTRUMENT/BOOK/PAGE:' style={{ width: '100%' }} value={table.data.instrBookPage || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>AMOUNT [$]</th>
                                             <td colSpan={2} style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" placeholder="$ Enter Amount" name="amount" style={{ width: '100%' }} value={table.data.amount || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
+                                                <input type="text" className="abstract-control-input" placeholder="$ Amount" name="amount" style={{ width: '100%' }} value={table.data.amount || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> DATED DATE:</th>
                                             <td colSpan={'4'} style={{ border: '1px solid black' }}>
-                                                <input type="Date" className="abstract-control-input" name="datedDate" placeholder='Enter DATED DATE:' style={{ width: '100%' }} value={table.data.datedDate || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
+                                                <input type="Date" className="abstract-control-input" name="datedDate" placeholder='DATED DATE:' style={{ width: '100%' }} value={table.data.datedDate || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>RECORDED DATE:</th>
                                             <td colSpan={2} style={{ border: '1px solid black' }}>
-                                                <input type="Date" className="abstract-control-input" placeholder="Enter RECORDED DATE" name="recordedDate" style={{ width: '100%' }} value={table.data.recordedDate || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
+                                                <input type="Date" className="abstract-control-input" placeholder="RECORDED DATE" name="recordedDate" style={{ width: '100%' }} value={table.data.recordedDate || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colSpan={5}></td>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>MATURITY DATE :</th>
                                             <td colSpan={3} style={{ border: '1px solid black' }}>
-                                                <input type="Date" className="abstract-control-input" placeholder="Enter Maturity Date" name="maturityDate" style={{ width: '100%' }} value={table.data.maturityDate || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
+                                                <input type="Date" className="abstract-control-input" placeholder="Maturity Date" name="maturityDate" style={{ width: '100%' }} value={table.data.maturityDate || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> MORTGAGE ASSIGNED TO</th>
                                             <td colSpan={'6'} style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" name="mortgageAssignedTo" placeholder='Enter MORTGAGE ASSIGNED TO' style={{ width: '100%' }} value={table.data.mortgageAssignedTo || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
+                                                <input type="text" className="abstract-control-input" name="mortgageAssignedTo" placeholder='MORTGAGE ASSIGNED TO' style={{ width: '100%' }} value={table.data.mortgageAssignedTo || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> ASSIGNMENT BK/PG</th>
                                             <td colSpan={'4'} style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" name="assignmentBkPg" placeholder='Enter ASSIGNMENT BK/PG :' style={{ width: '100%' }} value={table.data.assignmentBkPg || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
+                                                <input type="text" className="abstract-control-input" name="assignmentBkPg" placeholder='ASSIGNMENT BK/PG :' style={{ width: '100%' }} value={table.data.assignmentBkPg || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>ASSIGNMENT DATED:</th>
                                             <td colSpan={2} style={{ border: '1px solid black' }}>
-                                                <input type="Date" className="abstract-control-input" placeholder="Enter ASSIGNMENT DATED" name="assignmentDated" style={{ width: '100%' }} value={table.data.assignmentDated || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
+                                                <input type="Date" className="abstract-control-input" placeholder="ASSIGNMENT DATED" name="assignmentDated" style={{ width: '100%' }} value={table.data.assignmentDated || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colSpan={5}></td>
                                             <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>ASSIGNMENT RECORDED:</th>
                                             <td colSpan={3} style={{ border: '1px solid black' }}>
-                                                <input type="Date" className="abstract-control-input" placeholder="Enter ASSIGNMENT RECORDED:" name="assignmentRecorded" style={{ width: '100%' }} value={table.data.assignmentRecorded || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
+                                                <input type="Date" className="abstract-control-input" placeholder="ASSIGNMENT RECORDED:" name="assignmentRecorded" style={{ width: '100%' }} value={table.data.assignmentRecorded || ''} onChange={(e) => handleChaneMortage(e, table.id)} />
                                             </td>
                                         </tr>
                                         <tr>
@@ -1040,16 +1040,16 @@ function DasReport() {
                                         {tableRowsData.map((row) => (
                                             <tr key={row.id}>
                                                 <td style={{ border: '1px solid black' }}>
-                                                    <input type="text" className="abstract-control-input" placeholder="Enter Case Number" name="caseType" value={row.data.caseType} onChange={e => handleChange(e, row.id)} style={{ width: '100%' }} />
+                                                    <input type="text" className="abstract-control-input" placeholder="Case Number" name="caseType" value={row.data.caseType} onChange={e => handleChange(e, row.id)} style={{ width: '100%' }} />
                                                 </td>
                                                 <td style={{ border: '1px solid black' }}>
-                                                    <input type="text" className="abstract-control-input" placeholder="Enter Description" name="bkPgCaseNo" value={row.data.bkPgCaseNo} onChange={e => handleChange(e, row.id)} style={{ width: '100%' }} />
+                                                    <input type="text" className="abstract-control-input" placeholder="Description" name="bkPgCaseNo" value={row.data.bkPgCaseNo} onChange={e => handleChange(e, row.id)} style={{ width: '100%' }} />
                                                 </td>
                                                 <td style={{ border: '1px solid black' }}>
-                                                    <input type="Date" className="abstract-control-input" placeholder="Enter Date" name="recordingDate" value={row.data.recordingDate} onChange={e => handleChange(e, row.id)} style={{ width: '100%' }} />
+                                                    <input type="Date" className="abstract-control-input" placeholder="Date" name="recordingDate" value={row.data.recordingDate} onChange={e => handleChange(e, row.id)} style={{ width: '100%' }} />
                                                 </td>
                                                 <td style={{ border: '1px solid black' }}>
-                                                    <input type="text" className="abstract-control-input" placeholder="Enter Amount" name="amount" value={row.data.amount} onChange={e => handleChange(e, row.id)} style={{ width: '100%' }} />
+                                                    <input type="text" className="abstract-control-input" placeholder="Amount" name="amount" value={row.data.amount} onChange={e => handleChange(e, row.id)} style={{ width: '100%' }} />
                                                 </td>
                                             </tr>
                                         ))}
@@ -1126,21 +1126,21 @@ function DasReport() {
                                     <tr>
                                         <th className="das-report-sub-heading" colSpan='1' style={{ border: '1px solid black' }} > LAND VALUE </th>
                                         <td colSpan='1' style={{ border: '1px solid black' }} >
-                                            <input type="text" className="abstract-control-input" placeholder="Enter LandValue" name="landValue" value={taxinfo.landValue} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
+                                            <input type="text" className="abstract-control-input" placeholder="LandValue" name="landValue" value={taxinfo.landValue} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
                                         </td>
                                         <th className="das-report-sub-heading" colSpan='1' style={{ border: '1px solid black' }} > BUILDING VALUE </th>
                                         <td colSpan='1' style={{ border: '1px solid black' }} >
-                                            <input type="text" className="abstract-control-input" placeholder="Enter BuildingValue" name="buildingValue" value={taxinfo.buildingValue} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
+                                            <input type="text" className="abstract-control-input" placeholder="BuildingValue" name="buildingValue" value={taxinfo.buildingValue} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
                                         </td>
                                     </tr>
                                     <tr>
                                         <th className="das-report-sub-heading" colSpan='1' style={{ border: '1px solid black' }} > TOTAL VALUE </th>
                                         <td colSpan='1' style={{ border: '1px solid black' }} >
-                                            <input type="text" className="abstract-control-input" placeholder="Enter TotalValue" name="totalValue" value={taxinfo.totalValue} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
+                                            <input type="text" className="abstract-control-input" placeholder="TotalValue" name="totalValue" value={taxinfo.totalValue} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
                                         </td>
                                         <th className="das-report-sub-heading" colSpan='1' style={{ border: '1px solid black' }} > EXTRAVALUE </th>
                                         <td colSpan='1' style={{ border: '1px solid black' }} >
-                                            <input type="text" className="abstract-control-input" placeholder="Enter extraValue" name="extraValue" value={taxinfo.extraValue} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
+                                            <input type="text" className="abstract-control-input" placeholder="extraValue" name="extraValue" value={taxinfo.extraValue} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
                                         </td>
                                     </tr>
                                     <tr>
@@ -1155,20 +1155,20 @@ function DasReport() {
                                                 {index + 1 === 1 ? `${index + 1}ST INSTALLMENT ` : index + 1 === 2 ? `${index + 1}ND INSTALLMENT` : index + 1 === 3 ? `${index + 1}RD INSTALLMENT` : `${index + 1}TH INSTALLMENT`}
                                             </th>
                                             <td colSpan='1' style={{ border: '1px solid black' }} >
-                                                <input type="text" className="abstract-control-input" name="amount" placeholder='Enter Amount' value={row.amount} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
+                                                <input type="text" className="abstract-control-input" name="amount" placeholder='Amount' value={row.amount} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
                                             </td>
                                             <td colSpan='1' style={{ border: '1px solid black' }} >
-                                                <input type="text" className="abstract-control-input" name="status" placeholder='Enter Status' value={row.status} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
+                                                <input type="text" className="abstract-control-input" name="status" placeholder='Status' value={row.status} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
                                             </td>
                                             <td colSpan='1' style={{ border: '1px solid black' }} >
-                                                <input type="date" className="abstract-control-input" name="paidDueDate" placeholder='Enter Date' value={row.paidDueDate} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
+                                                <input type="date" className="abstract-control-input" name="paidDueDate" placeholder=' Date' value={row.paidDueDate} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
                                             </td>
                                         </tr>
                                     ))}
                                     <tr>
                                         <th className="das-report-sub-heading" style={{ border: '1px solid black' }}>COMMENTS</th>
                                         <td colSpan={6} style={{ border: '1px solid black' }}>
-                                            <input type='text' className="abstract-control-input" placeholder="Enter Notes" name="comments" value={comments} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
+                                            <input type='text' className="abstract-control-input" placeholder="Enter COMMENTS" name="comments" value={comments} onChange={(e) => onInputChange2(e)} style={{ width: '100%' }} />
                                         </td>
                                     </tr>
                                 </tbody>
@@ -1199,7 +1199,7 @@ function DasReport() {
                                         <th className="das-report-main-table-heading" colSpan={5}>NAMES RUNS</th>
                                     </tr>
                                     <tr >
-                                        <th colSpan={1} className="das-report-sub-heading-1" style={{ border: '1px solid black', width: '25%' }}>NAME</th>
+                                        <th colSpan={1} className="das-report-sub-heading-1" style={{ border: '1px solid black', width: '25%' }}>NAMES</th>
                                         <th colSpan={1} className="das-report-sub-heading-1" style={{ border: '1px solid black' }}>JUD</th>
                                         <th colSpan={1} className="das-report-sub-heading-1" style={{ border: '1px solid black' }}>LINES</th>
                                         <th colSpan={1} className="das-report-sub-heading-1" style={{ border: '1px solid black' }}>UCC</th>
@@ -1210,16 +1210,16 @@ function DasReport() {
                                     {nameRunData.map((row) => (
                                         <tr key={row.id}>
                                             <td style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" name="name" placeholder='Enter Name' value={row.data.name} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
+                                                <input type="text" className="abstract-control-input" name="name" placeholder='Name' value={row.data.name} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
                                             </td>
                                             <td style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" name="jud" placeholder='Enter JUD' value={row.data.jud} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
+                                                <input type="text" className="abstract-control-input" name="jud" placeholder='JUD' value={row.data.jud} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
                                             </td>
                                             <td style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" name="liens" placeholder='Enter LIENS' value={row.data.liens} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
+                                                <input type="text" className="abstract-control-input" name="liens" placeholder='LIENS' value={row.data.liens} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
                                             </td>
                                             <td style={{ border: '1px solid black' }}>
-                                                <input type="text" className="abstract-control-input" name="ucc" placeholder='Enter UCC' value={row.data.ucc} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
+                                                <input type="text" className="abstract-control-input" name="ucc" placeholder='UCC' value={row.data.ucc} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
                                             </td>
                                             <td style={{ border: '1px solid black' }}>
                                                 <input type="text" className="abstract-control-input" name="others" placeholder='Enter Others' value={row.data.others} onChange={e => handleChangeNameRun(e, row.id)} style={{ width: '100%' }} />
@@ -1256,7 +1256,7 @@ function DasReport() {
                                             <input
                                                 className="abstract-control-input"
                                                 type="text"
-                                                placeholder="Enter additional information"
+                                                placeholder="additional information"
                                                 name="additionalInformation"
                                                 value={additionalInformation}
                                                 onChange={onInputChangeinfo}
