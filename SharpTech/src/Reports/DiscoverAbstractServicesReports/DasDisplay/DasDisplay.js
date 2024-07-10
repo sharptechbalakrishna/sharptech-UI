@@ -127,6 +127,11 @@ function DasDisplay() {
                     margin: 0;
                     padding: 0;
                 }
+                    .das-display-side-headings
+                    {
+                    text-align: left;
+                    padding-left:5px;
+                    }
                 .das-display-overall-heading {
                     font-size: 22px;
                     padding-top: 10px;
@@ -142,7 +147,8 @@ function DasDisplay() {
                     padding-top: 10px;
                 }
                 .das-report-display-data {
-                    text-align: center;
+                    text-align: left;
+                    padding-left:5px;
                 }
                 table {
                     width: 100%;

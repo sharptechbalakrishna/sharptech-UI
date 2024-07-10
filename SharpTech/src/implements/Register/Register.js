@@ -73,6 +73,13 @@ function Register() {
       return;
     }
 
+
+    if (name === 'aadhaarNumber') {
+      const sanitizedValue = value.replace(/\D/g, '').slice(0, 12);
+      setUser({ ...user, [name]: sanitizedValue });
+      return;
+    }
+
     if (name === 'phoneNumber') {
       const sanitizedValue = value.replace(/\D/g, '').slice(0, 10);
       setUser({ ...user, [name]: sanitizedValue });
@@ -224,6 +231,7 @@ function Register() {
                 <label htmlFor="empAadhaarNumber">Aadhaar Number</label>
                 <input type="tel" className="form-control" placeholder="Enter your Aadhaar Number" name="aadhaarNumber" value={user.aadhaarNumber} maxLength="12" onChange={onInputChange} />
               </div>
+
               <div className="form-group col">
                 <label htmlFor="panNumber">Pan Number</label>
                 <input type="text" className="form-control" placeholder="Enter your PAN number" name="panNumber" value={user.panNumber} maxLength="10" onChange={onInputChange} />
@@ -256,9 +264,12 @@ function Register() {
             </div>
 
             <div className="button-container">
-              <button type="submit" disabled={loading}>
+              <button type="submit" disabled={loading} className="register-submit-button">
                 {loading ? (
-                  <ClipLoader color="#ffffff" loading={true} size={25} /> // Display ClipLoader while loading
+                  <>
+                    <ClipLoader color="#ffffff" loading={true} size={10} />
+                    <span style={{ marginLeft: '5px' }}>Submitting</span>
+                  </>
                 ) : (
                   "Submit"
                 )}

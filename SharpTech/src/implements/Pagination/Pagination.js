@@ -121,7 +121,7 @@ export default function Pagination() {
                                 <Column field="email" header="Email" className="heading-pagination-column" />
                                 <Column field="designation" header="Designation" className="heading-pagination-column" />
                                 <Column field="phoneNumber" header="Phone Number" className="heading-pagination-column" />
-                                <Column field="remark" header="Remark" className="heading-pagination-column" />
+                                {/* <Column field="remark" header="Remark" className="heading-pagination-column" />
                                 <Column field="fatherName" header="Father's Name" className="heading-pagination-column" />
                                 <Column field="motherName" header="Mother's Name" className="heading-pagination-column" />
                                 <Column field="dateOfBirth" header="Date of Birth" className="heading-pagination-column" />
@@ -132,7 +132,7 @@ export default function Pagination() {
                                 <Column field="releavingDate" header="Releaving Date" className="heading-pagination-column" />
                                 <Column field="aadhaarNumber" header="Aadhaar Number" className="heading-pagination-column" />
                                 <Column field="panNumber" header="Pan Number" className="heading-pagination-column" />
-                                <Column field="remark" header="Remark" className="heading-pagination-column" />
+                                <Column field="remark" header="Remark" className="heading-pagination-column" /> */}
                                 <Column
                                     header="Actions"
                                     body={(rowData) => (
