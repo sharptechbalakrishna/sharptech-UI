@@ -87,9 +87,9 @@ function EtServices() {
       });
       console.log('receiving data', response);
       if (response.data && response.data.statusCode === 200) {
-        window.alert(response.data.message || "Data Sent Successfully");
+        window.alert(response.data.message || "Et Report Submitted Successfully");
       } else {
-        window.alert(response.data.message || "Data Not Sent Something went Wrong");
+        window.alert(response.data.message || " Something went wrong in Et Report");
       }
     } catch (error) {
       console.error("Registration failed:", error);
@@ -281,7 +281,7 @@ function EtServices() {
     localStorage.removeItem(`vestingTableData_${tableId}`);
 
     // Update overall tables data in localStorage
-    localStorage.setItem('vestingInfo', JSON.stringify(updatedTables));
+    localStorage.setItem('etvestingInfo', JSON.stringify(updatedTables));
   };
 
 
@@ -303,7 +303,7 @@ function EtServices() {
     localStorage.removeItem(`mortgageTableData_${tableId}`);
 
     // Update overall mortgage tables data in localStorage
-    localStorage.setItem('mortgageInfo', JSON.stringify(updatedTables2));
+    localStorage.setItem('etmortgageInfo', JSON.stringify(updatedTables2));
   };
 
 
@@ -319,14 +319,14 @@ function EtServices() {
     if (tableRowsData.length > 0) {
       const updatedRows = tableRowsData.slice(0, -1); // Remove the last row
       setTableRowsData(updatedRows);
-      localStorage.setItem('tableRowsData', JSON.stringify(updatedRows)); // Update local storage
+      localStorage.setItem('etActiveJudgment', JSON.stringify(updatedRows)); // Update local storage
     }
   };
 
   const handleDeleteRow = (rowId) => {
     const updatedRows = tableRowsData.filter(row => row.id !== rowId);
     setTableRowsData(updatedRows);
-    localStorage.setItem('tableRowsData', JSON.stringify(updatedRows)); // Update local storage
+    localStorage.setItem('etActiveJudgment', JSON.stringify(updatedRows)); // Update local storage
   };
 
   const handleAddNameRow = (e) => {
@@ -341,7 +341,7 @@ function EtServices() {
     if (nameRunData.length > 0) {
       const updatedRows = nameRunData.slice(0, -1); // Remove the last row
       setNameRunData(updatedRows);
-      localStorage.setItem('nameRunData', JSON.stringify(updatedRows)); // Update local storage)
+      localStorage.setItem('etnameRunData', JSON.stringify(updatedRows)); // Update local storage)
     }
   };
 
@@ -357,18 +357,18 @@ function EtServices() {
     if (tableTaxInstaData.length > 0) {
       const updatedRows = tableTaxInstaData.slice(0, -1); // Remove the last row
       setTableTaxInstaData(updatedRows);
-      localStorage.setItem('tableTaxInstaData', JSON.stringify(updatedRows));
+      localStorage.setItem('ettableTaxInstaData', JSON.stringify(updatedRows));
     }
   };
 
   //  loadin the table data form the Loacl Storage if Saved
   useEffect(() => {
-    const savedGeneralInfo = localStorage.getItem('generalInfo');
+    const savedGeneralInfo = localStorage.getItem('etgeneralInfo');
     if (savedGeneralInfo) {
       setUser(JSON.parse(savedGeneralInfo));
     }
 
-    const savedVestingInfo = localStorage.getItem('vestingInfo');
+    const savedVestingInfo = localStorage.getItem('etvestingInfo');
     if (savedVestingInfo) {
       const parsedData = JSON.parse(savedVestingInfo);
 
@@ -394,7 +394,7 @@ function EtServices() {
       setNextTableId(parsedData.length + 1); // Ensure nextTableId is set correctly
     }
 
-    const savedMortgageInfo = localStorage.getItem('mortgageInfo');
+    const savedMortgageInfo = localStorage.getItem('etmortgageInfo');
     if (savedMortgageInfo) {
       const parsedData2 = JSON.parse(savedMortgageInfo);
 
@@ -422,21 +422,21 @@ function EtServices() {
     }
 
 
-    const savedData = localStorage.getItem('tableRowsData');
+    const savedData = localStorage.getItem('etActiveJudgment');
     if (savedData) {
       setTableRowsData(JSON.parse(savedData));
       setNextRowsId(JSON.parse(savedData).length + 1);
     }
 
-    const namerundata = localStorage.getItem('nameRunData');
+    const namerundata = localStorage.getItem('etnameRunData');
     if (namerundata) {
       const parsedData = JSON.parse(namerundata);
       setNameRunData(parsedData);
       setNextNameRunId(parsedData.length + 1);
     }
 
-    const savedTaxInfo = JSON.parse(localStorage.getItem('taxInformation'));
-    const savedTableData = JSON.parse(localStorage.getItem('tableTaxInstaData'));
+    const savedTaxInfo = JSON.parse(localStorage.getItem('ettaxInformation'));
+    const savedTableData = JSON.parse(localStorage.getItem('ettableTaxInstaData'));
     if (savedTaxInfo) {
       setTaxInfo(savedTaxInfo);
     }
@@ -448,8 +448,8 @@ function EtServices() {
 
   //  SaveFunction for ETGeneralInfo
   const saveGeneralInfo = () => {
-    localStorage.setItem('generalInfo', JSON.stringify(user));
-    window.alert("General Info Saved Successfully");
+    localStorage.setItem('etgeneralInfo', JSON.stringify(user));
+    window.alert("General Info Saved Locally");
   };
 
   //  Clear Function for ETGeneralInfo
@@ -468,17 +468,17 @@ function EtServices() {
       block: "",
       sfrPudCondo: "",
     });
-    localStorage.removeItem('generalInfo');
-    window.alert("General Info Cleared");
+    localStorage.removeItem('etgeneralInfo');
+    window.alert("General Info Cleared Locally");
   };
 
   const saveVestingInfo = (tableId) => {
     const tableData = tablesData.find(table => table.id === tableId);
     localStorage.setItem(`vestingTableData_${tableId}`, JSON.stringify(tableData));
-    window.alert('Table Data Saved Successfully');
+    window.alert('Vesting Info Saved Locally');
 
     // Update overall tables data in localStorage
-    localStorage.setItem('vestingInfo', JSON.stringify(tablesData));
+    localStorage.setItem('etvestingInfo', JSON.stringify(tablesData));
   };
 
   const clearVestingInfo = (tableId) => {
@@ -490,18 +490,20 @@ function EtServices() {
     });
     setTablesData(updatedTables);
     localStorage.removeItem(`vestingTableData_${tableId}`);
-    window.alert('Table Data Cleared');
+  
 
     // Update overall tables data in localStorage
-    localStorage.setItem('vestingInfo', JSON.stringify(updatedTables));
+    localStorage.setItem('etvestingInfo', JSON.stringify(updatedTables));
+    window.alert('Vesting Info Cleared Locally');
   };
 
   const saveMortgageInfo = (tableId) => {
     const tableData = tablesData2.find(table => table.id === tableId);
     localStorage.setItem(`mortgageTableData_${tableId}`, JSON.stringify(tableData));
-    window.alert('Table Data Saved Successfully');
+   
 
-    localStorage.setItem('mortgageInfo', JSON.stringify(tablesData2));
+    localStorage.setItem('etmortgageInfo', JSON.stringify(tablesData2));
+    window.alert('OpenMortage Saved Locally');
   };
 
 
@@ -514,29 +516,31 @@ function EtServices() {
     });
     setTablesData2(updatedTables);
     localStorage.removeItem(`mortgageTableData_${tableId}`);
-    window.alert('Table Data Cleared');
+    window.alert('OpenMortage Cleared Locally');
 
-    localStorage.setItem('mortgageInfo', JSON.stringify(updatedTables));
+    localStorage.setItem('etmortgageInfo', JSON.stringify(updatedTables));
   };
 
   const handleSave = () => {
-    localStorage.setItem('tableRowsData', JSON.stringify(tableRowsData));
-    alert('Data saved successfully!');
+    localStorage.setItem('etActiveJudgment', JSON.stringify(tableRowsData));
+    alert('Active Judgment and lines saved locally');
   };
 
   // Handle clearing data of the last row
   const handleClear = () => {
     const clearedRows = tableRowsData.map(row => ({ ...row, data: {} }));
     setTableRowsData(clearedRows);
-    localStorage.removeItem('tableRowsData'); // Clear local storage
+    localStorage.removeItem('etActiveJudgment'); // Clear local storage
+    alert('Active Judgment and lines cleared locally');
+
   };
 
 
 
 
   const handleSaveTemporarilyRow = () => {
-    localStorage.setItem('nameRunData', JSON.stringify(nameRunData));
-    alert('Data saved successfully!');
+    localStorage.setItem('etnameRunData', JSON.stringify(nameRunData));
+    alert('Names Runs saved locally');
   };
 
   const handleClearRows = () => {
@@ -545,12 +549,14 @@ function EtServices() {
       data: { name: '', jud: '', liens: '', ucc: '', others: '' }
     }));
     setNameRunData(clearedData);
+    localStorage.removeItem('etnameRunData');
+    alert('Names Runs cleared locally');
   };
 
   const handleSaveTemporarilyRow1 = () => {
-    localStorage.setItem('taxInformation', JSON.stringify(taxinfo));
-    localStorage.setItem('tableTaxInstaData', JSON.stringify(tableTaxInstaData));
-    alert('Data saved to local storage!');
+    localStorage.setItem('ettaxInformation', JSON.stringify(taxinfo));
+    localStorage.setItem('ettableTaxInstaData', JSON.stringify(tableTaxInstaData));
+    alert('Tax Info saved locally ');
   };
 
   const handleClearRows1 = () => {
@@ -568,6 +574,9 @@ function EtServices() {
       excemption: "",
       notes: "",
     });
+       localStorage.removeItem('ettaxInformation');
+        localStorage.removeItem('ettableTaxInstaData');
+        alert('Tax Info cleared locally');
   };
 
 
@@ -809,7 +818,7 @@ function EtServices() {
                         <tr>
                           <th className='et-service-form-table-1-heading' style={{ border: '1px solid black' }}> DATED DATE: </th>
                           <td colSpan={'4'} style={{ border: '1px solid black' }}>
-                            <input type="date" className="et-service-input-labels" name="datedDate" placeholder='DATED DATE:' style={{ width: '100%' }} value={table.data.datedDate || ''} onChange={(e) => handleInputChange(e, table.id)} />
+                          <input type="date" className="et-service-input-labels" placeholder="RECORDED DATE" name="datedDate" style={{ width: '100%' }} value={table.data.datedDate || ''} onChange={(e) => handleInputChange2(e, table.id)} />
                           </td>
                           <th className='et-service-form-table-1-heading' style={{ border: '1px solid black' }}>RECORDED DATE:</th>
                           <td colSpan={2} style={{ border: '1px solid black' }}>
@@ -914,7 +923,7 @@ function EtServices() {
                 </center>
                 <button className="et-service-genenal-info-add-button" type='button' onClick={handleAddRow}> <i className="pi pi-plus"  style={{ marginRight: '5px' }}   ></i>Row</button>
                 {tableRowsData.length > 3 && (
-                  <button className="et-service-genenal-info-delete-button" onClick={handleDeleteLastRow}>  <i className="pi pi-trash"     ></i> Row </button>
+                  <button className="et-service-genenal-info-delete-button" type='button' onClick={handleDeleteLastRow}>  <i className="pi pi-trash"     ></i> Row </button>
                 )}
 
                 <Button className='et-service-genenal-info-save-button' label="Save&nbsp;" icon="pi pi-check" type='button' onClick={handleSave} />
