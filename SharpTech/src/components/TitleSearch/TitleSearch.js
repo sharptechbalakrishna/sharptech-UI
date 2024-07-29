@@ -23,17 +23,17 @@ const TitleSearch = ({ setPlayState }) => {
           <ul>
      
 
-            <li><i className="fa fa-check"></i> Legal and Vesting Deed/LOV Report</li>
-            <li><i className="fa fa-check"></i> Owner and Encumbrance Report</li>
-            <li><i className="fa fa-check"></i> Current Owner Search</li>
-            <li><i className="fa fa-check"></i> Two Owner Search</li>
-            <li><i className="fa fa-check"></i> Chain of Title Search</li>
-            <li><i className="fa fa-check"></i> 10-20-30-60 Year Search</li>
-            <li><i className="fa fa-check"></i> Purchase Money Mortgage Search</li>
-            <li><i className="fa fa-check"></i> Full Search</li>
-            <li><i className="fa fa-check"></i> Closing Update</li>
-            <li><i className="fa fa-check"></i> Document Retrieval Services</li>
-            <li><i className="fa fa-check"></i> Judgment and Lien Search</li>
+            <li><i ></i> Legal and Vesting Deed/LOV Report</li>
+            <li><i ></i> Owner and Encumbrance Report</li>
+            <li><i ></i> Current Owner Search</li>
+            <li><i ></i> Two Owner Search</li>
+            <li><i ></i> Chain of Title Search</li>
+            <li><i ></i> 10-20-30-60 Year Search</li>
+            <li><i ></i> Purchase Money Mortgage Search</li>
+            <li><i ></i> Full Search</li>
+            <li><i ></i> Closing Update</li>
+            <li><i ></i> Document Retrieval Services</li>
+            <li><i ></i> Judgment and Lien Search</li>
           </ul>
         </div>
         <div className="about-left">
@@ -54,10 +54,10 @@ const TitleSearch = ({ setPlayState }) => {
              offering round-the-clock support via both email and voice channels, 
              ensuring a seamless and efficient experience.</p>
           <ul>
-            <li><i className="fa fa-check"></i> Highest quality search reports</li>
-            <li><i className="fa fa-check"></i> Unbeatable turnaround time</li>
-            <li><i className="fa fa-check"></i> Lowest Cost</li>
-            <li><i className="fa fa-check"></i> 24/7 Email and voice support</li>
+            <li><i ></i> Highest quality search reports</li>
+            <li><i ></i> Unbeatable turnaround time</li>
+            <li><i ></i> Lowest Cost</li>
+            <li><i ></i> 24/7 Email and voice support</li>
           </ul>
         </div>
       </div>

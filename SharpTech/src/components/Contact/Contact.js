@@ -46,13 +46,14 @@ const Contact = () => {
         <br />
         <h2>Hours of Operation:</h2>
         <br />
-        <p>Monday-Friday: 7:00 AM to 7:00 PM EST.</p>
-        <p>Saturday and Sunday: 7:00 AM to 12:00 PM EST.</p>
+        <p >Monday-Friday: 7:00 AM to 7:00 PM EST.</p>
+        <p>Saturday & Sunday: 7:00 AM to 12:00 PM EST.</p>
         <ul>
           <li>
           <a href="mailto:your@email.com" target="_blank">
-            <img src={mail_icon} alt=""  className='contact-mail-icon'/>info@sharptechsystems.in
+            <img src={mail_icon} alt=""  className='contact-mail-icon'/>
             </a>
+          <p className='contact-page-container'> info@sharptechsystems.in</p> 
           </li>
 
           <li>
@@ -103,7 +104,7 @@ const Contact = () => {
           <label>Write your messages here</label>
           <textarea name="message" rows="6" placeholder='Enter your message' required></textarea>
 
-          <button type='submit' className='btn dark-btn'>Submit now <img src={white_arrow} alt="" /></button>
+          <button type='submit' className='contact-btn'>Submit now <img src={white_arrow} alt="" /></button>
         </form>
         <span>{result}</span>
       </div>
