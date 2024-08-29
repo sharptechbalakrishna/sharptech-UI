@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './ResetPassword.css';
+import UserService from '../UserService/UserService';
 
 const ResetPassword = () => {
   const [otp, setOtp] = useState('');
@@ -20,11 +21,7 @@ const ResetPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/auth/reset-password', {
-        email,
-        otp,
-        newPassword
-      });
+      const response = await UserService.resetPassowrd(email, otp, newPassword);
       setMessage(response.data);
       setError('');
       window.alert(response.data);

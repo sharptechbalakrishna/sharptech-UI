@@ -14,6 +14,30 @@ class UserService {
             throw err;
         }
     }
+    static async forgetPassowrd(email) {
+        try {
+            const response = await axios.post(`${UserService.BASE_URL}/auth/forgot-password`, { email });
+            console.log("In us:", response);
+            return response;
+
+        } catch (err) {
+            throw err;
+        }
+    }
+    static async resetPassowrd(email, otp, newPassword) {
+        try {
+            const response = await axios.post(`${UserService.BASE_URL}/auth/reset-password`, {
+                email,
+                otp,
+                newPassword
+              });
+            console.log("In us:", response);
+            return response;
+
+        } catch (err) {
+            throw err;
+        }
+    }
 
     static async verifylogin(email, otp) {
         try {

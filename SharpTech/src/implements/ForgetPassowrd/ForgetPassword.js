@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import './ForgetPassword.css';
 import { useNavigate } from 'react-router-dom';
+import UserService from '../UserService/UserService';
 
 // Define the FloatLabel component within the same file
 const FloatLabel = ({ children, label, value }) => {
@@ -23,9 +23,9 @@ const ForgetPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/auth/forgot-password', { email });
+      const response = await UserService.forgetPassowrd(email);
       setMessage(response.data.message);
-      setError('');
+      setError(response.data.message);
       window.alert(response.data.message);
       navigate('/ResetPassword', { state: { email } });  // Pass email in state
     } catch (err) {
