@@ -469,14 +469,15 @@ function DasDisplay() {
                                                     <th className='das-display-header-table' colSpan={4}>TAX INFORMATION</th>
                                                 </tr>
                                                 <tr className='th-color'>
-                                                    <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }} colSpan={2}>ASSESMENT YEAR</th>
-                                                    <td>{taxinformation.assesementYear}</td>
-                                                    <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }} colSpan={2}>TAX YEAR</th>
+                                                    <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }} colSpan={1}>ASSESMENT YEAR</th>
+                                                    <td>{taxinformation.assementYear}</td>
+                                                    <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }} colSpan={1}>TAX YEAR</th>
+                                                    <td>{taxinformation.selectedTaxYear}</td>
                                                 </tr>
-                                                <tr>
+                                                {/* <tr>
                                                     <td className="das-report-display-data" style={{ border: '1px solid black' }} colSpan={2}>{taxinformation.assessmentYear}</td>
                                                     <td className="das-report-display-data" style={{ border: '1px solid black' }} colSpan={2}>{taxinformation.taxYear}</td>
-                                                </tr>
+                                                </tr> */}
                                             </thead>
                                             <tbody>
                                                 <tr className='th-color'>

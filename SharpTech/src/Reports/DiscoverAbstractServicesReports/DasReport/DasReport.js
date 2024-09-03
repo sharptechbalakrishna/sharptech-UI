@@ -10,11 +10,11 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 import UserService from '../../../implements/UserService/UserService';
 
 function DasReport() {
-    const [assesementYear, setAssesementYear] = useState('');
+    const [assementYear, setassementYear] = useState('');
     const [selectedTaxYear, setSelectedTaxYear] = useState('');
   
     const handleAssessmentYearChange = (e) => {
-        setAssesementYear(e.target.value);
+        setassementYear(e.target.value);
     };
   
     const handleTaxYearChange = (e) => {
@@ -102,7 +102,8 @@ function DasReport() {
 
 
     const [taxinfo, setTaxInfo] = useState({
-        taxYear: "",
+        selectedTaxYear: "",
+        assementYear:"",
         landValue: "",
         buildingValue: "",
         extraValue: "",
@@ -110,7 +111,7 @@ function DasReport() {
         comments: "",
     })
 
-    const { taxYear, landValue, buildingValue, extraValue, totalValue, comments } = taxinfo
+    const {landValue, buildingValue, extraValue, totalValue, comments } = taxinfo
 
     const onInputChange2 = (e) => {
         setTaxInfo({ ...taxinfo, [e.target.name]: e.target.value })
@@ -568,6 +569,8 @@ function DasReport() {
         setTableTaxInstaData(clearedData);
         setTaxInfo({
             landValue: "",
+            selectedTaxYear:"",
+            assementYear:"",
             buildingValue: "",
             totalValue: "",
             extraValue: "",
@@ -647,7 +650,8 @@ function DasReport() {
                     absopenmortgagedeedinfo: tablesData2.map(table => ({ ...table.data })),
                     absActiveJudgementsAndLines: tableRowsData.map(table => ({ ...table.data })),
                     assessementsAndTaxInfo: [{
-                        taxYear: taxYear,
+                        assementYear: assementYear,
+                        selectedTaxYear:selectedTaxYear,
                         landValue: landValue,
                         buildingValue: buildingValue,
                         extraValue: extraValue,
@@ -1090,7 +1094,7 @@ function DasReport() {
                                             <select
                                                 className="das-report-sub-heading-1"
                                                 style={{ border: 'none', background: 'none', outline: 'none' }}
-                                                value={assesementYear}
+                                                value={assementYear}
                                                 onChange={handleAssessmentYearChange}
                                             >
                                                 <option value="">Select Year</option>
