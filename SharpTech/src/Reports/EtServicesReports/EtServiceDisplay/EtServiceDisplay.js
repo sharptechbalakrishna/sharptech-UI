@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios';
+import moment from 'moment';
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import jsPDF from 'jspdf';
@@ -197,13 +198,13 @@ function EtServiceDisplay() {
 
                                                     <tr>
                                                         <th className='et-service-form-table-2-heading' colSpan={'1'} style={{ border: '1px solid black' }}> SEARCH DATE: </th>
-                                                        <td className='et-service-form-table-2-data' colSpan={'1'} style={{ border: '1px solid black' }}>{etservice.searchDate}</td>
+                                                        <td className='et-service-form-table-2-data' colSpan={'1'} style={{ border: '1px solid black' }}> {moment(etservice.searchDate).format('MM/DD/YYYY')}</td>
 
                                                         <th className='et-service-form-table-2-heading' colSpan={'1'} style={{ border: '1px solid black' }}>AS OF</th>
                                                         <th className='et-service-form-table-2-data' colSpan={'1'} style={{ border: '1px solid black' }} >7:30 Am</th>
 
                                                         <th className='et-service-form-table-2-heading' colSpan={'1'} style={{ border: '1px solid black' }}> EFFECTIVE DATE:</th>
-                                                        <td className='et-service-form-table-2-data' colSpan={'1'} style={{ border: '1px solid black' }}>{etservice.effectiveDate}</td>
+                                                        <td className='et-service-form-table-2-data' colSpan={'1'} style={{ border: '1px solid black' }}>{moment(etservice.effectiveDate).format('MM/DD/YYYY')}</td>
                                                     </tr>
 
                                                     <tr>
@@ -255,7 +256,7 @@ function EtServiceDisplay() {
                                             <center>
                                                 <table className='et-service-form-table-1' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
                                                     <tr className='et-service-form-table-1-rows'>
-                                                        <th className='et-service-form-table-selftables-heading' colSpan="4"> {index === 0 ? " VESTING INFORMATION " : `Chain of Title ${index}`}  </th>
+                                                        <th className='et-service-form-table-selftables-heading' colSpan="4"> {index === 0 ? " VESTING INFORMATION " : `CHAIN OF TITLE ${index}`}  </th>
                                                     </tr>
 
                                                     <tr>
@@ -286,10 +287,10 @@ function EtServiceDisplay() {
 
                                                     <tr>
                                                         <th className='et-service-form-table-2-heading' colSpan={1} style={{ border: '1px solid black' }}> DATED DATE: </th>
-                                                        <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{vestingInfo.datedDate}</td>
+                                                        <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{moment(vestingInfo.datedDate).format('MM/DD/YYYY')}</td>
 
                                                         <th className='et-service-form-table-2-heading' colSpan={1} style={{ border: '1px solid black' }}>RECORDED DATE:</th>
-                                                        <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{vestingInfo.recordDate}</td>
+                                                        <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{moment(vestingInfo.recordDate).format('MM/DD/YYYY')}</td>
                                                     </tr>
 
                                                     <tr>
@@ -343,16 +344,16 @@ function EtServiceDisplay() {
 
                                                     <tr>
                                                         <th className='et-service-form-table-2-heading' colSpan={1} style={{ border: '1px solid black' }}> DATED DATE: </th>
-                                                        <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.datedDate}</td>
+                                                        <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{moment(openmortagedeedinfo.datedDate).format('MM/DD/YYYY')}</td>
 
                                                         <th className='et-service-form-table-2-heading' colSpan={1} style={{ border: '1px solid black' }}>RECORDED DATE:</th>
-                                                        <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.recordedDate}</td>
+                                                        <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{moment(openmortagedeedinfo.recordedDate).format('MM/DD/YYYY')}</td>
                                                     </tr>
 
                                                     <tr>
 
                                                         <th className='et-service-form-table-2-heading' colSpan={1} style={{ border: '1px solid black' }}>MATURITY DATE: </th>
-                                                        <td className='et-service-form-table-2-data' colSpan={3} style={{ border: '1px solid black' }}>{openmortagedeedinfo.maturityDate}</td>
+                                                        <td className='et-service-form-table-2-data' colSpan={3} style={{ border: '1px solid black' }}>{moment(openmortagedeedinfo.maturityDate).format('MM/DD/YYYY')}</td>
                                                     </tr>
 
                                                     <tr>
@@ -366,10 +367,10 @@ function EtServiceDisplay() {
 
                                                     <tr>
                                                         <th className='et-service-form-table-2-heading' colSpan={1} style={{ border: '1px solid black' }}> ASSIGNMENT DATED: </th>
-                                                        <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.assiDated === null ? "No Data" : openmortagedeedinfo.assiDated}</td>
+                                                        <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{moment(openmortagedeedinfo.assiDated).format('MM/DD/YYYY')}</td>
 
                                                         <th className='et-service-form-table-2-heading' colSpan={1} style={{ border: '1px solid black' }}>ASSIGNMENT RECORDED: </th>
-                                                        <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.assiRecorded === null ? "No Data" : openmortagedeedinfo.assiRecorded}</td>
+                                                        <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{moment(openmortagedeedinfo.assiRecorded).format('MM/DD/YYYY')}</td>
                                                     </tr>
 
                                                     <tr>
@@ -416,7 +417,7 @@ function EtServiceDisplay() {
                                                     <tr key={index} style={{ border: '1px solid black' }}>
                                                         <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.caseNumbe}</td>
                                                         <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.description}</td>
-                                                        <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.dateRecorded}</td>
+                                                        <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{moment(activejudgmentsandliens.dateRecorded).format('MM/DD/YYYY')}</td>
                                                         <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.amount}</td>
 
 
@@ -469,7 +470,7 @@ function EtServiceDisplay() {
                                                         <td className='et-service-form-table-2-data' colSpan='1' style={{ border: '1px solid black' }} >{tindex === 0 ? `${tindex + 1}ST INSTALLMENT` : tindex === 1 ? ` ${tindex + 1}ND INSTALLMENT` : tindex === 2 ? `${tindex + 1}RD INSTALLMENT` : `${tindex + 1}th INSTALLMENT`}</td>
                                                         <td className='et-service-form-table-2-data' colSpan='1' style={{ border: '1px solid black' }} >{taxinstallment.amount}</td>
                                                         <td className='et-service-form-table-2-data' colSpan='1' style={{ border: '1px solid black' }} >{taxinstallment.status}</td>
-                                                        <td className='et-service-form-table-2-data' colSpan='1' style={{ border: '1px solid black' }} >{taxinstallment.paidDueDate}</td>
+                                                        <td className='et-service-form-table-2-data' colSpan='1' style={{ border: '1px solid black' }} >{moment(taxinstallment.paidDueDate).format('MM/DD/YYYY')}</td>
                                                     </tr>
                                                 ))}
 

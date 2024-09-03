@@ -1,4 +1,5 @@
 //reddy -code display
+import moment from 'moment';
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
@@ -101,7 +102,7 @@ function DasDisplay() {
             // Construct filename with current date
             const currentDate = new Date();
             const formattedDate = currentDate.toISOString().slice(0, 10); // Format as YYYY-MM-DD
-
+// const formattedDate = currentDate.toLocaleDateString('en-US');
             const filename = `das_service_${formattedDate}.pdf`; // Filename with current date
 
             // Save PDF with filename
@@ -223,13 +224,14 @@ function DasDisplay() {
 
                                                             <tr>
                                                                 <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>SEARCH DATE:</th>
-                                                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}> {etservice.searchDate}  </td>
+                                                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}> {moment(etservice.searchDate).format('MM/DD/YYYY')}  </td>
+                                                               
 
                                                                 <th className="das-display-side-headings" c colSpan={1} style={{ border: '1px solid black' }}>As Of</th>
                                                                 <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >7:30 Am</td>
 
                                                                 <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>EFFECTIVE DATE :</th>
-                                                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{etservice.effectiveDate}  </td>
+                                                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}> {moment(etservice.effectiveDate).format('MM/DD/YYYY')} </td>
                                                             </tr>
 
                                                             <tr>
@@ -322,9 +324,9 @@ function DasDisplay() {
 
                                                 <tr>
                                                     <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> DATED DATE: </th>
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{vestingdeedinfo.datedDate}  </td>
+                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{moment(vestingdeedinfo.datedDate).format('MM/DD/YYYY')}  </td>
                                                     <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>RECORDED DATE:</th>
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{vestingdeedinfo.recorderdDate} </td>
+                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}> {moment(vestingdeedinfo.recorderdDate).format('MM/DD/YYYY')} </td>
                                                 </tr>
 
                                                 <tr>
@@ -339,12 +341,12 @@ function DasDisplay() {
                                 <br />
                                 <br />
                                 {etservice && etservice.absopenmortgagedeedinfo.map((openmortagedeedinfo, mIndex) => (
-                                    <div key={mIndex} >
+                                    <div key={mIndex+1} >
                                         <br />
                                         <center>
                                             <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }} >
                                                 <tr>
-                                                    <th className='das-display-header-table' colSpan={4} >OPEN MORTGAGE / DEED OF TRUST  - ({mIndex}) INFORMATION </th>
+                                                    <th className='das-display-header-table' colSpan={4} >OPEN MORTGAGE / DEED OF TRUST  - ({mIndex+1}) INFORMATION </th>
                                                 </tr>
 
                                                 <tr>
@@ -373,17 +375,17 @@ function DasDisplay() {
 
                                                 <tr>
                                                     <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> DATED DATE:  </th>
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.datedDate}</td>
+                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{moment(openmortagedeedinfo.datedDate).format('MM/DD/YYYY')}</td>
 
                                                     <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>RECORDED DATE:</th>
 
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.recordedDate}</td>
+                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{moment(openmortagedeedinfo.recordedDate).format('MM/DD/YYYY')}</td>
                                                 </tr>
 
                                                 <tr>
 
                                                     <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>MATURITY DATE</th>
-                                                    <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{openmortagedeedinfo.maturityDate}</td>
+                                                    <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{moment(openmortagedeedinfo.maturityDate).format('MM/DD/YYYY')}</td>
                                                 </tr>
 
                                                 <tr>
@@ -398,10 +400,10 @@ function DasDisplay() {
                                                 <tr>
                                                     <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> ASSIGNMENT DATED </th>
 
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.assignmentDated === null ? "No Data" : openmortagedeedinfo.assignmentDated}</td>
+                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{moment(openmortagedeedinfo.assignmentDated).format('MM/DD/YYYY')}</td>
 
                                                     <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>ASSIGNMENT RECORDED: </th>
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.assignmentRecorded === null ? "No Data" : openmortagedeedinfo.assignmentRecorded}</td>
+                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{moment(openmortagedeedinfo.assignmentRecorded).format('MM/DD/YYYY')}</td>
                                                 </tr>
 
                                                 <tr>
@@ -448,7 +450,7 @@ function DasDisplay() {
                                                 <tr key={index} style={{ border: '1px solid black' }}>
                                                     <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.caseType}</td>
                                                     <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.bkPgCaseNo}</td>
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.recordingDate}</td>
+                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{moment(activejudgmentsandliens.recordingDate).format('MM/DD/YYYY')}</td>
                                                     <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.amount}</td>
                                                 </tr>
                                             ))}
@@ -500,7 +502,7 @@ function DasDisplay() {
                                                         <td className="das-report-display-data" style={{ border: '1px solid black' }}>{tindex === 0 ? `${tindex + 1}ST INSTALLMENT` : tindex === 1 ? `${tindex + 1}ND INSTALLMENT` : tindex === 2 ? `${tindex + 1}RD INSTALLMENT` : `${tindex + 1}TH INSTALLMENT`}</td>
                                                         <td className="das-report-display-data" style={{ border: '1px solid black' }}>{taxinstallment.amount}</td>
                                                         <td className="das-report-display-data" style={{ border: '1px solid black' }}>{taxinstallment.status}</td>
-                                                        <td className="das-report-display-data" style={{ border: '1px solid black' }}>{taxinstallment.paidDueDate}</td>
+                                                        <td className="das-report-display-data" style={{ border: '1px solid black' }}>{moment(taxinstallment.paidDueDate).format('MM/DD/YYYY')}</td>
                                                     </tr>
                                                 ))}
                                                 <tr className='th-color'>
