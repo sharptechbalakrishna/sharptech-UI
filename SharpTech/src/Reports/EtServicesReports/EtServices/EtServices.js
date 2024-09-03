@@ -15,6 +15,26 @@ function EtServices() {
 
   const [additionalInformation, setAdditionalInformation] = useState('');
 
+  const [assementYear, setassementYear] = useState('');
+    const [taxYear, setTaxYear] = useState('');
+
+
+  
+    const handleAssessmentYearChange = (e) => {
+        setassementYear(e.target.value);
+    };
+  
+    const handleTaxYearChange = (e) => {
+      setTaxYear(e.target.value);
+    };
+  
+    // Generate a list of years from 1900 to current year
+    const years = [];
+    const currentYear = new Date().getFullYear();
+    for (let year = 1900; year <= currentYear; year++) {
+      years.push(year.toString());
+    }
+
   // Handle input changes
   const onInputChangeinfo = (event) => {
       setAdditionalInformation(event.target.value);
@@ -59,6 +79,8 @@ function EtServices() {
           etactivejudgmentsandliens: tableRowsData.map(row => ({ ...row.data })),
           ettaxinformation: [
             {
+              assementYear:assementYear,
+              taxYear:taxYear,
               landValue: landValue,
               buildingValue: buildingValue,
               totalValue: buildingValue,
@@ -117,6 +139,8 @@ function EtServices() {
 
   const [taxinfo, setTaxInfo] = useState({
     landValue: "",
+    assementYear:"",
+    taxYear:"",
     buildingValue: "",
     totalValue: "",
     excemption: "",
@@ -573,6 +597,8 @@ function EtServices() {
       totalValue: "",
       excemption: "",
       notes: "",
+      assementYear:"",
+      taxYear:""
     });
        localStorage.removeItem('ettaxInformation');
         localStorage.removeItem('ettableTaxInstaData');
@@ -809,7 +835,7 @@ function EtServices() {
                           <td colSpan={'4'} style={{ border: '1px solid black' }}>
                             <input type="text" className="et-service-input-labels" placeholder="INSTRUMENT/BOOK/PAGE:" name="instBookPage" style={{ width: '100%' }} value={table.data.instBookPage || ''} onChange={(e) => handleInputChange2(e, table.id)} />
                           </td>
-                          <th className='et-service-form-table-1-heading' style={{ border: '1px solid black' }}>AMOUNT[$]:</th>
+                          <th className='et-service-form-table-1-heading' style={{ border: '1px solid black' }}>AMOUNT:</th>
                           <td colSpan={2} style={{ border: '1px solid black' }}>
                             <input type="text" className="et-service-input-labels" placeholder="$ AMOUNT" name="amount" style={{ width: '100%' }} value={table.data.amount || ''} onChange={(e) => handleInputChange2(e, table.id)} />
                           </td>
@@ -841,7 +867,7 @@ function EtServices() {
                           </td>
                           <th className='et-service-form-table-1-heading' style={{ border: '1px solid black' }}>ASSIGNMENT BK/PG: </th>
                           <td colSpan={2} style={{ border: '1px solid black' }}>
-                            <input type="number" className="et-service-input-labels" placeholder="ASSIGNMENT BK/PG" name="assiBkPg" style={{ width: '100%' }} value={table.data.assiBkPg || ''} onChange={(e) => handleInputChange2(e, table.id)} />
+                            <input type="text" className="et-service-input-labels" placeholder="ASSIGNMENT BK/PG" name="assiBkPg" style={{ width: '100%' }} value={table.data.assiBkPg || ''} onChange={(e) => handleInputChange2(e, table.id)} />
                           </td>
                         </tr>
 
@@ -852,7 +878,7 @@ function EtServices() {
                           </td>
                           <th className='et-service-form-table-1-heading' style={{ border: '1px solid black' }}>ASSIGNMENT RECORDED: </th>
                           <td colSpan={2} style={{ border: '1px solid black' }}>
-                            <input type="text" className="et-service-input-labels" placeholder="ASSIGNMENT RECORDED:" name="assiRecorded" style={{ width: '100%' }} value={table.data.assiRecorded || ''} onChange={(e) => handleInputChange2(e, table.id)} />
+                            <input type="date" className="et-service-input-labels" placeholder="ASSIGNMENT RECORDED:" name="assiRecorded" style={{ width: '100%' }} value={table.data.assiRecorded || ''} onChange={(e) => handleInputChange2(e, table.id)} />
                           </td>
                         </tr>
 
@@ -943,9 +969,37 @@ function EtServices() {
                     </tr>
                     <tr className='th-color'>
                       <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>ASSESMENT YEAR</th>
-                      <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>2023</th>
+                      <th className="et-service-form-table-selftables-heading" style={{ border: '1px solid black' }}>
+                                            <select
+                                                className="das-report-sub-heading-1"
+                                                style={{ border: 'none', background: 'none', outline: 'none' }}
+                                                value={assementYear}
+                                                onChange={handleAssessmentYearChange}
+                                            >
+                                                <option value="">Select Year</option>
+                                                {years.map((year) => (
+                                                    <option 
+                                                    key={year} value={year}> {year}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </th>
                       <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>TAX YEAR</th>
-                      <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>2023</th>
+                      <th className="et-service-form-table-selftables-heading" style={{ border: '1px solid black' }}>
+                                            <select
+                                                className="das-report-sub-heading-1"
+                                                style={{ border: 'none', background: 'none', outline: 'none' }}
+                                                value={taxYear}
+                                                onChange={handleTaxYearChange}
+                                            >
+                                                <option value="">Select Year</option>
+                                                {years.map((year) => (
+                                                    <option 
+                                                    key={year} value={year}> {year}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </th>
                     </tr>
 
                     <tr>

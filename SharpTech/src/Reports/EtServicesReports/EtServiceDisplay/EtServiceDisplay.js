@@ -264,7 +264,11 @@ function EtServiceDisplay() {
                                                         <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{vestingInfo.deedType}</td>
 
                                                         <th className='et-service-form-table-2-heading' colSpan={1} style={{ border: '1px solid black' }}>  CONSIDERATION AMOUNT: </th>
-                                                        <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{vestingInfo.considerationAmount}</td>
+                                                        <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>
+                                                        {vestingInfo.considerationAmount.startsWith('$')
+                                                                ? vestingInfo.considerationAmount
+                                                                : `$${vestingInfo.considerationAmount}`}
+                                                        </td>
                                                     </tr>
 
                                                     <tr>
@@ -311,11 +315,11 @@ function EtServiceDisplay() {
 
 
                                     {etservice && etservice.etopenmortagedeedinfo.map((openmortagedeedinfo, mIndex) => (
-                                        <div key={mIndex} >
+                                        <div key={mIndex + 1} >
                                             <center>
                                                 <table className='et-service-form-table-1' style={{ border: '2px solid black', borderCollapse: 'collapse' }} >
                                                     <tr className='et-service-form-table-1-rows' >
-                                                        <th className='et-service-form-table-selftables-heading' colSpan="4">OPEN MORTGAGE / DEED OF TRUST  - ({mIndex}) INFORMATION </th>
+                                                        <th className='et-service-form-table-selftables-heading' colSpan="4">OPEN MORTGAGE / DEED OF TRUST  - ({mIndex = 1}) INFORMATION </th>
                                                     </tr>
 
                                                     <tr>
@@ -338,7 +342,10 @@ function EtServiceDisplay() {
                                                         <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.instBookPage}</td>
 
                                                         <th className='et-service-form-table-2-heading' colSpan={1} style={{ border: '1px solid black' }}>AMOUNT [$]:</th>
-                                                        <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{openmortagedeedinfo.amount}</td>
+                                                        <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>
+                                                            {openmortagedeedinfo.amount.startsWith('$')
+                                                                ? openmortagedeedinfo.amount
+                                                                : `$${openmortagedeedinfo.amount}`}</td>
                                                     </tr>
 
 
@@ -418,7 +425,11 @@ function EtServiceDisplay() {
                                                         <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.caseNumbe}</td>
                                                         <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.description}</td>
                                                         <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{moment(activejudgmentsandliens.dateRecorded).format('MM/DD/YYYY')}</td>
-                                                        <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.amount}</td>
+                                                        <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>
+                                                            {activejudgmentsandliens.amount.startsWith('$')
+                                                                ? activejudgmentsandliens.amount
+                                                                : `$${activejudgmentsandliens.amount}`}
+                                                        </td>
 
 
                                                     </tr>
@@ -439,23 +450,39 @@ function EtServiceDisplay() {
                                                 </tr>
                                                 <tr   >
                                                     <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>ASSESMENT YEAR</th>
-                                                    <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>2023</th>
+                                                    <td className="et-service-form-table-sub-selftables-heading" style={{ border: '1px solid black' }} colSpan={1}>{taxinformation.assementYear}</td>
                                                     <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>TAX YEAR</th>
-                                                    <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>2023</th>
+                                                    <td className="et-service-form-table-sub-selftables-heading" style={{ border: '1px solid black' }} colSpan={1}>{taxinformation.taxYear}</td>
                                                 </tr>
 
                                                 <tr>
                                                     <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} > LAND VALUE </td>
-                                                    <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} >{taxinformation.landValue}</td>
+                                                    <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} >
+                                                    {taxinformation.landValue.startsWith('$')
+                                                                ? taxinformation.landValue
+                                                                : `$${taxinformation.landValue}`}
+                                                    </td>
                                                     <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} > BUILDING VALUE  </td>
-                                                    <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} >{taxinformation.buildingValue}</td>
+                                                    <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} >
+                                                    {taxinformation.buildingValue.startsWith('$')
+                                                                ? taxinformation.buildingValue
+                                                                : `$${taxinformation.buildingValue}`}
+                                                    </td>
                                                 </tr>
 
                                                 <tr>
                                                     <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} > TOTAL VALUE </td>
-                                                    <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} >{taxinformation.totalValue}</td>
+                                                    <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} >
+                                                    {taxinformation.totalValue.startsWith('$')
+                                                                ? taxinformation.totalValue
+                                                                : `$${taxinformation.totalValue}`}
+                                                    </td>
                                                     <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} > EXEMPTION </td>
-                                                    <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} >{taxinformation.excemption}</td>
+                                                    <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} >
+                                                    {taxinformation.excemption.startsWith('$')
+                                                                ? taxinformation.excemption
+                                                                : `$${taxinformation.excemption}`}
+                                                    </td>
                                                 </tr>
 
                                                 <tr>
@@ -468,7 +495,12 @@ function EtServiceDisplay() {
                                                 {etservice && etservice.ettaxinstallment.map((taxinstallment, tindex) => (
                                                     <tr key={tindex}>
                                                         <td className='et-service-form-table-2-data' colSpan='1' style={{ border: '1px solid black' }} >{tindex === 0 ? `${tindex + 1}ST INSTALLMENT` : tindex === 1 ? ` ${tindex + 1}ND INSTALLMENT` : tindex === 2 ? `${tindex + 1}RD INSTALLMENT` : `${tindex + 1}th INSTALLMENT`}</td>
-                                                        <td className='et-service-form-table-2-data' colSpan='1' style={{ border: '1px solid black' }} >{taxinstallment.amount}</td>
+                                                        <td className='et-service-form-table-2-data' colSpan='1' style={{ border: '1px solid black' }} >
+                                                        {taxinstallment.amount.startsWith('$')
+                                                                ? taxinstallment.amount
+                                                                : `$${taxinstallment.amount}`}
+                                                        </td>
+
                                                         <td className='et-service-form-table-2-data' colSpan='1' style={{ border: '1px solid black' }} >{taxinstallment.status}</td>
                                                         <td className='et-service-form-table-2-data' colSpan='1' style={{ border: '1px solid black' }} >{moment(taxinstallment.paidDueDate).format('MM/DD/YYYY')}</td>
                                                     </tr>
@@ -517,28 +549,28 @@ function EtServiceDisplay() {
                                     <br />
                                 </div>
                                 {etservice && etservice.etadditionalinformation.map((additionalinfo, tindex) => (
-                                <div className='abstractreport-container-12'>
-                                    <br />
-                                    <center>
-                                        <table className='et-service-form-table-1' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
-                                            <thead>
-                                                <tr>
-                                                    <th className="et-service-form-table-selftables-heading" colSpan='7'>ADDITIONAL INFORMATION</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td colSpan='7' style={{ width: '100%', border: '1px solid black' }}>
-                                                        {additionalinfo.additionalInformation || "No additional information available"}
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </center>
-                                </div>
-                            ))}
-                            <br/>
-                            <br/>
+                                    <div className='abstractreport-container-12'>
+                                        <br />
+                                        <center>
+                                            <table className='et-service-form-table-1' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
+                                                <thead>
+                                                    <tr>
+                                                        <th className="et-service-form-table-selftables-heading" colSpan='7'>ADDITIONAL INFORMATION</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td colSpan='7' style={{ width: '100%', border: '1px solid black' }}>
+                                                            {additionalinfo.additionalInformation || "No additional information available"}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </center>
+                                    </div>
+                                ))}
+                                <br />
+                                <br />
                                 {etservice && (
                                     <div id="legalDescription">
                                         <center>
