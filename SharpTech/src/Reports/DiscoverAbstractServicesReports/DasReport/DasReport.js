@@ -8,24 +8,29 @@ import Footer from '../../../components/Footer/Footer';
 import Navbar from '../../../components/Navbar/Navbar';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import UserService from '../../../implements/UserService/UserService';
+import { useNavigate } from 'react-router-dom';
+
 
 function DasReport() {
+
+    const navigate = useNavigate();
+
     const [assementYear, setassementYear] = useState('');
     const [selectedTaxYear, setSelectedTaxYear] = useState('');
-  
+
     const handleAssessmentYearChange = (e) => {
         setassementYear(e.target.value);
     };
-  
+
     const handleTaxYearChange = (e) => {
-      setSelectedTaxYear(e.target.value);
+        setSelectedTaxYear(e.target.value);
     };
-  
+
     // Generate a list of years from 1900 to current year
     const years = [];
     const currentYear = new Date().getFullYear();
     for (let year = 1900; year <= currentYear; year++) {
-      years.push(year.toString());
+        years.push(year.toString());
     }
     const [additionalInformation, setAdditionalInformation] = useState('');
 
@@ -94,16 +99,16 @@ function DasReport() {
     const [nextNameRunId, setNextNameRunId] = useState(4);
 
     const [tableTaxInstaData, setTableTaxInstaData] = useState([
-        { id: 1, data: {} },
-        { id: 2, data: {} },
+        { id: 1, installment: "1st Installment", amount: "", status: "", paidDueDate: "" },
+        { id: 2, installment: "2nd Installment", amount: "", status: "", paidDueDate: "" },
     ]);
-    const [nextTableTaxInstaId, setNextTableTaxInstaId] = useState(2);
+    const [nextTableTaxInstaId, setNextTableTaxInstaId] = useState(3);
 
 
 
     const [taxinfo, setTaxInfo] = useState({
         selectedTaxYear: "",
-        assementYear:"",
+        assementYear: "",
         landValue: "",
         buildingValue: "",
         extraValue: "",
@@ -111,7 +116,7 @@ function DasReport() {
         comments: "",
     })
 
-    const {landValue, buildingValue, extraValue, totalValue, comments } = taxinfo
+    const { landValue, buildingValue, extraValue, totalValue, comments } = taxinfo
 
     const onInputChange2 = (e) => {
         setTaxInfo({ ...taxinfo, [e.target.name]: e.target.value })
@@ -289,10 +294,11 @@ function DasReport() {
         }
     };
 
+
     const handleAddTaxInstaRow = (e) => {
         e.preventDefault();
         const newTableTaxInstaId = nextTableTaxInstaId;
-        const newRow = { id: newTableTaxInstaId, amount: '', status: '', paidDueDate: '' }; // Initialize fields
+        const newRow = { id: newTableTaxInstaId, installment: newTableTaxInstaId === 3 ? `${newTableTaxInstaId}rd Installment` : `${newTableTaxInstaId}th Installment`, amount: '', status: '', paidDueDate: '' }; // Initialize fields
         setTableTaxInstaData([...tableTaxInstaData, newRow]);
         setNextTableTaxInstaId(newTableTaxInstaId + 1);
     };
@@ -300,7 +306,11 @@ function DasReport() {
     const handleDeleteLastTaxInstaRow = () => {
         if (tableTaxInstaData.length > 0) {
             const updatedRows = tableTaxInstaData.slice(0, -1); // Remove the last row
+
             setTableTaxInstaData(updatedRows);
+
+            // Update the nextTableTaxInstaId to reflect the new length of the array
+            setNextTableTaxInstaId(updatedRows.length + 1); // Add 1 because array index starts from 0
             localStorage.setItem('tableTaxInstaData', JSON.stringify(updatedRows));
         }
     };
@@ -562,15 +572,16 @@ function DasReport() {
     const handleClearTaxInstaRows = () => {
         const clearedData = tableTaxInstaData.map(row => ({
             ...row,
+            installment: '',
             amount: '',
             status: '',
             paidDueDate: ''
         }));
         setTableTaxInstaData(clearedData);
+        localStorage.removeItem('tableTaxInstaData'); // Clear local storage
+        localStorage.removeItem('taxInformation'); // Clear local storage
         setTaxInfo({
             landValue: "",
-            selectedTaxYear:"",
-            assementYear:"",
             buildingValue: "",
             totalValue: "",
             extraValue: "",
@@ -651,7 +662,7 @@ function DasReport() {
                     absActiveJudgementsAndLines: tableRowsData.map(table => ({ ...table.data })),
                     assessementsAndTaxInfo: [{
                         assementYear: assementYear,
-                        selectedTaxYear:selectedTaxYear,
+                        selectedTaxYear: selectedTaxYear,
                         landValue: landValue,
                         buildingValue: buildingValue,
                         extraValue: extraValue,
@@ -664,6 +675,7 @@ function DasReport() {
                         }],
                     namesrun: nameRunData.map(row => ({ ...row.data })),
                     taxinstallments: tableTaxInstaData.map(row => ({
+                        installment: row.installment || `${row.id} Installment`, // Assingning the initial value here because default value is not taking from the initilized
                         amount: row.amount,
                         status: row.status,
                         paidDueDate: row.paidDueDate
@@ -685,8 +697,10 @@ function DasReport() {
                 setSuccess(true);
                 console.log(payload);
                 window.alert("Data Sent Successfully");
+                navigate(`/DasDisplay/${orderNumber}`);
+
                 // clearLocalStorage();
-                window.location.reload();
+                // window.location.reload();
             } else {
                 setError('Failed to submit data. Please try again.');
             }
@@ -1099,8 +1113,8 @@ function DasReport() {
                                             >
                                                 <option value="">Select Year</option>
                                                 {years.map((year) => (
-                                                    <option 
-                                                    key={year} value={year}> {year}
+                                                    <option
+                                                        key={year} value={year}> {year}
                                                     </option>
                                                 ))}
                                             </select>
@@ -1152,16 +1166,16 @@ function DasReport() {
                                     </tr>
                                     {tableTaxInstaData.map((row, index) => (
                                         <tr key={row.id}>
-                                            <th className="das-report-sub-heading" colSpan='1' style={{ border: '1px solid black' }}>
-                                                {index + 1 === 1 ? `${index + 1}ST INSTALLMENT ` : index + 1 === 2 ? `${index + 1}ND INSTALLMENT` : index + 1 === 3 ? `${index + 1}RD INSTALLMENT` : `${index + 1}TH INSTALLMENT`}
-                                            </th>
-                                            <td colSpan='1' style={{ border: '1px solid black' }} >
+                                            <td colSpan='1' style={{ border: '1px solid black' }}>
+                                                <input type="text" className="abstract-control-input" name="installment" placeholder='installment' value={row.installment} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
+                                            </td>
+                                            <td colSpan='1' style={{ border: '1px solid black' }}>
                                                 <input type="text" className="abstract-control-input" name="amount" placeholder='AMOUNT' value={row.amount} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
                                             </td>
-                                            <td colSpan='1' style={{ border: '1px solid black' }} >
+                                            <td colSpan='1' style={{ border: '1px solid black' }}>
                                                 <input type="text" className="abstract-control-input" name="status" placeholder='STATUS' value={row.status} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
                                             </td>
-                                            <td colSpan='1' style={{ border: '1px solid black' }} >
+                                            <td colSpan='1' style={{ border: '1px solid black' }}>
                                                 <input type="date" className="abstract-control-input" name="paidDueDate" placeholder='DATE' value={row.paidDueDate} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
                                             </td>
                                         </tr>
