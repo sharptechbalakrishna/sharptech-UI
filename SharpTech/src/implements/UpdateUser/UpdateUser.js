@@ -13,6 +13,8 @@ function UpdateUser() {
   const [emailInvalid, setEmailInvalid] = useState(false);
   const [dobInvalid, setDobInvalid] = useState(false);
   const [panInvalid, setPanInvalid] = useState(false);
+  const [empIdExists, setEmpIdExists] = useState(false);
+  const [emailExists, setEmailExists] = useState(false);
 
   const [userData, setUserData] = useState({
     empId: "",
@@ -114,12 +116,22 @@ function UpdateUser() {
       if (confirmUpdate) {
         const token = localStorage.getItem('token');
         const res = await UserService.updateUser(userId, userData, token);
+        if (res.statusCode === 400) {
+          if (res.message.includes('empId')) {
+            setEmpIdExists(true);
+          }
+          if (res.message.includes('email')) {
+            setEmailExists(true);
+          }
+          return;
+        }
+        alert(`${userData.firstName} ${userData.lastName} ${res.message}`);
         console.log(res);
         navigate("/Pagination");
       }
     } catch (error) {
       console.error('Error updating user profile:', error);
-      alert(error);
+      alert('Error updating user profile:');
     }
   };
 
@@ -134,8 +146,11 @@ function UpdateUser() {
             <div className="form-row">
               <div className="form-group col">
                 <label htmlFor="empId">Employee Id</label>
-                <input type="text" className="form-control" placeholder="Enter your employee id" name="empId" value={userData.empId} onChange={handleInputChange} readOnly />
-                {<p>&nbsp;&nbsp;Employee Id Cant be Edit</p>}
+                <input type="text" className="form-control" placeholder="Enter your employee id" name="empId" value={userData.empId} onChange={handleInputChange}
+                // readOnly 
+                />
+                {empIdExists && <span className="error-message-return">EmpId is already exists use different email</span>}
+                {/* {<p>&nbsp;&nbsp;Employee Id Cant be Edit</p>} */}
               </div>
             </div>
             <div className="form-row">
@@ -172,9 +187,10 @@ function UpdateUser() {
             <div className="form-row">
               <div className="form-group col">
                 <label htmlFor="empEmail">Email</label>
-                <input type="email" className="form-control" placeholder="Enter your email" name="email" value={userData.email} onChange={handleInputChange} readOnly />
+                <input type="email" className="form-control" placeholder="Enter your email" name="email" value={userData.email} onChange={handleInputChange} />
+                {emailExists && <span className="error-message-return">Email address is already exists use different email</span>}
                 {emailInvalid && <span className="error-message-return">Invalid email format</span>}
-                {<p>&nbsp;&nbsp;Email can't be Edit</p>}
+                {/* {<p>&nbsp;&nbsp;Email can't be Edit</p>} */}
               </div>
               <div className="form-group col">
                 <label htmlFor="phoneNumber">Phone Number</label>

@@ -69,6 +69,29 @@ nav ul li a:hover {
   filter: invert(34%) sepia(75%) saturate(550%) hue-rotate(185deg) brightness(90%) contrast(90%);
 }
 
+
+.home-link {
+  position: relative;
+  display: inline-block;
+  padding-right: 5px;
+  
+}
+
+.updates-badge {
+  position: absolute;
+  top: 0;
+  right: -20px; /* Adjust this value based on your image size */
+  width: 30px; /* Adjust the width as needed */
+  height: 20px; /* Adjust the height as needed */
+  object-fit: cover;
+  border-radius: 50%; /* Make it circular if the image is square */
+  
+}
+
+.events-text {
+  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+}
+
   
 
 

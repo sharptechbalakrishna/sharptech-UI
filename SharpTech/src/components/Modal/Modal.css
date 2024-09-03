@@ -1,0 +1,80 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it appears above all other content */
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 80%;
+    max-width: 800px; /* Adjust max-width as needed */
+    max-height: 80vh; /* Set a max height for the modal */
+    overflow: hidden; /* Hide overflow to control scrolling within the modal */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    position: relative; /* Positioning for close button */
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    margin: 0;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover {
+    color: #f00;
+}
+
+.scrollable {
+    max-height: calc(20vh - 35px); /* Adjust height based on header and footer */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: auto; /* Prevent horizontal scrolling */
+    width: 100%;
+}
+
+.updates-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.updates-table th, .updates-table td {
+    border: 1px solid #ddd;
+    padding: 3px;
+    text-align: left;
+}
+
+.updates-table th {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.updates-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.updates-table tr:hover {
+    background-color: #f1f1f1;
+}

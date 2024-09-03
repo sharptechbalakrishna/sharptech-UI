@@ -8,6 +8,9 @@ import AuthContext from '../../implements/AuthContext/AuthContext';
 import Dropdown from "../../implements/Dropdown/Dropdown";
 import { useNavigate } from 'react-router-dom';
 import UserService from '../../implements/UserService/UserService';
+import UpdatesImage from '../../assets/Updates.png';
+import Modal from '../Modal/Modal';
+import axios from 'axios';
 
 const Navbar = () => {
   const { isAuthenticated, isAdmin, logout } = useContext(AuthContext);
@@ -16,6 +19,46 @@ const Navbar = () => {
   const [sticky, setSticky] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
   const hasLoggedOutRef = useRef(false); // New ref to track logout status
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [UpdateData, setUpdateData] = useState();
+  const [visible, setVisible] = useState(false);
+
+  // const [latestdate, setLatestDate] = useState(false);
+  // const currentDate = new Date().toISOString().split('T')[0];
+  // const showUpdateImage = latestdate && latestdate >= currentDate;
+
+
+
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+
+
+  useEffect(() => {
+    featureUpdate();
+  }, []);
+
+
+  const featureUpdate = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/future/updates');
+      setVisible(response.data.updatesList[response.data.updatesList.length - 1].visible);
+      setUpdateData(response.data); // Remove quotes to store actual data
+
+      // console.log("Visible",response.data.updatesList[response.data.updatesList.length-1]);
+      // const ld = response.data.updatesList[response.data.updatesList.length - 1].releaseDate;
+      // console.log("Latest Date", ld);
+      // setLatestDate(response.data.updatesList[response.data.updatesList.length - 1].releaseDate) // Taking the first latest date of the entry
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleLogout = async (confirm = true) => {
     if (isLoggingOut || hasLoggedOutRef.current) return;
@@ -89,27 +132,56 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`container ${sticky ? 'dark-nav' : ''}`}>
-      <Link to='Navbar'>
-        <img src={logo} alt="" className={`logo ${sticky ? 'sticky-logo' : ''}`} />
-      </Link>
-      <ul className={mobileMenu ? '' : 'hide-mobile-menu'}>
-        {!isAuthenticated && <li><Link to='carousel' smooth={true} offset={-250} duration={500}>Home</Link></li>}
-        {!isAuthenticated && <li><Link to='about' smooth={true} offset={-150} duration={500}>About</Link></li>}
-        {!isAuthenticated && <li><Link to='program' smooth={true} offset={-440} duration={500}>Services</Link></li>}
-        {!isAuthenticated && <li><Link to='testimonials' smooth={true} offset={-320} duration={500}>Reports</Link></li>}
-        {!isAuthenticated && <li><Link to='contact' smooth={true} offset={-250} duration={500}>Contact</Link></li>}
-        {isAdmin && <li><RouterLink to='/Register'>Register</RouterLink></li>}
-        {isAdmin && <li><RouterLink to='/Pagination'>Employees List</RouterLink></li>}
-        {isAuthenticated && <li><Dropdown /></li>}
-        {isAuthenticated ? (
-          <li className='btn'><RouterLink to="/" onClick={() => handleLogout(true)}>Logout</RouterLink></li>
-        ) : (
-          <li className='btn'><RouterLink to="/Login">Login</RouterLink></li>
-        )}
-      </ul>
-      <img src={menu_icon} alt="" className='menu-icon' onClick={toggleMenu} />
-    </nav>
+    <>
+      <nav className={`container ${sticky ? 'dark-nav' : ''}`}>
+        <Link to='Navbar'>
+          <img src={logo} alt="" className={`logo ${sticky ? 'sticky-logo' : ''}`} />
+        </Link>
+        <ul className={mobileMenu ? '' : 'hide-mobile-menu'}>
+
+
+          {!isAuthenticated && <li className="events-text"><Link to='carousel' smooth={true} offset={-250} duration={500}>Home</Link></li>}
+
+          {!isAuthenticated && <li className="events-text"><Link to='about' smooth={true} offset={-150} duration={500}>About</Link></li>}
+          {!isAuthenticated && <li className="events-text"><Link to='program' smooth={true} offset={-440} duration={500}>Services</Link></li>}
+
+          {!isAuthenticated && (
+            <li className="home-link">
+              <span className="events-text" onClick={openModal}>
+                Updates
+                {visible && (
+                  <img
+                    src={UpdatesImage}
+                    alt="Updates"
+                    className="updates-badge"
+                    onClick={openModal}
+                  />
+                )}
+              </span>
+            </li>
+          )}
+
+          {!isAuthenticated && <li className="events-text"><Link to='testimonials' smooth={true} offset={-320} duration={500}>Reports</Link></li>}
+          {!isAuthenticated && <li className="events-text"><Link to='contact' smooth={true} offset={-250} duration={500}>Contact</Link></li>}
+          {isAdmin && <li><RouterLink to='/Register'>Register</RouterLink></li>}
+          {isAdmin && <li><RouterLink to='/Pagination'>Employees List</RouterLink></li>}
+          {isAuthenticated && <li><Dropdown /></li>}
+          {isAuthenticated ? (
+            <li className='btn'><RouterLink to="/" onClick={() => handleLogout(true)}>Logout</RouterLink></li>
+          ) : (
+            <li className='btn'><RouterLink to="/Login">Login</RouterLink></li>
+          )}
+        </ul>
+        <img src={menu_icon} alt="" className='menu-icon' onClick={toggleMenu} />
+
+
+      </nav>
+      {isModalOpen &&
+        <Modal
+          onClose={closeModal}
+          UpdateData={UpdateData}
+        />}
+    </>
   );
 };
 
