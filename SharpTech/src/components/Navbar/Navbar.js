@@ -145,7 +145,7 @@ const Navbar = () => {
           {!isAuthenticated && <li className="events-text"><Link to='about' smooth={true} offset={-150} duration={500}>About</Link></li>}
           {!isAuthenticated && <li className="events-text"><Link to='program' smooth={true} offset={-440} duration={500}>Services</Link></li>}
 
-          {!isAuthenticated && (
+          {/* {!isAuthenticated && (
             <li className="home-link">
               <span className="events-text" onClick={openModal}>
                 Updates
@@ -159,7 +159,7 @@ const Navbar = () => {
                 )}
               </span>
             </li>
-          )}
+          )} */}
 
           {!isAuthenticated && <li className="events-text"><Link to='testimonials' smooth={true} offset={-320} duration={500}>Reports</Link></li>}
           {!isAuthenticated && <li className="events-text"><Link to='contact' smooth={true} offset={-250} duration={500}>Contact</Link></li>}
