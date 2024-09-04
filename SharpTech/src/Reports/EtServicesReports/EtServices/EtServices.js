@@ -16,38 +16,55 @@ function EtServices() {
   const [additionalInformation, setAdditionalInformation] = useState('');
 
   const [assementYear, setassementYear] = useState('');
-    const [taxYear, setTaxYear] = useState('');
+  const [taxYear, setTaxYear] = useState('');
 
 
-  
-    const handleAssessmentYearChange = (e) => {
-        setassementYear(e.target.value);
-    };
-  
-    const handleTaxYearChange = (e) => {
-      setTaxYear(e.target.value);
-    };
-  
-    // Generate a list of years from 1900 to current year
-    const years = [];
-    const currentYear = new Date().getFullYear();
-    for (let year = 1900; year <= currentYear; year++) {
-      years.push(year.toString());
-    }
+
+  const handleAssessmentYearChange = (e) => {
+    setassementYear(e.target.value);
+  };
+
+  const handleTaxYearChange = (e) => {
+    setTaxYear(e.target.value);
+  };
+
+  // Generate a list of years from 1900 to current year
+  const years = [];
+  const currentYear = new Date().getFullYear();
+  for (let year = 1900; year <= currentYear; year++) {
+    years.push(year.toString());
+  }
 
   // Handle input changes
   const onInputChangeinfo = (event) => {
-      setAdditionalInformation(event.target.value);
+    setAdditionalInformation(event.target.value);
   };
 
   // UseEffect to log changes in additionalInformation
   useEffect(() => {
-      console.log("Additional Information updated:", additionalInformation);
+    console.log("Additional Information updated:", additionalInformation);
   }, [additionalInformation]);
 
 
+  const [legaldescription, setlegaldescription] = useState('');
+
+  // Handle input changes
+  const onInputlegalinfo = (event) => {
+    setlegaldescription(event.target.value);
+  };
+
+  // UseEffect to log changes in additionalInformation
+  useEffect(() => {
+    console.log("Additional Information updated:", legaldescription);
+  }, [legaldescription]);
+
+
+
+
+
+
   const handleInfoChange = (event) => {
-      setAdditionalInformation(event.target.value);
+    setAdditionalInformation(event.target.value);
   };
 
 
@@ -79,8 +96,8 @@ function EtServices() {
           etactivejudgmentsandliens: tableRowsData.map(row => ({ ...row.data })),
           ettaxinformation: [
             {
-              assementYear:assementYear,
-              taxYear:taxYear,
+              assementYear: assementYear,
+              taxYear: taxYear,
               landValue: landValue,
               buildingValue: buildingValue,
               totalValue: buildingValue,
@@ -88,11 +105,16 @@ function EtServices() {
               notes: notes
             }
           ],
-          
+
           etadditionalinformation:
-          [{
+            [{
               additionalInformation: additionalInformation
+            }],
+
+          etlegaldescriptioninfo: [{
+            legaldescription: legaldescription
           }],
+          
           etnameruns: nameRunData.map(row => ({ ...row.data })),
           ettaxinstallment: tableTaxInstaData.map(row => ({
             amount: row.amount || '',
@@ -101,7 +123,7 @@ function EtServices() {
           })),
         }
       };
-      console.log('sending data',payload);
+      console.log('sending data', payload);
       const response = await axios.post(`${UserService.BASE_URL}/etinsert`, payload, {
         headers: {
           'Authorization': `Bearer ${token}`
@@ -139,8 +161,8 @@ function EtServices() {
 
   const [taxinfo, setTaxInfo] = useState({
     landValue: "",
-    assementYear:"",
-    taxYear:"",
+    assementYear: "",
+    taxYear: "",
     buildingValue: "",
     totalValue: "",
     excemption: "",
@@ -514,7 +536,7 @@ function EtServices() {
     });
     setTablesData(updatedTables);
     localStorage.removeItem(`vestingTableData_${tableId}`);
-  
+
 
     // Update overall tables data in localStorage
     localStorage.setItem('etvestingInfo', JSON.stringify(updatedTables));
@@ -524,7 +546,7 @@ function EtServices() {
   const saveMortgageInfo = (tableId) => {
     const tableData = tablesData2.find(table => table.id === tableId);
     localStorage.setItem(`mortgageTableData_${tableId}`, JSON.stringify(tableData));
-   
+
 
     localStorage.setItem('etmortgageInfo', JSON.stringify(tablesData2));
     window.alert('OpenMortage Saved Locally');
@@ -597,12 +619,12 @@ function EtServices() {
       totalValue: "",
       excemption: "",
       notes: "",
-      assementYear:"",
-      taxYear:""
+      assementYear: "",
+      taxYear: ""
     });
-       localStorage.removeItem('ettaxInformation');
-        localStorage.removeItem('ettableTaxInstaData');
-        alert('Tax Info cleared locally');
+    localStorage.removeItem('ettaxInformation');
+    localStorage.removeItem('ettableTaxInstaData');
+    alert('Tax Info cleared locally');
   };
 
 
@@ -785,7 +807,7 @@ function EtServices() {
                     </center>
 
 
-                   
+
                     <button className="et-service-genenal-info-add-button" onClick={handleAddTable}> <i className="pi pi-plus" style={{ marginRight: '5px' }}></i>  Table  </button>
                     {table.id > 1 && (
                       <button className="et-service-genenal-info-delete-button" onClick={() => handleDeleteTable(table.id)}> <i className="pi pi-trash" ></i> Table</button>
@@ -844,7 +866,7 @@ function EtServices() {
                         <tr>
                           <th className='et-service-form-table-1-heading' style={{ border: '1px solid black' }}> DATED DATE: </th>
                           <td colSpan={'4'} style={{ border: '1px solid black' }}>
-                          <input type="date" className="et-service-input-labels" placeholder="RECORDED DATE" name="datedDate" style={{ width: '100%' }} value={table.data.datedDate || ''} onChange={(e) => handleInputChange2(e, table.id)} />
+                            <input type="date" className="et-service-input-labels" placeholder="RECORDED DATE" name="datedDate" style={{ width: '100%' }} value={table.data.datedDate || ''} onChange={(e) => handleInputChange2(e, table.id)} />
                           </td>
                           <th className='et-service-form-table-1-heading' style={{ border: '1px solid black' }}>RECORDED DATE:</th>
                           <td colSpan={2} style={{ border: '1px solid black' }}>
@@ -891,9 +913,9 @@ function EtServices() {
                       </table>
                     </center>
 
-                  
+
                     <button className="et-service-genenal-info-add-button" onClick={handleAddTable2}>
-                      <i className="pi pi-plus"  style={{ marginRight: '5px' }}   ></i>Table
+                      <i className="pi pi-plus" style={{ marginRight: '5px' }}   ></i>Table
                     </button>
                     {table.id > 1 && (
                       <button className="et-service-genenal-info-delete-button" onClick={() => handleDeleteTable2(table.id)}>
@@ -947,7 +969,7 @@ function EtServices() {
                     </tbody>
                   </table>
                 </center>
-                <button className="et-service-genenal-info-add-button" type='button' onClick={handleAddRow}> <i className="pi pi-plus"  style={{ marginRight: '5px' }}   ></i>Row</button>
+                <button className="et-service-genenal-info-add-button" type='button' onClick={handleAddRow}> <i className="pi pi-plus" style={{ marginRight: '5px' }}   ></i>Row</button>
                 {tableRowsData.length > 3 && (
                   <button className="et-service-genenal-info-delete-button" type='button' onClick={handleDeleteLastRow}>  <i className="pi pi-trash"     ></i> Row </button>
                 )}
@@ -970,36 +992,36 @@ function EtServices() {
                     <tr className='th-color'>
                       <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>ASSESMENT YEAR</th>
                       <th className="et-service-form-table-selftables-heading" style={{ border: '1px solid black' }}>
-                                            <select
-                                                className="das-report-sub-heading-1"
-                                                style={{ border: 'none', background: 'none', outline: 'none' }}
-                                                value={assementYear}
-                                                onChange={handleAssessmentYearChange}
-                                            >
-                                                <option value="">Select Year</option>
-                                                {years.map((year) => (
-                                                    <option 
-                                                    key={year} value={year}> {year}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </th>
+                        <select
+                          className="das-report-sub-heading-1"
+                          style={{ border: 'none', background: 'none', outline: 'none' }}
+                          value={assementYear}
+                          onChange={handleAssessmentYearChange}
+                        >
+                          <option value="">Select Year</option>
+                          {years.map((year) => (
+                            <option
+                              key={year} value={year}> {year}
+                            </option>
+                          ))}
+                        </select>
+                      </th>
                       <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>TAX YEAR</th>
                       <th className="et-service-form-table-selftables-heading" style={{ border: '1px solid black' }}>
-                                            <select
-                                                className="das-report-sub-heading-1"
-                                                style={{ border: 'none', background: 'none', outline: 'none' }}
-                                                value={taxYear}
-                                                onChange={handleTaxYearChange}
-                                            >
-                                                <option value="">Select Year</option>
-                                                {years.map((year) => (
-                                                    <option 
-                                                    key={year} value={year}> {year}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </th>
+                        <select
+                          className="das-report-sub-heading-1"
+                          style={{ border: 'none', background: 'none', outline: 'none' }}
+                          value={taxYear}
+                          onChange={handleTaxYearChange}
+                        >
+                          <option value="">Select Year</option>
+                          {years.map((year) => (
+                            <option
+                              key={year} value={year}> {year}
+                            </option>
+                          ))}
+                        </select>
+                      </th>
                     </tr>
 
                     <tr>
@@ -1058,7 +1080,7 @@ function EtServices() {
                     </tr>
                   </table>
                 </center>
-                <button className="et-service-genenal-info-add-button" type='button' onClick={handleAddTaxInstaRow}> <i className="pi pi-plus"   style={{ marginRight: '5px' }}  ></i> Row</button>
+                <button className="et-service-genenal-info-add-button" type='button' onClick={handleAddTaxInstaRow}> <i className="pi pi-plus" style={{ marginRight: '5px' }}  ></i> Row</button>
                 {tableTaxInstaData.length > 2 && (
                   <button className="et-service-genenal-info-delete-button" type='button' onClick={handleDeleteLastTaxInstaRow}>
                     <i className="pi pi-trash"     ></i> Row  </button>
@@ -1124,36 +1146,36 @@ function EtServices() {
 
               </div>
               <div >
-                        <br />
-                        <center>
-                            <table className='et-service-form-table-1' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
-                                <thead>
-                                    <tr>
-                                        <th className='et-service-form-table-selftables-heading' colSpan="5"> ADDITINAL INFORMATION</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td colSpan='5' style={{ border: '1px solid black' }}>
-                                            <input
-                                                className="abstract-control-input"
-                                                type="text"
-                                                placeholder="ADDITINAL INFORMATION"
-                                                name="additionalInformation"
-                                                value={additionalInformation}
-                                                onChange={onInputChangeinfo}
-                                                style={{ width: '100%' }}
-                                            />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </center>
-                        <br />
+                <br />
+                <center>
+                  <table className='et-service-form-table-1' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
+                    <thead>
+                      <tr>
+                        <th className='et-service-form-table-selftables-heading' colSpan="5"> ADDITINAL INFORMATION</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td colSpan='5' style={{ border: '1px solid black' }}>
+                          <textarea
+                            className="abstract-control-input"
+                            type="text"
+                            placeholder="ADDITINAL INFORMATION"
+                            name="additionalInformation"
+                            value={additionalInformation}
+                            onChange={onInputChangeinfo}
+                            style={{ width: '100%' }}
+                          />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </center>
+                <br />
 
 
-                    </div>
-                    <br />
+              </div>
+              <br />
               {/* --------------------------------------------------------------LEGAL DESCRIPTION 7-----------------------------------------------*/}
               <div>
                 <br />
@@ -1163,12 +1185,15 @@ function EtServices() {
                       <th className='et-service-form-table-selftables-heading' colSpan="5">LEGAL DESCRIPTION </th>
                     </tr>
                     <tr>
-                      <td className='et-service-form-table-1-data' style={{ border: '1px solid black' }}>
-                        <p> FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED ASSESSOR'S
-                          <br />
-                          <br />
-                          <br />
-                          PARCEL NUMBER:</p>
+                      <td colSpan='5' style={{ border: '1px solid black' }}>
+                        <textarea
+                          className="abstract-control-input"
+                          type="text"
+                          value={legaldescription || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n\n\nPROPERTY ADDRESS:"}
+                          name="legaldescription"
+                          onChange={onInputlegalinfo}
+                          style={{ width: '100%' }}
+                        />
                       </td>
                     </tr>
 

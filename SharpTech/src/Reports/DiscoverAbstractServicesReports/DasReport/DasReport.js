@@ -34,20 +34,34 @@ function DasReport() {
     }
     const [additionalInformation, setAdditionalInformation] = useState('');
 
-    // Handle input changes
-    const onInputChangeinfo = (event) => {
-        setAdditionalInformation(event.target.value);
-    };
-
     // UseEffect to log changes in additionalInformation
     useEffect(() => {
         console.log("Additional Information updated:", additionalInformation);
     }, [additionalInformation]);
 
+    // Handle input changes
+    const onInputChangeinfo = (event) => {
+        setAdditionalInformation(event.target.value);
+    };
+
+
+
+    const [daslegaldesc, setdaslegaldesc] = useState('');
+
+    const onInputlegalinfo = (event) => {
+        setdaslegaldesc(event.target.value);
+    }
+
+    useEffect(() => {
+        console.log("legal description", daslegaldesc);
+    }, [daslegaldesc]);
+
 
     const handleInfoChange = (event) => {
         setAdditionalInformation(event.target.value);
     };
+
+
     const [user, setUser] = useState({
 
         orderNumber: "",
@@ -673,6 +687,12 @@ function DasReport() {
                         [{
                             additionalInformation: additionalInformation
                         }],
+
+                    daslegaldescriptioninfo:
+                        [{
+                            daslegaldesc: daslegaldesc
+                        }],
+
                     namesrun: nameRunData.map(row => ({ ...row.data })),
                     taxinstallments: tableTaxInstaData.map(row => ({
                         installment: row.installment || `${row.id} Installment`, // Assingning the initial value here because default value is not taking from the initilized
@@ -1256,6 +1276,8 @@ function DasReport() {
                             <Button className='das-report-general-info-clear-button' type='button' label="Clear&nbsp;" icon="pi pi-times" onClick={handleClearNameRunRows} />
                         </center>
                     </div>
+
+
                     <div >
                         <br />
                         <center>
@@ -1268,14 +1290,14 @@ function DasReport() {
                                 <tbody>
                                     <tr>
                                         <td colSpan='5' style={{ border: '1px solid black' }}>
-                                            <input
+                                            <textarea
                                                 className="abstract-control-input"
                                                 type="text"
                                                 placeholder="ADDITIONAL INFORMATION"
                                                 name="additionalInformation"
                                                 value={additionalInformation}
                                                 onChange={onInputChangeinfo}
-                                                style={{ width: '100%' }}
+                                                style={{ height: '200px' }}
                                             />
                                         </td>
                                     </tr>
@@ -1299,7 +1321,7 @@ function DasReport() {
 
                                 <tr>
 
-                                    <td className='das-report-text-line' colSpan={1} style={{ border: '1px solid black' }}>
+                                    {/* <td className='das-report-text-line' colSpan={1} style={{ border: '1px solid black' }}>
                                         FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED
                                         <br />
                                         <br />
@@ -1307,6 +1329,17 @@ function DasReport() {
                                         <br />
                                         PROPERTY ADDRESS:
 
+                                    </td> */}
+
+                                    <td colSpan='5' style={{ border: '1px solid black' }}>
+                                        <textarea
+                                            className="abstract-control-input"
+                                            type="text"
+                                            name="daslegaldesc"
+                                            value={daslegaldesc || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n\n\nPROPERTY ADDRESS:"}
+                                            onChange={onInputlegalinfo}
+                                            style={{ height: '200px' }}
+                                        />
                                     </td>
                                     <br />
                                 </tr>
