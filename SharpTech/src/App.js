@@ -30,6 +30,7 @@ import EmployeeDetail from './implements/EmployeeDetail/EmployeeDetail';
 import ProtectedRoute from './implements/Logic/ProtectedRoute';
 import PublicRoute from './implements/Logic/PublicRoute';
 import VerifyLogin from './implements/Login/VerifyLogin';
+import DasReportEdit from './Reports/DiscoverAbstractServicesReports/DasReportEdit/DasReportEdit';
 
 
 function App() {
@@ -88,6 +89,7 @@ function App() {
                 <Route path="/DasDisplay/:orderNumber" element={<DasDisplay />} />
                 <Route path="/DasOrderSearch" element={<DasOrderSearch />} />
                 <Route path="/DasReport" element={<DasReport />} />
+                <Route path="/DasReportEdit" element={<DasReportEdit />} />
               </Route>
               
 

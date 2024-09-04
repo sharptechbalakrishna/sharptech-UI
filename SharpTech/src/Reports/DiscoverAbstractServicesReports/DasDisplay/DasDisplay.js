@@ -15,10 +15,12 @@ import Footer from '../../../components/Footer/Footer';
 import Navbar from '../../../components/Navbar/Navbar';
 import { ClipLoader } from 'react-spinners'; // Import ClipLoader from react-spinners
 import UserService from '../../../implements/UserService/UserService';
+import { useNavigate } from 'react-router-dom';
 
 
 function DasDisplay() {
 
+    const navigate = useNavigate();
     const [etservice, setEtService] = useState(null);
     const { orderNumber } = useParams(); // Assuming you're using React Router hooks
     const [isDownloading, setIsDownloading] = useState(false);
@@ -176,6 +178,13 @@ function DasDisplay() {
         // Save the DOCX file with the filename including the date
         saveAs(docxContent, filename);
     };
+
+    const editReport = () => {
+
+        console.log("Edit Data", etservice);
+        alert("Edit Pressed")
+        navigate(`/DasReportEdit`, { state: { dasData: etservice } });
+    }
 
 
     return (
@@ -482,9 +491,9 @@ function DasDisplay() {
                                                 </tr>
                                                 <tr className='th-color'>
                                                     <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }} colSpan={1}>ASSESMENT YEAR</th>
-                                                    <td>{taxinformation.assementYear}</td>
+                                                    <td><center>{taxinformation.assementYear}</center></td>
                                                     <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }} colSpan={1}>TAX YEAR</th>
-                                                    <td>{taxinformation.selectedTaxYear}</td>
+                                                    <td><center>{taxinformation.selectedTaxYear}</center></td>
                                                 </tr>
                                                 {/* <tr>
                                                     <td className="das-report-display-data" style={{ border: '1px solid black' }} colSpan={2}>{taxinformation.assessmentYear}</td>
@@ -528,7 +537,7 @@ function DasDisplay() {
                                                 </tr>
                                                 {etservice && etservice.taxinstallments.map((taxinstallments, tindex) => (
                                                     <tr key={tindex} className={tindex % 2 === 0 ? 'th-color' : ''}>
-                                                        <td className="das-report-display-data" style={{ border: '1px solid black' }}>{tindex === 0 ? `${tindex + 1}ST INSTALLMENT` : tindex === 1 ? `${tindex + 1}ND INSTALLMENT` : tindex === 2 ? `${tindex + 1}RD INSTALLMENT` : `${tindex + 1}TH INSTALLMENT`}</td>
+                                                        <td className="das-report-display-data" style={{ border: '1px solid black' }}>{taxinstallments.installment}</td>
                                                         <td className="das-report-display-data" style={{ border: '1px solid black' }}>
                                                         {/* {taxinstallments.amount} */}
                                                         {/* {taxinstallment.amount.startsWith('$')
@@ -680,6 +689,8 @@ function DasDisplay() {
                             <center>
                                 <button className='das-service-display-pdf-button ' onClick={printDocument}>Download PDF</button>
                                 <button className='das-service-display-doc-button' onClick={handleDownload}>Download DOCX</button>
+
+                                <button className='das-service-display-doc-button' onClick={editReport}>EditReport</button>
                             </center>
 
 
