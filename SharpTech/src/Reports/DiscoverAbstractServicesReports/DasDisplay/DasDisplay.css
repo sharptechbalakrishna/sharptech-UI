@@ -42,6 +42,28 @@
 
 
 
+.das-service-display-edit-button{
+  background-color: #b99328; /* Green background */
+  border: none; /* Remove borders */
+  color: white; /* White text */
+  padding: 10px 12px; /* Some padding */
+  text-align: center; /* Centered text */
+  text-decoration: none; /* Remove underline */
+  display: inline-block; /* Get elements to line up properly */
+  font-size: 16px; /* Increase font size */
+  margin: 4px 2px; /* Add some margin */
+  cursor: pointer; /* Pointer/hand icon */
+  border-radius: 10px; /* Rounded corners */
+  transition-duration: 0.4s; /* Animation duration */
+  width: 10%;
+}
+
+
+.das-service-display-edit-button:hover {
+  background-color: rgba(255, 255, 255, 0.24); /* White background on hover */
+  color: black; /* Black text on hover */
+  border: 2px solid #926504; /* Green border on hover */
+}
 
 
 
@@ -55,7 +77,7 @@
   text-decoration: none; /* Remove underline */
   display: inline-block; /* Get elements to line up properly */
   font-size: 16px; /* Increase font size */
- 
+  margin: 4px 2px; /* Add some margin */
   cursor: pointer; /* Pointer/hand icon */
   border-radius: 10px; /* Rounded corners */
   transition-duration: 0.4s; /* Animation duration */

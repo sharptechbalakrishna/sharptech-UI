@@ -144,7 +144,9 @@ function DasDisplay() {
                     border-radius: 10px;
                 }
                 .das-display-sub-title-headings {
-                    background-color: #93c0f3;
+                    // background-color: #93c0f3;
+                    text-align: left;
+
                 }
                 .das-display-header-table {
                     background-color: #7fb9f7;
@@ -383,7 +385,7 @@ function DasDisplay() {
 
                                                     <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>AMOUNT [$]:</th>
                                                     <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>
-                                                    {openmortagedeedinfo.amount.startsWith('$')
+                                                        {openmortagedeedinfo.amount.startsWith('$')
                                                             ? openmortagedeedinfo.amount
                                                             : `$${openmortagedeedinfo.amount}`}
                                                     </td>
@@ -469,7 +471,7 @@ function DasDisplay() {
                                                     <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.bkPgCaseNo}</td>
                                                     <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{moment(activejudgmentsandliens.recordingDate).format('MM/DD/YYYY')}</td>
                                                     <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>
-                                                    {activejudgmentsandliens.amount.startsWith('$')
+                                                        {activejudgmentsandliens.amount.startsWith('$')
                                                             ? activejudgmentsandliens.amount
                                                             : `$${activejudgmentsandliens.amount}`}
                                                     </td>
@@ -504,13 +506,13 @@ function DasDisplay() {
                                                 <tr className='th-color'>
                                                     <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }}>LAND VALUE</th>
                                                     <td className="das-report-display-data" style={{ border: '1px solid black' }} colSpan={1}>
-                                                    {taxinformation.landValue.startsWith('$')
+                                                        {taxinformation.landValue.startsWith('$')
                                                             ? taxinformation.landValue
                                                             : `$${taxinformation.landValue}`}
                                                     </td>
                                                     <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }}>BUILDING VALUE</th>
                                                     <td className="das-report-display-data" style={{ border: '1px solid black' }} colSpan={1}>
-                                                    {taxinformation.buildingValue.startsWith('$')
+                                                        {taxinformation.buildingValue.startsWith('$')
                                                             ? taxinformation.buildingValue
                                                             : `$${taxinformation.buildingValue}`}
                                                     </td>
@@ -518,14 +520,14 @@ function DasDisplay() {
                                                 <tr>
                                                     <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }}>TOTAL VALUE</th>
                                                     <td className="das-report-display-data" style={{ border: '1px solid black' }} colSpan={1}>
-                                                    {taxinformation.totalValue.startsWith('$')
+                                                        {taxinformation.totalValue.startsWith('$')
                                                             ? taxinformation.totalValue
                                                             : `$${taxinformation.totalValue}`}
                                                     </td>
                                                     <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }}>EXTRA VALUE</th>
                                                     <td className="das-report-display-data" style={{ border: '1px solid black' }} colSpan={1}>
-                                                    {taxinformation.extraValue.startsWith('$')
-                                                            ?taxinformation.extraValue
+                                                        {taxinformation.extraValue.startsWith('$')
+                                                            ? taxinformation.extraValue
                                                             : `$${taxinformation.extraValue}`}
                                                     </td>
                                                 </tr>
@@ -539,8 +541,8 @@ function DasDisplay() {
                                                     <tr key={tindex} className={tindex % 2 === 0 ? 'th-color' : ''}>
                                                         <td className="das-report-display-data" style={{ border: '1px solid black' }}>{taxinstallments.installment}</td>
                                                         <td className="das-report-display-data" style={{ border: '1px solid black' }}>
-                                                        {/* {taxinstallments.amount} */}
-                                                        {/* {taxinstallment.amount.startsWith('$')
+                                                            {/* {taxinstallments.amount} */}
+                                                            {/* {taxinstallment.amount.startsWith('$')
                                                             ? taxinstallment.amount
                                                             : `$${taxinstallment.amount}`} */}
                                                             {taxinstallments.amount.startsWith('$')
@@ -590,6 +592,7 @@ function DasDisplay() {
                                 <br />
                             </center>
                             {etservice && etservice.dasadditionalinformation.map((additionalinfo, tindex) => (
+
                                 <div className='abstractreport-container-12'>
                                     <br />
                                     <center>
@@ -601,8 +604,14 @@ function DasDisplay() {
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td colSpan='7' style={{ width: '100%', border: '1px solid black' }}>
-                                                        {additionalinfo.additionalInformation || "No additional information available"}
+                                                    <td colSpan="7" style={{ width: '100%', border: '1px solid black', padding: '10px', backgroundColor: '#f9f9f9' }}>
+                                                        <pre style={{
+                                                            whiteSpace: 'pre-wrap', // Ensures the text wraps if it's too long
+                                                            wordWrap: 'break-word', // Prevents long words from overflowing
+                                                           
+                                                        }}>
+                                                            {additionalinfo.additionalInformation || "No additional information available"}
+                                                        </pre>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -611,47 +620,36 @@ function DasDisplay() {
                                 </div>
                             ))}
                             <br />
-                            {etservice && (
-                                <center>
-                                    <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
-                                        <tr>
-                                            <th className="das-display-header-table" colSpan={1}> SHORT LEGAL DESCRIPTION </th>
-                                        </tr>
+                            {etservice && etservice.daslegaldescriptioninfo.map((legaldescription, tindex) => (
+                                <div className='abstractreport-container-13'>
+                                    <center>
+                                        <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
+                                            <tr>
+                                                <th className="das-display-header-table" colSpan={1}> SHORT LEGAL DESCRIPTION </th>
+                                            </tr>
 
-                                        <tr>
-                                            <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>
-                                                <p>FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED </p>
-                                                <br />
-                                                <br />
-                                                <br />
-                                                <br />
-                                                <p> PROPERTY ADDRESS :  {etservice.propertyAddress} </p>
-                                                {/* {etservice.propertyAddress === null ? "No" : {etservice.propertyAddress}}  */}
-                                            </td>
+                                            <tr>
+                                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>
+                                                <pre style={{
+                                                            whiteSpace: 'pre-wrap', // Ensures the text wraps if it's too long
+                                                            wordWrap: 'break-word', // Prevents long words from overflowing
+                                                           
+                                                        }}> {legaldescription.daslegaldesc || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n"}</pre>
+                                                    <br />
+                                                    PROPERTY ADDRESS: {etservice.propertyAddress}
+                                                </td>
 
-                                        </tr>
-
-
-                                    </table>
-                                </center>
-                            )}
+                                            </tr>
+                                        </table>
+                                    </center>
+                                </div>
+                            ))}
                         </div>
                         <br />
                         <br />
 
 
                         <div id="pdf-content3">
-                            {/* Third set of content to be converted */}
-
-                            <br />
-                            {/* <center>
-                    <table className='das-display-report-heading' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
-                        <tr>
-                            <th>  DISCOVER ABSTRACT REPORT   </th>
-                        </tr>
-                    </table>
-                </center> */}
-
                             <br />
                             <br />
                             {etservice && (
@@ -690,7 +688,7 @@ function DasDisplay() {
                                 <button className='das-service-display-pdf-button ' onClick={printDocument}>Download PDF</button>
                                 <button className='das-service-display-doc-button' onClick={handleDownload}>Download DOCX</button>
 
-                                <button className='das-service-display-doc-button' onClick={editReport}>EditReport</button>
+                                <button className='das-service-display-edit-button' onClick={editReport}>EditReport</button>
                             </center>
 
 

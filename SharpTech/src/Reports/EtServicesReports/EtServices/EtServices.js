@@ -1164,7 +1164,7 @@ function EtServices() {
                             name="additionalInformation"
                             value={additionalInformation}
                             onChange={onInputChangeinfo}
-                            style={{ width: '100%' }}
+                            style={{ width: '100%',height:'150px' }}
                           />
                         </td>
                       </tr>
@@ -1192,7 +1192,7 @@ function EtServices() {
                           value={legaldescription || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n\n\nPROPERTY ADDRESS:"}
                           name="legaldescription"
                           onChange={onInputlegalinfo}
-                          style={{ width: '100%' }}
+                          style={{ width: '100%', height:'150px' }}
                         />
                       </td>
                     </tr>

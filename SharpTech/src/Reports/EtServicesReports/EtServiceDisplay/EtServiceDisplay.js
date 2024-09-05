@@ -265,7 +265,7 @@ function EtServiceDisplay() {
 
                                                         <th className='et-service-form-table-2-heading' colSpan={1} style={{ border: '1px solid black' }}>  CONSIDERATION AMOUNT: </th>
                                                         <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>
-                                                        {vestingInfo.considerationAmount.startsWith('$')
+                                                            {vestingInfo.considerationAmount.startsWith('$')
                                                                 ? vestingInfo.considerationAmount
                                                                 : `$${vestingInfo.considerationAmount}`}
                                                         </td>
@@ -458,30 +458,30 @@ function EtServiceDisplay() {
                                                 <tr>
                                                     <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} > LAND VALUE </td>
                                                     <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} >
-                                                    {taxinformation.landValue.startsWith('$')
-                                                                ? taxinformation.landValue
-                                                                : `$${taxinformation.landValue}`}
+                                                        {taxinformation.landValue.startsWith('$')
+                                                            ? taxinformation.landValue
+                                                            : `$${taxinformation.landValue}`}
                                                     </td>
                                                     <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} > BUILDING VALUE  </td>
                                                     <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} >
-                                                    {taxinformation.buildingValue.startsWith('$')
-                                                                ? taxinformation.buildingValue
-                                                                : `$${taxinformation.buildingValue}`}
+                                                        {taxinformation.buildingValue.startsWith('$')
+                                                            ? taxinformation.buildingValue
+                                                            : `$${taxinformation.buildingValue}`}
                                                     </td>
                                                 </tr>
 
                                                 <tr>
                                                     <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} > TOTAL VALUE </td>
                                                     <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} >
-                                                    {taxinformation.totalValue.startsWith('$')
-                                                                ? taxinformation.totalValue
-                                                                : `$${taxinformation.totalValue}`}
+                                                        {taxinformation.totalValue.startsWith('$')
+                                                            ? taxinformation.totalValue
+                                                            : `$${taxinformation.totalValue}`}
                                                     </td>
                                                     <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} > EXEMPTION </td>
                                                     <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} >
-                                                    {taxinformation.excemption.startsWith('$')
-                                                                ? taxinformation.excemption
-                                                                : `$${taxinformation.excemption}`}
+                                                        {taxinformation.excemption.startsWith('$')
+                                                            ? taxinformation.excemption
+                                                            : `$${taxinformation.excemption}`}
                                                     </td>
                                                 </tr>
 
@@ -496,7 +496,7 @@ function EtServiceDisplay() {
                                                     <tr key={tindex}>
                                                         <td className='et-service-form-table-2-data' colSpan='1' style={{ border: '1px solid black' }} >{tindex === 0 ? `${tindex + 1}ST INSTALLMENT` : tindex === 1 ? ` ${tindex + 1}ND INSTALLMENT` : tindex === 2 ? `${tindex + 1}RD INSTALLMENT` : `${tindex + 1}th INSTALLMENT`}</td>
                                                         <td className='et-service-form-table-2-data' colSpan='1' style={{ border: '1px solid black' }} >
-                                                        {taxinstallment.amount.startsWith('$')
+                                                            {taxinstallment.amount.startsWith('$')
                                                                 ? taxinstallment.amount
                                                                 : `$${taxinstallment.amount}`}
                                                         </td>
@@ -561,7 +561,11 @@ function EtServiceDisplay() {
                                                 <tbody>
                                                     <tr>
                                                         <td colSpan='7' style={{ width: '100%', border: '1px solid black' }}>
-                                                            {additionalinfo.additionalInformation || "No additional information available"}
+                                                        <pre style={{
+                                                            whiteSpace: 'pre-wrap', // Ensures the text wraps if it's too long
+                                                            wordWrap: 'break-word', // Prevents long words from overflowing
+                                                           
+                                                        }}>  {additionalinfo.additionalInformation || "No additional information available"}</pre>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -571,29 +575,35 @@ function EtServiceDisplay() {
                                 ))}
                                 <br />
                                 <br />
-                                {etservice && (
-                                    <div id="legalDescription">
-                                        <center>
-                                            <table className='et-service-form-table-1' style={{ border: '2px solid black', borderCollapse: 'collapse' }} >
-                                                <tr className='et-service-form-table-1-rows' >
-                                                    <th className='et-service-form-table-selftables-heading' colSpan={1} >LEGAL DESCRIPTION </th>
-                                                </tr>
-                                                <tr>
-                                                    <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }}>
-                                                        <p> FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED ASSESSOR'S
-                                                            <br />
-                                                            <br />
-                                                            <br />
-                                                            PARCEL NUMBER:{etservice.parcelNumber} </p>
 
-                                                    </td>
-                                                </tr>
+                                {etservice && etservice.etlegaldescriptioninfo.map((ledgerdescriptioninfo, tindex) => (
+                                    <div id="legalDescription" key={tindex}>
+                                        <center>
+                                            <table className="et-service-form-table-1" style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
+                                                <thead>
+                                                    <tr className="et-service-form-table-1-rows">
+                                                        <th className="et-service-form-table-selftables-heading" colSpan={1}>LEGAL DESCRIPTION</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td className="et-service-form-table-2-data" style={{ border: '1px solid black' }}>
+                                                          
+                                                        <pre style={{
+                                                            whiteSpace: 'pre-wrap', // Ensures the text wraps if it's too long
+                                                            wordWrap: 'break-word', // Prevents long words from overflowing
+                                                           
+                                                        }}>{ledgerdescriptioninfo.legaldescription || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n"}</pre>
+                                                            PARCEL NUMBER: {etservice.parcelNumber || "N/A"}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
                                             </table>
                                         </center>
                                         <br />
                                         <br />
                                     </div>
-                                )}
+                                ))}
                             </div>
 
 
@@ -639,8 +649,11 @@ function EtServiceDisplay() {
 
                             </div>
                             <center>
+                            <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
                                 <button className='et-service-display-doc-button' onClick={handleDownload}>Download DOCX</button>
                                 <button className='et-service-display-pdf-button' onClick={printDocument}>Download PDF</button>
+                                <button className='et-service-display-edit-button'>EditReport</button>
+                                </div>
                             </center>
                         </div>
                     </center>
