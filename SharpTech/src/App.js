@@ -31,6 +31,7 @@ import ProtectedRoute from './implements/Logic/ProtectedRoute';
 import PublicRoute from './implements/Logic/PublicRoute';
 import VerifyLogin from './implements/Login/VerifyLogin';
 import DasReportEdit from './Reports/DiscoverAbstractServicesReports/DasReportEdit/DasReportEdit';
+import EtServiceEdit from './Reports/EtServicesReports/EtServiceEdit/EtServiceEdit';
 
 
 function App() {
@@ -84,6 +85,7 @@ function App() {
                 <Route path="/EtSearchAddress" element={<EtSearchAddress />} />
                 <Route path="/EtServiceDisplay/:orderNumber" element={<EtServiceDisplay />} />
                 <Route path="/EtOrderSearch" element={<EtOrderSearch />} />
+                <Route path="/EtServiceEdit" element={<EtServiceEdit />} />
                 <Route path="/DisplayLogin" element={<DisplayLogin />} />
                 <Route path="/DasAddressSearch" element={<DasAddressSearch />} />
                 <Route path="/DasDisplay/:orderNumber" element={<DasDisplay />} />

@@ -10,8 +10,11 @@ import { Button } from 'primereact/button';
 import Navbar from '../../../components/Navbar/Navbar';
 import Footer from '../../../components/Footer/Footer';
 import UserService from '../../../implements/UserService/UserService';
+import { useNavigate } from 'react-router-dom';
 
 function EtServices() {
+
+  const navigate = useNavigate();
 
   const [additionalInformation, setAdditionalInformation] = useState('');
 
@@ -114,9 +117,10 @@ function EtServices() {
           etlegaldescriptioninfo: [{
             legaldescription: legaldescription
           }],
-          
+
           etnameruns: nameRunData.map(row => ({ ...row.data })),
           ettaxinstallment: tableTaxInstaData.map(row => ({
+            installment: row.installment,
             amount: row.amount || '',
             status: row.status || '',
             paidDueDate: row.paidDueDate || ''
@@ -135,6 +139,7 @@ function EtServices() {
       } else {
         window.alert(response.data.message || " Something went wrong in Et Report");
       }
+      navigate(`/EtServiceDisplay/${orderNumber}`);
     } catch (error) {
       console.error("Registration failed:", error);
       window.alert("Data Not Sent Somthing went Wrong"); // Handle error if registration fails
@@ -172,10 +177,10 @@ function EtServices() {
   const { landValue, buildingValue, totalValue, excemption, notes } = taxinfo
 
   const [tableTaxInstaData, setTableTaxInstaData] = useState([
-    { id: 1, data: {} },
-    { id: 2, data: {} },
+    { id: 1, installment: "1st Installment", amount: "", status: "", paidDueDate: "" },
+    { id: 2, installment: "2nd Installment", amount: "", status: "", paidDueDate: "" },
   ]);
-  const [nextTableTaxInstaId, setNextTableTaxInstaId] = useState(2);
+  const [nextTableTaxInstaId, setNextTableTaxInstaId] = useState(3);
 
   const { orderNumber, refeenceNumber, searchDate, effectiveDate, propertyAdderess, state, country, parcelNumber,
     subDivision, lotUnit, block, sfrPudCondo } = user
@@ -394,15 +399,16 @@ function EtServices() {
   const handleAddTaxInstaRow = (e) => {
     e.preventDefault()
     const newTableTaxInstaId = nextTableTaxInstaId;
-    const newRow = { id: newTableTaxInstaId, data: {} };
+    const newRow = { id: newTableTaxInstaId, installment: newTableTaxInstaId === 3 ? `${newTableTaxInstaId}rd Installment` : `${newTableTaxInstaId}th Installment`, amount: '', status: '', paidDueDate: '' }; // Initialize fields    setTableTaxInstaData([...tableTaxInstaData, newRow]);
     setTableTaxInstaData([...tableTaxInstaData, newRow]);
     setNextTableTaxInstaId(newTableTaxInstaId + 1);
-  };
+  }
 
   const handleDeleteLastTaxInstaRow = () => {
     if (tableTaxInstaData.length > 0) {
       const updatedRows = tableTaxInstaData.slice(0, -1); // Remove the last row
       setTableTaxInstaData(updatedRows);
+      setNextTableTaxInstaId(updatedRows.length + 1); // Add 1 because array index starts
       localStorage.setItem('ettableTaxInstaData', JSON.stringify(updatedRows));
     }
   };
@@ -1054,24 +1060,22 @@ function EtServices() {
 
                     </tr>
 
-                    {
-                      tableTaxInstaData.map((row, index) => (
-                        <tr key={index}>
-                          <td className="et-service-side-heading-fields" colSpan='1' style={{ border: '1px solid black' }}>
-                            {index === 0 ? `${index + 1}ST INSTALLMENT` : index === 1 ? `${index + 1}ND INSTALLMENT` : index === 2 ? `${index + 1}RD INSTALLMENT` : `${index + 1}TH INSTALLMENT`}
-                          </td>
-                          <td colSpan='1' style={{ border: '1px solid black' }}>
-                            <input type="text" className="et-service-input-labels" name="amount" placeholder='AMOUNT' value={row.amount} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
-                          </td>
-                          <td colSpan='1' style={{ border: '1px solid black' }}>
-                            <input type="text" className="et-service-input-labels" name="status" placeholder='STATUS' value={row.status} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
-                          </td>
-                          <td colSpan='1' style={{ border: '1px solid black' }}>
-                            <input type="date" className="et-service-input-labels" name="paidDueDate" placeholder='DATE' value={row.paidDueDate} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
-                          </td>
-                        </tr>
-                      ))
-                    }
+                    {tableTaxInstaData.map((row, index) => (
+                      <tr key={index}>
+                        <td colSpan='1' style={{ border: '1px solid black' }}>
+                          <input type="text" className="abstract-control-input" name="installment" placeholder='installment' value={row.installment} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
+                        </td>
+                        <td colSpan='1' style={{ border: '1px solid black' }}>
+                          <input type="text" className="et-service-input-labels" name="amount" placeholder='AMOUNT' value={row.amount} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
+                        </td>
+                        <td colSpan='1' style={{ border: '1px solid black' }}>
+                          <input type="text" className="et-service-input-labels" name="status" placeholder='STATUS' value={row.status} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
+                        </td>
+                        <td colSpan='1' style={{ border: '1px solid black' }}>
+                          <input type="date" className="et-service-input-labels" name="paidDueDate" placeholder='DATE' value={row.paidDueDate} onChange={e => handleInputChangeTaxInsta(e, index)} style={{ width: '100%' }} />
+                        </td>
+                      </tr>
+                    ))}
                     <tr>
                       <th style={{ border: '1px solid black' }}> NOTES </th>
                       <td colSpan={6} style={{ border: '1px solid black' }}>
@@ -1164,7 +1168,7 @@ function EtServices() {
                             name="additionalInformation"
                             value={additionalInformation}
                             onChange={onInputChangeinfo}
-                            style={{ width: '100%',height:'150px' }}
+                            style={{ width: '100%', height: '150px' }}
                           />
                         </td>
                       </tr>
@@ -1192,7 +1196,7 @@ function EtServices() {
                           value={legaldescription || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n\n\nPROPERTY ADDRESS:"}
                           name="legaldescription"
                           onChange={onInputlegalinfo}
-                          style={{ width: '100%', height:'150px' }}
+                          style={{ width: '100%', height: '150px' }}
                         />
                       </td>
                     </tr>

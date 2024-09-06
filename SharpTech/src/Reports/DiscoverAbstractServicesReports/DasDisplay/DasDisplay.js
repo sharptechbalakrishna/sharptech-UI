@@ -18,6 +18,7 @@ import UserService from '../../../implements/UserService/UserService';
 import { useNavigate } from 'react-router-dom';
 
 
+
 function DasDisplay() {
 
     const navigate = useNavigate();
@@ -608,7 +609,7 @@ function DasDisplay() {
                                                         <pre style={{
                                                             whiteSpace: 'pre-wrap', // Ensures the text wraps if it's too long
                                                             wordWrap: 'break-word', // Prevents long words from overflowing
-                                                           
+
                                                         }}>
                                                             {additionalinfo.additionalInformation || "No additional information available"}
                                                         </pre>
@@ -630,11 +631,11 @@ function DasDisplay() {
 
                                             <tr>
                                                 <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>
-                                                <pre style={{
-                                                            whiteSpace: 'pre-wrap', // Ensures the text wraps if it's too long
-                                                            wordWrap: 'break-word', // Prevents long words from overflowing
-                                                           
-                                                        }}> {legaldescription.daslegaldesc || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n"}</pre>
+                                                    <pre style={{
+                                                        whiteSpace: 'pre-wrap', // Ensures the text wraps if it's too long
+                                                        wordWrap: 'break-word', // Prevents long words from overflowing
+
+                                                    }}> {legaldescription.daslegaldesc || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n"}</pre>
                                                     <br />
                                                     PROPERTY ADDRESS: {etservice.propertyAddress}
                                                 </td>

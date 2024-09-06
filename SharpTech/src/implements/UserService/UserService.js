@@ -30,7 +30,7 @@ class UserService {
                 email,
                 otp,
                 newPassword
-              });
+            });
             console.log("In us:", response);
             return response;
 

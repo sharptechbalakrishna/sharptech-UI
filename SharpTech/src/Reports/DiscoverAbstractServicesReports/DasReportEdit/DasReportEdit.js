@@ -6,10 +6,11 @@ import { useState, useEffect } from 'react';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import UserService from '../../../implements/UserService/UserService';
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const DasReportEdit = () => {
 
-
+    const navigate = useNavigate();
 
     const location = useLocation();
     const { dasData } = location.state || {}; // Get dasData from the state
@@ -17,7 +18,7 @@ const DasReportEdit = () => {
 
     const [loading, setLoading] = useState(false);
 
-    console.log("Edit Page", dasData.daslegaldescriptioninfo); // Print the data to the console
+    console.log("DasReportEdit", dasData); // Print the data to the console
 
 
     const [user, setUser] = useState({
@@ -64,22 +65,11 @@ const DasReportEdit = () => {
         data: item,
     })));
 
-    // Assigning default Value fo the 5.1th table 
-    const [taxinfo, setTaxInfo] = useState({
-        selectedTaxYear: "",
-        assementYear: "",
-        landValue: "",
-        buildingValue: "",
-        extraValue: "",
-        totalValue: "",
-        comments: "",
-    })
 
-    const { landValue, buildingValue, extraValue, totalValue, comments } = taxinfo
 
     // Assigning default Value fo the 5.2th table 
     const [tableTaxInstaData, setTableTaxInstaData] = useState(dasData.taxinstallments.map((item, index) => ({
-        id: index, installment: item.installment, amount: item.amount, status: item.status, paidDueDate: item.paidDueDate
+        id: index, slno: item.slno, installment: item.installment, amount: item.amount, status: item.status, paidDueDate: item.paidDueDate
     })));
 
 
@@ -107,23 +97,53 @@ const DasReportEdit = () => {
 
 
     const [additionalInformation, setAdditionalInformation] = useState('');
-    // const [slno, setSlno] = useState(null);
+    const [slno, setSlno] = useState(null);
 
     const [daslegaldesc, setdaslegaldesc] = useState({
         slno: '',
         daslegaldesc: ''
     });
 
-    useEffect(() => {
-        if (dasData && dasData.dasadditionalinformation && dasData.dasadditionalinformation.length > 0) {
-            const info = dasData.dasadditionalinformation[0];
+    // Assigning default Value fo the 5.1th table 
+    const [taxinfo, setTaxInfo] = useState({
+        selectedTaxYear: "",
+        assementYear: "",
+        landValue: "",
+        buildingValue: "",
+        extraValue: "",
+        totalValue: "",
+        comments: "",
+    });
 
-            setAdditionalInformation(info.additionalInformation);
-            
+    const { landValue, buildingValue, extraValue, totalValue, comments } = taxinfo
+
+    useEffect(() => {
+
+        console.log("In UseEffect", dasData); // Debug: Check if dasData is available
+        if (dasData && dasData.dasadditionalinformation && dasData.dasadditionalinformation.length > 0) {
+            const taxInsta = dasData.dasadditionalinformation[0];
+            const taxInfo = dasData.daslegaldescriptioninfo[0];
+            setAdditionalInformation(taxInsta.additionalInformation);
+            setSlno(taxInsta.slno); // Store slno as well
             setdaslegaldesc({
                 slno: dasData.daslegaldescriptioninfo[0].slno,
                 daslegaldesc: dasData.daslegaldescriptioninfo[0].daslegaldesc
             });
+
+            setTaxInfo({
+                slno: dasData.assessementsAndTaxInfo[0].slno,
+                assementYear: dasData.assessementsAndTaxInfo[0].assementYear,
+                selectedTaxYear: dasData.assessementsAndTaxInfo[0].selectedTaxYear,
+                landValue: dasData.assessementsAndTaxInfo[0].landValue,
+                buildingValue: dasData.assessementsAndTaxInfo[0].buildingValue,
+                extraValue: dasData.assessementsAndTaxInfo[0].extraValue,
+                totalValue: dasData.assessementsAndTaxInfo[0].totalValue,
+                comments: dasData.assessementsAndTaxInfo[0].comments,
+            });
+            setassementYear(dasData.assessementsAndTaxInfo[0].assementYear);
+            setSelectedTaxYear(dasData.assessementsAndTaxInfo[0].selectedTaxYear);
+
+            console.log("US in Tax", taxinfo);
         }
     }, [dasData]);
 
@@ -195,7 +215,11 @@ const DasReportEdit = () => {
 
 
     const onInputChange2 = (e) => {
-        setTaxInfo({ ...taxinfo, [e.target.name]: e.target.value })
+        const { name, value } = e.target;
+        setTaxInfo((prevState) => ({
+            ...prevState,
+            [name]: value // Update the corresponding field in taxinfo
+        }));
     };
 
     // Table 5.2 Input Change
@@ -232,7 +256,7 @@ const DasReportEdit = () => {
         const { name, value } = event.target;
         setdaslegaldesc((prevState) => ({
             ...prevState, // Keep the existing state
-            daslegaldesc: value    // Update only daslegaldesc
+            [name]: value // Update only daslegaldesc field
         }));
     };
 
@@ -242,68 +266,68 @@ const DasReportEdit = () => {
         e.preventDefault();
 
         setLoading(true);
-        try {
-            const token = localStorage.getItem('token');
-            const payload = {
-                propertyinfo: {
-                    orderNumber: orderNumber,
-                    referenceNumber: referenceNumber,
-                    searchDate: searchDate,
-                    effectiveDate: effectiveDate,
-                    propertyAddress: propertyAddress,
-                    state: state,
-                    county: county,
-                    borrowerName: borrowerName,
-                    parcelNumber: parcelNumber,
-                    subdivision: subdivision,
-                    lotUnit: lotUnit,
-                    block: block,
-                    propertyType: propertyType,
-                    vestingdeedinfo: tablesData.map(table => ({ ...table.data })),
-                    absopenmortgagedeedinfo: tablesData2.map(table => ({ ...table.data })),
-                    absActiveJudgementsAndLines: tableRowsData.map(table => ({ ...table.data })),
-                    assessementsAndTaxInfo: [{
-                        assementYear: assementYear,
-                        selectedTaxYear: selectedTaxYear,
-                        landValue: landValue,
-                        buildingValue: buildingValue,
-                        extraValue: extraValue,
-                        totalValue: totalValue,
-                        comments: comments
-                    }],
-                    taxinstallments: tableTaxInstaData.map(row => ({
-                        installment: row.installment,
-                        amount: row.amount,
-                        status: row.status,
-                        paidDueDate: row.paidDueDate
-                    })),
-                    namesrun: nameRunData.map(row => ({ ...row.data })),
-                    dasadditionalinformation:
-                        [{
-                            // slno: slno, // Include slno in the payload
-                            additionalInformation: additionalInformation
-                        }],
+        const token = localStorage.getItem('token');
+        const payload = {
+            orderNumber: orderNumber,
+            referenceNumber: referenceNumber,
+            searchDate: searchDate,
+            effectiveDate: effectiveDate,
+            propertyAddress: propertyAddress,
+            state: state,
+            county: county,
+            borrowerName: borrowerName,
+            parcelNumber: parcelNumber,
+            subdivision: subdivision,
+            lotUnit: lotUnit,
+            block: block,
+            propertyType: propertyType,
+            vestingdeedinfo: tablesData.map(table => ({ ...table.data })),
+            absopenmortgagedeedinfo: tablesData2.map(table => ({ ...table.data })),
+            absActiveJudgementsAndLines: tableRowsData.map(table => ({ ...table.data })),
+            assessementsAndTaxInfo: [{
+                slno: taxinfo.slno,
+                assementYear: assementYear,
+                selectedTaxYear: selectedTaxYear,
+                landValue: landValue,
+                buildingValue: buildingValue,
+                extraValue: extraValue,
+                totalValue: totalValue,
+                comments: comments
+            }],
+            taxinstallments: tableTaxInstaData.map(row => ({
+                slno: row.slno,
+                installment: row.installment,
+                amount: row.amount,
+                status: row.status,
+                paidDueDate: row.paidDueDate
+            })),
+            namesrun: nameRunData.map(row => ({ ...row.data })),
+            dasadditionalinformation:
+                [{
+                    slno: slno, // Include slno in the payload
+                    additionalInformation: additionalInformation
+                }],
 
-                    daslegaldescriptioninfo: [
-                        {
-                            slno: daslegaldesc.slno,
-                            daslegaldesc: daslegaldesc.daslegaldesc
-                        }
-                    ]
+            daslegaldescriptioninfo: [
+                {
+                    slno: daslegaldesc.slno,
+                    daslegaldesc: daslegaldesc.daslegaldesc
                 }
-            }
+            ]
+        };
 
-            console.log("Payload", payload);
-            // const response = await axios.post(`${UserService.BASE_URL}/update/das`, payload, {
-            //     headers: {
-            //         'Authorization': `Bearer ${token}`
-            //     }
-            // });
-            // console.log("Response", response);
-            alert("Edited Sucessfully");
+        try {
+            const response = await axios.post(`${UserService.BASE_URL}/update/das`, payload, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            console.log('Response', response);
+            alert("Edited Successfully");
+            navigate(`/DasDisplay/${orderNumber}`)
         } catch (error) {
             alert("Not Updated");
-            console.log(error)
+            console.log("Error", error);
         } finally {
             setLoading(false);
         }
@@ -795,15 +819,7 @@ const DasReportEdit = () => {
                             </table>
                         </center>
                     </div>
-                    {/* <td className='das-report-text-line' colSpan={1} style={{ border: '1px solid black' }}>
-                                        FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
-                                        PROPERTY ADDRESS:
 
-                                    </td> */}
 
                     <div >
                         <br />
@@ -836,10 +852,6 @@ const DasReportEdit = () => {
 
                     </div>
                     <br />
-
-
-
-                    
                     <div className='abstractreport-container-13'>
                         <br />
                         <center>
@@ -851,14 +863,22 @@ const DasReportEdit = () => {
 
                                 <tr>
 
+                                    {/* <td className='das-report-text-line' colSpan={1} style={{ border: '1px solid black' }}>
+                                        FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        PROPERTY ADDRESS:
 
+                                    </td> */}
 
                                     <td colSpan='5' style={{ border: '1px solid black' }}>
                                         <textarea
                                             className="abstract-control-input"
                                             type="text"
                                             name="daslegaldesc"
-                                            value={daslegaldesc.daslegaldesc}
+                                            value={daslegaldesc.daslegaldesc || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n\n\nPROPERTY ADDRESS:"}
                                             onChange={onInputlegalinfo}
                                             style={{ height: '200px' }}
                                         />

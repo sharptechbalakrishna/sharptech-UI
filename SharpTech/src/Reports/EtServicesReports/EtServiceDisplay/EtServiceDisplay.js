@@ -13,9 +13,11 @@ import Footer from '../../../components/Footer/Footer';
 import htmlDocx from "html-docx-js/dist/html-docx";
 import { ClipLoader } from 'react-spinners'; // Import ClipLoader from react-spinners
 import UserService from '../../../implements/UserService/UserService';
+import { useNavigate } from 'react-router-dom';
 
 
 function EtServiceDisplay() {
+    const navigate = useNavigate();
     const [etservice, setEtService] = useState(null);
     const { orderNumber } = useParams(); // Assuming you're using React Router hooks
     const [isDownloading, setIsDownloading] = useState(false);
@@ -94,6 +96,12 @@ function EtServiceDisplay() {
 
         generatePDF();
     };
+    const onEtEdit = () => {
+
+        // console.log("On Edit", etservice);
+        alert("Do you want ot edit the data???")
+        navigate(`/EtServiceEdit`, { state: { etServiceData : etservice } });
+    }
 
     const contentRef = useRef(null);
     const handleDownload = () => {
@@ -652,7 +660,8 @@ function EtServiceDisplay() {
                             <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
                                 <button className='et-service-display-doc-button' onClick={handleDownload}>Download DOCX</button>
                                 <button className='et-service-display-pdf-button' onClick={printDocument}>Download PDF</button>
-                                <button className='et-service-display-edit-button'>EditReport</button>
+                                <button className='et-service-display-pdf-button' onClick={onEtEdit}>Edit Data</button> 
+                                {/* <button className='et-service-display-edit-button'>EditReport</button> */}
                                 </div>
                             </center>
                         </div>
