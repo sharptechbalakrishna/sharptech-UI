@@ -38,7 +38,7 @@ function DasDisplay() {
                     }
                 });
                 setEtService(result.data);
-                console.log(result.data);
+                console.log("Response", result.data.vestingdeedinfo);
             } catch (error) {
                 console.error('Error fetching et service details:', error);
             } finally {
@@ -58,62 +58,65 @@ function DasDisplay() {
         const input1 = document.getElementById('pdf-content1');
         const input2 = document.getElementById('pdf-content2');
         const input3 = document.getElementById('pdf-content3');
-
+    
         const generatePDF = async () => {
             const pdf = new jsPDF('p', 'mm', 'a4');
+            const pageWidth = pdf.internal.pageSize.getWidth();
             const pageHeight = pdf.internal.pageSize.getHeight();
-            const imgWidth = pdf.internal.pageSize.getWidth();
-
+            const margin = 10;
+            const imgWidth = pageWidth - 2 * margin;
+    
             const addContentToPDF = async (input) => {
                 const canvas = await html2canvas(input, {
                     scrollY: -window.scrollY,
-                    scale: 2 // Increase the scale for better quality and larger size
+                    scale: 2, // For better image quality
                 });
                 const imgData = canvas.toDataURL('image/png');
-                const imgWidth = pdf.internal.pageSize.getWidth() - 20; // Adjust width to fit within margins
                 const imgHeight = (canvas.height / canvas.width) * imgWidth;
-                let position = 0;
+                
                 let remainingHeight = imgHeight;
-
+                let position = margin;
+    
+                // Loop through the content and add it page by page
                 while (remainingHeight > 0) {
-                    if (remainingHeight > pageHeight) {
-                        pdf.addImage(imgData, 'PNG', 10, position, imgWidth, pageHeight - 10);
-                        remainingHeight -= pageHeight - 10;
-                        position -= pageHeight - 10;
+                    if (remainingHeight > pageHeight - margin * 2) {
+                        pdf.addImage(imgData, 'PNG', margin, position, imgWidth, pageHeight - margin * 2);
+                        remainingHeight -= pageHeight - margin * 2;
+                        position = margin;
                         pdf.addPage();
                     } else {
-                        pdf.addImage(imgData, 'PNG', 10, position, imgWidth, remainingHeight);
+                        pdf.addImage(imgData, 'PNG', margin, position, imgWidth, remainingHeight);
                         remainingHeight = 0;
                     }
                 }
-
+    
                 // Add current date and time at the bottom of the page
-                const now = new Date();
-                const formattedDate = `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
-                const textWidth = pdf.getStringUnitWidth(formattedDate) * pdf.internal.getFontSize() / pdf.internal.scaleFactor;
-                const textX = (pdf.internal.pageSize.getWidth() - textWidth) / 2;
-                const textY = pdf.internal.pageSize.getHeight() - 10;
-                pdf.text(formattedDate, textX, textY, { align: 'center' });
+                // const now = new Date();
+                // const formattedDate = `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
+                // const textWidth = pdf.getStringUnitWidth(formattedDate) * pdf.internal.getFontSize() / pdf.internal.scaleFactor;
+                // const textX = (pageWidth - textWidth) / 2;
+                // const textY = pageHeight - margin / 2;
+                // pdf.text(formattedDate, textX, textY, { align: 'center' });
             };
-
+    
             await addContentToPDF(input1);
             pdf.addPage();
             await addContentToPDF(input2);
             pdf.addPage();
             await addContentToPDF(input3);
-
+    
             // Construct filename with current date
             const currentDate = new Date();
             const formattedDate = currentDate.toISOString().slice(0, 10); // Format as YYYY-MM-DD
-            // const formattedDate = currentDate.toLocaleDateString('en-US');
-            const filename = `das_service_${formattedDate}.pdf`; // Filename with current date
-
+            const filename = `das_service_${formattedDate}.pdf`;
+    
             // Save PDF with filename
             pdf.save(filename);
         };
-
+    
         generatePDF();
     };
+    
 
 
     //commit by reddy
@@ -236,14 +239,20 @@ function DasDisplay() {
 
                                                             <tr>
                                                                 <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>SEARCH DATE:</th>
-                                                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}> {moment(etservice.searchDate).format('MM/DD/YYYY')}  </td>
+                                                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}> 
+                                                                    {/* {moment(etservice.searchDate).format('MM/DD/YYYY')}   */}
+                                                                    {etservice.searchDate ? moment(etservice.searchDate).isValid() ? moment(etservice.searchDate).format('MM/DD/YYYY') : '' : ''} </td>
+                                                                   
 
 
                                                                 <th className="das-display-side-headings" c colSpan={1} style={{ border: '1px solid black' }}>As Of</th>
                                                                 <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }} >7:30 Am</td>
 
                                                                 <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>EFFECTIVE DATE :</th>
-                                                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}> {moment(etservice.effectiveDate).format('MM/DD/YYYY')} </td>
+                                                                <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}> 
+                                                                    {moment(etservice.effectiveDate).format('MM/DD/YYYY')}
+                                                                    {etservice.effectiveDate ? moment(etservice.effectiveDate).isValid() ? moment(etservice.effectiveDate).format('MM/DD/YYYY') : '' : ''} 
+                                                                     </td>
                                                             </tr>
 
                                                             <tr>
@@ -312,11 +321,20 @@ function DasDisplay() {
                                                 <tr>
                                                     <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> DEED TYPE </th>
                                                     <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{vestingdeedinfo.deedType}  </td>
+                                                    {/* <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black',wordSpacing: 'normal', whiteSpace: 'normal'}}>{vestingdeedinfo.deedType} </td> */}
                                                     <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> CONSIDERATION AMOUNT : $ </th>
                                                     <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>
-                                                        {vestingdeedinfo.considerationAmount.startsWith('$')
-                                                            ? vestingdeedinfo.considerationAmount
-                                                            : `$${vestingdeedinfo.considerationAmount}`}
+                                                    {/* {vestingdeedinfo.considerationAmount?.startsWith('$')
+                                                        ? vestingdeedinfo.considerationAmount
+                                                        : vestingdeedinfo.considerationAmount != null
+                                                            ? `$${vestingdeedinfo.considerationAmount}`
+                                                            : ' '} */}
+                                                            {vestingdeedinfo.considerationAmount && vestingdeedinfo.considerationAmount !== ''
+                                                                ? (vestingdeedinfo.considerationAmount.startsWith('$')
+                                                                    ? vestingdeedinfo.considerationAmount
+                                                                    : `$${vestingdeedinfo.considerationAmount}`)
+                                                                : ''
+                                                            }
                                                     </td>
                                                 </tr>
 
@@ -340,9 +358,13 @@ function DasDisplay() {
 
                                                 <tr>
                                                     <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> DATED DATE: </th>
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{moment(vestingdeedinfo.datedDate).format('MM/DD/YYYY')}  </td>
+                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>
+                                                         {vestingdeedinfo.datedDate ? moment(vestingdeedinfo.datedDate).isValid() ? moment(vestingdeedinfo.datedDate).format('MM/DD/YYYY') : '' : ''} </td>
                                                     <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>RECORDED DATE:</th>
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}> {moment(vestingdeedinfo.recorderdDate).format('MM/DD/YYYY')} </td>
+                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}> 
+                                                        {/* {moment(vestingdeedinfo.recorderdDate).format('MM/DD/YYYY')}  */}
+                                                        {vestingdeedinfo.recorderdDate ? moment(vestingdeedinfo.recorderdDate).isValid() ? moment(vestingdeedinfo.recorderdDate).format('MM/DD/YYYY') : '' : ''} 
+                                                        </td>
                                                 </tr>
 
                                                 <tr>
@@ -386,26 +408,43 @@ function DasDisplay() {
 
                                                     <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>AMOUNT [$]:</th>
                                                     <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>
-                                                        {openmortagedeedinfo.amount.startsWith('$')
-                                                            ? openmortagedeedinfo.amount
-                                                            : `$${openmortagedeedinfo.amount}`}
+                                                    {/* {openmortagedeedinfo.amount?.startsWith('$')
+                                                        ? openmortagedeedinfo.amount
+                                                        : openmortagedeedinfo.amount != null
+                                                            ? `$${openmortagedeedinfo.amount}`
+                                                            : ' '} */}
+                                                            {openmortagedeedinfo.amount && openmortagedeedinfo.amount !== ''
+                                                                ? (openmortagedeedinfo.amount.startsWith('$')
+                                                                    ? openmortagedeedinfo.amount
+                                                                    : `$${openmortagedeedinfo.amount}`)
+                                                                : ''
+                                                            }
                                                     </td>
                                                 </tr>
 
 
                                                 <tr>
                                                     <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> DATED DATE:  </th>
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{moment(openmortagedeedinfo.datedDate).format('MM/DD/YYYY')}</td>
+                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>
+                                                        {/* {moment(openmortagedeedinfo.datedDate).format('MM/DD/YYYY')} */}
+                                                        {openmortagedeedinfo.datedDate ? moment(openmortagedeedinfo.datedDate).isValid() ? moment(openmortagedeedinfo.datedDate).format('MM/DD/YYYY') : '' : ''} 
+                                                        </td>
 
                                                     <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>RECORDED DATE:</th>
 
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{moment(openmortagedeedinfo.recordedDate).format('MM/DD/YYYY')}</td>
+                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>
+                                                        {/* {moment(openmortagedeedinfo.recordedDate).format('MM/DD/YYYY')} */}
+                                                        {openmortagedeedinfo.recordedDate? moment(openmortagedeedinfo.recordedDate).isValid() ? moment(openmortagedeedinfo.recordedDate).format('MM/DD/YYYY') : '' : ''} 
+                                                        </td>
                                                 </tr>
 
                                                 <tr>
 
                                                     <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>MATURITY DATE</th>
-                                                    <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>{moment(openmortagedeedinfo.maturityDate).format('MM/DD/YYYY')}</td>
+                                                    <td className="das-report-display-data" colSpan={3} style={{ border: '1px solid black' }}>
+                                                        {/* {moment(openmortagedeedinfo.maturityDate).format('MM/DD/YYYY')} */}
+                                                    {openmortagedeedinfo.maturityDate? moment(openmortagedeedinfo.maturityDate).isValid() ? moment(openmortagedeedinfo.maturityDate).format('MM/DD/YYYY') : '' : ''} 
+                                                    </td>
                                                 </tr>
 
                                                 <tr>
@@ -420,10 +459,16 @@ function DasDisplay() {
                                                 <tr>
                                                     <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}> ASSIGNMENT DATED </th>
 
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{moment(openmortagedeedinfo.assignmentDated).format('MM/DD/YYYY')}</td>
+                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>
+                                                        {/* {moment(openmortagedeedinfo.assignmentDated).format('MM/DD/YYYY')} */}
+                                                        {openmortagedeedinfo.assignmentDated? moment(openmortagedeedinfo.assignmentDated).isValid() ? moment(openmortagedeedinfo.assignmentDated).format('MM/DD/YYYY') : '' : ''} 
+                                                        </td>
 
                                                     <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>ASSIGNMENT RECORDED: </th>
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{moment(openmortagedeedinfo.assignmentRecorded).format('MM/DD/YYYY')}</td>
+                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>
+                                                        {/* {moment(openmortagedeedinfo.assignmentRecorded).format('MM/DD/YYYY')} */}
+                                                        {openmortagedeedinfo.assignmentRecorded? moment(openmortagedeedinfo.assignmentRecorded).isValid() ? moment(openmortagedeedinfo.assignmentRecorded).format('MM/DD/YYYY') : '' : ''} 
+                                                        </td>
                                                 </tr>
 
                                                 <tr>
@@ -470,11 +515,22 @@ function DasDisplay() {
                                                 <tr key={index} style={{ border: '1px solid black' }}>
                                                     <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.caseType}</td>
                                                     <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.bkPgCaseNo}</td>
-                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>{moment(activejudgmentsandliens.recordingDate).format('MM/DD/YYYY')}</td>
                                                     <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>
-                                                        {activejudgmentsandliens.amount.startsWith('$')
-                                                            ? activejudgmentsandliens.amount
-                                                            : `$${activejudgmentsandliens.amount}`}
+                                                        {/* {moment(activejudgmentsandliens.recordingDate).format('MM/DD/YYYY')} */}
+                                                        {activejudgmentsandliens.recordingDate? moment(activejudgmentsandliens.recordingDate).isValid() ? moment(activejudgmentsandliens.recordingDate).format('MM/DD/YYYY') : '' : ''} 
+                                                        </td>
+                                                    <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>
+                                                    {/* {activejudgmentsandliens.amount?.startsWith('$')
+                                                        ? activejudgmentsandliens.amount
+                                                        : activejudgmentsandliens.amount != null
+                                                            ? `$${activejudgmentsandliens.amount}`
+                                                            : ' '} */}
+                                                            {activejudgmentsandliens.amount && activejudgmentsandliens.amount !== ''
+                                                                ? (activejudgmentsandliens.amount.startsWith('$')
+                                                                    ? activejudgmentsandliens.amount
+                                                                    : `$${activejudgmentsandliens.amount}`)
+                                                                : ''
+                                                            }
                                                     </td>
                                                 </tr>
                                             ))}
@@ -507,29 +563,61 @@ function DasDisplay() {
                                                 <tr className='th-color'>
                                                     <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }}>LAND VALUE</th>
                                                     <td className="das-report-display-data" style={{ border: '1px solid black' }} colSpan={1}>
-                                                        {taxinformation.landValue.startsWith('$')
-                                                            ? taxinformation.landValue
-                                                            : `$${taxinformation.landValue}`}
+                                                    {/* {taxinformation.landValue?.startsWith('$')
+                                                        ? taxinformation.landValue
+                                                        : taxinformation.landValue != null
+                                                            ? `$${taxinformation.landValue}`
+                                                            : ' '} */}
+                                                            {taxinformation.landValue && taxinformation.landValue !== ''
+                                                                ? (taxinformation.landValue.startsWith('$')
+                                                                    ?taxinformation.landValue
+                                                                    : `$${taxinformation.landValue}`)
+                                                                : ''
+                                                            }
                                                     </td>
                                                     <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }}>BUILDING VALUE</th>
                                                     <td className="das-report-display-data" style={{ border: '1px solid black' }} colSpan={1}>
-                                                        {taxinformation.buildingValue.startsWith('$')
-                                                            ? taxinformation.buildingValue
-                                                            : `$${taxinformation.buildingValue}`}
+                                                    {/* {taxinformation.buildingValue?.startsWith('$')
+                                                        ? taxinformation.buildingValue
+                                                        : taxinformation.buildingValue!= null
+                                                            ? `$${taxinformation.buildingValue}`
+                                                            : ' '} */}
+                                                             {taxinformation.buildingValue && taxinformation.buildingValue !== ''
+                                                                ? (taxinformation.buildingValue.startsWith('$')
+                                                                    ?taxinformation.buildingValue
+                                                                    : `$${taxinformation.buildingValue}`)
+                                                                : ''
+                                                            }
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }}>TOTAL VALUE</th>
                                                     <td className="das-report-display-data" style={{ border: '1px solid black' }} colSpan={1}>
-                                                        {taxinformation.totalValue.startsWith('$')
-                                                            ? taxinformation.totalValue
-                                                            : `$${taxinformation.totalValue}`}
+                                                    {/* {taxinformation.totalValue?.startsWith('$')
+                                                        ? taxinformation.totalValue
+                                                        : taxinformation.totalValue!= null
+                                                            ? `$${taxinformation.totalValue}`
+                                                            : ' '} */}
+                                                             {taxinformation.totalValue && taxinformation.totalValue !== ''
+                                                                ? (taxinformation.totalValue.startsWith('$')
+                                                                    ?taxinformation.totalValue
+                                                                    : `$${taxinformation.totalValue}`)
+                                                                : ''
+                                                            }
                                                     </td>
                                                     <th className="das-display-sub-title-headings" style={{ border: '1px solid black' }}>EXTRA VALUE</th>
                                                     <td className="das-report-display-data" style={{ border: '1px solid black' }} colSpan={1}>
-                                                        {taxinformation.extraValue.startsWith('$')
-                                                            ? taxinformation.extraValue
-                                                            : `$${taxinformation.extraValue}`}
+                                                    {/* {taxinformation.extraValue?.startsWith('$')
+                                                        ? taxinformation.extraValue
+                                                        : taxinformation.extraValue!= null
+                                                            ? `$${taxinformation.extraValue}`
+                                                            : ' '} */}
+                                                             {taxinformation.extraValue && taxinformation.extraValue !== ''
+                                                                ? (taxinformation.extraValue.startsWith('$')
+                                                                    ?taxinformation.extraValue
+                                                                    : `$${taxinformation.extraValue}`)
+                                                                : ''
+                                                            }
                                                     </td>
                                                 </tr>
                                                 <tr className='th-color'>
@@ -546,12 +634,23 @@ function DasDisplay() {
                                                             {/* {taxinstallment.amount.startsWith('$')
                                                             ? taxinstallment.amount
                                                             : `$${taxinstallment.amount}`} */}
-                                                            {taxinstallments.amount.startsWith('$')
-                                                                ? taxinstallments.amount
-                                                                : `$${taxinstallments.amount}`}
+                                                            {/* {taxinstallments.amount?.startsWith('$')
+                                                        ? taxinstallments.amount
+                                                        : taxinstallments.amount!= null
+                                                            ? `$${taxinstallments.amount}`
+                                                            : ' '} */}
+                                                             {taxinstallments.amount && taxinstallments.amount!== ''
+                                                                ? (taxinstallments.amount.startsWith('$')
+                                                                    ?taxinstallments.amount
+                                                                    : `$${taxinstallments.amount}`)
+                                                                : ''
+                                                            }
                                                         </td>
                                                         <td className="das-report-display-data" style={{ border: '1px solid black' }}>{taxinstallments.status}</td>
-                                                        <td className="das-report-display-data" style={{ border: '1px solid black' }}>{moment(taxinstallments.paidDueDate).format('MM/DD/YYYY')}</td>
+                                                        <td className="das-report-display-data" style={{ border: '1px solid black' }}>
+                                                            {/* {moment(taxinstallments.paidDueDate).format('MM/DD/YYYY')} */}
+                                                            {taxinstallments.paidDueDate? moment(taxinstallments.paidDueDate).isValid() ? moment(taxinstallments.paidDueDate).format('MM/DD/YYYY') : '' : ''} 
+                                                            </td>
                                                     </tr>
                                                 ))}
                                                 <tr className='th-color'>
@@ -611,7 +710,7 @@ function DasDisplay() {
                                                             wordWrap: 'break-word', // Prevents long words from overflowing
 
                                                         }}>
-                                                            {additionalinfo.additionalInformation || "No additional information available"}
+                                                            {additionalinfo.additionalInformation || " "}
                                                         </pre>
                                                     </td>
                                                 </tr>

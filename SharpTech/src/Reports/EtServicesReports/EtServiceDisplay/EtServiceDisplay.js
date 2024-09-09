@@ -100,7 +100,7 @@ function EtServiceDisplay() {
 
         // console.log("On Edit", etservice);
         alert("Do you want ot edit the data???")
-        navigate(`/EtServiceEdit`, { state: { etServiceData : etservice } });
+        navigate(`/EtServiceEdit`, { state: { etServiceData: etservice } });
     }
 
     const contentRef = useRef(null);
@@ -273,9 +273,16 @@ function EtServiceDisplay() {
 
                                                         <th className='et-service-form-table-2-heading' colSpan={1} style={{ border: '1px solid black' }}>  CONSIDERATION AMOUNT: </th>
                                                         <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>
-                                                            {vestingInfo.considerationAmount.startsWith('$')
+                                                            {/* {vestingInfo.considerationAmount.startsWith('$')
                                                                 ? vestingInfo.considerationAmount
-                                                                : `$${vestingInfo.considerationAmount}`}
+                                                                : `$${vestingInfo.considerationAmount}`} */}
+
+                                                            {vestingInfo.considerationAmount && vestingInfo.considerationAmount !== ''
+                                                                ? (vestingInfo.considerationAmount.startsWith('$')
+                                                                    ? vestingInfo.considerationAmount
+                                                                    : `$${vestingInfo.considerationAmount}`)
+                                                                : ''}
+
                                                         </td>
                                                     </tr>
 
@@ -351,9 +358,22 @@ function EtServiceDisplay() {
 
                                                         <th className='et-service-form-table-2-heading' colSpan={1} style={{ border: '1px solid black' }}>AMOUNT [$]:</th>
                                                         <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>
-                                                            {openmortagedeedinfo.amount.startsWith('$')
+                                                            {/* {openmortagedeedinfo.amount.startsWith('$')
                                                                 ? openmortagedeedinfo.amount
-                                                                : `$${openmortagedeedinfo.amount}`}</td>
+                                                                : `$${openmortagedeedinfo.amount}`} */}
+                                                            {/* {openmortagedeedinfo.amount?.startsWith('$')
+                                                                ? openmortagedeedinfo.amount
+                                                                : openmortagedeedinfo.amount != null
+                                                                    ? `$${openmortagedeedinfo.amount}`
+                                                                    : ''} */}
+                                                            {openmortagedeedinfo.amount && openmortagedeedinfo.amount !== ''
+                                                                ? (openmortagedeedinfo.amount.startsWith('$')
+                                                                    ? openmortagedeedinfo.amount
+                                                                    : `$${openmortagedeedinfo.amount}`)
+                                                                : ''
+                                                            }
+                                                        </td>
+
                                                     </tr>
 
 
@@ -434,9 +454,21 @@ function EtServiceDisplay() {
                                                         <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{activejudgmentsandliens.description}</td>
                                                         <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>{moment(activejudgmentsandliens.dateRecorded).format('MM/DD/YYYY')}</td>
                                                         <td className='et-service-form-table-2-data' colSpan={1} style={{ border: '1px solid black' }}>
-                                                            {activejudgmentsandliens.amount.startsWith('$')
+                                                            {/* {activejudgmentsandliens.amount.startsWith('$')
                                                                 ? activejudgmentsandliens.amount
-                                                                : `$${activejudgmentsandliens.amount}`}
+                                                                : `$${activejudgmentsandliens.amount}`} */}
+                                                            {/* {activejudgmentsandliens.amount?.startsWith('$')
+                                                                ? activejudgmentsandliens.amount
+                                                                : activejudgmentsandliens.amount != null
+                                                                    ? `$${activejudgmentsandliens.amount}`
+                                                                    : ''} */}
+
+                                                            {activejudgmentsandliens.amount && activejudgmentsandliens.amount !== ''
+                                                                ? (activejudgmentsandliens.amount.startsWith('$')
+                                                                    ? activejudgmentsandliens.amount
+                                                                    : `$${activejudgmentsandliens.amount}`)
+                                                                : ''
+                                                            }
                                                         </td>
 
 
@@ -466,30 +498,75 @@ function EtServiceDisplay() {
                                                 <tr>
                                                     <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} > LAND VALUE </td>
                                                     <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} >
-                                                        {taxinformation.landValue.startsWith('$')
+                                                        {/* {taxinformation.landValue.startsWith('$')
                                                             ? taxinformation.landValue
-                                                            : `$${taxinformation.landValue}`}
+                                                            : `$${taxinformation.landValue}`} */}
+                                                        {/* {taxinformation.landValue?.startsWith('$')
+                                                            ? taxinformation.landValue
+                                                            : taxinformation.landValue != null
+                                                                ? `$${taxinformation.landValue}`
+                                                                : ''} */}
+                                                        {taxinformation.landValue && taxinformation.landValue !== ''
+                                                            ? (taxinformation.landValue.startsWith('$')
+                                                                ? taxinformation.landValue
+                                                                : `$${taxinformation.landValue}`)
+                                                            : ''
+                                                        }
                                                     </td>
                                                     <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} > BUILDING VALUE  </td>
                                                     <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} >
-                                                        {taxinformation.buildingValue.startsWith('$')
+                                                        {/* {taxinformation.buildingValue.startsWith('$')
                                                             ? taxinformation.buildingValue
-                                                            : `$${taxinformation.buildingValue}`}
+                                                            : `$${taxinformation.buildingValue}`} */}
+                                                        {/* {taxinformation.buildingValue?.startsWith('$')
+                                                            ? taxinformation.buildingValue
+                                                            : taxinformation.buildingValue != null
+                                                                ? `$${taxinformation.buildingValue}`
+                                                                : ''} */}
+
+                                                        {taxinformation.buildingValue && taxinformation.buildingValue !== ''
+                                                            ? (taxinformation.buildingValue.startsWith('$')
+                                                                ? taxinformation.buildingValue
+                                                                : `$${taxinformation.buildingValue}`)
+                                                            : ''
+                                                        }
                                                     </td>
                                                 </tr>
 
                                                 <tr>
                                                     <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} > TOTAL VALUE </td>
                                                     <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} >
-                                                        {taxinformation.totalValue.startsWith('$')
+                                                        {/* {taxinformation.totalValue.startsWith('$')
                                                             ? taxinformation.totalValue
-                                                            : `$${taxinformation.totalValue}`}
+                                                            : `$${taxinformation.totalValue}`} */}
+                                                        {/* {taxinformation.totalValue?.startsWith('$')
+                                                            ? taxinformation.totalValue
+                                                            : taxinformation.totalValue != null
+                                                                ? `$${taxinformation.totalValue}`
+                                                                : ''} */}
+                                                                {taxinformation.totalValue && taxinformation.totalValue !== ''
+                                                            ? (taxinformation.totalValue.startsWith('$')
+                                                                ? taxinformation.totalValue
+                                                                : `$${taxinformation.totalValue}`)
+                                                            : ''
+                                                        }
                                                     </td>
                                                     <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} > EXEMPTION </td>
                                                     <td className='et-service-form-table-2-data' style={{ border: '1px solid black' }} >
-                                                        {taxinformation.excemption.startsWith('$')
+                                                        {/* {taxinformation.excemption.startsWith('$')
                                                             ? taxinformation.excemption
-                                                            : `$${taxinformation.excemption}`}
+                                                            : `$${taxinformation.excemption}`} */}
+                                                        {/* {taxinformation.excemption?.startsWith('$')
+                                                            ? taxinformation.excemption
+                                                            : taxinformation.excemption != null
+                                                                ? `$${taxinformation.excemption}`
+                                                                : ''} */}
+                                                                 {taxinformation.excemption && taxinformation.excemption !== ''
+                                                            ? (taxinformation.excemption.startsWith('$')
+                                                                ? taxinformation.excemption
+                                                                : `$${taxinformation.excemption}`)
+                                                            : ''
+                                                        }
                                                     </td>
                                                 </tr>
 
@@ -504,9 +581,26 @@ function EtServiceDisplay() {
                                                     <tr key={tindex}>
                                                         <td className='et-service-form-table-2-data' colSpan='1' style={{ border: '1px solid black' }} >{tindex === 0 ? `${tindex + 1}ST INSTALLMENT` : tindex === 1 ? ` ${tindex + 1}ND INSTALLMENT` : tindex === 2 ? `${tindex + 1}RD INSTALLMENT` : `${tindex + 1}th INSTALLMENT`}</td>
                                                         <td className='et-service-form-table-2-data' colSpan='1' style={{ border: '1px solid black' }} >
-                                                            {taxinstallment.amount.startsWith('$')
+                                                            {/* {taxinstallment.amount.startsWith('$')
                                                                 ? taxinstallment.amount
-                                                                : `$${taxinstallment.amount}`}
+                                                                : `$${taxinstallment.amount}`} */}
+                                                            {/* {taxinstallment.amount?.startsWith('$')
+                                                                ? taxinstallment.amount
+                                                                : taxinstallment.amount != null
+                                                                    ? `$${taxinstallment.amount}`
+                                                                    : ''} */}
+                                                            {/* {taxinstallment.amount && taxinstallment.amount !== ''
+                                                                ? (taxinstallment.amount.startsWith('$')
+                                                                    ? taxinstallment.amount
+                                                                    : `$${taxinstallment.amount}`)
+                                                                : ''
+                                                            } */}
+                                                            {taxinstallment.amount && taxinstallment.amount !== ''
+                                                            ? (taxinstallment.amount.startsWith('$')
+                                                                ? taxinstallment.amount
+                                                                : `$${taxinstallment.amount}`)
+                                                            : ''
+                                                        }
                                                         </td>
 
                                                         <td className='et-service-form-table-2-data' colSpan='1' style={{ border: '1px solid black' }} >{taxinstallment.status}</td>
@@ -569,11 +663,11 @@ function EtServiceDisplay() {
                                                 <tbody>
                                                     <tr>
                                                         <td colSpan='7' style={{ width: '100%', border: '1px solid black' }}>
-                                                        <pre style={{
-                                                            whiteSpace: 'pre-wrap', // Ensures the text wraps if it's too long
-                                                            wordWrap: 'break-word', // Prevents long words from overflowing
-                                                           
-                                                        }}>  {additionalinfo.additionalInformation || "No additional information available"}</pre>
+                                                            <pre style={{
+                                                                whiteSpace: 'pre-wrap', // Ensures the text wraps if it's too long
+                                                                wordWrap: 'break-word', // Prevents long words from overflowing
+
+                                                            }}>  {additionalinfo.additionalInformation || " "}</pre>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -596,13 +690,13 @@ function EtServiceDisplay() {
                                                 <tbody>
                                                     <tr>
                                                         <td className="et-service-form-table-2-data" style={{ border: '1px solid black' }}>
-                                                          
-                                                        <pre style={{
-                                                            whiteSpace: 'pre-wrap', // Ensures the text wraps if it's too long
-                                                            wordWrap: 'break-word', // Prevents long words from overflowing
-                                                           
-                                                        }}>{ledgerdescriptioninfo.legaldescription || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n"}</pre>
-                                                            PARCEL NUMBER: {etservice.parcelNumber || "N/A"}
+
+                                                            <pre style={{
+                                                                whiteSpace: 'pre-wrap', // Ensures the text wraps if it's too long
+                                                                wordWrap: 'break-word', // Prevents long words from overflowing
+
+                                                            }}>{ledgerdescriptioninfo.legaldescription || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n"}</pre>
+                                                            PARCEL NUMBER: {etservice.parcelNumber || " "}
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -657,11 +751,11 @@ function EtServiceDisplay() {
 
                             </div>
                             <center>
-                            <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
-                                <button className='et-service-display-doc-button' onClick={handleDownload}>Download DOCX</button>
-                                <button className='et-service-display-pdf-button' onClick={printDocument}>Download PDF</button>
-                                <button className='et-service-display-pdf-button' onClick={onEtEdit}>Edit Data</button> 
-                                {/* <button className='et-service-display-edit-button'>EditReport</button> */}
+                                <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
+                                    <button className='et-service-display-doc-button' onClick={handleDownload}>Download DOCX</button>
+                                    <button className='et-service-display-pdf-button' onClick={printDocument}>Download PDF</button>
+                                    <button className='et-service-display-pdf-button' onClick={onEtEdit}>Edit Data</button>
+                                    {/* <button className='et-service-display-edit-button'>EditReport</button> */}
                                 </div>
                             </center>
                         </div>

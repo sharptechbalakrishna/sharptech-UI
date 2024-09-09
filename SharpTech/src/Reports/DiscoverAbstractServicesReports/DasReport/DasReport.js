@@ -880,8 +880,8 @@ function DasReport() {
                                         <tbody>
                                             <tr>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> DEED TYPE </th>
-                                                <td colSpan={4} style={{ border: '1px solid black' }}>
-                                                    <input type="text" className="abstract-control-input" placeholder="DEED TYPE" name="deedType" value={table.data.deedType || ''} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} required />
+                                                <td colSpan={4} style={{ border: '1px solid black',wordSpacing: 'normal' , whiteSpace: 'normal'}}>
+                                                    <input type="text" className="abstract-control-input" placeholder="DEED TYPE" name="deedType" value={table.data.deedType} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} required />
                                                 </td>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> CONSIDERATION AMOUNT ($) </th>
                                                 <td colSpan={'100%'} style={{ border: '1px solid black' }}>
