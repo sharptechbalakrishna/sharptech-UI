@@ -894,7 +894,7 @@ const EtServiceEdit = () => {
                         <textarea
                           className="abstract-control-input"
                           type="text"
-                          value={legaldescription.legaldescription || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n\n\nPROPERTY ADDRESS:"}
+                          value={legaldescription.legaldescription || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n\n\n"}
                           name="legaldescription"
                           onChange={onInputlegalinfo}
                           style={{ width: '100%', height: '150px' }}

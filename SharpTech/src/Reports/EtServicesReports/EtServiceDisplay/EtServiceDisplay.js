@@ -14,6 +14,7 @@ import htmlDocx from "html-docx-js/dist/html-docx";
 import { ClipLoader } from 'react-spinners'; // Import ClipLoader from react-spinners
 import UserService from '../../../implements/UserService/UserService';
 import { useNavigate } from 'react-router-dom';
+import EtServiceDoc from '../EtServiceDoc/EtServiceDoc';
 
 
 function EtServiceDisplay() {
@@ -111,14 +112,13 @@ function EtServiceDisplay() {
           
 
         .et-display-services-container table {
-    width: 80%; /* or any specific width like 600px */
-    table-layout: fixed; /* Optional: ensures the table respects the width set */
-  }
+             width: 100%; 
+             table-layout: fixed; 
+          }
            .et-service-form-table-1 {
-                width: 100%;
-               
+              width: 100%;
               max-height:100%;
-              height:10%
+         
             }
 
            .et-service-form-table-1{
@@ -130,19 +130,20 @@ function EtServiceDisplay() {
            }
         .etract-title-service-heading{
          text-align: center;
+         font-size:16px;
         }
            .et-service-form-table-sub-selftables-heading{
           background-color: rgb(212, 210, 210);
            }
             .et-service-form-table-selftables-heading {
-                font-weight: bold;
-                font-size: 18px;
+             
+                font-size: 16px;
                 text-align: center;
                background-color: rgb(150, 147, 147);
             }
 
             .et-service-form-table-2-heading {
-                font-weight: bold;
+              
                 text-align: left;
                 padding-left:10px
 
@@ -179,10 +180,8 @@ function EtServiceDisplay() {
 
                             <div id="pdf-content1">
                                 <div  >
-                                    <br />
-                                    <br />
+
                                     <h1 className='etract-title-service-heading'> ETRACK TITTLE SERVICES INC </h1>
-                                    <br />
                                     <br />
 
                                     {etservice && (
@@ -544,7 +543,7 @@ function EtServiceDisplay() {
                                                             : taxinformation.totalValue != null
                                                                 ? `$${taxinformation.totalValue}`
                                                                 : ''} */}
-                                                                {taxinformation.totalValue && taxinformation.totalValue !== ''
+                                                        {taxinformation.totalValue && taxinformation.totalValue !== ''
                                                             ? (taxinformation.totalValue.startsWith('$')
                                                                 ? taxinformation.totalValue
                                                                 : `$${taxinformation.totalValue}`)
@@ -561,7 +560,7 @@ function EtServiceDisplay() {
                                                             : taxinformation.excemption != null
                                                                 ? `$${taxinformation.excemption}`
                                                                 : ''} */}
-                                                                 {taxinformation.excemption && taxinformation.excemption !== ''
+                                                        {taxinformation.excemption && taxinformation.excemption !== ''
                                                             ? (taxinformation.excemption.startsWith('$')
                                                                 ? taxinformation.excemption
                                                                 : `$${taxinformation.excemption}`)
@@ -596,11 +595,11 @@ function EtServiceDisplay() {
                                                                 : ''
                                                             } */}
                                                             {taxinstallment.amount && taxinstallment.amount !== ''
-                                                            ? (taxinstallment.amount.startsWith('$')
-                                                                ? taxinstallment.amount
-                                                                : `$${taxinstallment.amount}`)
-                                                            : ''
-                                                        }
+                                                                ? (taxinstallment.amount.startsWith('$')
+                                                                    ? taxinstallment.amount
+                                                                    : `$${taxinstallment.amount}`)
+                                                                : ''
+                                                            }
                                                         </td>
 
                                                         <td className='et-service-form-table-2-data' colSpan='1' style={{ border: '1px solid black' }} >{taxinstallment.status}</td>
@@ -662,11 +661,12 @@ function EtServiceDisplay() {
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td colSpan='7' style={{ width: '100%', border: '1px solid black' }}>
+                                                        <td colSpan='7' className="et-service-form-table-2-data" style={{ width: '100%', border: '1px solid black' }}>
                                                             <pre style={{
                                                                 whiteSpace: 'pre-wrap', // Ensures the text wraps if it's too long
                                                                 wordWrap: 'break-word', // Prevents long words from overflowing
-
+                                                                fontSize: '16px',
+                                                                fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
                                                             }}>  {additionalinfo.additionalInformation || " "}</pre>
                                                         </td>
                                                     </tr>
@@ -694,6 +694,8 @@ function EtServiceDisplay() {
                                                             <pre style={{
                                                                 whiteSpace: 'pre-wrap', // Ensures the text wraps if it's too long
                                                                 wordWrap: 'break-word', // Prevents long words from overflowing
+                                                                fontSize: '16px',
+                                                                fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
 
                                                             }}>{ledgerdescriptioninfo.legaldescription || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n"}</pre>
                                                             PARCEL NUMBER: {etservice.parcelNumber || " "}
@@ -702,8 +704,8 @@ function EtServiceDisplay() {
                                                 </tbody>
                                             </table>
                                         </center>
-                                        <br />
-                                        <br />
+                                      
+                                  
                                     </div>
                                 ))}
                             </div>
@@ -711,7 +713,7 @@ function EtServiceDisplay() {
 
                             <div id="pdf-content3">
                                 <br />
-                                <br />
+                     
                                 <div id="disclaimer">
                                     <center>
                                         <table className='et-service-form-table-1' style={{ border: '2px solid black', borderCollapse: 'collapse' }} >
@@ -735,19 +737,22 @@ function EtServiceDisplay() {
                                                         assessments before settlement. E-Track Title Services, Inc.
                                                         makes no warranties, and assumes no liability whatsoever for
                                                         the accuracy of the information contained herein beyond
-                                                        the exercise of such reasonable care.</p>
+                                                        the exercise of such reasonable care.
+                                                        {/* THIS TITLE SEARCH REPORT WAS PERFORMED IN ACCORDANCE WITH GENERALLY ACCEPTED STANDARDS. THIS REPORT MAY NOT CONTAIN INFORMATION AFFECTING ABOVE REAL ESTATE PROPERTY THAT CANNOT BE INDEXED DUE TO DIFFERENT SPELLING OF OWNER'S NAME OR INCORRECTLY RECORDED PARCEL NUMBER OR RECORDER CLERK ERROR. THIS TITLE SEARCH DOES NOT INCLUDE A SEARCH OF THE RECORDS OF THE CIRCUIT, PROBATE, BANKRUPTCY OR OTHER COURTS NOR ANY RECORDERS OTHER THAN THE RECORDS IN THE OFFICE OF THE REGISTER OF DEEDS. TAXES ARE INFORMATIONAL PURPOSES ONLY, ALL INFORMATION CONTAINED HEREIN ARE OBTAINED FROM TAX COLLECTORS OFFICE/WEBSITE. PLEASE DO CHECK FOR ANY ADDITIONAL LEVIES AND ASSESSMENTS BEFORE SETTLEMENT. E-TRACK TITLE SERVICES, INC. MAKES NO WARRANTIES, AND ASSUMES NO LIABILITY WHATSOEVER FOR THE ACCURACY OF THE INFORMATION CONTAINED HEREIN BEYOND THE EXERCISE OF SUCH REASONABLE CARE. */}
+                                                        
+                                                        </p>
                                                 </td>
                                             </tr>
                                         </table>
                                     </center>
                                     <br />
-                                    <br />
+
                                 </div>
 
 
                                 <br />
                                 <br />
-                                <br />
+
 
                             </div>
                             <center>
@@ -755,7 +760,10 @@ function EtServiceDisplay() {
                                     <button className='et-service-display-doc-button' onClick={handleDownload}>Download DOCX</button>
                                     <button className='et-service-display-pdf-button' onClick={printDocument}>Download PDF</button>
                                     <button className='et-service-display-pdf-button' onClick={onEtEdit}>Edit Data</button>
-                                    {/* <button className='et-service-display-edit-button'>EditReport</button> */}
+                                    {/* <EtServiceDoc
+                                        etServiceData={etservice}
+                                    /> 
+                                   <button className='et-service-display-edit-button'>EditReport</button> */}
                                 </div>
                             </center>
                         </div>

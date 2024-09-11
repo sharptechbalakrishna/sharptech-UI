@@ -1193,7 +1193,7 @@ function EtServices() {
                         <textarea
                           className="abstract-control-input"
                           type="text"
-                          value={legaldescription || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n\n\nPROPERTY ADDRESS:"}
+                          value={legaldescription || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n\n\n"}
                           name="legaldescription"
                           onChange={onInputlegalinfo}
                           style={{ width: '100%', height: '150px' }}
@@ -1219,6 +1219,29 @@ function EtServices() {
                     <tr>
                       <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }}>This title search report was performed in accordance with generally accepted standards. This report may not contain information affecting above real estate property that cannot be indexed due to different spelling of owner's name or incorrectly recorded parcel number or recorder clerk error. This title search does not include a search of the records of the circuit, probate, bankruptcy or other courts nor any recorders other than the records in the office of the Register of Deeds. Taxes are informational purposes only, all information contained herein are obtained from Tax Collectors office/website. Please do check for any additional levies and assessments before settlement. E-Track Title Services, Inc. makes no warranties, and assumes no liability whatsoever for the accuracy of the information contained herein beyond the exercise of such reasonable care.</td>
                     </tr>
+
+                    {/* <tr>
+                      <td className='et-service-form-table-1-data' colSpan='1' style={{ border: '1px solid black' }}>
+                        THIS TITLE SEARCH REPORT WAS PERFORMED IN ACCORDANCE WITH GENERALLY ACCEPTED STANDARDS.
+                        THIS REPORT MAY NOT CONTAIN INFORMATION AFFECTING ABOVE REAL ESTATE PROPERTY THAT CANNOT
+                        BE INDEXED DUE TO DIFFERENT SPELLING OF OWNER'S NAME OR INCORRECTLY RECORDED PARCEL NUMBER
+                        OR RECORDER CLERK ERROR. THIS TITLE SEARCH DOES NOT INCLUDE A SEARCH OF THE RECORDS OF THE
+                        CIRCUIT, PROBATE, BANKRUPTCY OR OTHER COURTS NOR ANY RECORDERS OTHER THAN THE RECORDS IN
+                        THE OFFICE OF THE REGISTER OF DEEDS. TAXES ARE FOR INFORMATIONAL PURPOSES ONLY, ALL
+                        INFORMATION CONTAINED HEREIN ARE OBTAINED FROM TAX COLLECTOR'S OFFICE/WEBSITE. PLEASE
+                        DO CHECK FOR ANY ADDITIONAL LEVIES AND ASSESSMENTS BEFORE SETTLEMENT. E-TRACK TITLE SERVICES,
+                        INC. MAKES NO WARRANTIES, AND ASSUMES NO LIABILITY WHATSOEVER FOR THE ACCURACY OF THE
+                        INFORMATION CONTAINED HEREIN BEYOND THE EXERCISE OF SUCH REASONABLE CARE.</td>
+
+                    </tr> */}
+
+
+
+
+
+
+
+
 
                   </table>
                 </center>

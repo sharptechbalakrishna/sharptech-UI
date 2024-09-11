@@ -20,6 +20,7 @@
 }
 .abstractform-container{
   margin-top: 10%;
+  /* font-weight: 200; */
 }
 
 .das-display-overall-heading{
@@ -36,7 +37,11 @@
   padding-left: 5px;
 }
 
-
+.das-display-sub-title-headings-1{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #9fc6f3;
+}
 
 
 
@@ -117,7 +122,9 @@
 .das-display-sub-title-headings{
   padding-top: 5px;
   padding-bottom: 5px;
-  background-color: #aed0f5;
+  /* background-color: #aed0f5; */
+  text-align: left;
+  padding-left: 5px;
 }
 
 .das-display-loader {

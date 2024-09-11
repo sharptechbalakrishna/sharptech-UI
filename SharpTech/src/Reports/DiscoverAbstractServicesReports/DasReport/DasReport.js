@@ -1336,7 +1336,7 @@ function DasReport() {
                                             className="abstract-control-input"
                                             type="text"
                                             name="daslegaldesc"
-                                            value={daslegaldesc || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n\n\nPROPERTY ADDRESS:"}
+                                            value={daslegaldesc || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n\n\n"}
                                             onChange={onInputlegalinfo}
                                             style={{ height: '200px' }}
                                         />
