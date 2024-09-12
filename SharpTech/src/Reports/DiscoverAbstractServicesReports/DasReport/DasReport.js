@@ -114,9 +114,9 @@ function DasReport() {
 
     const [tableTaxInstaData, setTableTaxInstaData] = useState([
         { id: 1, installment: "1st Installment", amount: "", status: "", paidDueDate: "" },
-        { id: 2, installment: "2nd Installment", amount: "", status: "", paidDueDate: "" },
+        // { id: 2, installment: "2nd Installment", amount: "", status: "", paidDueDate: "" },
     ]);
-    const [nextTableTaxInstaId, setNextTableTaxInstaId] = useState(3);
+    const [nextTableTaxInstaId, setNextTableTaxInstaId] = useState(2);
 
 
 
@@ -312,7 +312,7 @@ function DasReport() {
     const handleAddTaxInstaRow = (e) => {
         e.preventDefault();
         const newTableTaxInstaId = nextTableTaxInstaId;
-        const newRow = { id: newTableTaxInstaId, installment: newTableTaxInstaId === 3 ? `${newTableTaxInstaId}rd Installment` : `${newTableTaxInstaId}th Installment`, amount: '', status: '', paidDueDate: '' }; // Initialize fields
+        const newRow = { id: newTableTaxInstaId, installment: newTableTaxInstaId === 2 ? `${newTableTaxInstaId}nd Installment` : newTableTaxInstaId === 3 ? `${newTableTaxInstaId}rd Installment` : `${newTableTaxInstaId}th Installment`, amount: '', status: '', paidDueDate: '' }; // Initialize fields
         setTableTaxInstaData([...tableTaxInstaData, newRow]);
         setNextTableTaxInstaId(newTableTaxInstaId + 1);
     };
@@ -880,7 +880,7 @@ function DasReport() {
                                         <tbody>
                                             <tr>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> DEED TYPE </th>
-                                                <td colSpan={4} style={{ border: '1px solid black',wordSpacing: 'normal' , whiteSpace: 'normal'}}>
+                                                <td colSpan={4} style={{ border: '1px solid black', wordSpacing: 'normal', whiteSpace: 'normal' }}>
                                                     <input type="text" className="abstract-control-input" placeholder="DEED TYPE" name="deedType" value={table.data.deedType} onChange={(e) => handleInputChange(e, table.id)} style={{ width: '100%' }} required />
                                                 </td>
                                                 <th className="das-report-sub-heading" style={{ border: '1px solid black' }}> CONSIDERATION AMOUNT ($) </th>
@@ -1211,7 +1211,7 @@ function DasReport() {
 
 
                             <button className="das-report-general-info-add-button" type='button' onClick={handleAddTaxInstaRow}> <i className="pi pi-plus" style={{ marginRight: '8px' }}></i>Row</button>
-                            {tableTaxInstaData.length > 2 && (
+                            {tableTaxInstaData.length > 1 && (
 
                                 <button className="das-report-general-info-delete-button" type='button' onClick={handleDeleteLastTaxInstaRow}>  <i className="pi pi-trash" style={{ marginRight: '8px' }}></i> Row</button>
                             )}

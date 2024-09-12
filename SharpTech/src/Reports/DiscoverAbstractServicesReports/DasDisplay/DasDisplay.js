@@ -267,7 +267,7 @@ function DasDisplay() {
 
                                                                 <th className="das-display-side-headings" colSpan={1} style={{ border: '1px solid black' }}>EFFECTIVE DATE </th>
                                                                 <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>
-                                                                    {moment(etservice.effectiveDate).format('MM/DD/YYYY')}
+                                                                    {/* {moment(etservice.effectiveDate).format('MM/DD/YYYY')} */}
                                                                     {etservice.effectiveDate ? moment(etservice.effectiveDate).isValid() ? moment(etservice.effectiveDate).format('MM/DD/YYYY') : '' : ''}
                                                                 </td>
                                                             </tr>

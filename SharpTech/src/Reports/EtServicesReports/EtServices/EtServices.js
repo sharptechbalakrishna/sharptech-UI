@@ -34,7 +34,7 @@ function EtServices() {
   // Generate a list of years from 1900 to current year
   const years = [];
   const currentYear = new Date().getFullYear();
-  
+
   for (let year = 1900; year <= currentYear; year++) {
     years.push(year.toString());
   }
@@ -179,9 +179,9 @@ function EtServices() {
 
   const [tableTaxInstaData, setTableTaxInstaData] = useState([
     { id: 1, installment: "1st Installment", amount: "", status: "", paidDueDate: "" },
-    { id: 2, installment: "2nd Installment", amount: "", status: "", paidDueDate: "" },
+    // { id: 2, installment: "2nd Installment", amount: "", status: "", paidDueDate: "" },
   ]);
-  const [nextTableTaxInstaId, setNextTableTaxInstaId] = useState(3);
+  const [nextTableTaxInstaId, setNextTableTaxInstaId] = useState(2);
 
   const { orderNumber, refeenceNumber, searchDate, effectiveDate, propertyAdderess, state, country, parcelNumber,
     subDivision, lotUnit, block, sfrPudCondo } = user
@@ -400,7 +400,7 @@ function EtServices() {
   const handleAddTaxInstaRow = (e) => {
     e.preventDefault()
     const newTableTaxInstaId = nextTableTaxInstaId;
-    const newRow = { id: newTableTaxInstaId, installment: newTableTaxInstaId === 3 ? `${newTableTaxInstaId}rd Installment` : `${newTableTaxInstaId}th Installment`, amount: '', status: '', paidDueDate: '' }; // Initialize fields    setTableTaxInstaData([...tableTaxInstaData, newRow]);
+    const newRow = { id: newTableTaxInstaId, installment: newTableTaxInstaId === 2 ? `${newTableTaxInstaId}nd Installment` : newTableTaxInstaId === 3 ? `${newTableTaxInstaId}rd Installment` : `${newTableTaxInstaId}th Installment`, amount: '', status: '', paidDueDate: '' }; // Initialize fields    setTableTaxInstaData([...tableTaxInstaData, newRow]);
     setTableTaxInstaData([...tableTaxInstaData, newRow]);
     setNextTableTaxInstaId(newTableTaxInstaId + 1);
   }
@@ -1086,7 +1086,7 @@ function EtServices() {
                   </table>
                 </center>
                 <button className="et-service-genenal-info-add-button" type='button' onClick={handleAddTaxInstaRow}> <i className="pi pi-plus" style={{ marginRight: '5px' }}  ></i> Row</button>
-                {tableTaxInstaData.length > 2 && (
+                {tableTaxInstaData.length > 1 && (
                   <button className="et-service-genenal-info-delete-button" type='button' onClick={handleDeleteLastTaxInstaRow}>
                     <i className="pi pi-trash"     ></i> Row  </button>
                 )}
