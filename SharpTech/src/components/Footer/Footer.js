@@ -15,10 +15,12 @@ const Footer = () => {
     <div className='footer'>
       <div className='footer-text'>
       <p>© 2024 Sharp Tech Systems Pvt Ltd. All rights reserved.</p>
-      <p className="iso-text">
-          <img src={Certification} alt="Certification" /> ISO 27001 : 2022
-        </p>
+      
       </div>
+      <p className="iso-text">
+          <img src={Certification} alt="Certification" /> 
+          {/* ISO 27001 : 2022 */}
+        </p>
       <ul>
         <li><a className="linkedin" href="https://www.linkedin.com/company/sharp-tech-systems/?viewAsMember=true"><FaLinkedin /></a></li>
         

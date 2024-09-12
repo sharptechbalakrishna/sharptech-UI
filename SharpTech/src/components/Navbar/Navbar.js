@@ -10,6 +10,9 @@ import { useNavigate } from 'react-router-dom';
 import UserService from '../../implements/UserService/UserService';
 import UpdatesImage from '../../assets/Updates.png';
 import Modal from '../Modal/Modal';
+import login_icon from '../../assets/Login_Icon.png'
+import Modula from '../Modula/Modula';
+
 import axios from 'axios';
 
 const Navbar = () => {
@@ -21,8 +24,10 @@ const Navbar = () => {
   const hasLoggedOutRef = useRef(false); // New ref to track logout status
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [UpdateData, setUpdateData] = useState();
-  const [visible, setVisible] = useState(false);
-
+  const [visible, setVisible] = useState(() => {
+    const savedVisible = sessionStorage.getItem('visible');
+    return savedVisible ? JSON.parse(savedVisible) : false;
+  });
   // const [latestdate, setLatestDate] = useState(false);
   // const currentDate = new Date().toISOString().split('T')[0];
   // const showUpdateImage = latestdate && latestdate >= currentDate;
@@ -38,11 +43,23 @@ const Navbar = () => {
     setIsModalOpen(false);
   };
 
+  // Update sessionStorage whenever 'visible' changes
+  useEffect(() => {
+    sessionStorage.setItem('visible', JSON.stringify(visible));
+  }, [visible]);
+
+  // Function to update the visible state
+  const toggleVisible = () => {
+    setVisible(prevVisible => !prevVisible);
+  };
 
 
   useEffect(() => {
+    console.log(visible);
     featureUpdate();
+    console.log(visible);
   }, []);
+
 
 
   const featureUpdate = async () => {
@@ -50,6 +67,8 @@ const Navbar = () => {
       const response = await axios.get('http://localhost:8080/future/updates');
       setVisible(response.data.updatesList[response.data.updatesList.length - 1].visible);
       setUpdateData(response.data); // Remove quotes to store actual data
+
+      // Dont remove the below code it should be use in future
 
       // console.log("Visible",response.data.updatesList[response.data.updatesList.length-1]);
       // const ld = response.data.updatesList[response.data.updatesList.length - 1].releaseDate;
@@ -131,6 +150,31 @@ const Navbar = () => {
     setMobileMenu(prevState => !prevState);
   };
 
+
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const toggleDropdown = () => {
+    setIsDropdownVisible(!isDropdownVisible);
+  };
+
+  // Add an event listener to detect clicks outside the dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownVisible(false); // Hide the dropdown if clicked outside
+      }
+    };
+
+    // Bind the event listener
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [dropdownRef]);
+
   return (
     <>
       <nav className={`container ${sticky ? 'dark-nav' : ''}`}>
@@ -166,21 +210,72 @@ const Navbar = () => {
           {isAdmin && <li><RouterLink to='/Register'>Register</RouterLink></li>}
           {isAdmin && <li><RouterLink to='/Pagination'>Employees List</RouterLink></li>}
           {isAuthenticated && <li><Dropdown /></li>}
-          {isAuthenticated ? (
+
+          {!mobileMenu ?
+
+            <li className="events-text">
+              <div className="login_icon-container" onClick={toggleDropdown}>
+                <img src={login_icon} alt="Login Icon" className="login_icon" />
+                {/* Conditionally render the NEW label based on the visible state */}
+                {visible && (
+                  <span className="new-label">NEW</span>
+                )}
+              </div>
+              {/* Conditionally render the dropdown */}
+              <div ref={dropdownRef} className={`dropdown-box ${isDropdownVisible ? 'show' : ''}`}>
+                <ul>
+                  <li onClick={openModal}>What's New</li>
+                  {visible && (
+                    <span className="new-label_Updates">NEW</span>
+                  )}
+                  {isAuthenticated ? (
+                    <li><RouterLink to="/" onClick={() => handleLogout(true)}>Logout</RouterLink></li>
+                  ) : (
+                    <li><RouterLink to="/Login">Login</RouterLink></li>
+                  )}
+                </ul>
+              </div>
+            </li>
+
+            : isAuthenticated ? (
+              <li className='btn'><RouterLink to="/" onClick={() => handleLogout(true)}>Logout</RouterLink></li>
+            ) : (
+              <li className='btn'><RouterLink to="/Login">Login</RouterLink></li>
+            )}
+
+
+
+
+
+
+          {/* {isAuthenticated ? (
             <li className='btn'><RouterLink to="/" onClick={() => handleLogout(true)}>Logout</RouterLink></li>
           ) : (
             <li className='btn'><RouterLink to="/Login">Login</RouterLink></li>
-          )}
+          )} */}
+
+
+
         </ul>
         <img src={menu_icon} alt="" className='menu-icon' onClick={toggleMenu} />
 
 
       </nav>
-      {isModalOpen &&
+      {/* {isModalOpen &&
         <Modal
           onClose={closeModal}
           UpdateData={UpdateData}
+        />} */}
+
+      {isModalOpen &&
+        <Modula
+          onClose={closeModal}
+          UpdateData={UpdateData}
         />}
+
+
+
+
     </>
   );
 };

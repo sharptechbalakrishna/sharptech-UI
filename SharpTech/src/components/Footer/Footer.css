@@ -31,7 +31,7 @@
 
 
 .iso-text img {
-  height: 35px; /* Match image height to the text size */
+  height: 50px; /* Match image height to the text size */
   margin-right: 5px; /* Space between the image and the text */
 }
 

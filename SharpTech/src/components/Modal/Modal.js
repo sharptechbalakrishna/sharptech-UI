@@ -2,6 +2,7 @@ import React from 'react';
 import './Modal.css'; // Ensure this path matches your file structure
 import { FaTimes } from 'react-icons/fa'; // Import a cross icon from react-icons
 import moment from 'moment';
+import modulaimg from '../../assets/Update.jpg';
 
 const Modal = ({ onClose, UpdateData }) => {
   return (

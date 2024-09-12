@@ -1,17 +1,20 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Footer from "../../components/Footer/Footer";
 import Navbar from '../../components/Navbar/Navbar';
 import UserService from '../UserService/UserService';
 import AuthContext from '../AuthContext/AuthContext';
 import { Link } from "react-router-dom";
 import { ClipLoader } from 'react-spinners'; // Import ClipLoader from react-spinners
+import { Navigate } from 'react-router-dom';
 
 
 function EmployeeDetail() {
   const [profileInfo, setProfileInfo] = useState(null);
   const { isAdmin } = useContext(AuthContext); // Use the context
   const [loading, setLoading] = useState(true); // Add loading state
+
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -23,6 +26,21 @@ function EmployeeDetail() {
 
   if (!id) {
     return <p>No employee ID provided. Please go back and select an employee.</p>;
+  }
+
+  const handleDelete = async () => {
+
+    alert("are you Sure you want to delete");
+    console.log(profileInfo.id);
+    try {
+      const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+      const response = await UserService.deleteUser(profileInfo.id, token);
+    } catch {
+      alert("Cant delete Try after Some time");
+    }
+    navigate('/Pagination')
+
+
   }
 
 
@@ -131,6 +149,13 @@ function EmployeeDetail() {
                   <div className="displaylogin-card">
                     <button className='displaylogin-update-button'>
                       <Link to={`/update-user/${profileInfo.id}`}>Update</Link>
+                    </button>
+                  </div>
+                )}
+                {isAdmin && (
+                  <div className="displaylogin-card">
+                    <button className='displaylogin-delete-button' onClick={handleDelete}>
+                      Delete
                     </button>
                   </div>
                 )}

@@ -73,6 +73,30 @@
   color: white;
   text-decoration: none;
 }
+/* Update button styling */
+.displaylogin-delete-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #db1e1e; /* Green background */
+  color: white; /* White text */
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px; /* Add some space at the top */
+}
+
+.displaylogin-delete-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+.displaylogin-delete-button a {
+  color: white;
+  text-decoration: none;
+}
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {

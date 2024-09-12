@@ -1,4 +1,4 @@
-nav{
+nav {
   width: 100%;
   /* background: #333; */
   color: rgb(42, 64, 92);
@@ -10,58 +10,76 @@ nav{
   align-items: center;
   justify-content: space-between;
   z-index: 10;
-  background-color:white; /* 0.5 is 50% transparency */
+  background-color: white;
+  /* 0.5 is 50% transparency */
 }
-.logo{
+
+.logo {
   width: 220px;
   height: 80px;
 }
 
 nav ul {
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
-  list-style: none; /* Remove default list styling */
+  margin: 0;
+  /* Remove default margin */
+  padding: 0;
+  /* Remove default padding */
+  list-style: none;
+  /* Remove default list styling */
 }
 
-nav ul li{
+nav ul li {
   display: inline-block;
   list-style: none;
   margin: 5px 20px;
   font-size: 20px;
 }
+
 nav ul li a {
-  text-decoration: none; /* Remove underline from links */
-  color: inherit; /* Inherit color from parent */
+  text-decoration: none;
+  /* Remove underline from links */
+  color: inherit;
+  /* Inherit color from parent */
 }
+
 nav ul li a:hover {
-  color: rgb(25, 9, 241); /* Change text color on hover */
-  transition: color 0.3s ease; /* Smooth transition */
+  color: rgb(25, 9, 241);
+  /* Change text color on hover */
+  transition: color 0.3s ease;
+  /* Smooth transition */
 }
+
 .menu-icon {
-    display: none;
-    width: 30px;
-    cursor: pointer;
+  display: none;
+  width: 30px;
+  cursor: pointer;
 }
+
 /* Define the animation */
 @keyframes colorChange {
   0% {
-    color: #752e2e; /* Initial text color */
+    color: #752e2e;
+    /* Initial text color */
   }
+
   100% {
-    color: #1c303d; /* Text color on hover */
+    color: #1c303d;
+    /* Text color on hover */
   }
 }
 
 /*---- Apply the animation on hover--------- */
 nav ul li a:hover {
-  animation: colorChange 0.2s ease; /* Animation duration and timing function */
+  animation: colorChange 0.2s ease;
+  /* Animation duration and timing function */
 }
 
-.dark-nav{
-  
+.dark-nav {
+
   transition: 0.5s;
-  
+
 }
+
 .menu-icon {
   display: none;
   width: 30px;
@@ -74,100 +92,252 @@ nav ul li a:hover {
   position: relative;
   display: inline-block;
   padding-right: 5px;
-  
+
 }
 
 .updates-badge {
   position: absolute;
   top: 0;
-  right: -20px; /* Adjust this value based on your image size */
-  width: 30px; /* Adjust the width as needed */
-  height: 20px; /* Adjust the height as needed */
+  right: -20px;
+  /* Adjust this value based on your image size */
+  width: 30px;
+  /* Adjust the width as needed */
+  height: 20px;
+  /* Adjust the height as needed */
   object-fit: cover;
-  border-radius: 50%; /* Make it circular if the image is square */
-  
+  border-radius: 50%;
+  /* Make it circular if the image is square */
+
 }
 
 .events-text {
-  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+  cursor: pointer;
+  /* Change cursor to pointer to indicate it's clickable */
 }
 
-  
+
+.login_icon-container {
+  cursor: pointer;
+  position: relative;
+  /* Ensure this container is the reference for positioning */
+}
+
+.login_icon {
+  width: 50px;
+  /* Icon size */
+  height: auto;
+  cursor: pointer;
+  margin-left: 0;
+  /* Align with other items */
+  vertical-align: middle;
+  /* Vertically align it in the middle */
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.login_icon-container:hover {
+  transform: scale(1.2);
+  filter: brightness(1.2);
+}
+
+.login_icon:active {
+  transform: scale(0.95);
+}
+
+.new-label {
+  position: absolute;
+  bottom: -17px;
+  right: 9px;
+  background-color: red;
+  color: white;
+  font-size: 9px;
+  padding: 2px 5px;
+  border-radius: 3px;
+  white-space: nowrap;
+  /* Prevent text wrapping */
+}
+
+.new-label_Updates {
+  position: absolute;
+  bottom: 61px;
+  right: 13px;
+  background-color: red;
+  color: white;
+  font-size: 9px;
+  padding: 2px 5px;
+  border-radius: 3px;
+  white-space: nowrap;
+  /* Prevent text wrapping */
+}
+
+.dropdown-box {
+  position: absolute;
+  top: 85%;
+  /* Position it directly below the icon */
+  left: 90%;
+  /* Center align dropdown */
+  transform: translateX(-50%);
+  /* Adjust positioning */
+  background-color: #fff;
+  /* Background color of dropdown */
+  border: 1px solid #ccc;
+  /* Border color */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  /* Shadow for dropdown */
+  z-index: 1000;
+  /* Ensure dropdown is above other content */
+  width: 180px;
+  /* Set a width for the dropdown */
+  display: none;
+  /* Hide dropdown by default */
+}
+
+.dropdown-box.show {
+  display: block;
+  /* Show the dropdown when visible */
+}
+
+.dropdown-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-box li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  /* Add a bottom border to separate items */
+}
+
+.dropdown-box li:last-child {
+  border-bottom: none;
+  /* Remove bottom border for the last item */
+}
+
+.dropdown-box li:hover {
+  background-color: #f0f0f0;
+  /* Highlight on hover */
+}
+
+
 
 
 /* ----- media query ----------- */
 
-@media (max-width: 1000px){
-  .logo{
-      width: 140px;
+@media (max-width: 1100px) {
+
+
+
+  .new-label_Updates {
+    position: absolute;
+    bottom: 75px;
+    right: 13px;
+    background-color: red;
+    color: white;
+    font-size: 9px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    white-space: nowrap;
+    /* Prevent text wrapping */
   }
-  nav ul li{
-      margin: 10px 15px;
+
+  .logo {
+    width: 140px;
   }
-}
-@media (max-width: 840px){
-  nav{
-      padding: 15px 0;
-  }
-  nav ul{
-      position: fixed;
-      top: 0;
-      right: 0px;
-      bottom: 0;
-      background: #5eb2e2;
-      z-index: -1;
-      width: 200px;
-      padding-top: 70px;
-      transition: 0.5s;
-  }
-  nav ul li{
-      display: block;
-      margin: 25px 40px;
-  }
-  .menu-icon{
-      display: block;
-      width: 30px;
-      cursor: pointer;
-  }
-  .hide-mobile-menu{
-      right: -200px;
+
+
+  nav ul li {
+    margin: 10px 15px;
   }
 }
 
+@media (max-width: 1100px) {
 
 
-.container{
+  nav {
+    padding: 15px 0;
+  }
+
+  nav ul {
+    position: fixed;
+    top: 0;
+    right: 0px;
+    bottom: 0;
+    background: #5eb2e2;
+    z-index: -1;
+    width: 200px;
+    padding-top: 70px;
+    transition: 0.5s;
+  }
+
+  nav ul li {
+    display: block;
+    margin: 25px 40px;
+  }
+
+  .menu-icon {
+    display: block;
+    width: 30px;
+    cursor: pointer;
+  }
+
+  .hide-mobile-menu {
+    right: -200px;
+  }
+}
+
+
+
+.container {
   padding-left: 5%;
-  padding-right:5%;
-}   
+  padding-right: 5%;
+}
 
 
 .btn {
-  background-color: #71bcee; /* Background color for buttons */
-  color: #fff; /* Text color */
-  border: none; /* Remove default border */
-  border-radius: 50px; /* Rounded corners */
-  padding: 10px 20px; /* Padding inside button */
-  font-size: 20px; /* Font size */
-  text-align: center; /* Center text */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition */
-  text-decoration: none; /* Remove underline from links */
-  display: inline-block; /* Ensure the button size is only as big as its content */
+  background-color: #71bcee;
+  /* Background color for buttons */
+  color: #fff;
+  /* Text color */
+  border: none;
+  /* Remove default border */
+  border-radius: 50px;
+  /* Rounded corners */
+  padding: 10px 20px;
+  /* Padding inside button */
+  font-size: 20px;
+  /* Font size */
+  text-align: center;
+  /* Center text */
+  cursor: pointer;
+  /* Pointer cursor on hover */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  /* Smooth transition */
+  text-decoration: none;
+  /* Remove underline from links */
+  display: inline-block;
+  /* Ensure the button size is only as big as its content */
 }
 
 .btn:hover {
-  background-color: #4694ec; /* Darker background color on hover */
-  transform: scale(1.05); /* Slightly enlarge button on hover */
+  background-color: #4694ec;
+  /* Darker background color on hover */
+  transform: scale(1.05);
+  /* Slightly enlarge button on hover */
 }
 
 .btn:disabled {
-  background-color: #ccc; /* Gray background for disabled button */
-  cursor: not-allowed; /* Not-allowed cursor */
-  opacity: 0.7; /* Slightly transparent */
+  background-color: #ccc;
+  /* Gray background for disabled button */
+  cursor: not-allowed;
+  /* Not-allowed cursor */
+  opacity: 0.7;
+  /* Slightly transparent */
 }
 
 .btn:active {
-  background-color: #6ca6f3; /* Even darker background when button is clicked */
-  transform: scale(0.95); /* Slightly shrink button on click */
+  background-color: #6ca6f3;
+  /* Even darker background when button is clicked */
+  transform: scale(0.95);
+  /* Slightly shrink button on click */
 }
