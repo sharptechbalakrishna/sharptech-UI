@@ -154,6 +154,12 @@ function EtServiceDisplay() {
                 padding-left:10px
 
             }
+                .pre-doc-font-size{
+                font-size:13px;
+                    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+                    font-weight:100;
+
+                }
       
 }
         </style>
@@ -662,12 +668,17 @@ function EtServiceDisplay() {
                                                 <tbody>
                                                     <tr>
                                                         <td colSpan='7' className="et-service-form-table-2-data" style={{ width: '100%', border: '1px solid black' }}>
-                                                            <pre style={{
+                                                            {/* <pre style={{
                                                                 whiteSpace: 'pre-wrap', // Ensures the text wraps if it's too long
                                                                 wordWrap: 'break-word', // Prevents long words from overflowing
                                                                 fontSize: '16px',
                                                                 fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
-                                                            }}>  {additionalinfo.additionalInformation || " "}</pre>
+                                                            }}>  {additionalinfo.additionalInformation || " "}</pre> */}
+
+
+                                                            <pre className="pre-doc-font-size">
+                                                                {additionalinfo.additionalInformation || ""}
+                                                            </pre>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -691,21 +702,26 @@ function EtServiceDisplay() {
                                                     <tr>
                                                         <td className="et-service-form-table-2-data" style={{ border: '1px solid black' }}>
 
-                                                            <pre style={{
+                                                            {/* <pre style={{
                                                                 whiteSpace: 'pre-wrap', // Ensures the text wraps if it's too long
                                                                 wordWrap: 'break-word', // Prevents long words from overflowing
                                                                 fontSize: '16px',
                                                                 fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
 
-                                                            }}>{ledgerdescriptioninfo.legaldescription || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n"}</pre>
+                                                            }}>{ledgerdescriptioninfo.legaldescription || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n"}</pre> */}
+
+
+                                                            <pre className="pre-doc-font-size">
+                                                                {ledgerdescriptioninfo.legaldescription || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n"}
+                                                            </pre>
                                                             PARCEL NUMBER: {etservice.parcelNumber || " "}
                                                         </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                         </center>
-                                      
-                                  
+
+
                                     </div>
                                 ))}
                             </div>
@@ -713,7 +729,7 @@ function EtServiceDisplay() {
 
                             <div id="pdf-content3">
                                 <br />
-                     
+
                                 <div id="disclaimer">
                                     <center>
                                         <table className='et-service-form-table-1' style={{ border: '2px solid black', borderCollapse: 'collapse' }} >
@@ -739,8 +755,8 @@ function EtServiceDisplay() {
                                                         the accuracy of the information contained herein beyond
                                                         the exercise of such reasonable care.
                                                         {/* THIS TITLE SEARCH REPORT WAS PERFORMED IN ACCORDANCE WITH GENERALLY ACCEPTED STANDARDS. THIS REPORT MAY NOT CONTAIN INFORMATION AFFECTING ABOVE REAL ESTATE PROPERTY THAT CANNOT BE INDEXED DUE TO DIFFERENT SPELLING OF OWNER'S NAME OR INCORRECTLY RECORDED PARCEL NUMBER OR RECORDER CLERK ERROR. THIS TITLE SEARCH DOES NOT INCLUDE A SEARCH OF THE RECORDS OF THE CIRCUIT, PROBATE, BANKRUPTCY OR OTHER COURTS NOR ANY RECORDERS OTHER THAN THE RECORDS IN THE OFFICE OF THE REGISTER OF DEEDS. TAXES ARE INFORMATIONAL PURPOSES ONLY, ALL INFORMATION CONTAINED HEREIN ARE OBTAINED FROM TAX COLLECTORS OFFICE/WEBSITE. PLEASE DO CHECK FOR ANY ADDITIONAL LEVIES AND ASSESSMENTS BEFORE SETTLEMENT. E-TRACK TITLE SERVICES, INC. MAKES NO WARRANTIES, AND ASSUMES NO LIABILITY WHATSOEVER FOR THE ACCURACY OF THE INFORMATION CONTAINED HEREIN BEYOND THE EXERCISE OF SUCH REASONABLE CARE. */}
-                                                        
-                                                        </p>
+
+                                                    </p>
                                                 </td>
                                             </tr>
                                         </table>

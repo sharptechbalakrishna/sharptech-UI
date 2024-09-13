@@ -171,6 +171,14 @@ function DasDisplay() {
                     padding-left:5px;
                     font-size:14px;
                 }
+
+
+                .das-pre-doc-font-size{
+                    font-size:15px;
+                    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+                    /* font-weight:50; */
+
+                 }
             </style>
         `;
 
@@ -314,7 +322,7 @@ function DasDisplay() {
 
 
                                 <br />
-                         
+
 
                                 {etservice && etservice.vestingdeedinfo.map((vestingdeedinfo, index) => (
                                     <div key={index} >
@@ -384,7 +392,7 @@ function DasDisplay() {
                                     </div>
                                 ))}
                                 <br />
-                               
+
                                 {etservice && etservice.absopenmortgagedeedinfo.map((openmortagedeedinfo, mIndex) => (
                                     <div key={mIndex + 1} >
                                         <br />
@@ -486,11 +494,11 @@ function DasDisplay() {
                                         </center>
                                     </div>
                                 ))}
-                            
+
                             </div>
                         </div>
                         <br />
-                      
+
 
                         <div id="pdf-content2">
                             <br />
@@ -499,8 +507,8 @@ function DasDisplay() {
                         <tr>  <th> DISCOVER ABSTRACT REPORT </th> </tr>
                     </table>
                 </center> */}
-                          
-                          
+
+
                             <div >
                                 <center>
                                     <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }}>
@@ -670,7 +678,7 @@ function DasDisplay() {
                                 </div>
                             ))}
                             <br />
-                        
+
 
 
                             <center>
@@ -696,7 +704,7 @@ function DasDisplay() {
                                         </tr>
                                     ))}
                                 </table>
-                               
+
                             </center>
                             {etservice && etservice.dasadditionalinformation.map((additionalinfo, tindex) => (
 
@@ -712,14 +720,23 @@ function DasDisplay() {
                                             <tbody>
                                                 <tr>
                                                     <td colSpan="7" style={{ width: '100%', border: '1px solid black', padding: '10px', backgroundColor: '#f9f9f9' }}>
-                                                        <pre style={{
+                                                        {/* <pre style={{
                                                             whiteSpace: 'pre-wrap', // Ensures the text wraps if it's too long
                                                             wordWrap: 'break-word', // Prevents long words from overflowing
                                                             fontSize: '16px',
                                                             fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
                                                         }}>
                                                             {additionalinfo.additionalInformation || " "}
+                                                        </pre> */}
+
+
+                                                        <pre className="das-pre-doc-font-size">
+                                                            {additionalinfo.additionalInformation || ""}
                                                         </pre>
+
+
+
+
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -738,12 +755,18 @@ function DasDisplay() {
 
                                             <tr>
                                                 <td className="das-report-display-data" colSpan={1} style={{ border: '1px solid black' }}>
-                                                    <pre style={{
+                                                    {/* <pre style={{
                                                         whiteSpace: 'pre-wrap', // Ensures the text wraps if it's too long
                                                         wordWrap: 'break-word', // Prevents long words from overflowing
                                                         fontSize: '16px',
                                                         fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
-                                                    }}> {legaldescription.daslegaldesc || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n"}</pre>
+                                                    }}> {legaldescription.daslegaldesc || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n"}</pre> */}
+
+
+
+                                                    <pre className="das-pre-doc-font-size">
+                                                        {legaldescription.daslegaldesc || "FOR COMPLETE LEGAL DESCRIPTION SEE ATTACHED VESTING DEED\n\n"}
+                                                    </pre>
                                                     <br />
                                                     PROPERTY ADDRESS: {etservice.propertyAddress}
                                                 </td>
@@ -754,21 +777,21 @@ function DasDisplay() {
                                 </div>
                             ))}
                         </div>
-                       
-                     
+
+
 
 
                         <div id="pdf-content3">
                             <br />
-                          
+
                             {etservice && (
                                 <div className='abstractreport-container-13'>
                                     <br />
 
                                 </div>
                             )}
-                           
-                        
+
+
 
                             <center>
                                 <table className='das-display-table' style={{ border: '2px solid black', borderCollapse: 'collapse' }} >

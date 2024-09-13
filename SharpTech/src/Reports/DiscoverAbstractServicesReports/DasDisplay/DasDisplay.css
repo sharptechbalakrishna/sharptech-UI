@@ -43,8 +43,12 @@
   background-color: #9fc6f3;
 }
 
-
-
+.das-pre-doc-font-size{
+  white-space: pre-wrap; /* Ensures the text wraps if it's too long */
+  word-wrap: break-word; /* Prevents long words from overflowing */
+  font-size: 18px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
 
 
 .das-service-display-edit-button{

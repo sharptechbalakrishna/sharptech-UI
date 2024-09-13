@@ -54,6 +54,19 @@
 /* font-weight: 100; */
 }
 
+
+
+.pre-doc-font-size {
+  white-space: pre-wrap;
+  /* Ensures the text wraps if it's too long */
+  word-wrap: break-word;
+  /* Prevents long words from overflowing */
+  font-size: 19px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+
+}
+
+
 .et-service-display-pdf-button {
   background-color: #af684c;
   /* Green background */
