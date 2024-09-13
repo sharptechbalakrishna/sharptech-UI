@@ -400,7 +400,7 @@ function EtServices() {
   const handleAddTaxInstaRow = (e) => {
     e.preventDefault()
     const newTableTaxInstaId = nextTableTaxInstaId;
-    const newRow = { id: newTableTaxInstaId, installment: newTableTaxInstaId === 2 ? `${newTableTaxInstaId}nd Installment` : newTableTaxInstaId === 3 ? `${newTableTaxInstaId}rd Installment` : `${newTableTaxInstaId}th Installment`, amount: '', status: '', paidDueDate: '' }; // Initialize fields    setTableTaxInstaData([...tableTaxInstaData, newRow]);
+    const newRow = { id: newTableTaxInstaId, installment: newTableTaxInstaId === 2 ? `${newTableTaxInstaId}ND INSTALLMENT` : newTableTaxInstaId === 3 ? `${newTableTaxInstaId}RD INSTALLMENT` : `${newTableTaxInstaId}TH INSTALLMENT`, amount: '', status: '', paidDueDate: '' }; // Initialize fields    setTableTaxInstaData([...tableTaxInstaData, newRow]);
     setTableTaxInstaData([...tableTaxInstaData, newRow]);
     setNextTableTaxInstaId(newTableTaxInstaId + 1);
   }
@@ -999,23 +999,18 @@ function EtServices() {
                     <tr className='th-color'>
                       <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>ASSESMENT YEAR</th>
                       <th className="et-service-form-table-selftables-heading" style={{ border: '1px solid black' }}>
-                        <select
+                        <input
+                          type="text"
                           className="das-report-sub-heading-1"
                           style={{ border: 'none', background: 'none', outline: 'none' }}
                           value={assementYear}
                           onChange={handleAssessmentYearChange}
-                        >
-                          <option value="">Select Year</option>
-                          {years.map((year) => (
-                            <option
-                              key={year} value={year}> {year}
-                            </option>
-                          ))}
-                        </select>
+                          placeholder="Enter Year"
+                        />
                       </th>
                       <th className='et-service-form-table-sub-selftables-heading' style={{ border: '1px solid black' }}>TAX YEAR</th>
                       <th className="et-service-form-table-selftables-heading" style={{ border: '1px solid black' }}>
-                        <select
+                        {/* <select
                           className="das-report-sub-heading-1"
                           style={{ border: 'none', background: 'none', outline: 'none' }}
                           value={taxYear}
@@ -1027,7 +1022,15 @@ function EtServices() {
                               key={year} value={year}> {year}
                             </option>
                           ))}
-                        </select>
+                        </select> */}
+                        <input
+                          type="text"
+                          className="das-report-sub-heading-1"
+                          style={{ border: 'none', background: 'none', outline: 'none' }}
+                          value={taxYear}
+                          onChange={handleTaxYearChange}
+                          placeholder="Enter Year"
+                        />
                       </th>
                     </tr>
 

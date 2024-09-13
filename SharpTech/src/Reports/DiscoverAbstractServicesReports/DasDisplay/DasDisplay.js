@@ -61,42 +61,33 @@ function DasDisplay() {
 
         const generatePDF = async () => {
             const pdf = new jsPDF('p', 'mm', 'a4');
-            const pageWidth = pdf.internal.pageSize.getWidth();
             const pageHeight = pdf.internal.pageSize.getHeight();
-            const margin = 10;
-            const imgWidth = pageWidth - 2 * margin;
+            const imgWidth = pdf.internal.pageSize.getWidth();
 
             const addContentToPDF = async (input) => {
                 const canvas = await html2canvas(input, {
                     scrollY: -window.scrollY,
-                    scale: 2, // For better image quality
+                    scale: 2 // Increase the scale for better quality and larger size
                 });
                 const imgData = canvas.toDataURL('image/png');
+                const imgWidth = pdf.internal.pageSize.getWidth() - 20; // Adjust width to fit within margins
                 const imgHeight = (canvas.height / canvas.width) * imgWidth;
 
+                let position = 0;
                 let remainingHeight = imgHeight;
-                let position = margin;
 
-                // Loop through the content and add it page by page
                 while (remainingHeight > 0) {
-                    if (remainingHeight > pageHeight - margin * 2) {
-                        pdf.addImage(imgData, 'PNG', margin, position, imgWidth, pageHeight - margin * 2);
-                        remainingHeight -= pageHeight - margin * 2;
-                        position = margin;
+                    if (remainingHeight > pageHeight) {
+                        pdf.addImage(imgData, 'PNG', 10, position, imgWidth, pageHeight - 10);
+                        remainingHeight -= pageHeight - 10;
+                        position -= pageHeight - 10;
                         pdf.addPage();
                     } else {
-                        pdf.addImage(imgData, 'PNG', margin, position, imgWidth, remainingHeight);
+                        pdf.addImage(imgData, 'PNG', 10, position, imgWidth, remainingHeight);
                         remainingHeight = 0;
                     }
                 }
 
-                // Add current date and time at the bottom of the page
-                // const now = new Date();
-                // const formattedDate = `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
-                // const textWidth = pdf.getStringUnitWidth(formattedDate) * pdf.internal.getFontSize() / pdf.internal.scaleFactor;
-                // const textX = (pageWidth - textWidth) / 2;
-                // const textY = pageHeight - margin / 2;
-                // pdf.text(formattedDate, textX, textY, { align: 'center' });
             };
 
             await addContentToPDF(input1);
@@ -105,13 +96,12 @@ function DasDisplay() {
             pdf.addPage();
             await addContentToPDF(input3);
 
-            // Construct filename with current date
-            const currentDate = new Date();
-            const formattedDate = currentDate.toISOString().slice(0, 10); // Format as YYYY-MM-DD
-            const filename = `das_service_${formattedDate}.pdf`;
+            // Generate a filename with current timestamp
+            const now = new Date();
+            const fileName = `das_service_${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}_${now.getHours()}-${now.getMinutes()}-${now.getSeconds()}.pdf`;
 
-            // Save PDF with filename
-            pdf.save(filename);
+            // Save the PDF with the generated filename
+            pdf.save(fileName);
         };
 
         generatePDF();

@@ -312,7 +312,7 @@ function DasReport() {
     const handleAddTaxInstaRow = (e) => {
         e.preventDefault();
         const newTableTaxInstaId = nextTableTaxInstaId;
-        const newRow = { id: newTableTaxInstaId, installment: newTableTaxInstaId === 2 ? `${newTableTaxInstaId}nd Installment` : newTableTaxInstaId === 3 ? `${newTableTaxInstaId}rd Installment` : `${newTableTaxInstaId}th Installment`, amount: '', status: '', paidDueDate: '' }; // Initialize fields
+        const newRow = { id: newTableTaxInstaId, installment: newTableTaxInstaId === 2 ? `${newTableTaxInstaId}ND INSTALLMENT` : newTableTaxInstaId === 3 ? `${newTableTaxInstaId}RD INSTALLMENT` : `${newTableTaxInstaId}TH INSTALLMENT`, amount: '', status: '', paidDueDate: '' }; // Initialize fields
         setTableTaxInstaData([...tableTaxInstaData, newRow]);
         setNextTableTaxInstaId(newTableTaxInstaId + 1);
     };
@@ -1125,23 +1125,18 @@ function DasReport() {
                                     <tr className='th-color'>
                                         <th className="das-report-sub-heading-1" style={{ border: '1px solid black' }}>ASSESMENT YEAR</th>
                                         <th className="das-report-sub-heading-1" style={{ border: '1px solid black' }}>
-                                            <select
+                                            <input
+                                                type="text"
                                                 className="das-report-sub-heading-1"
                                                 style={{ border: 'none', background: 'none', outline: 'none' }}
                                                 value={assementYear}
                                                 onChange={handleAssessmentYearChange}
-                                            >
-                                                <option value="">Select Year</option>
-                                                {years.map((year) => (
-                                                    <option
-                                                        key={year} value={year}> {year}
-                                                    </option>
-                                                ))}
-                                            </select>
+                                                placeholder="Enter Year"
+                                            />
                                         </th>
                                         <th className="das-report-sub-heading-1" style={{ border: '1px solid black' }}>SELECTED TAX YEAR</th>
                                         <th className="das-report-sub-heading-1" style={{ border: '1px solid black' }}>
-                                            <select
+                                            {/* <select
                                                 className="das-report-sub-heading-1"
                                                 style={{ border: 'none', background: 'none', outline: 'none' }}
                                                 value={selectedTaxYear}
@@ -1153,7 +1148,16 @@ function DasReport() {
                                                         {year}
                                                     </option>
                                                 ))}
-                                            </select>
+                                            </select> */}
+
+                                            <input
+                                                type="text"
+                                                className="das-report-sub-heading-1"
+                                                style={{ border: 'none', background: 'none', outline: 'none' }}
+                                                value={selectedTaxYear}
+                                                onChange={handleTaxYearChange}
+                                                placeholder="Enter Year"
+                                            />
                                         </th>
                                     </tr>
                                 </thead>
