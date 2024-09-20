@@ -8,10 +8,10 @@ import AuthContext from '../../implements/AuthContext/AuthContext';
 import Dropdown from "../../implements/Dropdown/Dropdown";
 import { useNavigate } from 'react-router-dom';
 import UserService from '../../implements/UserService/UserService';
-import UpdatesImage from '../../assets/Updates.png';
 import Modal from '../Modal/Modal';
 import login_icon from '../../assets/Login_Icon.png'
 import Modula from '../Modula/Modula';
+// import UpdatesImage from '../../assets/Updates.png';
 
 import axios from 'axios';
 
@@ -64,7 +64,7 @@ const Navbar = () => {
 
   const featureUpdate = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/future/updates');
+      const response = await axios.get(`${UserService.BASE_URL}/future/updates`);
       setVisible(response.data.updatesList[response.data.updatesList.length - 1].visible);
       setUpdateData(response.data); // Remove quotes to store actual data
 
@@ -224,9 +224,12 @@ const Navbar = () => {
               {/* Conditionally render the dropdown */}
               <div ref={dropdownRef} className={`dropdown-box ${isDropdownVisible ? 'show' : ''}`}>
                 <ul>
-                  <li onClick={openModal}>What's New</li>
+
                   {visible && (
-                    <span className="new-label_Updates">NEW</span>
+                    <>
+                      <li onClick={openModal}>What's New</li>
+                      <span className="new-label_Updates">NEW</span>
+                    </>
                   )}
                   {isAuthenticated ? (
                     <li><RouterLink to="/" onClick={() => handleLogout(true)}>Logout</RouterLink></li>
